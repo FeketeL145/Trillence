@@ -3,7 +3,10 @@ import { BrowserRouter as Router, NavLink, Routes, Route, useNavigationType, use
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import HomePage from "./pages/HomePage";
+import MusicPage from "./pages/Musicpage.js";
 import './App.css';
+import './Components/MusicPlayer/AudioPlayer.js';
+
 
 function App() {
   return (
@@ -34,7 +37,7 @@ function App() {
               <input type="text" placeholder="Search" className="form-control search"/>
             </li>
             <li className="nav-item">
-              <NavLink to={`/`} className="nav-link">
+              <NavLink to={`/musicpage`} className="nav-link">
                 <span className="nav-link">Local songs</span>
               </NavLink>
             </li>
@@ -62,6 +65,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
+        <Route path="/musicpage" element={<MusicPage/>}/>
       </Routes>
     </Router>
   );
