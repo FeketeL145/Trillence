@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BackEnd.Models;
+﻿namespace BackEnd.Models;
 
 public partial class Album
 {

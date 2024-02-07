@@ -1,15 +1,19 @@
 using BackEnd.Models;
 using BackEnd.Repositories.Interfaces;
 using BackEnd.Repositories.Services;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IEmailService, EmailService>();
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<TrillenceContext>().AddDefaultTokenProviders();
+builder.Services.AddDbContext<TrillenceContext>();
+builder.Services.AddScoped<IEmailInterface, EmailService>();
+builder.Services.AddScoped<IAlbumInterface, AlbumService>();
+builder.Services.AddScoped<IArtistInterface, ArtistService>();
+builder.Services.AddScoped<IGenreInterface, GenreService>();
+builder.Services.AddScoped<ISongInterface, SongService>();
+builder.Services.AddScoped<IUserInterface, UserService>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

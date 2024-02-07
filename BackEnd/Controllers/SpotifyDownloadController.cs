@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Email_Test_API.Models;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using Email_Test_API.Models;
 
 public class SpotifyDownloadController : ControllerBase
 {
@@ -14,7 +11,7 @@ public class SpotifyDownloadController : ControllerBase
         try
         {
             // Use SpotDL command to download music
-            var outputDirectory = @"C:\Users\Quatro\Music";
+            var outputDirectory = @"C:\Users\TKrisztián\Desktop\Trillence\Downloaded Songs";
             var spotifyLink = request.SpotifyUrl;
 
             using (var process = new Process())

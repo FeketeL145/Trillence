@@ -4,5 +4,4 @@
     {
         public string? SpotifyUrl { get; set; }
     }
-
 }

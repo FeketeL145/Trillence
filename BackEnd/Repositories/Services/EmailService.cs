@@ -6,7 +6,7 @@ using MimeKit;
 
 namespace BackEnd.Repositories.Services
 {
-    public class EmailService : IEmailService
+    public class EmailService : IEmailInterface
     {
         private readonly IConfiguration configuration;
 

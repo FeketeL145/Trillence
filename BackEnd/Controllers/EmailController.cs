@@ -9,9 +9,9 @@ namespace Email_Test_API.Controllers
 
     public class EmailController : ControllerBase
     {
-        private readonly IEmailService emailService;
+        private readonly IEmailInterface emailService;
 
-        public EmailController(IEmailService emailService)
+        public EmailController(IEmailInterface emailService)
         {
             this.emailService = emailService;
         }
