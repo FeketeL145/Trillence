@@ -1,0 +1,3 @@
+02.06 : (BIG)	Zenelejátszó hozzáadva, de kell hozzá backend és utánna átkell dolgozni teljesen
+
+03.07

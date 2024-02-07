@@ -1,5 +1,10 @@
+/*Segít megtalálni a dolgoknak a helyzetét*/
+.bordertester{
+  border: 1px solid black;
+}
+
 .navbar {
-  position: fixed;
+  /*position: fixed;*/
   width: 100%;
   height: 55px;
 }

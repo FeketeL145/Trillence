@@ -13,7 +13,7 @@ function HomePage() {
     <div className="text-center content bg-ivory">
       <div className="mt-5 card d-inline-block" style={{borderRadius: '20px',backgroundColor: '#0A2234',color: 'white'}}>
         <div className="card-body">
-          <AudioPlayer></AudioPlayer>
+          
         </div>
       </div>
     </div>
@@ -21,3 +21,5 @@ function HomePage() {
 }
 
 export default HomePage;
+
+//<AudioPlayer></AudioPlayer>
