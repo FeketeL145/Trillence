@@ -1,35 +1,53 @@
-
-
-
 function Register(){
     return(
-        <div className="javisdmegpls container text-center d-flex align-items-center justify-content-center">
-            <div className="text-center card p-5">
-            <form className="form-group needs-validation">
-                <div className="form-group m-3">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" required/>
-                </div>
-                <div className="form-group m-2">
-                    <label>Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required/>
-                </div>
-                <div className="form-group m-2">
-                    <label>Confirm Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Confirm Password" required/>
-                </div>
-                <div className="form-group m-2">
-                    <label>User Name</label>
-                    <input className="form-control" id="exampleInputPassword1" placeholder="User Name" required/>
-                </div>
-                <div className="form-group m-2">
-                    <label>Full Name</label>
-                    <input className="form-control" id="exampleInputPassword1" placeholder="Full Name" required/>
-                </div>
-                <button type="submit" className="btn btn-primary m-3">Register</button>
-            </form>
-            </div>
+        <div className="auth-wrapper">
+            <div className="auth-inner">
+            <form>
+        <h3 className="text-item">Register</h3>
+
+        <div className="mb-3">
+          <label>First name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="First name"
+          />
         </div>
+
+        <div className="mb-3">
+          <label>Last name</label>
+          <input type="text" className="form-control" placeholder="Last name" />
+        </div>
+
+        <div className="mb-3">
+          <label>Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Enter email"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label>Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Enter password"
+          />
+        </div>
+
+        <div className="d-grid">
+          <button type="submit" className="btn btn-primary">
+            Sign Up
+          </button>
+        </div>
+        <p className="forgot-password text-right">
+        <a href="/sign-in">Already registered?</a>
+        </p>
+      </form>
+            </div>
+          </div>
     )
 }
 export default Register;

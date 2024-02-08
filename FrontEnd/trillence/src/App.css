@@ -3,6 +3,11 @@
   border: 1px solid black;
 }
 
+a{
+  text-decoration: none;
+  color: black;
+}
+
 .navbar {
   /*position: fixed;*/
   width: 100%;
@@ -18,12 +23,6 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {

@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+import "mdb-ui-kit/css/mdb.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   Routes,
   Route,
@@ -8,25 +11,20 @@ import {
 } from "react-router-dom";
 
 function HomePage() {
+  
   return (
-    <div className="p-4 m-auto text-center content bg-ivory">
-      <div className="card col-sm-3 d-inline-block ms-4" style={{
-        borderRadius: '20px',
-        backgroundColor: '#0A2234',
-        color: 'white'
-      }}>
-        <div className="card-body">
-          <img src="song image" alt="song image" style={{
-            maxWidth: '100%',
-            maxHeight: '50%',
-            objectFit: 'cover',
-            alignSelf: 'center',
-            borderRadius: '10px'
-          }}/>
-          <h2 style={{ textAlign: 'center', fontWeight: 'bold'}}>Song title</h2>
-          <p style={{ textAlign: 'center', fontSize: '20px'}}>Author</p>
-          <p style={{ textAlign: 'center', fontSize:'25px' }} className='postcontent mt-3'>song uhh</p>
-          <p style={{ textAlign: 'center', fontSize:'18px'}}>Photo by: uhh</p>
+    <div>
+      <div className='container p-4 mt-4 bg-dark rounded-8' >
+        <div className='input-group'>
+          <div className='form-outline' data-mdb-input-init>
+            <input type='search' id='form1' className='form-control' />
+            <label className='form-label' htmlFor='form1'>
+              Search
+            </label>
+          </div>
+          <button type="button" className='btn btn-primary' data-mdb-ripple-init>
+            <i class='bi bi-search'></i>
+          </button>
         </div>
       </div>
     </div>
