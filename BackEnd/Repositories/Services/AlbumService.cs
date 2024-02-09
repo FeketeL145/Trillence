@@ -1,5 +1,4 @@
-﻿using BackEnd.Models;
-using BackEnd.Models.Dtos;
+﻿using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,10 +19,8 @@ namespace BackEnd.Repositories.Services
             {
                 Id = Guid.NewGuid(),
                 Name = createAlbumDto.Name,
+                Image = createAlbumDto.Image,
                 Released = createAlbumDto.Released,
-                Listens = 0,
-                ArtistId = createAlbumDto.ArtistId,
-                SongId = createAlbumDto.SongId
             };
 
             await trillenceContext.Albums.AddAsync(album);
@@ -48,9 +45,8 @@ namespace BackEnd.Repositories.Services
             if (existingAlbum != null)
             {
                 existingAlbum.Name = modifyAlbumDto.Name;
+                existingAlbum.Image = modifyAlbumDto.Image;
                 existingAlbum.Released = modifyAlbumDto.Released;
-                existingAlbum.ArtistId = modifyAlbumDto.ArtistId;
-                existingAlbum.SongId = modifyAlbumDto.SongId;
 
                 trillenceContext.Update(existingAlbum);
                 await trillenceContext.SaveChangesAsync();

@@ -1,5 +1,4 @@
-﻿using BackEnd.Models;
-using BackEnd.Models.Dtos;
+﻿using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,8 +19,6 @@ namespace BackEnd.Repositories.Services
             {
                 Id = Guid.NewGuid(),
                 Name = createUserDto.Name,
-                Password = createUserDto.Password,
-                Birth = createUserDto.Birth,
             };
 
             await trillenceContext.Users.AddAsync(user);
@@ -46,8 +43,6 @@ namespace BackEnd.Repositories.Services
             if (existingUser != null)
             {
                 existingUser.Name = modifyUserDto.Name;
-                existingUser.Password = modifyUserDto.Password;
-                existingUser.Birth = modifyUserDto.Birth;
 
                 trillenceContext.Update(existingUser);
                 await trillenceContext.SaveChangesAsync();

@@ -12,27 +12,19 @@ public partial class Album
     /// </summary>
     public string Name { get; set; } = null!;
 
+    public string Image { get; set; } = null!;
+
     /// <summary>
     /// Album release date.
     /// </summary>
     public DateOnly Released { get; set; }
 
     /// <summary>
-    /// Times somebody has listened to any of the songs from the album.
+    /// User ID.
     /// </summary>
-    public long Listens { get; set; }
-
-    /// <summary>
-    /// Artist ID.
-    /// </summary>
-    public Guid ArtistId { get; set; }
-
-    /// <summary>
-    /// Song ID.
-    /// </summary>
-    public Guid SongId { get; set; }
+    public Guid UserId { get; set; }
 
     public virtual Song IdNavigation { get; set; } = null!;
 
-    public virtual Song? Song { get; set; }
+    public virtual User? User { get; set; }
 }

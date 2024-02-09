@@ -1,7 +1,9 @@
 ﻿namespace BackEnd.Models.Dtos
 {
-    public record AlbumDto(Guid Id, string Name, DateOnly Released, long Listens, Guid ArtistId, Guid SongId, Song IdNavigation, Song Song);
-    public record CreateAlbumDto(string Name, DateOnly Released, Guid ArtistId, Guid SongId, Song SongIdNavigation, Song Song);
+    public record AlbumDto(Guid Id, string Name, string Image, DateOnly Released, Guid UserId, Song IdNavigation, User User);
+    public record CreateAlbumDto(string Name, string Image, DateOnly Released);
+    public record CreateAlbumDtoWithConnections(string Name, string Image, DateOnly Released, Guid UserId);
     public record RemoveAlbumDto(Guid Id);
-    public record ModifyAlbumDto(string Name, DateOnly Released, Guid ArtistId, Guid SongId, Song SongIdNavigation, Song Song);
+    public record ModifyAlbumDto(string Name, string Image, DateOnly Released);
+    public record ModifyAlbumDtoWithConnections(string Name, string Image, DateOnly Released, Guid UserId);
 }

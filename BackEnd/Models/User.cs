@@ -12,15 +12,9 @@ public partial class User
     /// </summary>
     public string Name { get; set; } = null!;
 
-    /// <summary>
-    /// User password.
-    /// </summary>
-    public string Password { get; set; } = null!;
+    public virtual Song Id1 { get; set; } = null!;
 
-    /// <summary>
-    /// User birthdate.
-    /// </summary>
-    public DateOnly Birth { get; set; }
+    public virtual Playlist Id2 { get; set; } = null!;
 
-    public virtual Artist IdNavigation { get; set; } = null!;
+    public virtual Album IdNavigation { get; set; } = null!;
 }

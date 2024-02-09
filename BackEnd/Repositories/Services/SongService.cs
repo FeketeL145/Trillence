@@ -1,5 +1,4 @@
-﻿using BackEnd.Models;
-using BackEnd.Models.Dtos;
+﻿using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,9 +20,6 @@ namespace BackEnd.Repositories.Services
                 Id = Guid.NewGuid(),
                 Name = createSongDto.Name,
                 Length = createSongDto.Length,
-                ArtistId = createSongDto.ArtistId,
-                AlbumId = createSongDto.AlbumId,
-                GenreId = createSongDto.GenreId,
             };
 
             await trillenceContext.Songs.AddAsync(song);
@@ -49,9 +45,6 @@ namespace BackEnd.Repositories.Services
             {
                 existingSong.Name = modifySongDto.Name;
                 existingSong.Length = modifySongDto.Length;
-                existingSong.ArtistId = modifySongDto.ArtistId;
-                existingSong.AlbumId = modifySongDto.AlbumId;
-                existingSong.GenreId = modifySongDto.GenreId;
 
                 trillenceContext.Update(existingSong);
                 await trillenceContext.SaveChangesAsync();

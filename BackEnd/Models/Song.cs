@@ -18,24 +18,9 @@ public partial class Song
     public TimeOnly Length { get; set; }
 
     /// <summary>
-    /// Times someone has listened to the song.
+    /// User ID.
     /// </summary>
-    public long Listens { get; set; }
-
-    /// <summary>
-    /// Song like amount.
-    /// </summary>
-    public long Likes { get; set; }
-
-    /// <summary>
-    /// Song dislike amount.
-    /// </summary>
-    public long Dislikes { get; set; }
-
-    /// <summary>
-    /// Artist ID.
-    /// </summary>
-    public Guid ArtistId { get; set; }
+    public Guid UserId { get; set; }
 
     /// <summary>
     /// Album ID.
@@ -49,9 +34,9 @@ public partial class Song
 
     public virtual Album? Album { get; set; }
 
-    public virtual Artist? Artist { get; set; }
-
     public virtual Genre? Genre { get; set; }
 
-    public virtual Album IdNavigation { get; set; } = null!;
+    public virtual Playlistsong IdNavigation { get; set; } = null!;
+
+    public virtual User? User { get; set; }
 }
