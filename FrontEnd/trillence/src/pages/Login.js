@@ -1,15 +1,15 @@
 function Login(){
     return(
         <div className="auth-wrapper">
-            <div className="auth-inner">
+            <div className="auth-inner bg-dark">
             <form>
-        <h3>Sign In</h3>
+        <h3 className="whitetext">Sign In</h3>
 
         <div className="mb-3">
           <label>Email address</label>
           <input
             type="email"
-            className="form-control"
+            className="form-control whitetext"
             placeholder="Enter email"
           />
         </div>
@@ -18,7 +18,7 @@ function Login(){
           <label>Password</label>
           <input
             type="password"
-            className="form-control"
+            className="form-control whitetext"
             placeholder="Enter password"
           />
         </div>
@@ -41,7 +41,7 @@ function Login(){
             Submit
           </button>
         </div>
-        <p className="forgot-password text-right">
+        <p className="forgot-password text-right whitetext">
         <a href="#">Forgot password?</a>
         </p>
       </form>

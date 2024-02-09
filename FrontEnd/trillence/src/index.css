@@ -4,8 +4,12 @@
   box-sizing: border-box;
 }
 
+#form1{
+  color:white;
+}
+
 body {
-  background: #1c8ef9 !important;
+  background: rgb(67, 67, 176) !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -17,6 +21,29 @@ code {
     monospace;
 }
 
+.card{
+  overflow: hidden;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgb(67, 67, 176,0.5) 100%);
+}
+.songimgcontainer{
+  position:relative;
+}
+
+.songimggroup{
+  position: absolute; /* Position the items absolutely */
+  top: 0; /* Align items to the top */
+  left: 0; /* Align items to the left */
+  width: 160px; /* Set a width for the items */
+  height: 160px; /* Set a height for the items */
+}
+
+.songimg{
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
+}
+
+.songimgoverlay{
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0, 0.75) 100%);
+}
 
 h1,
 h2,
@@ -25,9 +52,11 @@ h4,
 h5,
 h6,
 label,
-span {
+span ,
+.whitetext{
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
+  color: #ffffff;
 }
 
 body,
@@ -54,7 +83,6 @@ html,
 .auth-inner {
   width: 450px;
   margin: auto;
-  background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
@@ -82,12 +110,12 @@ html,
   text-align: right;
   font-size: 13px;
   padding-top: 10px;
-  color: #7f7d7d;
+  color: #c3c3c3;
   margin: 0;
 }
 
 .forgot-password a {
-  color: #167bff;
+  color: #7f7f7f;
 }
 
 .unselectable {
