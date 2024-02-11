@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Input, Ripple, initMDB } from "mdb-ui-kit";
 import "mdb-ui-kit/css/mdb.min.css";
@@ -11,7 +11,25 @@ import {
 } from "react-router-dom";
 
 function HomePage() {
-  
+  const [Songs, setSongs] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+
+  useEffect(() => {
+    setFetchPending(true);
+    fetch("https://localhost:7106/api/Song/allsong", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*'
+      },
+    })
+      .then((response) => response.json())
+      .then((Songs) => setSongs(Songs))
+      .catch(console.log)
+      .finally(() => {
+        setFetchPending(false);
+      });
+  }, []);
   return (
     <div>
       <div className='container p-4 mt-4 bg-dark rounded-8' >
@@ -27,26 +45,50 @@ function HomePage() {
           </button>
         </div>
       </div>
-      <div className='container p-4 mt-4 bg-dark rounded-8'>
-        <div className="row">
-          <div className=''>
-            <div className="card">
-              <NavLink to={`/musicpage/CurrentSongId`}>
-            <div className="songimgcontainer">
-                  <div className='songimggroup songimg'><img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" alt="Song Thumbnail" className='w-100'/></div>
-                  <div className='songimggroup songimgoverlay'></div>
+      {isFetchPending ? (<div className='spinner-border'></div>) : (
+        <div className='d-flex flex-wrap'>
+        {Songs.map((Songs) => (
+          <div className='container p-4 mt-4 bg-dark rounded-8'>
+            <div className="row">
+              <div className=''>
+                <div className="card">
+                  <NavLink to={`/musicpage/CurrentSongId`}>
+                    <div className="songimgcontainer">
+                      <div className='songimggroup songimg'><img src='../../public/data/HiddenValley.jpg' alt="Song Thumbnail" className='w-100' /></div>
+                      <div className='songimggroup songimgoverlay'></div>
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">{Songs.name}</h5>
+                      <p className="card-text">{Songs.artist}</p>
+                    </div>
+                  </NavLink>
                 </div>
-              <div className="card-body">
-                <h5 className="card-title">Song Title</h5>
-                <p className="card-text">Song artist</p>
               </div>
-              </NavLink>
             </div>
           </div>
+        ))}
         </div>
+      )}
     </div>
-  </div>
   );
 }
 
 export default HomePage;
+
+/*
+[
+  {
+    "id": "2aa2ecb1-c90a-11ee-98ec-b42e994614d4",
+    "name": "proba1",
+    "fileName": "proba1",
+    "albumPhoto": "proba1",
+    "length": "00:04:13",
+    "listens": 3123,
+    "likes": 123,
+    "disikes": 312,
+    "artist": "proba1",
+    "album": "proba1",
+    "genre": "proba1"
+  }
+]
+*/
