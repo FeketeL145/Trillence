@@ -59,9 +59,9 @@ namespace BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_songs", x => x.ID);
-                    table.UniqueConstraint("AK_songs_AlbumID", x => x.AlbumID);
-                    table.UniqueConstraint("AK_songs_ArtistID", x => x.ArtistID);
-                    table.UniqueConstraint("AK_songs_GenreID", x => x.GenreID);
+                    table.UniqueConstraint("AK_songs_Album1ID", x => x.AlbumID);
+                    table.UniqueConstraint("AK_songs_Artist1ID", x => x.ArtistID);
+                    table.UniqueConstraint("AK_songs_Genre1ID", x => x.GenreID);
                     table.ForeignKey(
                         name: "Song ID - Playlistsong SongID",
                         column: x => x.ID,

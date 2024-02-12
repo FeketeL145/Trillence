@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 12. 10:01
+-- Létrehozás ideje: 2024. Feb 12. 10:20
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -28,7 +28,7 @@ USE `trillence`;
 --
 -- Tábla szerkezet ehhez a táblához `albums`
 --
--- Létrehozva: 2024. Feb 12. 09:00
+-- Létrehozva: 2024. Feb 12. 09:19
 --
 
 DROP TABLE IF EXISTS `albums`;
@@ -40,12 +40,18 @@ CREATE TABLE `albums` (
   `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- TÁBLA KAPCSOLATAI `albums`:
+--   `ID`
+--       `songs` -> `AlbumID`
+--
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `genres`
 --
--- Létrehozva: 2024. Feb 12. 09:00
+-- Létrehozva: 2024. Feb 12. 09:19
 --
 
 DROP TABLE IF EXISTS `genres`;
@@ -54,12 +60,18 @@ CREATE TABLE `genres` (
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- TÁBLA KAPCSOLATAI `genres`:
+--   `ID`
+--       `songs` -> `GenreID`
+--
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `playlists`
 --
--- Létrehozva: 2024. Feb 12. 09:00
+-- Létrehozva: 2024. Feb 12. 09:19
 --
 
 DROP TABLE IF EXISTS `playlists`;
@@ -69,12 +81,18 @@ CREATE TABLE `playlists` (
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- TÁBLA KAPCSOLATAI `playlists`:
+--   `ID`
+--       `playlistsong` -> `PlaylistID`
+--
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `playlistsong`
 --
--- Létrehozva: 2024. Feb 12. 09:00
+-- Létrehozva: 2024. Feb 12. 09:19
 --
 
 DROP TABLE IF EXISTS `playlistsong`;
@@ -83,12 +101,16 @@ CREATE TABLE `playlistsong` (
   `PlaylistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- TÁBLA KAPCSOLATAI `playlistsong`:
+--
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `songs`
 --
--- Létrehozva: 2024. Feb 12. 09:00
+-- Létrehozva: 2024. Feb 12. 09:19
 --
 
 DROP TABLE IF EXISTS `songs`;
@@ -101,12 +123,18 @@ CREATE TABLE `songs` (
   `GenreID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- TÁBLA KAPCSOLATAI `songs`:
+--   `ID`
+--       `playlistsong` -> `SongID`
+--
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `users`
 --
--- Létrehozva: 2024. Feb 12. 09:00
+-- Létrehozva: 2024. Feb 12. 09:19
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -114,6 +142,16 @@ CREATE TABLE `users` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- TÁBLA KAPCSOLATAI `users`:
+--   `ID`
+--       `albums` -> `ArtistID`
+--   `ID`
+--       `playlists` -> `UserID`
+--   `ID`
+--       `songs` -> `ArtistID`
+--
 
 --
 -- Indexek a kiírt táblákhoz
@@ -156,6 +194,9 @@ ALTER TABLE `playlistsong`
 --
 ALTER TABLE `songs`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `AK_songs_Album1ID` (`AlbumID`),
+  ADD UNIQUE KEY `AK_songs_Artist1ID` (`ArtistID`),
+  ADD UNIQUE KEY `AK_songs_Genre1ID` (`GenreID`),
   ADD UNIQUE KEY `AK_songs_AlbumID` (`AlbumID`),
   ADD UNIQUE KEY `AK_songs_ArtistID` (`ArtistID`),
   ADD UNIQUE KEY `AK_songs_GenreID` (`GenreID`);
