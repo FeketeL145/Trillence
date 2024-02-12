@@ -1,6 +1,4 @@
 global using BackEnd.Models;
-using BackEnd;
-using System.IO;
 using BackEnd.Repositories.Interfaces;
 using BackEnd.Repositories.Services;
 

@@ -23,5 +23,15 @@ namespace BackEnd
         {
             return new UserDto(user.Id, user.Name, user.Id1, user.Id2, user.IdNavigation);
         }
+
+        public static PlaylistDto AsDto(this Playlist playlist)
+        {
+            return new PlaylistDto(playlist.Id, playlist.Name, playlist.UserId, playlist.IdNavigation, playlist.User);
+        }
+
+        public static PlaylistSongDto AsDto(this Playlistsong playlistsong)
+        {
+            return new PlaylistSongDto(playlistsong.SongId, playlistsong.PlaylistId, playlistsong.Playlist, playlistsong.Song);
+        }
     }
 }
