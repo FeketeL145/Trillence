@@ -1,16 +1,13 @@
-﻿namespace BackEnd.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public partial class Playlistsong
+namespace WebApplication3.Models;
+
+public partial class PlaylistSong
 {
-    /// <summary>
-    /// Song ID.
-    /// </summary>
-    public Guid SongId { get; set; }
-
-    /// <summary>
-    /// Playlist ID.
-    /// </summary>
     public Guid PlaylistId { get; set; }
+
+    public Guid SongId { get; set; }
 
     public virtual Playlist? Playlist { get; set; }
 

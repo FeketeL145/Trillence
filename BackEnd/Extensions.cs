@@ -6,7 +6,7 @@ namespace BackEnd
     {
         public static AlbumDto AsDto(this Album album)
         {
-            return new AlbumDto(album.Id, album.Name, album.Image, album.Released, album.UserId, album.IdNavigation, album.User);
+            return new AlbumDto(album.Id, album.Name, album.Image, album.Released, album.ArtistId, album.IdNavigation);
         }
 
         public static GenreDto GenreDto(this Genre genre)
@@ -16,12 +16,12 @@ namespace BackEnd
 
         public static SongDto AsDto(this Song song)
         {
-            return new SongDto(song.Id, song.Name, song.Length, song.UserId, song.AlbumId, song.GenreId, song.Album, song.Genre, song.IdNavigation, song.User);
+            return new SongDto(song.Id, song.Name, song.Length, song.AlbumId, song.GenreId, song.Album, song.Genre, song.IdNavigation);
         }
 
         public static UserDto AsDto(this User user)
         {
-            return new UserDto(user.Id, user.Name, user.Id1, user.Id2, user.IdNavigation);
+            return new UserDto(user.Id, user.Name);
         }
 
         public static PlaylistDto AsDto(this Playlist playlist)

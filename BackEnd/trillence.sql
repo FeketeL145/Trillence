@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 12. 10:20
+-- Létrehozás ideje: 2024. Feb 14. 13:26
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -28,16 +28,15 @@ USE `trillence`;
 --
 -- Tábla szerkezet ehhez a táblához `albums`
 --
--- Létrehozva: 2024. Feb 12. 09:19
+-- Létrehozva: 2024. Feb 14. 08:08
 --
 
 DROP TABLE IF EXISTS `albums`;
 CREATE TABLE `albums` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Image` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Released` date NOT NULL,
-  `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `Image` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `Released` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -49,15 +48,73 @@ CREATE TABLE `albums` (
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `artist-album`
+--
+-- Létrehozva: 2024. Feb 14. 08:26
+--
+
+DROP TABLE IF EXISTS `artist-album`;
+CREATE TABLE `artist-album` (
+  `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `AlbumID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- TÁBLA KAPCSOLATAI `artist-album`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `artist-song`
+--
+-- Létrehozva: 2024. Feb 14. 08:26
+--
+
+DROP TABLE IF EXISTS `artist-song`;
+CREATE TABLE `artist-song` (
+  `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `SongID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- TÁBLA KAPCSOLATAI `artist-song`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `artists`
+--
+-- Létrehozva: 2024. Feb 14. 08:24
+--
+
+DROP TABLE IF EXISTS `artists`;
+CREATE TABLE `artists` (
+  `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- TÁBLA KAPCSOLATAI `artists`:
+--   `ID`
+--       `artist-album` -> `AlbumID`
+--   `ID`
+--       `artist-song` -> `SongID`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `genres`
 --
--- Létrehozva: 2024. Feb 12. 09:19
+-- Létrehozva: 2024. Feb 14. 07:11
 --
 
 DROP TABLE IF EXISTS `genres`;
 CREATE TABLE `genres` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -69,40 +126,40 @@ CREATE TABLE `genres` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `playlists`
+-- Tábla szerkezet ehhez a táblához `playlist-song`
 --
--- Létrehozva: 2024. Feb 12. 09:19
+-- Létrehozva: 2024. Feb 14. 08:26
 --
 
-DROP TABLE IF EXISTS `playlists`;
-CREATE TABLE `playlists` (
-  `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `UserID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+DROP TABLE IF EXISTS `playlist-song`;
+CREATE TABLE `playlist-song` (
+  `PlaylistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `SongID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- TÁBLA KAPCSOLATAI `playlists`:
---   `ID`
---       `playlistsong` -> `PlaylistID`
+-- TÁBLA KAPCSOLATAI `playlist-song`:
 --
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `playlistsong`
+-- Tábla szerkezet ehhez a táblához `playlists`
 --
--- Létrehozva: 2024. Feb 12. 09:19
+-- Létrehozva: 2024. Feb 14. 08:29
 --
 
-DROP TABLE IF EXISTS `playlistsong`;
-CREATE TABLE `playlistsong` (
-  `SongID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `PlaylistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+DROP TABLE IF EXISTS `playlists`;
+CREATE TABLE `playlists` (
+  `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `UserID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- TÁBLA KAPCSOLATAI `playlistsong`:
+-- TÁBLA KAPCSOLATAI `playlists`:
+--   `ID`
+--       `playlist-song` -> `PlaylistID`
 --
 
 -- --------------------------------------------------------
@@ -110,23 +167,24 @@ CREATE TABLE `playlistsong` (
 --
 -- Tábla szerkezet ehhez a táblához `songs`
 --
--- Létrehozva: 2024. Feb 12. 09:19
+-- Létrehozva: 2024. Feb 14. 08:29
 --
 
 DROP TABLE IF EXISTS `songs`;
 CREATE TABLE `songs` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Length` time NOT NULL,
-  `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `AlbumID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `GenreID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `Length` time DEFAULT NULL,
+  `AlbumID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `GenreID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- TÁBLA KAPCSOLATAI `songs`:
 --   `ID`
---       `playlistsong` -> `SongID`
+--       `artist-song` -> `SongID`
+--   `ID`
+--       `playlist-song` -> `SongID`
 --
 
 -- --------------------------------------------------------
@@ -134,23 +192,19 @@ CREATE TABLE `songs` (
 --
 -- Tábla szerkezet ehhez a táblához `users`
 --
--- Létrehozva: 2024. Feb 12. 09:19
+-- Létrehozva: 2024. Feb 14. 07:13
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
+  `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- TÁBLA KAPCSOLATAI `users`:
 --   `ID`
---       `albums` -> `ArtistID`
---   `ID`
 --       `playlists` -> `UserID`
---   `ID`
---       `songs` -> `ArtistID`
 --
 
 --
@@ -161,15 +215,43 @@ CREATE TABLE `users` (
 -- A tábla indexei `albums`
 --
 ALTER TABLE `albums`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `AK_albums_ArtistID` (`ArtistID`),
-  ADD UNIQUE KEY `IX_albums_ArtistID` (`ArtistID`);
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- A tábla indexei `artist-album`
+--
+ALTER TABLE `artist-album`
+  ADD PRIMARY KEY (`ArtistID`,`AlbumID`),
+  ADD UNIQUE KEY `ArtistID` (`ArtistID`),
+  ADD UNIQUE KEY `AlbumID` (`AlbumID`);
+
+--
+-- A tábla indexei `artist-song`
+--
+ALTER TABLE `artist-song`
+  ADD PRIMARY KEY (`ArtistID`,`SongID`),
+  ADD UNIQUE KEY `ArtistID` (`ArtistID`),
+  ADD UNIQUE KEY `SongID` (`SongID`);
+
+--
+-- A tábla indexei `artists`
+--
+ALTER TABLE `artists`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- A tábla indexei `genres`
 --
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- A tábla indexei `playlist-song`
+--
+ALTER TABLE `playlist-song`
+  ADD PRIMARY KEY (`PlaylistID`,`SongID`),
+  ADD UNIQUE KEY `PlaylistID` (`PlaylistID`),
+  ADD UNIQUE KEY `SongID` (`SongID`);
 
 --
 -- A tábla indexei `playlists`
@@ -180,32 +262,21 @@ ALTER TABLE `playlists`
   ADD UNIQUE KEY `IX_playlists_UserID` (`UserID`);
 
 --
--- A tábla indexei `playlistsong`
---
-ALTER TABLE `playlistsong`
-  ADD PRIMARY KEY (`SongID`,`PlaylistID`),
-  ADD UNIQUE KEY `AK_playlistsong_PlaylistID` (`PlaylistID`),
-  ADD UNIQUE KEY `AK_playlistsong_SongID` (`SongID`),
-  ADD UNIQUE KEY `IX_playlistsong_PlaylistID` (`PlaylistID`),
-  ADD UNIQUE KEY `IX_playlistsong_SongID` (`SongID`);
-
---
 -- A tábla indexei `songs`
 --
 ALTER TABLE `songs`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `AK_songs_Album1ID` (`AlbumID`),
-  ADD UNIQUE KEY `AK_songs_Artist1ID` (`ArtistID`),
   ADD UNIQUE KEY `AK_songs_Genre1ID` (`GenreID`),
   ADD UNIQUE KEY `AK_songs_AlbumID` (`AlbumID`),
-  ADD UNIQUE KEY `AK_songs_ArtistID` (`ArtistID`),
   ADD UNIQUE KEY `AK_songs_GenreID` (`GenreID`);
 
 --
 -- A tábla indexei `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Name` (`Name`) USING HASH;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -215,7 +286,14 @@ ALTER TABLE `users`
 -- Megkötések a táblához `albums`
 --
 ALTER TABLE `albums`
-  ADD CONSTRAINT `Album ID - Song AlbumID` FOREIGN KEY (`ID`) REFERENCES `songs` (`AlbumID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Album ID - Song AlbumID` FOREIGN KEY (`ID`) REFERENCES `songs` (`AlbumID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Megkötések a táblához `artists`
+--
+ALTER TABLE `artists`
+  ADD CONSTRAINT `Artist ID - Artist-Album AristID` FOREIGN KEY (`ID`) REFERENCES `artist-album` (`AlbumID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Artist ID - Artist-Song ArtistID` FOREIGN KEY (`ID`) REFERENCES `artist-song` (`SongID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `genres`
@@ -227,21 +305,20 @@ ALTER TABLE `genres`
 -- Megkötések a táblához `playlists`
 --
 ALTER TABLE `playlists`
-  ADD CONSTRAINT `Playlist ID - Playlistsong PlaylistID` FOREIGN KEY (`ID`) REFERENCES `playlistsong` (`PlaylistID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Playlist ID - Playlist-Song PlaylistID` FOREIGN KEY (`ID`) REFERENCES `playlist-song` (`PlaylistID`) ON DELETE CASCADE;
 
 --
 -- Megkötések a táblához `songs`
 --
 ALTER TABLE `songs`
-  ADD CONSTRAINT `Song ID - Playlistsong SongID` FOREIGN KEY (`ID`) REFERENCES `playlistsong` (`SongID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Song ID - Artist-Song SongID` FOREIGN KEY (`ID`) REFERENCES `artist-song` (`SongID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Song ID - Playlist-Song SongID` FOREIGN KEY (`ID`) REFERENCES `playlist-song` (`SongID`) ON DELETE CASCADE;
 
 --
 -- Megkötések a táblához `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `User ID - Album ArtistID` FOREIGN KEY (`ID`) REFERENCES `albums` (`ArtistID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `User ID - Playlist UserID` FOREIGN KEY (`ID`) REFERENCES `playlists` (`UserID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `User ID - Song ArtistID` FOREIGN KEY (`ID`) REFERENCES `songs` (`ArtistID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `User ID - Playlist UserID` FOREIGN KEY (`ID`) REFERENCES `playlists` (`UserID`) ON DELETE CASCADE;
 
 
 --
@@ -254,15 +331,27 @@ USE `phpmyadmin`;
 --
 
 --
+-- A(z) artist-album tábla metaadatai
+--
+
+--
+-- A(z) artist-song tábla metaadatai
+--
+
+--
+-- A(z) artists tábla metaadatai
+--
+
+--
 -- A(z) genres tábla metaadatai
 --
 
 --
--- A(z) playlists tábla metaadatai
+-- A(z) playlist-song tábla metaadatai
 --
 
 --
--- A(z) playlistsong tábla metaadatai
+-- A(z) playlists tábla metaadatai
 --
 
 --

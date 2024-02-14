@@ -347,9 +347,9 @@ C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\static
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Auth.props
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\scopedcss\bundle\Auth.styles.css
-C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.csproj.CopyComplete
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.dll
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\refint\Auth.dll
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.pdb
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.genruntimeconfig.cache
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\ref\Auth.dll
+C:\Users\TKrisztián\Desktop\Trillence\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.csproj.Up2Date
