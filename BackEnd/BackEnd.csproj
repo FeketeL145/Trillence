@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Current Database.png" />
     <None Remove="DBTerv.png" />
     <None Remove="First Trillence DB.sql" />
     <None Remove="trillence.sql" />

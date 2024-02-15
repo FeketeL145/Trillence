@@ -1,4 +1,5 @@
-﻿using BackEnd.Models.Dtos;
+﻿using BackEnd.Models;
+using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,32 +14,32 @@ namespace BackEnd.Repositories.Services
             this.trillenceContext = trillenceContext;
         }
 
-        public async Task<Playlistsong> Post(CreatePlaylistSongDto createPlaylistsongDto)
+        public async Task<PlaylistSong> Post(CreatePlaylistSongDto createPlaylistsongDto)
         {
-            var playlistsong = new Playlistsong
+            var playlistsong = new PlaylistSong
             {
                 SongId = createPlaylistsongDto.SongId,
                 PlaylistId = createPlaylistsongDto.PlaylistId,
             };
 
-            await trillenceContext.Playlistsongs.AddAsync(playlistsong);
+            await trillenceContext.PlaylistSongs.AddAsync(playlistsong);
             await trillenceContext.SaveChangesAsync();
             return playlistsong;
         }
 
-        public async Task<IEnumerable<Playlistsong>> GetAll()
+        public async Task<IEnumerable<PlaylistSong>> GetAll()
         {
-            return await trillenceContext.Playlistsongs.ToListAsync();
+            return await trillenceContext.PlaylistSongs.ToListAsync();
         }
 
-        public async Task<Playlistsong> GetById(Guid playlistid, Guid songid)
+        public async Task<PlaylistSong> GetById(Guid playlistid, Guid songid)
         {
-            return await trillenceContext.Playlistsongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
+            return await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
         }
 
-        public async Task<Playlistsong> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistsongDto)
+        public async Task<PlaylistSong> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistsongDto)
         {
-            var existingPlaylistsong = await trillenceContext.Playlistsongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
+            var existingPlaylistsong = await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
 
             if (existingPlaylistsong != null)
             {
@@ -54,13 +55,13 @@ namespace BackEnd.Repositories.Services
             return null;
         }
 
-        public async Task<Playlistsong> DeleteById(Guid playlistid, Guid songid)
+        public async Task<PlaylistSong> DeleteById(Guid playlistid, Guid songid)
         {
-            var playlistsong = await trillenceContext.Playlistsongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
+            var playlistsong = await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
 
             if (playlistsong != null)
             {
-                trillenceContext.Playlistsongs.Remove(playlistsong);
+                trillenceContext.PlaylistSongs.Remove(playlistsong);
                 await trillenceContext.SaveChangesAsync();
             }
 

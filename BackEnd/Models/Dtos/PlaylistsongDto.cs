@@ -1,7 +1,7 @@
 ﻿namespace BackEnd.Models.Dtos
 {
-    public record PlaylistSongDto(Guid? SongId, Guid? PlaylistId, Playlist? Playlist, Song? Song);
-    public record CreatePlaylistSongDto(Guid? SongId, Guid? PlaylistId);
-    public record RemovePlaylistSongDto(Guid? SongId, Guid? PlaylistId);
-    public record ModifyPlaylistSongDto(Guid? SongId, Guid? PlaylistId);
+    public record PlaylistSongDto(Guid PlaylistId, Guid SongId, Playlist? Playlist, Song? Song);
+    public record CreatePlaylistSongDto(Guid PlaylistId, Guid SongId);
+    public record RemovePlaylistSongDto(Guid PlaylistId, Guid SongId);
+    public record ModifyPlaylistSongDto(Guid PlaylistId, Guid SongId);
 }

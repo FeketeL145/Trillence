@@ -1,4 +1,5 @@
-﻿using BackEnd.Models.Dtos;
+﻿using BackEnd.Models;
+using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

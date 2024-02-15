@@ -361,9 +361,9 @@ C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\staticwebassets\
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.BackEnd.props
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\scopedcss\bundle\BackEnd.styles.css
-C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.csproj.CopyComplete
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.dll
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\refint\BackEnd.dll
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.pdb
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.genruntimeconfig.cache
 C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\ref\BackEnd.dll
+C:\Users\TKrisztián\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.csproj.Up2Date

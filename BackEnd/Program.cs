@@ -1,4 +1,4 @@
-global using BackEnd.Models;
+using BackEnd.Models;
 using BackEnd.Repositories.Interfaces;
 using BackEnd.Repositories.Services;
 
@@ -10,6 +10,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TrillenceContext>();
 builder.Services.AddScoped<IEmailInterface, EmailService>();
 builder.Services.AddScoped<IAlbumInterface, AlbumService>();
+builder.Services.AddScoped<IArtistAlbumInterface, ArtistAlbumService>();
+builder.Services.AddScoped<IArtistInterface, ArtistService>();
+builder.Services.AddScoped<IArtistSongInterface, ArtistSongService>();
 builder.Services.AddScoped<IGenreInterface, GenreService>();
 builder.Services.AddScoped<IPlaylistInterface, PlaylistService>();
 builder.Services.AddScoped<IPlaylistsongInterface, PlaylistsongService>();

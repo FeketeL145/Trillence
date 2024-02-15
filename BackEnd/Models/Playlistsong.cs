@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebApplication3.Models;
+﻿namespace BackEnd.Models;
 
 public partial class PlaylistSong
 {

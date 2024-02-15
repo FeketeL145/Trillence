@@ -1,13 +1,14 @@
-﻿using BackEnd.Models.Dtos;
+﻿using BackEnd.Models;
+using BackEnd.Models.Dtos;
 
 namespace BackEnd.Repositories.Interfaces
 {
     public interface IPlaylistsongInterface
     {
-        Task<IEnumerable<Playlistsong>> GetAll();
-        Task<Playlistsong> GetById(Guid playlistid, Guid songid);
-        Task<Playlistsong> Post(CreatePlaylistSongDto createPlaylistsongDto);
-        Task<Playlistsong> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistsongDto);
-        Task<Playlistsong> DeleteById(Guid playlistid, Guid songid);
+        Task<IEnumerable<PlaylistSong>> GetAll();
+        Task<PlaylistSong> GetById(Guid playlistid, Guid songid);
+        Task<PlaylistSong> Post(CreatePlaylistSongDto createPlaylistsongDto);
+        Task<PlaylistSong> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistsongDto);
+        Task<PlaylistSong> DeleteById(Guid playlistid, Guid songid);
     }
 }

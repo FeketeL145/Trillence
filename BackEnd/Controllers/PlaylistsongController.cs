@@ -1,4 +1,5 @@
-﻿using BackEnd.Models.Dtos;
+﻿using BackEnd.Models;
+using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,13 +23,13 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("allplaylistsong")]
-        public async Task<IEnumerable<Playlistsong>> Get()
+        public async Task<IEnumerable<PlaylistSong>> Get()
         {
-            return (IEnumerable<Playlistsong>)await playlistsongInterface.GetAll();
+            return (IEnumerable<PlaylistSong>)await playlistsongInterface.GetAll();
         }
 
         [HttpGet("playlistsongbyid/{playlistid, songid}")]
-        public async Task<ActionResult<Playlistsong>> GetById(Guid playlistid, Guid songid)
+        public async Task<ActionResult<PlaylistSong>> GetById(Guid playlistid, Guid songid)
         {
             var result = await playlistsongInterface.GetById(playlistid, songid);
             if (result == null)
@@ -40,7 +41,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPut("updatebyid/{playlistid}/{songid}")]
-        public async Task<ActionResult<Playlistsong>> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistSongDto)
+        public async Task<ActionResult<PlaylistSong>> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistSongDto)
         {
             var result = await playlistsongInterface.Put(playlistid, songid, modifyPlaylistSongDto);
 
@@ -53,7 +54,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpDelete("deletebyid/{playlistid, songid}")]
-        public async Task<ActionResult<Playlistsong>> DeleteById(Guid playlistid, Guid songid)
+        public async Task<ActionResult<PlaylistSong>> DeleteById(Guid playlistid, Guid songid)
         {
             var result = await playlistsongInterface.DeleteById(playlistid, songid);
 

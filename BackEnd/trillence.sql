@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 14. 13:26
+-- Létrehozás ideje: 2024. Feb 15. 11:19
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -31,7 +31,6 @@ USE `trillence`;
 -- Létrehozva: 2024. Feb 14. 08:08
 --
 
-DROP TABLE IF EXISTS `albums`;
 CREATE TABLE `albums` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
@@ -53,7 +52,6 @@ CREATE TABLE `albums` (
 -- Létrehozva: 2024. Feb 14. 08:26
 --
 
-DROP TABLE IF EXISTS `artist-album`;
 CREATE TABLE `artist-album` (
   `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `AlbumID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
@@ -71,7 +69,6 @@ CREATE TABLE `artist-album` (
 -- Létrehozva: 2024. Feb 14. 08:26
 --
 
-DROP TABLE IF EXISTS `artist-song`;
 CREATE TABLE `artist-song` (
   `ArtistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `SongID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
@@ -89,7 +86,6 @@ CREATE TABLE `artist-song` (
 -- Létrehozva: 2024. Feb 14. 08:24
 --
 
-DROP TABLE IF EXISTS `artists`;
 CREATE TABLE `artists` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
@@ -111,7 +107,6 @@ CREATE TABLE `artists` (
 -- Létrehozva: 2024. Feb 14. 07:11
 --
 
-DROP TABLE IF EXISTS `genres`;
 CREATE TABLE `genres` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
@@ -131,7 +126,6 @@ CREATE TABLE `genres` (
 -- Létrehozva: 2024. Feb 14. 08:26
 --
 
-DROP TABLE IF EXISTS `playlist-song`;
 CREATE TABLE `playlist-song` (
   `PlaylistID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `SongID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL
@@ -149,7 +143,6 @@ CREATE TABLE `playlist-song` (
 -- Létrehozva: 2024. Feb 14. 08:29
 --
 
-DROP TABLE IF EXISTS `playlists`;
 CREATE TABLE `playlists` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `UserID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
@@ -170,7 +163,6 @@ CREATE TABLE `playlists` (
 -- Létrehozva: 2024. Feb 14. 08:29
 --
 
-DROP TABLE IF EXISTS `songs`;
 CREATE TABLE `songs` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL,
@@ -195,7 +187,6 @@ CREATE TABLE `songs` (
 -- Létrehozva: 2024. Feb 14. 07:13
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `ID` char(36) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
   `Name` tinytext CHARACTER SET utf8 COLLATE utf8_hungarian_ci DEFAULT NULL
@@ -318,7 +309,7 @@ ALTER TABLE `songs`
 -- Megkötések a táblához `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `User ID - Playlist UserID` FOREIGN KEY (`ID`) REFERENCES `playlists` (`UserID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `User ID - Playlist UserID` FOREIGN KEY (`ID`) REFERENCES `playlists` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
