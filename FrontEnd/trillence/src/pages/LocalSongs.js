@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import AudioPlayer from '../Components/MusicPlayer/AudioPlayer';
 
-function HomePage() {
+function LocalSongs() {
   return (
     <div className="text-center content bg-ivory">
       <div className="mt-5 card d-inline-block" style={{borderRadius: '20px',backgroundColor: '#0A2234',color: 'white'}}>
@@ -20,6 +20,6 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default LocalSongs;
 
 //<AudioPlayer></AudioPlayer>

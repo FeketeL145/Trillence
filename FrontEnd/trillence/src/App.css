@@ -1,6 +1,9 @@
 /*Segít megtalálni a dolgoknak a helyzetét*/
-.bordertester{
+.bt{
   border: 1px solid black;
+}
+.btw{
+  border: 1px solid white;
 }
 
 a{
@@ -40,3 +43,9 @@ a{
   color: #61dafb;
 }
 
+.bg-dark {
+  color: #F9F6EE;
+}
+.text-justify{
+  text-align: justify;
+}

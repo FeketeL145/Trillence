@@ -5,13 +5,18 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //Oldalak importálása
 import HomePage from "./pages/HomePage";
-import MusicPage from "./pages/Musicpage.js";
-import Settings from "./pages/Settings.js";
+import LocalSongs from "./pages/LocalSongs.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
+import Settings from "./pages/Settings.js";
+import PasswordForgot from "./pages/PasswordForgot.js";
+import ResetPassword from "./pages/ResetPassword.js";
+
 
 import './App.css';
 import './Components/MusicPlayer/AudioPlayer.js';
+import AudioPlayer from "./Components/MusicPlayer/AudioPlayer.js";
+
 
 
 function App() {
@@ -45,6 +50,16 @@ function App() {
         </div>
         <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
+            <li>
+              <NavLink to={`/ResetPassword`} className="nav-link">
+                <span className="nav-link">ResetPassword</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/settings`} className="nav-link">
+                <span className="nav-link">Settings</span>
+              </NavLink>
+            </li>
             <li className="nav-item">
               <NavLink to={`/sign-in`} className="nav-link">
                 <span className="nav-link">Sign In</span>
@@ -60,13 +75,17 @@ function App() {
       </nav>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/local-songs" element={<MusicPage/>}/>
+          <Route path="/local-songs" element={<LocalSongs/>}/>
           <Route path="/sign-in" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/PasswordForgot" element={<PasswordForgot />} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
         </Routes>
+
       </div>
     </Router>
-
+    
       
   );
 }
