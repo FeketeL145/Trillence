@@ -11,6 +11,60 @@ a{
   color: black;
 }
 
+/*
+ Logo style and animation
+*/
+.cls-1{
+  fill:#000000;
+}
+.cls-2{
+  fill:#da7c34
+}
+
+.logocontainer{
+  width: max-content;
+}
+.logo{
+  width: 200px;
+  size: fixed;
+}
+
+.logo .e1, .n, .c, .e2 {
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.logo .arrow {
+  transform: translateX(-440px);
+  transition: transform 0.25s ease-in; /* Apply transition for smooth movement */
+}
+
+.logo:hover .arrow {
+  transform: translateX(0px);
+   /* Move the arrow to the left by 100px on hover */
+}
+
+.logo:hover .e1 {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+.logo:hover .n {
+  opacity: 1;
+  transition-delay: 0.125s;
+}
+
+.logo:hover .c {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+
+.logo:hover .e2 {
+  opacity: 1;
+  transition-delay: 0.175s;
+}
+
+
 .navbar {
   /*position: fixed;*/
   width: 100%;
