@@ -6,5 +6,5 @@ public partial class User
 
     public string? Name { get; set; }
 
-    public virtual Playlist IdNavigation { get; set; } = null!;
+    public virtual Playlist? Playlist { get; set; }
 }

@@ -6,5 +6,5 @@ public partial class ArtistAlbum
 
     public Guid AlbumId { get; set; }
 
-    public virtual Artist? Artist { get; set; }
+    public virtual Album? Album { get; set; }
 }

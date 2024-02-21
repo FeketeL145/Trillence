@@ -8,13 +8,13 @@ public partial class Song
 
     public TimeOnly? Length { get; set; }
 
-    public Guid? AlbumId { get; set; }
+    public Guid AlbumId { get; set; }
 
-    public Guid? GenreId { get; set; }
+    public Guid GenreId { get; set; }
 
-    public virtual Album? Album { get; set; }
+    public virtual Album Album { get; set; } = null!;
 
-    public virtual Genre? Genre { get; set; }
+    public virtual Genre Genre { get; set; } = null!;
 
     public virtual PlaylistSong Id1 { get; set; } = null!;
 

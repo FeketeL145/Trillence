@@ -1,4 +1,4 @@
-using BackEnd.Models;
+global using BackEnd.Models;
 using BackEnd.Repositories.Interfaces;
 using BackEnd.Repositories.Services;
 

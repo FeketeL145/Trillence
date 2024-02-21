@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\repositories\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,8 +11,32 @@
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\playlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\repositories\\services\\genreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\genreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\repositories\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\models\\dtos\\playlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\dtos\\playlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\models\\dtos\\playlistsongdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\dtos\\playlistsongdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\models\\dtos\\songdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\dtos\\songdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\models\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\tkriszti\u00E1n\\desktop\\trillence\\backend\\extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +46,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\UserDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\UserDto.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\UserDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-20T11:59:45.796Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Repositories\\Services\\UserService.cs",
@@ -38,47 +70,92 @@
               "RelativeToolTip": "Repositories\\Services\\UserService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-15T10:08:01.503Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-20T11:59:43.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlaylistsongDto.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\PlaylistsongDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\PlaylistsongDto.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\PlaylistsongDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\PlaylistsongDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-20T11:59:34.219Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SongService.cs",
-              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\SongService.cs",
-              "RelativeDocumentMoniker": "Repositories\\Services\\SongService.cs",
-              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\SongService.cs",
-              "RelativeToolTip": "Repositories\\Services\\SongService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-15T10:07:51.159Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "PlaylistService.cs",
               "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\PlaylistService.cs",
               "RelativeDocumentMoniker": "Repositories\\Services\\PlaylistService.cs",
               "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\PlaylistService.cs",
               "RelativeToolTip": "Repositories\\Services\\PlaylistService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAdAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAIAwwBUAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-15T10:07:38.726Z",
+              "WhenOpened": "2024-02-20T11:59:07.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SongDto.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\SongDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\SongDto.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\SongDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\SongDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-20T11:46:49.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SongService.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\SongService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\SongService.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\SongService.cs",
+              "RelativeToolTip": "Repositories\\Services\\SongService.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABMAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-20T11:45:17.6Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "GenreService.cs",
-              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\GenreService.cs",
-              "RelativeDocumentMoniker": "Repositories\\Services\\GenreService.cs",
-              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\GenreService.cs",
-              "RelativeToolTip": "Repositories\\Services\\GenreService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAcAAAA",
+              "Title": "PlaylistDto.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\PlaylistDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\PlaylistDto.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Dtos\\PlaylistDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\PlaylistDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-15T10:07:32.984Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-20T12:00:25.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Song.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Song.cs",
+              "RelativeDocumentMoniker": "Models\\Song.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Models\\Song.cs",
+              "RelativeToolTip": "Models\\Song.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-20T11:45:09.25Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Extensions.cs",
+              "DocumentMoniker": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Extensions.cs",
+              "RelativeDocumentMoniker": "Extensions.cs",
+              "ToolTip": "C:\\Users\\TKriszti\u00E1n\\Desktop\\Trillence\\BackEnd\\Extensions.cs",
+              "RelativeToolTip": "Extensions.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAswCgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T09:00:33.47Z"
             }
           ]
         }

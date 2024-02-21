@@ -6,5 +6,5 @@ public partial class Genre
 
     public string? Name { get; set; }
 
-    public virtual Song IdNavigation { get; set; } = null!;
+    public virtual Song? Song { get; set; }
 }

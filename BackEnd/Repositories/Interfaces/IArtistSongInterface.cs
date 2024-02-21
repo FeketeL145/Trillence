@@ -1,5 +1,4 @@
 ﻿using BackEnd.Models.Dtos;
-using BackEnd.Models;
 
 namespace BackEnd.Repositories.Interfaces
 {

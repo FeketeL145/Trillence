@@ -1,5 +1,4 @@
-﻿using BackEnd.Models;
-using BackEnd.Models.Dtos;
+﻿using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +19,7 @@ namespace BackEnd.Repositories.Services
             {
                 Id = Guid.NewGuid(),
                 Name = createPlaylistDto.Name,
+                UserId = createPlaylistDto.UserId,
             };
 
             await trillenceContext.Playlists.AddAsync(playlist);

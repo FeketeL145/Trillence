@@ -1,5 +1,4 @@
-﻿using BackEnd.Models;
-using BackEnd.Models.Dtos;
+﻿using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +20,8 @@ namespace BackEnd.Repositories.Services
                 Id = Guid.NewGuid(),
                 Name = createSongDto.Name,
                 Length = createSongDto.Length,
+                AlbumId = createSongDto.AlbumId,
+                GenreId = createSongDto.GenreId,
             };
 
             await trillenceContext.Songs.AddAsync(song);

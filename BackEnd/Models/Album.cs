@@ -10,5 +10,7 @@ public partial class Album
 
     public DateOnly? Released { get; set; }
 
-    public virtual Song IdNavigation { get; set; } = null!;
+    public virtual ArtistAlbum IdNavigation { get; set; } = null!;
+
+    public virtual Song? Song { get; set; }
 }

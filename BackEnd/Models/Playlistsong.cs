@@ -6,7 +6,5 @@ public partial class PlaylistSong
 
     public Guid SongId { get; set; }
 
-    public virtual Playlist? Playlist { get; set; }
-
     public virtual Song? Song { get; set; }
 }
