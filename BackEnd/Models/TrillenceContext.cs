@@ -21,8 +21,6 @@ public partial class TrillenceContext : DbContext
 
     public virtual DbSet<ArtistSong> ArtistSongs { get; set; }
 
-    public virtual DbSet<Genre> Genres { get; set; }
-
     public virtual DbSet<Playlist> Playlists { get; set; }
 
     public virtual DbSet<PlaylistSong> PlaylistSongs { get; set; }
@@ -37,8 +35,8 @@ public partial class TrillenceContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .UseCollation("utf8_general_ci")
-            .HasCharSet("utf8");
+            .UseCollation("utf8mb4_general_ci")
+            .HasCharSet("utf8mb4");
 
         modelBuilder.Entity<Album>(entity =>
         {
@@ -46,22 +44,9 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("albums");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("ID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.Image)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.Name)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Album)
-                .HasPrincipalKey<ArtistAlbum>(p => p.AlbumId)
-                .HasForeignKey<Album>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Album ID - ArtistAlbum AlbumID");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Image).HasColumnType("tinytext");
+            entity.Property(e => e.Name).HasColumnType("tinytext");
         });
 
         modelBuilder.Entity<Artist>(entity =>
@@ -70,62 +55,60 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("artists");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.Name)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Name).HasColumnType("tinytext");
         });
 
         modelBuilder.Entity<ArtistAlbum>(entity =>
         {
-            entity.HasKey(e => new { e.ArtistId, e.AlbumId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.ArtistId).HasName("PRIMARY");
 
             entity.ToTable("artist-album");
 
-            entity.HasIndex(e => e.AlbumId, "AlbumID").IsUnique();
+            entity.HasIndex(e => e.AlbumId, "AlbumID");
+
+            entity.HasIndex(e => e.ArtistId, "ArtistID");
 
             entity.Property(e => e.ArtistId)
-                .HasColumnName("ArtistID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.AlbumId)
-                .HasColumnName("AlbumID")
-                .UseCollation("utf8_hungarian_ci");
+                .ValueGeneratedOnAdd()
+                .HasColumnName("ArtistID");
+            entity.Property(e => e.AlbumId).HasColumnName("AlbumID");
+
+            entity.HasOne(d => d.Album).WithMany(p => p.ArtistAlbums)
+                .HasForeignKey(d => d.AlbumId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("artist-album_ibfk_1");
+
+            entity.HasOne(d => d.Artist).WithOne(p => p.ArtistAlbum)
+                .HasForeignKey<ArtistAlbum>(d => d.ArtistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("artist-album_ibfk_2");
         });
 
         modelBuilder.Entity<ArtistSong>(entity =>
         {
-            entity.HasKey(e => new { e.ArtistId, e.SongId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.ArtistId).HasName("PRIMARY");
 
             entity.ToTable("artist-song");
 
-            entity.HasIndex(e => e.SongId, "SongID").IsUnique();
+            entity.HasIndex(e => e.ArtistId, "ArtistID");
+
+            entity.HasIndex(e => e.SongId, "SongID");
 
             entity.Property(e => e.ArtistId)
-                .HasColumnName("ArtistID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.SongId)
-                .HasColumnName("SongID")
-                .UseCollation("utf8_hungarian_ci");
-        });
+                .ValueGeneratedOnAdd()
+                .HasColumnName("ArtistID");
+            entity.Property(e => e.SongId).HasColumnName("SongID");
 
-        modelBuilder.Entity<Genre>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasOne(d => d.Artist).WithOne(p => p.ArtistSong)
+                .HasForeignKey<ArtistSong>(d => d.ArtistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("artist-song_ibfk_1");
 
-            entity.ToTable("genres");
-
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.Name)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
+            entity.HasOne(d => d.Song).WithMany(p => p.ArtistSongs)
+                .HasForeignKey(d => d.SongId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("artist-song_ibfk_2");
         });
 
         modelBuilder.Entity<Playlist>(entity =>
@@ -134,40 +117,42 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("playlists");
 
-            entity.HasIndex(e => e.UserId, "AK_playlists_UserID").IsUnique();
+            entity.HasIndex(e => e.UserId, "UserID");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.Name)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.UserId)
-                .HasColumnName("UserID")
-                .UseCollation("utf8_hungarian_ci");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Name).HasColumnType("tinytext");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
 
-            entity.HasOne(d => d.User).WithOne(p => p.Playlist)
-                .HasForeignKey<Playlist>(d => d.UserId)
+            entity.HasOne(d => d.User).WithMany(p => p.Playlists)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Playlist UserID - User ID");
+                .HasConstraintName("playlists_ibfk_1");
         });
 
         modelBuilder.Entity<PlaylistSong>(entity =>
         {
-            entity.HasKey(e => new { e.PlaylistId, e.SongId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.SongId).HasName("PRIMARY");
 
             entity.ToTable("playlist-song");
 
-            entity.HasIndex(e => e.SongId, "SongID1").IsUnique();
+            entity.HasIndex(e => e.PlaylistId, "PlaylistID");
 
-            entity.Property(e => e.PlaylistId)
-                .HasColumnName("PlaylistID")
-                .UseCollation("utf8_hungarian_ci");
+            entity.HasIndex(e => e.SongId, "SongID");
+
             entity.Property(e => e.SongId)
-                .HasColumnName("SongID")
-                .UseCollation("utf8_hungarian_ci");
+                .ValueGeneratedOnAdd()
+                .HasColumnName("SongID");
+            entity.Property(e => e.PlaylistId).HasColumnName("PlaylistID");
+
+            entity.HasOne(d => d.Playlist).WithMany(p => p.PlaylistSongs)
+                .HasForeignKey(d => d.PlaylistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("playlist-song_ibfk_1");
+
+            entity.HasOne(d => d.Song).WithOne(p => p.PlaylistSong)
+                .HasForeignKey<PlaylistSong>(d => d.SongId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("playlist-song_ibfk_2");
         });
 
         modelBuilder.Entity<Song>(entity =>
@@ -176,46 +161,11 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("songs");
 
-            entity.HasIndex(e => e.AlbumId, "AK_songs_AlbumID").IsUnique();
-
-            entity.HasIndex(e => e.GenreId, "AK_songs_GenreID").IsUnique();
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("ID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.AlbumId)
-                .HasColumnName("AlbumID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.GenreId)
-                .HasColumnName("GenreID")
-                .UseCollation("utf8_hungarian_ci");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.AlbumId).HasColumnName("AlbumID");
+            entity.Property(e => e.Genre).HasColumnType("tinytext");
             entity.Property(e => e.Length).HasColumnType("time");
-            entity.Property(e => e.Name)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
-
-            entity.HasOne(d => d.Album).WithOne(p => p.Song)
-                .HasForeignKey<Song>(d => d.AlbumId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Song AlbumID - Album ID");
-
-            entity.HasOne(d => d.Genre).WithOne(p => p.Song)
-                .HasForeignKey<Song>(d => d.GenreId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Song GenreID - Genre ID");
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Song)
-                .HasPrincipalKey<ArtistSong>(p => p.SongId)
-                .HasForeignKey<Song>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Song ID - ArtistSong SongID");
-
-            entity.HasOne(d => d.Id1).WithOne(p => p.Song)
-                .HasPrincipalKey<PlaylistSong>(p => p.SongId)
-                .HasForeignKey<Song>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Song ID - PlaylistSong SongID");
+            entity.Property(e => e.Name).HasColumnType("tinytext");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -224,12 +174,8 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("users");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("utf8_hungarian_ci");
-            entity.Property(e => e.Name)
-                .HasColumnType("tinytext")
-                .UseCollation("utf8_hungarian_ci");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Name).HasColumnType("tinytext");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -10,13 +10,9 @@ public partial class Song
 
     public Guid AlbumId { get; set; }
 
-    public Guid GenreId { get; set; }
+    public string Genre { get; set; } = null!;
 
-    public virtual Album Album { get; set; } = null!;
+    public virtual ICollection<ArtistSong> ArtistSongs { get; set; } = new List<ArtistSong>();
 
-    public virtual Genre Genre { get; set; } = null!;
-
-    public virtual PlaylistSong Id1 { get; set; } = null!;
-
-    public virtual ArtistSong IdNavigation { get; set; } = null!;
+    public virtual PlaylistSong? PlaylistSong { get; set; }
 }

@@ -21,7 +21,7 @@ namespace BackEnd.Repositories.Services
                 Name = createSongDto.Name,
                 Length = createSongDto.Length,
                 AlbumId = createSongDto.AlbumId,
-                GenreId = createSongDto.GenreId,
+                Genre = createSongDto.Genre,
             };
 
             await trillenceContext.Songs.AddAsync(song);
@@ -47,6 +47,7 @@ namespace BackEnd.Repositories.Services
             {
                 existingSong.Name = modifySongDto.Name;
                 existingSong.Length = modifySongDto.Length;
+                existingSong.Genre = modifySongDto.Genre;
 
                 trillenceContext.Update(existingSong);
                 await trillenceContext.SaveChangesAsync();

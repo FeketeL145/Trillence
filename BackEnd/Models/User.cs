@@ -6,5 +6,5 @@ public partial class User
 
     public string? Name { get; set; }
 
-    public virtual Playlist? Playlist { get; set; }
+    public virtual ICollection<Playlist> Playlists { get; set; } = new List<Playlist>();
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TKrisztián\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj": {}
+    "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TKrisztián\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj": {
+    "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TKrisztián\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
         "projectName": "BackEnd",
-        "projectPath": "C:\\Users\\TKrisztián\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
-        "packagesPath": "C:\\Users\\TKrisztián\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TKrisztián\\Desktop\\Trillence\\BackEnd\\obj\\",
+        "projectPath": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
+        "packagesPath": "C:\\Users\\profo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TKrisztián\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\profo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -110,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

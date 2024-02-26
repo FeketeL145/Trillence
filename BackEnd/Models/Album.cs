@@ -10,7 +10,5 @@ public partial class Album
 
     public DateOnly? Released { get; set; }
 
-    public virtual ArtistAlbum IdNavigation { get; set; } = null!;
-
-    public virtual Song? Song { get; set; }
+    public virtual ICollection<ArtistAlbum> ArtistAlbums { get; set; } = new List<ArtistAlbum>();
 }

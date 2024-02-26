@@ -6,5 +6,7 @@ public partial class ArtistSong
 
     public Guid SongId { get; set; }
 
-    public virtual Song? Song { get; set; }
+    public virtual Artist Artist { get; set; } = null!;
+
+    public virtual Song Song { get; set; } = null!;
 }

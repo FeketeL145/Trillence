@@ -6,7 +6,7 @@ namespace BackEnd
     {
         public static AlbumDto AsDto(this Album album)
         {
-            return new AlbumDto(album.Id, album.Name, album.Image, album.Released, album.IdNavigation, album.Song);
+            return new AlbumDto(album.Id, album.Name, album.Image, album.Released);
         }
 
         public static ArtistAlbumDto AsDto(this ArtistAlbum artistAlbum)
@@ -21,12 +21,7 @@ namespace BackEnd
 
         public static ArtistSongDto AsDto(this ArtistSong artistSong)
         {
-            return new ArtistSongDto(artistSong.ArtistId, artistSong.SongId, artistSong.Song);
-        }
-
-        public static GenreDto GenreDto(this Genre genre)
-        {
-            return new GenreDto(genre.Id, genre.Name, genre.Song);
+            return new ArtistSongDto(artistSong.ArtistId, artistSong.SongId, artistSong.Artist, artistSong.Song);
         }
 
         public static PlaylistDto AsDto(this Playlist playlist)
@@ -36,17 +31,17 @@ namespace BackEnd
 
         public static PlaylistSongDto AsDto(this PlaylistSong playlistsong)
         {
-            return new PlaylistSongDto(playlistsong.PlaylistId, playlistsong.SongId, playlistsong.Song);
+            return new PlaylistSongDto(playlistsong.PlaylistId, playlistsong.SongId, playlistsong.Playlist, playlistsong.Song);
         }
 
         public static SongDto AsDto(this Song song)
         {
-            return new SongDto(song.Id, song.Name, song.Length, song.AlbumId, song.GenreId, song.Album, song.Genre, song.Id1, song.IdNavigation);
+            return new SongDto(song.Id, song.Name, song.Length, song.AlbumId, song.Genre);
         }
 
         public static UserDto AsDto(this User user)
         {
-            return new UserDto(user.Id, user.Name, user.Playlist);
+            return new UserDto(user.Id, user.Name, user.Playlists);
         }
     }
 }

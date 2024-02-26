@@ -13,7 +13,6 @@ builder.Services.AddScoped<IAlbumInterface, AlbumService>();
 builder.Services.AddScoped<IArtistAlbumInterface, ArtistAlbumService>();
 builder.Services.AddScoped<IArtistInterface, ArtistService>();
 builder.Services.AddScoped<IArtistSongInterface, ArtistSongService>();
-builder.Services.AddScoped<IGenreInterface, GenreService>();
 builder.Services.AddScoped<IPlaylistInterface, PlaylistService>();
 builder.Services.AddScoped<IPlaylistsongInterface, PlaylistsongService>();
 builder.Services.AddScoped<ISongInterface, SongService>();
@@ -30,6 +29,11 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod()
                         .AllowAnyHeader();
             });
+});
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
 var app = builder.Build();

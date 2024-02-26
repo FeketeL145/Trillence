@@ -8,5 +8,7 @@ public partial class Playlist
 
     public string? Name { get; set; }
 
+    public virtual ICollection<PlaylistSong> PlaylistSongs { get; set; } = new List<PlaylistSong>();
+
     public virtual User User { get; set; } = null!;
 }
