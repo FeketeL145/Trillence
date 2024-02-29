@@ -11,4 +11,6 @@ public partial class Album
     public uint? Released { get; set; }
 
     public virtual ICollection<ArtistAlbum> ArtistAlbums { get; set; } = new List<ArtistAlbum>();
+
+    public virtual ICollection<Song> Songs { get; set; } = new List<Song>();
 }

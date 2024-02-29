@@ -10,8 +10,6 @@ public class SpotifyDownloadController : ControllerBase
     {
         try
         {
-            // Use SpotDL command to download music
-            var outputDirectory = @"C:\Users\TKrisztián\Desktop\Trillence\Downloaded Songs";
             var spotifyLink = request.SpotifyUrl;
 
             using (var process = new Process())
@@ -24,23 +22,19 @@ public class SpotifyDownloadController : ControllerBase
 
                 process.Start();
 
-                // Pass the SpotDL command to CMD
                 using (StreamWriter sw = process.StandardInput)
                 {
                     if (sw.BaseStream.CanWrite)
                     {
-                        // Specify the SpotDL command with the output directory and Spotify link
                         string spotDlCommand = $"spotdl \"{spotifyLink}\"";
                         sw.WriteLine(spotDlCommand);
                     }
                 }
 
-                // Capture the CMD output
                 string output = await process.StandardOutput.ReadToEndAsync();
 
                 process.WaitForExit();
 
-                // Log or process the output as needed
                 Console.WriteLine($"CMD Output: {output}");
 
                 return Ok(new { Message = "Download completed successfully" });
@@ -48,7 +42,7 @@ public class SpotifyDownloadController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { Error = "Internal Server Error" });
+            return StatusCode(500, new { Error = "Internal Server Error:" + ex });
         }
     }
 }

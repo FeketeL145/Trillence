@@ -44,9 +44,13 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("albums");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
             entity.Property(e => e.Image).HasColumnType("tinytext");
             entity.Property(e => e.Name).HasColumnType("tinytext");
+            entity.Property(e => e.Released).HasColumnType("int(10) unsigned");
         });
 
         modelBuilder.Entity<Artist>(entity =>
@@ -55,7 +59,10 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("artists");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
             entity.Property(e => e.Name).HasColumnType("tinytext");
         });
 
@@ -71,8 +78,13 @@ public partial class TrillenceContext : DbContext
 
             entity.Property(e => e.ArtistId)
                 .ValueGeneratedOnAdd()
-                .HasColumnName("ArtistID");
-            entity.Property(e => e.AlbumId).HasColumnName("AlbumID");
+                .HasColumnName("ArtistID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
+            entity.Property(e => e.AlbumId)
+                .HasColumnName("AlbumID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
 
             entity.HasOne(d => d.Album).WithMany(p => p.ArtistAlbums)
                 .HasForeignKey(d => d.AlbumId)
@@ -91,14 +103,19 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("artist-song");
 
-            entity.HasIndex(e => e.ArtistId, "ArtistID");
+            entity.HasIndex(e => e.ArtistId, "ArtistID1");
 
             entity.HasIndex(e => e.SongId, "SongID");
 
             entity.Property(e => e.ArtistId)
                 .ValueGeneratedOnAdd()
-                .HasColumnName("ArtistID");
-            entity.Property(e => e.SongId).HasColumnName("SongID");
+                .HasColumnName("ArtistID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
+            entity.Property(e => e.SongId)
+                .HasColumnName("SongID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
 
             entity.HasOne(d => d.Artist).WithOne(p => p.ArtistSong)
                 .HasForeignKey<ArtistSong>(d => d.ArtistId)
@@ -119,9 +136,15 @@ public partial class TrillenceContext : DbContext
 
             entity.HasIndex(e => e.UserId, "UserID");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
             entity.Property(e => e.Name).HasColumnType("tinytext");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.UserId)
+                .HasColumnName("UserID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
 
             entity.HasOne(d => d.User).WithMany(p => p.Playlists)
                 .HasForeignKey(d => d.UserId)
@@ -137,12 +160,17 @@ public partial class TrillenceContext : DbContext
 
             entity.HasIndex(e => e.PlaylistId, "PlaylistID");
 
-            entity.HasIndex(e => e.SongId, "SongID");
+            entity.HasIndex(e => e.SongId, "SongID1");
 
             entity.Property(e => e.SongId)
                 .ValueGeneratedOnAdd()
-                .HasColumnName("SongID");
-            entity.Property(e => e.PlaylistId).HasColumnName("PlaylistID");
+                .HasColumnName("SongID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
+            entity.Property(e => e.PlaylistId)
+                .HasColumnName("PlaylistID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
 
             entity.HasOne(d => d.Playlist).WithMany(p => p.PlaylistSongs)
                 .HasForeignKey(d => d.PlaylistId)
@@ -161,11 +189,23 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("songs");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.AlbumId).HasColumnName("AlbumID");
+            entity.HasIndex(e => e.AlbumId, "Song AlbumID - Album ID");
+
+            entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
+            entity.Property(e => e.AlbumId)
+                .HasColumnName("AlbumID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
             entity.Property(e => e.Genre).HasColumnType("tinytext");
             entity.Property(e => e.Length).HasColumnType("time");
             entity.Property(e => e.Name).HasColumnType("tinytext");
+
+            entity.HasOne(d => d.Album).WithMany(p => p.Songs)
+                .HasForeignKey(d => d.AlbumId)
+                .HasConstraintName("Song AlbumID - Album ID");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -174,7 +214,10 @@ public partial class TrillenceContext : DbContext
 
             entity.ToTable("users");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .UseCollation("ascii_general_ci")
+                .HasCharSet("ascii");
             entity.Property(e => e.Name).HasColumnType("tinytext");
         });
 

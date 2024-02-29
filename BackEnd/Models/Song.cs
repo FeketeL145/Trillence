@@ -12,6 +12,8 @@ public partial class Song
 
     public string Genre { get; set; } = null!;
 
+    public virtual Album Album { get; set; } = null!;
+
     public virtual ICollection<ArtistSong> ArtistSongs { get; set; } = new List<ArtistSong>();
 
     public virtual PlaylistSong? PlaylistSong { get; set; }

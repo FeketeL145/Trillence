@@ -1,4 +1,5 @@
 global using BackEnd.Models;
+using BackEnd;
 using BackEnd.Repositories.Interfaces;
 using BackEnd.Repositories.Services;
 
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IPlaylistInterface, PlaylistService>();
 builder.Services.AddScoped<IPlaylistsongInterface, PlaylistsongService>();
 builder.Services.AddScoped<ISongInterface, SongService>();
 builder.Services.AddScoped<IUserInterface, UserService>();
+builder.Services.AddScoped<Mp3MetadataReader>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
