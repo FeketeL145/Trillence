@@ -8,7 +8,7 @@ public partial class Album
 
     public string? Image { get; set; }
 
-    public DateOnly? Released { get; set; }
+    public uint? Released { get; set; }
 
     public virtual ICollection<ArtistAlbum> ArtistAlbums { get; set; } = new List<ArtistAlbum>();
 }

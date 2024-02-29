@@ -566,6 +566,22 @@
     ]
   },
   {
+    "ContainingType": "MetadataController",
+    "Method": "GetMetadata",
+    "RelativePath": "api/Metadata",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BackEnd.Controllers.PlaylistController",
     "Method": "Get",
     "RelativePath": "api/Playlist/allplaylist",

@@ -3,44 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\repositories\\services\\mp3metadatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\mp3metadatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\artistalbum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\artistalbum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\repositories\\services\\artistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\artistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\artistsong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\artistsong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\playlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\playlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\playlistsong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\playlistsong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\models\\trillencecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\trillencecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\profo\\desktop\\trillence\\backend\\controllers\\mp3metadatereadercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\mp3metadatereadercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,137 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Email.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Email.cs",
-              "RelativeDocumentMoniker": "Models\\Email.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Email.cs",
-              "RelativeToolTip": "Models\\Email.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:06:13.698Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:46.504Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Song.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Song.cs",
-              "RelativeDocumentMoniker": "Models\\Song.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Song.cs",
-              "RelativeToolTip": "Models\\Song.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABEAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:37.873Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PlaylistSong.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\PlaylistSong.cs",
-              "RelativeDocumentMoniker": "Models\\PlaylistSong.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\PlaylistSong.cs",
-              "RelativeToolTip": "Models\\PlaylistSong.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:34.863Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Playlist.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Playlist.cs",
-              "RelativeDocumentMoniker": "Models\\Playlist.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Playlist.cs",
-              "RelativeToolTip": "Models\\Playlist.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:31.436Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ArtistSong.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\ArtistSong.cs",
-              "RelativeDocumentMoniker": "Models\\ArtistSong.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\ArtistSong.cs",
-              "RelativeToolTip": "Models\\ArtistSong.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:27.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ArtistAlbum.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\ArtistAlbum.cs",
-              "RelativeDocumentMoniker": "Models\\ArtistAlbum.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\ArtistAlbum.cs",
-              "RelativeToolTip": "Models\\ArtistAlbum.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:23.766Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Artist.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Artist.cs",
-              "RelativeDocumentMoniker": "Models\\Artist.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Artist.cs",
-              "RelativeToolTip": "Models\\Artist.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:18.909Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Album.cs",
               "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Album.cs",
               "RelativeDocumentMoniker": "Models\\Album.cs",
               "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\Album.cs",
               "RelativeToolTip": "Models\\Album.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:04:50.673Z",
+              "WhenOpened": "2024-02-29T06:29:37.865Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "TrillenceContext.cs",
-              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\TrillenceContext.cs",
-              "RelativeDocumentMoniker": "Models\\TrillenceContext.cs",
-              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Models\\TrillenceContext.cs",
-              "RelativeToolTip": "Models\\TrillenceContext.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAAALgAAAABAAAA",
+              "DocumentIndex": 0,
+              "Title": "SongService.cs",
+              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\SongService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\SongService.cs",
+              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\SongService.cs",
+              "RelativeToolTip": "Repositories\\Services\\SongService.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T09:05:42.051Z",
+              "WhenOpened": "2024-02-29T06:27:41.366Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ArtistService.cs",
+              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\ArtistService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\ArtistService.cs",
+              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\ArtistService.cs",
+              "RelativeToolTip": "Repositories\\Services\\ArtistService.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T06:27:40.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Mp3MetadataReader.cs",
+              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\Mp3MetadataReader.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\Mp3MetadataReader.cs",
+              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\Mp3MetadataReader.cs",
+              "RelativeToolTip": "Repositories\\Services\\Mp3MetadataReader.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T11:01:59.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Mp3MetadateReaderController.cs",
+              "DocumentMoniker": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Controllers\\Mp3MetadateReaderController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Mp3MetadateReaderController.cs",
+              "ToolTip": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Controllers\\Mp3MetadateReaderController.cs",
+              "RelativeToolTip": "Controllers\\Mp3MetadateReaderController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T11:01:35.027Z"
             }
           ]
         }

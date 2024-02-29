@@ -490,3 +490,4 @@ C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\scopedcss\bundle\BackE
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.csproj.Up2Date
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.genruntimeconfig.cache
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\ref\BackEnd.dll
+C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\taglib-sharp.dll

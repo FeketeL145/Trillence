@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9H0zbO05cxQVC7lYa6gDjlHVC4qskKByqgvMXbZNb7M0jLFAn8VNs2WsSqlOuX7uxFww6/Qd8efM8OfTLWga7A==",
+  "dgSpecHash": "NAoab6tIBAmaucj/0I6KUDFoAKmRlbj30I6akHcx1pbxnkCkzwBhRzx/9KBQv8oJqJOitQkq8hBIwmKrj9YEIA==",
   "success": true,
   "projectFilePath": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
   "expectedPackageFiles": [
@@ -69,7 +69,8 @@
     "C:\\Users\\profo\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512",
     "C:\\Users\\profo\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\profo\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\profo\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\profo\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\profo\\.nuget\\packages\\taglib-sharp-netstandard2.0\\2.1.0\\taglib-sharp-netstandard2.0.2.1.0.nupkg.sha512"
   ],
   "logs": []
 }
