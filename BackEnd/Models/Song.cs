@@ -6,7 +6,7 @@ public partial class Song
 
     public string? Name { get; set; }
 
-    public TimeOnly? Length { get; set; }
+    public TimeSpan? Length { get; set; }
 
     public Guid AlbumId { get; set; }
 

@@ -14,16 +14,18 @@ public class Mp3MetadataReader
             string titleread = file.Tag.Title;
             string artistread = file.Tag.FirstPerformer;
             string albumread = file.Tag.Album;
+            string genreread = file.Tag.FirstGenre;
             uint yearread = file.Tag.Year;
             TimeSpan durationread = file.Properties.Duration;
 
             Console.WriteLine("Title: " + titleread);
             Console.WriteLine("Artist: " + artistread);
             Console.WriteLine("Album: " + albumread);
+            Console.WriteLine("Genre: " + genreread);
             Console.WriteLine("Year: " + yearread);
             Console.WriteLine("Duration: " + durationread);
 
-            var artist = new Artist
+            /*var artist = new Artist
             {
                 Id = Guid.NewGuid(),
                 Name = artistread,
@@ -42,6 +44,15 @@ public class Mp3MetadataReader
                 Id = Guid.NewGuid(),
                 Name = artistread,
             };
+
+            var song = new Song
+            {
+                Id = Guid.NewGuid(),
+                Name = titleread,
+                Length = durationread,
+                AlbumId = album.Id,
+                Genre = genreread,
+            };*/
         }
         catch (Exception ex)
         {
