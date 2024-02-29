@@ -10,6 +10,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
+
 function HomePage() {
   const [Songs, setSongs] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
@@ -17,10 +18,11 @@ function HomePage() {
   useEffect(() => {
     setFetchPending(true);
     fetch("https://localhost:7106/api/Song/allsong", {
+      mode: "cors",
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
       },
     })
       .then((response) => response.json())
@@ -41,7 +43,7 @@ function HomePage() {
             </label>
           </div>
           <button type="button" className='btn btn-primary' data-mdb-ripple-init>
-            <i class='bi bi-search'></i>
+            <i className='bi bi-search'></i>
           </button>
         </div>
       </div>
@@ -74,21 +76,3 @@ function HomePage() {
 }
 
 export default HomePage;
-
-/*
-[
-  {
-    "id": "2aa2ecb1-c90a-11ee-98ec-b42e994614d4",
-    "name": "proba1",
-    "fileName": "proba1",
-    "albumPhoto": "proba1",
-    "length": "00:04:13",
-    "listens": 3123,
-    "likes": 123,
-    "disikes": 312,
-    "artist": "proba1",
-    "album": "proba1",
-    "genre": "proba1"
-  }
-]
-*/
