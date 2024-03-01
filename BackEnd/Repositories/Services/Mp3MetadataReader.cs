@@ -1,4 +1,6 @@
-﻿namespace BackEnd
+﻿using TagLib;
+
+namespace BackEnd
 {
     public class Mp3MetadataReader
     {
@@ -18,7 +20,7 @@
                     string titleread = file.Tag.Title;
                     string artistread = file.Tag.FirstPerformer;
                     string albumread = file.Tag.Album;
-                    string genreread = file.Tag.FirstGenre;
+                    string genreread = file.Tag.FirstGenre ?? "Unknown";
                     uint yearread = file.Tag.Year;
                     TimeSpan durationread = file.Properties.Duration;
 
@@ -29,35 +31,49 @@
                     Console.WriteLine("Year: " + yearread);
                     Console.WriteLine("Duration: " + durationread);
 
-                    var artist = new Artist
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = artistread,
-                    };
+                    if (file.Tag.Pictures != null && file.Tag.Pictures.Length > 0)
+                    { 
+                        IPicture picture = file.Tag.Pictures[0];
+                        byte[] pictureData = picture.Data.Data;
 
-                    var album = new Album
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = albumread,
-                        Image = "Image.jpg",
-                        Released = yearread,
-                    };
+                        string pictureFilePath = Path.ChangeExtension(filePath, ".jpg");
+                        System.IO.File.WriteAllBytes(pictureFilePath, pictureData);
 
-                    var song = new Song
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = titleread,
-                        Length = durationread,
-                        AlbumId = album.Id,
-                        Genre = genreread,
-                    };
+                        Console.WriteLine("Album art saved to: " + pictureFilePath);
 
-                    await trillenceContext.Artists.AddAsync(artist);
-                    await trillenceContext.SaveChangesAsync();
-                    await trillenceContext.Albums.AddAsync(album);
-                    await trillenceContext.SaveChangesAsync();
-                    await trillenceContext.Songs.AddAsync(song);
-                    await trillenceContext.SaveChangesAsync();
+                        var artist = new Artist
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = artistread,
+                        };
+
+                        var album = new Album
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = albumread,
+                            Released = yearread,
+                        };
+
+                        var song = new Song
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = titleread,
+                            Length = durationread,
+                            AlbumId = album.Id,
+                            Genre = genreread,
+                        };
+
+                        await trillenceContext.Artists.AddAsync(artist);
+                        await trillenceContext.SaveChangesAsync();
+                        await trillenceContext.Albums.AddAsync(album);
+                        await trillenceContext.SaveChangesAsync();
+                        await trillenceContext.Songs.AddAsync(song);
+                        await trillenceContext.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        Console.WriteLine("No album art found in the MP3 file.");
+                    }
                 }
             }
             catch (Exception ex)

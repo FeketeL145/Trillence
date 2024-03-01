@@ -19,7 +19,6 @@ namespace BackEnd.Repositories.Services
             {
                 Id = Guid.NewGuid(),
                 Name = createAlbumDto.Name,
-                Image = createAlbumDto.Image,
                 Released = createAlbumDto.Released,
             };
 
@@ -45,7 +44,6 @@ namespace BackEnd.Repositories.Services
             if (existingAlbum != null)
             {
                 existingAlbum.Name = modifyAlbumDto.Name;
-                existingAlbum.Image = modifyAlbumDto.Image;
                 existingAlbum.Released = modifyAlbumDto.Released;
 
                 trillenceContext.Update(existingAlbum);

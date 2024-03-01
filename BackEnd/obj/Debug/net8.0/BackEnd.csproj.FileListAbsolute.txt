@@ -375,9 +375,6 @@ C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.csproj.CoreCom
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.sourcelink.json
-C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.dll
-C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\refint\BackEnd.dll
-C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.pdb
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\appsettings.json
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\BackEnd.exe
@@ -427,6 +424,7 @@ C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\System.Composition.Hos
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\System.Composition.Runtime.dll
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\System.Composition.TypedParts.dll
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\taglib-sharp.dll
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -488,6 +486,8 @@ C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\staticwebassets\msbuil
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\scopedcss\bundle\BackEnd.styles.css
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.csproj.Up2Date
+C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.dll
+C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\refint\BackEnd.dll
+C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.pdb
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.genruntimeconfig.cache
 C:\Users\profo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\ref\BackEnd.dll
-C:\Users\profo\Desktop\Trillence\BackEnd\bin\Debug\net8.0\taglib-sharp.dll

@@ -6,7 +6,7 @@ namespace BackEnd
     {
         public static AlbumDto AsDto(this Album album)
         {
-            return new AlbumDto(album.Id, album.Name, album.Image, album.Released);
+            return new AlbumDto(album.Id, album.Name, album.Released);
         }
 
         public static ArtistAlbumDto AsDto(this ArtistAlbum artistAlbum)

@@ -48,7 +48,6 @@ public partial class TrillenceContext : DbContext
                 .HasColumnName("ID")
                 .UseCollation("ascii_general_ci")
                 .HasCharSet("ascii");
-            entity.Property(e => e.Image).HasColumnType("tinytext");
             entity.Property(e => e.Name).HasColumnType("tinytext");
             entity.Property(e => e.Released).HasColumnType("int(10) unsigned");
         });
