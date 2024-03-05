@@ -63,11 +63,23 @@ namespace BackEnd
                             Genre = genreread,
                         };
 
+                        var artistalbum = new ArtistAlbum
+                        {
+                            ArtistId = artist.Id,
+                            AlbumId = album.Id,
+                        };
+
+                        var artistsong = new ArtistSong
+                        {
+                            ArtistId = artist.Id,
+                            SongId = song.Id,
+                        };
+
                         await trillenceContext.Artists.AddAsync(artist);
-                        await trillenceContext.SaveChangesAsync();
                         await trillenceContext.Albums.AddAsync(album);
-                        await trillenceContext.SaveChangesAsync();
                         await trillenceContext.Songs.AddAsync(song);
+                        await trillenceContext.ArtistAlbums.AddAsync(artistalbum);
+                        await trillenceContext.ArtistSongs.AddAsync(artistsong);
                         await trillenceContext.SaveChangesAsync();
                     }
                     else
