@@ -19,6 +19,7 @@ public class SpotifyDownloadController : ControllerBase
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 
                 process.Start();
 

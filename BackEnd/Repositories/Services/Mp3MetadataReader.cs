@@ -1,4 +1,5 @@
-﻿using TagLib;
+﻿using Microsoft.EntityFrameworkCore;
+using TagLib;
 
 namespace BackEnd
 {
@@ -32,54 +33,48 @@ namespace BackEnd
                     Console.WriteLine("Duration: " + durationread);
 
                     if (file.Tag.Pictures != null && file.Tag.Pictures.Length > 0)
-                    { 
+                    {
                         IPicture picture = file.Tag.Pictures[0];
                         byte[] pictureData = picture.Data.Data;
 
-                        string pictureFilePath = Path.ChangeExtension(filePath, ".jpg");
-                        System.IO.File.WriteAllBytes(pictureFilePath, pictureData);
-
-                        Console.WriteLine("Album art saved to: " + pictureFilePath);
-
-                        var artist = new Artist
+                        var artist = await trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistread);
+                        if (artist == null)
                         {
-                            Id = Guid.NewGuid(),
-                            Name = artistread,
-                        };
+                            artist = new Artist { Id = Guid.NewGuid(), Name = artistread };
+                            await trillenceContext.Artists.AddAsync(artist);
+                        }
 
-                        var album = new Album
+                        var album = await trillenceContext.Albums.FirstOrDefaultAsync(a => a.Name == albumread);
+                        if (album == null)
                         {
-                            Id = Guid.NewGuid(),
-                            Name = albumread,
-                            Released = yearread,
-                        };
+                            album = new Album { Id = Guid.NewGuid(), Name = albumread, Released = yearread };
+                            await trillenceContext.Albums.AddAsync(album);
 
-                        var song = new Song
+                            string pictureFilePath = Path.ChangeExtension(filePath, ".jpg");
+                            System.IO.File.WriteAllBytes(pictureFilePath, pictureData);
+                            Microsoft.VisualBasic.FileIO.FileSystem.RenameFile(pictureFilePath, albumread + ".jpg");
+                            Console.WriteLine("Album art saved to: " + pictureFilePath);
+                        }
+
+                        var song = await trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == titleread);
+                        if (song == null)
                         {
-                            Id = Guid.NewGuid(),
-                            Name = titleread,
-                            Length = durationread,
-                            AlbumId = album.Id,
-                            Genre = genreread,
-                        };
+                            song = new Song { Id = Guid.NewGuid(), Name = titleread, Length = durationread, AlbumId = album.Id, Genre = genreread };
+                            await trillenceContext.Songs.AddAsync(song);
+                        }
 
-                        var artistalbum = new ArtistAlbum
+                        var artistAlbumExists = await trillenceContext.ArtistAlbums.AnyAsync(s => s.ArtistId == artist.Id && s.AlbumId == album.Id);
+                        if (!artistAlbumExists)
                         {
-                            ArtistId = artist.Id,
-                            AlbumId = album.Id,
-                        };
+                            await trillenceContext.ArtistAlbums.AddAsync(new ArtistAlbum { ArtistId = artist.Id, AlbumId = album.Id });
+                        }
 
-                        var artistsong = new ArtistSong
+                        var artistSongExists = await trillenceContext.ArtistSongs.AnyAsync(s => s.ArtistId == artist.Id && s.SongId == song.Id);
+                        if (!artistSongExists)
                         {
-                            ArtistId = artist.Id,
-                            SongId = song.Id,
-                        };
+                            await trillenceContext.ArtistSongs.AddAsync(new ArtistSong { ArtistId = artist.Id, SongId = song.Id });
+                        }
 
-                        await trillenceContext.Artists.AddAsync(artist);
-                        await trillenceContext.Albums.AddAsync(album);
-                        await trillenceContext.Songs.AddAsync(song);
-                        await trillenceContext.ArtistAlbums.AddAsync(artistalbum);
-                        await trillenceContext.ArtistSongs.AddAsync(artistsong);
                         await trillenceContext.SaveChangesAsync();
                     }
                     else
