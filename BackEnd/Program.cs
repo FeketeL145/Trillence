@@ -18,6 +18,7 @@ builder.Services.AddScoped<IPlaylistInterface, PlaylistService>();
 builder.Services.AddScoped<IPlaylistsongInterface, PlaylistsongService>();
 builder.Services.AddScoped<ISongInterface, SongService>();
 builder.Services.AddScoped<IUserInterface, UserService>();
+builder.Services.AddScoped<IConnectionInterface, ConnectionService>();
 builder.Services.AddScoped<Mp3MetadataReader>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -27,7 +28,6 @@ builder.Services.AddCors(options =>
             builder =>
             {
                 builder.WithOrigins("*")
-                        .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader();
             });
@@ -48,10 +48,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseCors(MyAllowSpecificOrigins);
 
-app.UseCors();
+app.MapControllers();
 
 app.Run();

@@ -14,19 +14,18 @@ namespace BackEnd
 
         public async Task ReadMetadata(string filePath)
         {
+            filePath = filePath.Trim('"');
             try
             {
                 using (var file = TagLib.File.Create(filePath))
                 {
                     string titleread = file.Tag.Title;
-                    string artistread = file.Tag.FirstPerformer;
                     string albumread = file.Tag.Album;
                     string genreread = file.Tag.FirstGenre ?? "Unknown";
                     uint yearread = file.Tag.Year;
                     TimeSpan durationread = file.Properties.Duration;
 
                     Console.WriteLine("Title: " + titleread);
-                    Console.WriteLine("Artist: " + artistread);
                     Console.WriteLine("Album: " + albumread);
                     Console.WriteLine("Genre: " + genreread);
                     Console.WriteLine("Year: " + yearread);
@@ -36,13 +35,6 @@ namespace BackEnd
                     {
                         IPicture picture = file.Tag.Pictures[0];
                         byte[] pictureData = picture.Data.Data;
-
-                        var artist = await trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistread);
-                        if (artist == null)
-                        {
-                            artist = new Artist { Id = Guid.NewGuid(), Name = artistread };
-                            await trillenceContext.Artists.AddAsync(artist);
-                        }
 
                         var album = await trillenceContext.Albums.FirstOrDefaultAsync(a => a.Name == albumread);
                         if (album == null)
@@ -63,16 +55,21 @@ namespace BackEnd
                             await trillenceContext.Songs.AddAsync(song);
                         }
 
-                        var artistAlbumExists = await trillenceContext.ArtistAlbums.AnyAsync(s => s.ArtistId == artist.Id && s.AlbumId == album.Id);
-                        if (!artistAlbumExists)
+                        var contributoryArtists = file.Tag.Performers;
+                        foreach (var artistName in contributoryArtists)
                         {
-                            await trillenceContext.ArtistAlbums.AddAsync(new ArtistAlbum { ArtistId = artist.Id, AlbumId = album.Id });
-                        }
+                            var artist = await trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
+                            if (artist == null)
+                            {
+                                artist = new Artist { Id = Guid.NewGuid(), Name = artistName };
+                                await trillenceContext.Artists.AddAsync(artist);
+                            }
 
-                        var artistSongExists = await trillenceContext.ArtistSongs.AnyAsync(s => s.ArtistId == artist.Id && s.SongId == song.Id);
-                        if (!artistSongExists)
-                        {
-                            await trillenceContext.ArtistSongs.AddAsync(new ArtistSong { ArtistId = artist.Id, SongId = song.Id });
+                            var artistSongExists = await trillenceContext.ArtistSongs.AnyAsync(s => s.ArtistId == artist.Id && s.SongId == song.Id);
+                            if (!artistSongExists)
+                            {
+                                await trillenceContext.ArtistSongs.AddAsync(new ArtistSong { ArtistId = artist.Id, SongId = song.Id });
+                            }
                         }
 
                         await trillenceContext.SaveChangesAsync();
