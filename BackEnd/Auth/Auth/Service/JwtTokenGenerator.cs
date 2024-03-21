@@ -23,17 +23,16 @@ namespace Auth.Service
 
             var key = Encoding.ASCII.GetBytes(jwtOptions.Secret);
 
-            var claimList = new List<Claim>//Data which should be included in the token:
+            var claimList = new List<Claim>
             {
 
                 new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
                 new Claim(JwtRegisteredClaimNames.Name,applicationUser.UserName.ToString()),
-                //new Claim(JwtRegisteredClaimNames.Name,applicationUser.FullName.ToString())
             };
 
             claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-            var tokenDescription = new SecurityTokenDescriptor//Token options
+            var tokenDescription = new SecurityTokenDescriptor
             {
                 Audience = jwtOptions.Audience,
                 Issuer = jwtOptions.Issuer,

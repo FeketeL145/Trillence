@@ -2,6 +2,8 @@
 
 public partial class ArtistSong
 {
+    public long Id { get; set; }
+
     public Guid ArtistId { get; set; }
 
     public Guid SongId { get; set; }

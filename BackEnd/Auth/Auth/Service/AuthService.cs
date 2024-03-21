@@ -31,7 +31,6 @@ namespace Auth.Service
             {
                 if (!roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
                 {
-                    //Roles are created here:
                     roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
                 }
 
@@ -49,8 +48,6 @@ namespace Auth.Service
             {
                 UserName = registerRequestDto.UserName,
                 NormalizedUserName = registerRequestDto.UserName.ToUpper(),
-                /*Age = registerRequestDto.Age,
-                FullName = registerRequestDto.FullName,*/
                 Email = registerRequestDto.Email,
 
             };
@@ -70,7 +67,6 @@ namespace Auth.Service
                         Id = userToReturn.Id,
                         Email = userToReturn.Email,
                         UserName = userToReturn.UserName,
-                        //FullName = userToReturn.FullName,
                     };
 
                     return "";
@@ -105,7 +101,6 @@ namespace Auth.Service
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                //FullName = user.FullName
             };
 
             LoginResponseDto loginResponseDto = new()

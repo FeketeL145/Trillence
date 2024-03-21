@@ -5,16 +5,16 @@ namespace BackEnd.Repositories.Services
 {
     public class ConnectionService : IConnectionInterface
     {
-        private readonly TrillenceContext trillenceContext;
-        
-        public ConnectionService(TrillenceContext trillencecontext)
+        private readonly TrillenceContext _trillenceContext;
+
+        public ConnectionService(TrillenceContext trillenceContext)
         {
-            this.trillenceContext = trillencecontext;
+            _trillenceContext = trillenceContext;
         }
 
         public async Task<object> GetAllSongDetails()
         {
-            var data = await trillenceContext.Albums
+            var data = await _trillenceContext.Albums
                 .Include(album => album.Songs)
                     .ThenInclude(song => song.ArtistSongs)
                         .ThenInclude(artistSong => artistSong.Artist)
@@ -22,9 +22,9 @@ namespace BackEnd.Repositories.Services
 
             var flattenedData = data.Select(album =>
             {
-                var mainArtist = trillenceContext.ArtistAlbums
-                    .Where(aa => aa.AlbumId == album.Id)
-                    .Select(aa => new { artistId = aa.Artist.Id, artistName = aa.Artist.Name })
+                var mainArtist = _trillenceContext.Artists
+                    .Where(artist => artist.Id == album.ArtistId)
+                    .Select(artist => new { artistId = artist.Id, artistName = artist.Name })
                     .FirstOrDefault();
 
                 var songs = album.Songs.Select(song =>
@@ -61,7 +61,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetSongDetailsById(Guid songId)
         {
-            var data = await trillenceContext.Albums
+            var data = await _trillenceContext.Albums
                 .Include(album => album.Songs)
                     .ThenInclude(song => song.ArtistSongs)
                         .ThenInclude(artistSong => artistSong.Artist)
@@ -69,9 +69,9 @@ namespace BackEnd.Repositories.Services
 
             var flattenedData = data.Select(album =>
             {
-                var mainArtist = trillenceContext.ArtistAlbums
-                    .Where(aa => aa.AlbumId == album.Id)
-                    .Select(aa => new { artistId = aa.Artist.Id, artistName = aa.Artist.Name })
+                var mainArtist = _trillenceContext.Artists
+                    .Where(artist => artist.Id == album.ArtistId)
+                    .Select(artist => new { artistId = artist.Id, artistName = artist.Name })
                     .FirstOrDefault();
 
                 var song = album.Songs.FirstOrDefault(s => s.Id == songId);
@@ -102,11 +102,11 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetAllPlaylistDetails()
         {
-            var data = await trillenceContext.Users
-        .Include(user => user.Playlists)
-            .ThenInclude(playlist => playlist.PlaylistSongs)
-                .ThenInclude(playlistSong => playlistSong.Song)
-        .ToListAsync();
+            var data = await _trillenceContext.Users
+                .Include(user => user.Playlists)
+                    .ThenInclude(playlist => playlist.PlaylistSongs)
+                        .ThenInclude(playlistSong => playlistSong.Song)
+                .ToListAsync();
 
             var groupedData = data.Select(user =>
             {
@@ -143,11 +143,11 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetPlaylistDetailsById(Guid playlistId)
         {
-            var playlist = await trillenceContext.Playlists
-        .Include(p => p.User)
-        .Include(p => p.PlaylistSongs)
-            .ThenInclude(ps => ps.Song)
-        .FirstOrDefaultAsync(p => p.Id == playlistId);
+            var playlist = await _trillenceContext.Playlists
+                .Include(p => p.User)
+                .Include(p => p.PlaylistSongs)
+                    .ThenInclude(ps => ps.Song)
+                .FirstOrDefaultAsync(p => p.Id == playlistId);
 
             if (playlist == null)
             {
