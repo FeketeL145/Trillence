@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 11. 11:38
+-- Létrehozás ideje: 2024. Már 21. 09:03
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -28,41 +28,20 @@ USE `trillence`;
 --
 -- Tábla szerkezet ehhez a táblához `albums`
 --
--- Létrehozva: 2024. Már 01. 10:05
--- Utolsó frissítés: 2024. Már 11. 10:38
+-- Létrehozva: 2024. Már 21. 06:22
+-- Utolsó frissítés: 2024. Már 21. 08:03
 --
 
 DROP TABLE IF EXISTS `albums`;
 CREATE TABLE `albums` (
   `ID` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `Name` tinytext DEFAULT NULL,
-  `Released` int(10) UNSIGNED DEFAULT NULL
+  `Released` int(10) UNSIGNED DEFAULT NULL,
+  `ArtistID` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- TÁBLA KAPCSOLATAI `albums`:
---
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `artist-album`
---
--- Létrehozva: 2024. Már 11. 08:53
--- Utolsó frissítés: 2024. Már 11. 10:37
---
-
-DROP TABLE IF EXISTS `artist-album`;
-CREATE TABLE `artist-album` (
-  `ID` bigint(20) NOT NULL,
-  `ArtistID` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  `AlbumID` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- TÁBLA KAPCSOLATAI `artist-album`:
---   `AlbumID`
---       `albums` -> `ID`
 --   `ArtistID`
 --       `artists` -> `ID`
 --
@@ -72,8 +51,8 @@ CREATE TABLE `artist-album` (
 --
 -- Tábla szerkezet ehhez a táblához `artist-song`
 --
--- Létrehozva: 2024. Már 11. 08:53
--- Utolsó frissítés: 2024. Már 11. 10:38
+-- Létrehozva: 2024. Már 20. 12:36
+-- Utolsó frissítés: 2024. Már 21. 08:03
 --
 
 DROP TABLE IF EXISTS `artist-song`;
@@ -96,8 +75,8 @@ CREATE TABLE `artist-song` (
 --
 -- Tábla szerkezet ehhez a táblához `artists`
 --
--- Létrehozva: 2024. Már 01. 08:26
--- Utolsó frissítés: 2024. Már 11. 10:38
+-- Létrehozva: 2024. Már 20. 12:36
+-- Utolsó frissítés: 2024. Már 21. 08:03
 --
 
 DROP TABLE IF EXISTS `artists`;
@@ -115,7 +94,7 @@ CREATE TABLE `artists` (
 --
 -- Tábla szerkezet ehhez a táblához `playlist-song`
 --
--- Létrehozva: 2024. Már 11. 08:54
+-- Létrehozva: 2024. Már 20. 12:36
 --
 
 DROP TABLE IF EXISTS `playlist-song`;
@@ -138,7 +117,7 @@ CREATE TABLE `playlist-song` (
 --
 -- Tábla szerkezet ehhez a táblához `playlists`
 --
--- Létrehozva: 2024. Már 01. 08:26
+-- Létrehozva: 2024. Már 20. 12:36
 --
 
 DROP TABLE IF EXISTS `playlists`;
@@ -159,8 +138,8 @@ CREATE TABLE `playlists` (
 --
 -- Tábla szerkezet ehhez a táblához `songs`
 --
--- Létrehozva: 2024. Már 01. 08:26
--- Utolsó frissítés: 2024. Már 11. 10:38
+-- Létrehozva: 2024. Már 20. 12:36
+-- Utolsó frissítés: 2024. Már 21. 08:03
 --
 
 DROP TABLE IF EXISTS `songs`;
@@ -183,7 +162,7 @@ CREATE TABLE `songs` (
 --
 -- Tábla szerkezet ehhez a táblához `users`
 --
--- Létrehozva: 2024. Már 01. 08:26
+-- Létrehozva: 2024. Már 20. 12:36
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -204,15 +183,8 @@ CREATE TABLE `users` (
 -- A tábla indexei `albums`
 --
 ALTER TABLE `albums`
-  ADD PRIMARY KEY (`ID`);
-
---
--- A tábla indexei `artist-album`
---
-ALTER TABLE `artist-album`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `AlbumID` (`AlbumID`),
-  ADD KEY `ArtistID` (`ArtistID`);
+  ADD KEY `Album ArtistID - Artist ID` (`ArtistID`);
 
 --
 -- A tábla indexei `artist-song`
@@ -261,16 +233,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT a táblához `artist-album`
---
-ALTER TABLE `artist-album`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT a táblához `artist-song`
 --
 ALTER TABLE `artist-song`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT a táblához `playlist-song`
@@ -283,11 +249,10 @@ ALTER TABLE `playlist-song`
 --
 
 --
--- Megkötések a táblához `artist-album`
+-- Megkötések a táblához `albums`
 --
-ALTER TABLE `artist-album`
-  ADD CONSTRAINT `artist-album_ibfk_1` FOREIGN KEY (`AlbumID`) REFERENCES `albums` (`ID`),
-  ADD CONSTRAINT `artist-album_ibfk_2` FOREIGN KEY (`ArtistID`) REFERENCES `artists` (`ID`);
+ALTER TABLE `albums`
+  ADD CONSTRAINT `Album ArtistID - Artist ID` FOREIGN KEY (`ArtistID`) REFERENCES `artists` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `artist-song`
@@ -323,10 +288,6 @@ USE `phpmyadmin`;
 
 --
 -- A(z) albums tábla metaadatai
---
-
---
--- A(z) artist-album tábla metaadatai
 --
 
 --

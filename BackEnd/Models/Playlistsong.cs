@@ -2,6 +2,8 @@
 
 public partial class PlaylistSong
 {
+    public long Id { get; set; }
+
     public Guid SongId { get; set; }
 
     public Guid PlaylistId { get; set; }

@@ -16,5 +16,5 @@ public partial class Song
 
     public virtual ICollection<ArtistSong> ArtistSongs { get; set; } = new List<ArtistSong>();
 
-    public virtual PlaylistSong? PlaylistSong { get; set; }
+    public virtual ICollection<PlaylistSong> PlaylistSongs { get; set; } = new List<PlaylistSong>();
 }

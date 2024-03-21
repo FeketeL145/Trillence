@@ -8,7 +8,9 @@ public partial class Album
 
     public uint? Released { get; set; }
 
-    public virtual ICollection<ArtistAlbum> ArtistAlbums { get; set; } = new List<ArtistAlbum>();
+    public Guid ArtistId { get; set; }
+
+    public virtual Artist Artist { get; set; } = null!;
 
     public virtual ICollection<Song> Songs { get; set; } = new List<Song>();
 }

@@ -1,226 +1,210 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BackEnd.Models;
-
-public partial class TrillenceContext : DbContext
+namespace BackEnd.Models
 {
-    public TrillenceContext()
+    public partial class TrillenceContext : DbContext
     {
-    }
-
-    public TrillenceContext(DbContextOptions<TrillenceContext> options)
-        : base(options)
-    {
-    }
-
-    public virtual DbSet<Album> Albums { get; set; }
-
-    public virtual DbSet<Artist> Artists { get; set; }
-
-    public virtual DbSet<ArtistAlbum> ArtistAlbums { get; set; }
-
-    public virtual DbSet<ArtistSong> ArtistSongs { get; set; }
-
-    public virtual DbSet<Playlist> Playlists { get; set; }
-
-    public virtual DbSet<PlaylistSong> PlaylistSongs { get; set; }
-
-    public virtual DbSet<Song> Songs { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
+        public TrillenceContext()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            string connectionString = configuration.GetConnectionString("Trillence");
-
-            optionsBuilder.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.32-mariadb"));
         }
-    }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder
-            .UseCollation("utf8mb4_general_ci")
-            .HasCharSet("utf8mb4");
-
-        modelBuilder.Entity<Album>(entity =>
+        public TrillenceContext(DbContextOptions<TrillenceContext> options)
+            : base(options)
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+        }
 
-            entity.ToTable("albums");
+        public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<Artist> Artists { get; set; }
+        public virtual DbSet<ArtistSong> ArtistSongs { get; set; }
+        public virtual DbSet<Playlist> Playlists { get; set; }
+        public virtual DbSet<PlaylistSong> PlaylistSongs { get; set; }
+        public virtual DbSet<Song> Songs { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.Name).HasColumnType("tinytext");
-            entity.Property(e => e.Released).HasColumnType("int(10) unsigned");
-        });
-
-        modelBuilder.Entity<Artist>(entity =>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            if (!optionsBuilder.IsConfigured)
+            {
+                var config = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
 
-            entity.ToTable("artists");
+                optionsBuilder.UseMySql(config.GetConnectionString("Trillence"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.32-mariadb"));
+            }
+        }
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.Name).HasColumnType("tinytext");
-        });
-
-        modelBuilder.Entity<ArtistAlbum>(entity =>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            entity.HasKey(e => e.ArtistId).HasName("PRIMARY");
+            modelBuilder
+                .UseCollation("utf8mb4_general_ci")
+                .HasCharSet("utf8mb4");
 
-            entity.ToTable("artist-album");
+            modelBuilder.Entity<Album>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasIndex(e => e.AlbumId, "AlbumID");
+                entity.ToTable("albums");
 
-            entity.HasIndex(e => e.ArtistId, "ArtistID");
+                entity.HasIndex(e => e.ArtistId, "Album ArtistID - Artist ID");
 
-            entity.Property(e => e.ArtistId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("ArtistID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.AlbumId)
-                .HasColumnName("AlbumID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-            entity.HasOne(d => d.Album).WithMany(p => p.ArtistAlbums)
-                .HasForeignKey(d => d.AlbumId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("artist-album_ibfk_1");
+                entity.Property(e => e.ArtistId)
+                    .HasColumnName("ArtistID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-            entity.HasOne(d => d.Artist).WithOne(p => p.ArtistAlbum)
-                .HasForeignKey<ArtistAlbum>(d => d.ArtistId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("artist-album_ibfk_2");
-        });
+                entity.Property(e => e.Name).HasColumnType("tinytext");
+                entity.Property(e => e.Released).HasColumnType("int(10) unsigned");
 
-        modelBuilder.Entity<ArtistSong>(entity =>
-        {
-            entity.HasKey(e => e.ArtistId).HasName("PRIMARY");
+                entity.HasOne(d => d.Artist).WithMany(p => p.Albums)
+                    .HasForeignKey(d => d.ArtistId)
+                    .HasConstraintName("Album ArtistID - Artist ID");
+            });
 
-            entity.ToTable("artist-song");
+            modelBuilder.Entity<Artist>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasIndex(e => e.ArtistId, "ArtistID1");
+                entity.ToTable("artists");
 
-            entity.HasIndex(e => e.SongId, "SongID");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-            entity.Property(e => e.ArtistId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("ArtistID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.SongId)
-                .HasColumnName("SongID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
+                entity.Property(e => e.Name).HasColumnType("tinytext");
+            });
 
-            entity.HasOne(d => d.Artist).WithOne(p => p.ArtistSong)
-                .HasForeignKey<ArtistSong>(d => d.ArtistId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("artist-song_ibfk_1");
+            modelBuilder.Entity<ArtistSong>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Song).WithMany(p => p.ArtistSongs)
-                .HasForeignKey(d => d.SongId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("artist-song_ibfk_2");
-        });
+                entity.ToTable("artist-song");
 
-        modelBuilder.Entity<Playlist>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+                entity.HasIndex(e => e.ArtistId, "ArtistID1");
 
-            entity.ToTable("playlists");
+                entity.HasIndex(e => e.SongId, "SongID");
 
-            entity.HasIndex(e => e.UserId, "UserID");
+                entity.Property(e => e.Id)
+                    .HasColumnType("bigint(20)")
+                    .HasColumnName("ID");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.Name).HasColumnType("tinytext");
-            entity.Property(e => e.UserId)
-                .HasColumnName("UserID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
+                entity.Property(e => e.ArtistId)
+                    .HasColumnName("ArtistID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Playlists)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("playlists_ibfk_1");
-        });
+                entity.Property(e => e.SongId)
+                    .HasColumnName("SongID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-        modelBuilder.Entity<PlaylistSong>(entity =>
-        {
-            entity.HasKey(e => e.SongId).HasName("PRIMARY");
+                entity.HasOne(d => d.Artist).WithMany(p => p.ArtistSongs)
+                    .HasForeignKey(d => d.ArtistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("artist-song_ibfk_1");
 
-            entity.ToTable("playlist-song");
+                entity.HasOne(d => d.Song).WithMany(p => p.ArtistSongs)
+                    .HasForeignKey(d => d.SongId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("artist-song_ibfk_2");
+            });
 
-            entity.HasIndex(e => e.PlaylistId, "PlaylistID");
+            modelBuilder.Entity<Playlist>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasIndex(e => e.SongId, "SongID1");
+                entity.ToTable("playlists");
 
-            entity.Property(e => e.SongId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("SongID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.PlaylistId)
-                .HasColumnName("PlaylistID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
+                entity.HasIndex(e => e.UserId, "UserID");
 
-            entity.HasOne(d => d.Playlist).WithMany(p => p.PlaylistSongs)
-                .HasForeignKey(d => d.PlaylistId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("playlist-song_ibfk_1");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-            entity.HasOne(d => d.Song).WithOne(p => p.PlaylistSong)
-                .HasForeignKey<PlaylistSong>(d => d.SongId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("playlist-song_ibfk_2");
-        });
+                entity.Property(e => e.Name).HasColumnType("tinytext");
 
-        modelBuilder.Entity<Song>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
 
-            entity.ToTable("songs");
+                entity.HasOne(d => d.User).WithMany(p => p.Playlists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("playlists_ibfk_1");
+            });
 
-            entity.HasIndex(e => e.AlbumId, "Song AlbumID - Album ID");
+            modelBuilder.Entity<PlaylistSong>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("ID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.AlbumId)
-                .HasColumnName("AlbumID")
-                .UseCollation("ascii_general_ci")
-                .HasCharSet("ascii");
-            entity.Property(e => e.Genre).HasColumnType("tinytext");
-            entity.Property(e => e.Length).HasColumnType("time");
-            entity.Property(e => e.Name).HasColumnType("tinytext");
+                entity.ToTable("playlist-song");
 
-            entity.HasOne(d => d.Album).WithMany(p => p.Songs)
-                .HasForeignKey(d => d.AlbumId)
-                .HasConstraintName("Song AlbumID - Album ID");
-        });
+                entity.HasIndex(e => e.PlaylistId, "PlaylistID");
 
-        modelBuilder.Entity<User>(entity =>
-        {
+                entity.HasIndex(e => e.SongId, "SongID1");
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("bigint(20)")
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.PlaylistId)
+                    .HasColumnName("PlaylistID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
+
+                entity.Property(e => e.SongId)
+                    .HasColumnName("SongID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
+
+                entity.HasOne(d => d.Playlist).WithMany(p => p.PlaylistSongs)
+                    .HasForeignKey(d => d.PlaylistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("playlist-song_ibfk_1");
+
+                entity.HasOne(d => d.Song).WithMany(p => p.PlaylistSongs)
+                    .HasForeignKey(d => d.SongId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("playlist-song_ibfk_2");
+            });
+
+            modelBuilder.Entity<Song>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+                entity.ToTable("songs");
+
+                entity.HasIndex(e => e.AlbumId, "Song AlbumID - Album ID");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
+
+                entity.Property(e => e.AlbumId)
+                    .HasColumnName("AlbumID")
+                    .UseCollation("ascii_general_ci")
+                    .HasCharSet("ascii");
+
+                entity.Property(e => e.Genre).HasColumnType("tinytext");
+                entity.Property(e => e.Length).HasColumnType("time");
+                entity.Property(e => e.Name).HasColumnType("tinytext");
+
+                entity.HasOne(d => d.Album).WithMany(p => p.Songs)
+                    .HasForeignKey(d => d.AlbumId)
+                    .HasConstraintName("Song AlbumID - Album ID");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("users");
@@ -229,11 +213,14 @@ public partial class TrillenceContext : DbContext
                 .HasColumnName("ID")
                 .UseCollation("ascii_general_ci")
                 .HasCharSet("ascii");
-            entity.Property(e => e.Name).HasColumnType("tinytext");
-        });
 
-        OnModelCreatingPartial(modelBuilder);
+            entity.Property
+            (e => e.Name).HasColumnType("tinytext");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
