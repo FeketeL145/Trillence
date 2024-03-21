@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Register(){
     return(
       <div className="auth-wrapper">
@@ -48,7 +50,9 @@ function Register(){
               </button>
             </div>
             <p className="forgot-password text-right whitetext">
-            <a href="/sign-in">Already registered?</a>
+            <NavLink to={`/sign-in`}>
+            Already registered?
+            </NavLink>
             </p>
           </form>
         </div>

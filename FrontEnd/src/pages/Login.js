@@ -39,12 +39,19 @@ function Login(){
 
                 <div className="d-grid">
                   <button type="submit" className="btn btn-primary">
-                    Log in
+                    Sign in
                   </button>
                 </div>
                 <NavLink to={`/PasswordForgot`}>
                   <p className="forgot-password text-right whitetext"><a href="#">Forgot password?</a></p>
                 </NavLink>
+                <br/>
+                <div className="forgot-password text-center whitetext">
+                  Don't have an account?
+                  <NavLink to={`/sign-up`} className="text-center">
+                    <p>Sign up!</p>
+                  </NavLink>
+                </div>
               </form>
             </div>
         </div>

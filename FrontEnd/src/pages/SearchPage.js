@@ -12,14 +12,14 @@ import {
 import Search from '../Components/Search';
 
 
-function HomePage() {
-  return(
-<div>
-
-</div>
-  );
+function SearchPage() {
+    return(
+        <div>
+            <Search/>
+        </div>
+    );
 }
 
 
 
-export default HomePage;
+export default SearchPage;

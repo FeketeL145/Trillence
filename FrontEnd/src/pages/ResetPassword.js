@@ -4,7 +4,7 @@ function ResetPassword(){
                 <div className="auth-inner bg-dark">
                     <form>
                         <h3 className="whitetext">Reset Password</h3>
-                        <p>Enter your password twice, and try to not forget it next time</p>
+                        <p>Enter your new password below</p>
                         <div className="mb-3">
                             <label>Password</label>
                             <input

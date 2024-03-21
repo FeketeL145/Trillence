@@ -19,15 +19,17 @@ function Settings(){
       };
     
     return(
+        
         <div>
-            <div className='container p-4 mt-4 bg-dark rounded-8' >
+            {/*Ennek a témáját még nem csináltam meg, de a mai meg a holnapi nap folyamán megoldom*/}
+            <div className='card m-5' >
                 <form className="p-4">
                     <div className="row align-items-baseline">
                         <div className="col-lg-3">
                             <p className="text-start">Theme</p>
                         </div>
                         <div className="col">
-                            <select className="m-2 rounded-8 form-select bg-dark">
+                            <select className="m-2 rounded-8 form-select bg-dark" onChange={handleThemeChange}>
                             <option value="1" className="rounded-8">Light Theme</option>
                             <option value="2" className="rounded-8">Dark Theme</option>
                             <option value="3" className="rounded-8">Automatic</option>
@@ -35,11 +37,12 @@ function Settings(){
                         </div>
                     </div>
                     <div className="row">
-                        <input type="file" className="m-2 form-control rounded-8 bg-dark" id="inputGroupFile04"/>
+                        <input type="file" className="m-2 form-control rounded-8 bg-dark" id="inputGroupFile04" onChange={handleFileChange}/>
                     </div>
                 </form>
             </div>
         </div>
+    
     )
 }
 export default Settings;

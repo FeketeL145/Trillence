@@ -1,4 +1,4 @@
-function PasswordForgot(){
+function ForgotPassword(){
     return(
         <div className="auth-wrapper">
             <div className="auth-inner bg-dark">
@@ -23,4 +23,4 @@ function PasswordForgot(){
             </div>
         </div>
 )}
-        export default PasswordForgot;
+        export default ForgotPassword;
