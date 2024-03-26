@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence\\backend\\controllers\\spotifydownloadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\spotifydownloadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence\\backend\\repositories\\services\\mp3metadatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\mp3metadatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,11 +30,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "SpotifyDownloadController.cs",
+              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Controllers\\SpotifyDownloadController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SpotifyDownloadController.cs",
+              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Controllers\\SpotifyDownloadController.cs",
+              "RelativeToolTip": "Controllers\\SpotifyDownloadController.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBwAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-26T11:34:26.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Mp3MetadateReaderController.cs",
               "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Controllers\\Mp3MetadateReaderController.cs",
               "RelativeDocumentMoniker": "Controllers\\Mp3MetadateReaderController.cs",
@@ -38,12 +55,11 @@
               "RelativeToolTip": "Controllers\\Mp3MetadateReaderController.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAD4vxEAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T10:11:20.016Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-26T10:11:20.016Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TrillenceContext.cs",
               "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Models\\TrillenceContext.cs",
               "RelativeDocumentMoniker": "Models\\TrillenceContext.cs",
@@ -51,12 +67,11 @@
               "RelativeToolTip": "Models\\TrillenceContext.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAAB4AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T09:34:14.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-26T09:34:14.721Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -64,18 +79,17 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-26T09:26:26.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-26T09:26:26.179Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Mp3MetadataReader.cs",
               "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\Mp3MetadataReader.cs",
               "RelativeDocumentMoniker": "Repositories\\Services\\Mp3MetadataReader.cs",
               "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\Mp3MetadataReader.cs",
               "RelativeToolTip": "Repositories\\Services\\Mp3MetadataReader.cs",
-              "ViewState": "AQIAAG0AAAAAAAAAAADwv4YAAAABAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAwwBcAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-26T09:22:11.832Z",
               "EditorCaption": ""
