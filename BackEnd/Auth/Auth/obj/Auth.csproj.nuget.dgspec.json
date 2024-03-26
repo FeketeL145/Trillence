@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {}
+    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {}
   },
   "projects": {
-    "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
         "projectName": "Auth",
-        "projectPath": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
-        "packagesPath": "C:\\Users\\profo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\profo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\obj\\",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+        "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\profo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

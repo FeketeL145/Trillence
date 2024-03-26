@@ -13,9 +13,9 @@ public class MetadataController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMetadata(string filePath)
+    public async Task<IActionResult> GetMetadata()
     {
-        await mp3MetadataReader.ReadMetadata(filePath);
+        await mp3MetadataReader.ReadMetadata();
         return Ok();
     }
 }
