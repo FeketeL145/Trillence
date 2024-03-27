@@ -61,43 +61,49 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetSongDetailsById(Guid songId)
         {
-            var data = await _trillenceContext.Albums
-                .Include(album => album.Songs)
-                    .ThenInclude(song => song.ArtistSongs)
-                        .ThenInclude(artistSong => artistSong.Artist)
-                .ToListAsync();
+            var songData = await _trillenceContext.Songs
+        .Include(song => song.Album)
+            .ThenInclude(album => album.Artist)
+        .Include(song => song.ArtistSongs)
+            .ThenInclude(artistSong => artistSong.Artist)
+        .FirstOrDefaultAsync(song => song.Id == songId);
 
-            var flattenedData = data.Select(album =>
+            if (songData == null)
             {
-                var mainArtist = _trillenceContext.Artists
-                    .Where(artist => artist.Id == album.ArtistId)
-                    .Select(artist => new { artistId = artist.Id, artistName = artist.Name })
-                    .FirstOrDefault();
+                return null;
+            }
 
-                var song = album.Songs.FirstOrDefault(s => s.Id == songId);
-                if (song == null)
+            var mainArtist = new
+            {
+                artistId = songData.Album.Artist.Id,
+                artistName = songData.Album.Artist.Name
+            };
+
+            var contributoryArtists = songData.ArtistSongs
+                .Where(artistSong => artistSong.ArtistId != mainArtist.artistId)
+                .Select(artistSong => new
                 {
-                    return null;
-                }
+                    artistId = artistSong.Artist.Id,
+                    artistName = artistSong.Artist.Name
+                })
+                .ToList();
 
-                var contributoryArtists = song.ArtistSongs
-                    .Where(artistSong => artistSong.ArtistId != mainArtist.artistId)
-                    .Select(artistSong => new { artistId = artistSong.Artist.Id, artistName = artistSong.Artist.Name })
-                    .ToList();
+            var contributoryArtistsSection = contributoryArtists.Any() ? contributoryArtists : null;
 
-                var contributoryArtistsSection = contributoryArtists.Any() ? contributoryArtists : null;
+            var songDetails = new
+            {
+                songId = songData.Id,
+                songName = songData.Name,
+                songLength = songData.Length,
+                songGenre = songData.Genre,
+                albumId = songData.Album.Id,
+                albumName = songData.Album.Name,
+                albumReleased = songData.Album.Released,
+                mainArtist = mainArtist,
+                contributoryArtists = contributoryArtistsSection
+            };
 
-                return new
-                {
-                    songId = song.Id,
-                    songName = song.Name,
-                    songLength = song.Length,
-                    songGenre = song.Genre,
-                    contributoryArtists = contributoryArtistsSection
-                };
-            }).FirstOrDefault();
-
-            return flattenedData;
+            return songDetails;
         }
 
         public async Task<object> GetAllPlaylistDetails()
