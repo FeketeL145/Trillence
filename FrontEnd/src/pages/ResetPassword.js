@@ -1,34 +1,41 @@
-function ResetPassword(){
-    return(
-        <div className="auth-wrapper">
-                <div className="auth-inner bg-dark">
-                    <form>
-                        <h3 className="whitetext">Reset Password</h3>
-                        <p>Enter your new password below</p>
-                        <div className="mb-3">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                className="form-control whitetext"
-                                placeholder="Password"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label>Confirm Password</label>
-                            <input
-                                type="password"
-                                className="form-control whitetext"
-                                placeholder="Confirm Password"
-                            />
-                        </div>
-                        <div className="d-grid pt-4">
-                            <button type="submit" className="btn btn-primary">
-                                Reset password
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-    )
+function ResetPassword() {
+  return (
+    <div className="auth-wrapper">
+      <div
+        className="auth-inner"
+        style={{
+          backdropFilter: "blur(10px)",
+          color: "white",
+          boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+        }}
+      >
+        <form>
+          <h3 className="whitetext">Reset Password</h3>
+          <p className="whitetext text-center">Enter your new password below</p>
+          <div className="mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control whitetext"
+              placeholder="Password"
+            />
+          </div>
+          <div className="mb-3">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              className="form-control whitetext"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div className="d-grid pt-4">
+            <button type="submit" className="btn btn-primary">
+              Reset password
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 export default ResetPassword;

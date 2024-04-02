@@ -1,48 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
-#form1{
-  color:white;
-}
-
 body {
-  background: rgb(67, 67, 176) !important;
+  background-position: 0 0, 9px 9px;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.card{
-  overflow: hidden;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgb(67, 67, 176,0.5) 100%);
-}
-.songimgcontainer{
-  position:relative;
-}
-
-.songimggroup{
-  position: absolute; /* Position the items absolutely */
-  top: 0; /* Align items to the top */
-  left: 0; /* Align items to the left */
-  width: 160px; /* Set a width for the items */
-  height: 160px; /* Set a height for the items */
-}
-
-.songimg{
-  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
-}
-
-.songimgoverlay{
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0, 0.75) 100%);
 }
 
 h1,
@@ -52,11 +19,46 @@ h4,
 h5,
 h6,
 label,
-span ,
-.whitetext{
-  font-weight: 500;
+span,
+.whitetext {
+  font-weight: 400;
   font-family: "Montserrat", sans-serif;
   color: #ffffff;
+}
+
+.whitetextbold {
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+}
+
+.whitetextboldhoverable {
+  font-weight: 400;
+  font-size: 30px;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  transition: ease-in-out 0.1s;
+}
+
+.whitetextboldhoverable:hover {
+  font-size:35px;
+  font-family: "Montserrat", sans-serif;
+  font-style: initial;
+}
+
+.profile-img{
+  height:10%;
+  max-width: 10rem;
+  image-rendering: optimizeSpeed;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 960px) {
+  .profile-img{
+    max-width: 10rem;
+    height: 100%;
+  }
 }
 
 body,
@@ -65,7 +67,7 @@ html,
 #root,
 .auth-wrapper {
   width: 100%;
-  height:100%;
+  height: 100%;
 }
 
 .navbar-light {
@@ -108,14 +110,8 @@ html,
 .forgot-password,
 .forgot-password a {
   text-align: right;
-  font-size: 13px;
-  padding-top: 10px;
-  color: #c3c3c3;
+  font-size: 15px;
   margin: 0;
-}
-
-.forgot-password a {
-  color: #7f7f7f;
 }
 
 .unselectable {

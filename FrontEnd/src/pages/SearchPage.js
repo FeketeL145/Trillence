@@ -1,7 +1,3 @@
-import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Input, Ripple, initMDB } from "mdb-ui-kit";
-import "mdb-ui-kit/css/mdb.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   Routes,
@@ -9,17 +5,16 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
-import Search from '../Components/Search';
-
+import SearchBar from "../Components/Search";
 
 function SearchPage() {
-    return(
-        <div>
-            <Search/>
-        </div>
-    );
+  return (
+    <div>
+      <div>
+        <SearchBar />
+      </div>
+    </div>
+  );
 }
-
-
 
 export default SearchPage;
