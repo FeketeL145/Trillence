@@ -7,10 +7,10 @@ function ProfileDisplay() {
                 <div className="card-body p-4">
                     <div className="d-flex align-items-center">
                         <img className="profile-img" src="https://placehold.co/600x600/EEE/31343C"/>
-                        <h1 className="whitetextbold display-1">Hi, Username!</h1>
+                        <p className="whitetextbold display-5">Szomorú!</p>
                     </div>
                     <div className="card-content mt-4">
-                        <p className="whitetext">Example1</p>
+                        <p className="whitetext"></p>
                     </div>
                     
                 </div>

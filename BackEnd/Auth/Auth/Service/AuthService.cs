@@ -44,6 +44,12 @@ namespace Auth.Service
 
         public async Task<string> Register(RegisterRequestDto registerRequestDto)
         {
+            var existingEmail = await userManager.FindByEmailAsync(registerRequestDto.Email);
+            if (existingEmail != null)
+            {
+                return "Email is already registered";
+            }
+
             ApplicationUser user = new()
             {
                 UserName = registerRequestDto.UserName,
@@ -65,7 +71,6 @@ namespace Auth.Service
                     RegisterResponseDto registerResponseDto = new()
                     {
                         Id = userToReturn.Id,
-                        Email = userToReturn.Email,
                         UserName = userToReturn.UserName,
                     };
 
@@ -91,7 +96,7 @@ namespace Auth.Service
 
             if (user == null || isValid == false)
             {
-                return new LoginResponseDto() { User = null, Token = "" };
+                return new LoginResponseDto() {Token = "" };
             }
 
             var roles = await userManager.GetRolesAsync(user);
@@ -105,7 +110,6 @@ namespace Auth.Service
 
             LoginResponseDto loginResponseDto = new()
             {
-                User = userDto,
                 Token = token
             };
 

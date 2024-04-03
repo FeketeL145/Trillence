@@ -28,6 +28,7 @@ namespace Auth.Service
 
                 new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
                 new Claim(JwtRegisteredClaimNames.Name,applicationUser.UserName.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email,applicationUser.Email.ToString()),
             };
 
             claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));

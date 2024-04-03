@@ -1,6 +1,30 @@
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import AuthService from "../Components/AuthService";
+import Cookies from 'js-cookie';
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await AuthService.login(username, password);
+      if (!token) {
+        setError("Username or password is incorrect");
+        return;
+      }
+      if (rememberMe) {
+        Cookies.set('token', token, { expires: 7 });
+      }
+      console.log("Login Successful");
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   return (
     <div className="auth-wrapper">
       <div
@@ -11,23 +35,34 @@ function Login() {
           boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
         }}
       >
-        <form>
+        <form onSubmit={handleLogin}>
           <h3 className="whitetextbold">Sign In</h3>
           <div className="mb-3">
-            <label>Email address</label>
+            <label>Username</label>
             <input
-              type="email"
-              className="form-control whitetext"
-              placeholder="Enter email"
+              type="text"
+              className="form-control"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setError("");
+              }}
             />
           </div>
           <div className="mb-1">
             <label>Password</label>
             <input
               type="password"
-              className="form-control whitetext"
-              placeholder="Enter password"
+              className="form-control"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
             />
+            {error && <div className="whitetext text-danger">{error}</div>}
           </div>
           <NavLink to={`/PasswordForgot`}>
             <p className="forgot-password text-secondary whitetext">
@@ -39,7 +74,9 @@ function Login() {
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id="customCheck1"
+                id="customCheck1"  
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
               />
               <label
                 className="custom-control-label px-2 unselectable"

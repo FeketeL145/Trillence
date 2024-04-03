@@ -32,6 +32,18 @@ namespace Auth
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                        builder =>
+                        {
+                            builder.WithOrigins("*")
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader();
+                        });
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -44,6 +56,7 @@ namespace Auth
 
             app.UseAuthorization();
 
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.MapControllers();
 

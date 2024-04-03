@@ -258,160 +258,6 @@
     ]
   },
   {
-    "ContainingType": "BackEnd.Controllers.ArtistAlbumController",
-    "Method": "Get",
-    "RelativePath": "api/ArtistAlbum/allartistalbum",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BackEnd.Models.ArtistAlbum, BackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BackEnd.Controllers.ArtistAlbumController",
-    "Method": "Post",
-    "RelativePath": "api/ArtistAlbum/artistalbum",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "createArtistAlbumDto",
-        "Type": "BackEnd.Models.Dtos.CreateArtistAlbumDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BackEnd.Models.Dtos.ArtistAlbumDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BackEnd.Controllers.ArtistAlbumController",
-    "Method": "GetById",
-    "RelativePath": "api/ArtistAlbum/artistalbumbyid/{artistid, albumid}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "artistid",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "albumid",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "artistid, albumid",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BackEnd.Models.ArtistAlbum",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BackEnd.Controllers.ArtistAlbumController",
-    "Method": "DeleteById",
-    "RelativePath": "api/ArtistAlbum/deletebyid/{artistid, albumid}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "artistid",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "albumid",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "artistid, albumid",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BackEnd.Models.ArtistAlbum",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BackEnd.Controllers.ArtistAlbumController",
-    "Method": "Put",
-    "RelativePath": "api/ArtistAlbum/updatebyid/{artistid}/{albumid}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "artistid",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "albumid",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "modifyArtistAlbumDto",
-        "Type": "BackEnd.Models.Dtos.ModifyArtistAlbumDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BackEnd.Models.ArtistAlbum",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
     "ContainingType": "BackEnd.Controllers.ArtistSongController",
     "Method": "Get",
     "RelativePath": "api/ArtistSong/allartistsong",
@@ -566,19 +412,85 @@
     ]
   },
   {
+    "ContainingType": "BackEnd.Controllers.ConnectionController",
+    "Method": "GetAllPlaylistDetails",
+    "RelativePath": "api/Connection/allplaylistdetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.ConnectionController",
+    "Method": "GetAllSongDetails",
+    "RelativePath": "api/Connection/allsongdetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.ConnectionController",
+    "Method": "GetPlaylistDetailsById",
+    "RelativePath": "api/Connection/playlistdetailsby/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.ConnectionController",
+    "Method": "GetSongDetailsById",
+    "RelativePath": "api/Connection/songdetails/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MetadataController",
     "Method": "GetMetadata",
     "RelativePath": "api/Metadata",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "filePath",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -1136,6 +1048,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SpotifyWebDownloadController",
+    "Method": "Download",
+    "RelativePath": "downloadweb",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

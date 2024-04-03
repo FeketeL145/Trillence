@@ -49,11 +49,6 @@ namespace Auth.Controllers
         {
             var loginResponse = await authService.Login(model);
 
-            if (loginResponse.User == null)
-            {
-                return BadRequest("The username or password is incorrect!");
-            }
-
             return StatusCode(200, loginResponse);
         }
     }

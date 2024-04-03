@@ -47,8 +47,7 @@ span,
 }
 
 .profile-img{
-  height:10%;
-  max-width: 10rem;
+  max-width: 5rem;
   image-rendering: optimizeSpeed;
   border-radius: 50%;
   overflow: hidden;
@@ -56,7 +55,7 @@ span,
 
 @media screen and (max-width: 960px) {
   .profile-img{
-    max-width: 10rem;
+    max-width: 7rem;
     height: 100%;
   }
 }
