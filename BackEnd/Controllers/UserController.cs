@@ -1,68 +1,40 @@
 ﻿using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+using BackEnd.Repositories.Services;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Moq;
+using NUnit.Framework;
 
-namespace BackEnd.Controllers
+namespace BackEnd.Tests.Repositories.Services
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+    [TestFixture]
+    public class UserTest
     {
-        private readonly IUserInterface userInterface;
+        private Mock<TrillenceContext> _mockContext;
+        private IUserInterface _userService;
 
-        public UserController(IUserInterface userInterface)
+        [SetUp]
+        public void Setup()
         {
-            this.userInterface = userInterface;
+            _mockContext = new Mock<TrillenceContext>();
+            _userService = new UserService(_mockContext.Object);
         }
 
-        [HttpPost("user")]
-        public async Task<ActionResult<UserDto>> Post(CreateUserDto createUserDto)
+        [Test]
+        public async Task Post_ValidInput_ReturnsUserDto()
         {
-            return StatusCode(201, await userInterface.Post(createUserDto));
-        }
-
-        [HttpGet("alluser")]
-        public async Task<IEnumerable<User>> Get()
-        {
-            return await userInterface.GetAll();
-        }
-
-        [HttpGet("userbyid/{id}")]
-        public async Task<ActionResult<User>> GetById(Guid id)
-        {
-            var result = await userInterface.GetById(id);
-            if (result == null)
+            var createUserDto = new CreateUserDto("Test User");
+            var user = new User
             {
-                return StatusCode(404, "User with this id cannot be found.");
-            }
+                Id = Guid.NewGuid(),
+                Name = createUserDto.Name,
+            };
+            _mockContext.Setup(x => x.Users.AddAsync(It.IsAny<User>(), default)).ReturnsAsync((EntityEntry<User>)null);
 
-            return StatusCode(200, result);
-        }
+            var result = await _userService.Post(createUserDto);
 
-        [HttpPut("updatebyid/{id}")]
-        public async Task<ActionResult<User>> Put(Guid id, ModifyUserDto modifyUserDto)
-        {
-            var result = await userInterface.Put(id, modifyUserDto);
-
-            if (result == null)
-            {
-                return StatusCode(404, $"User with the id of {id} couldn't be found.");
-            }
-
-            return StatusCode(200, result);
-        }
-
-        [HttpDelete("deletebyid/{id}")]
-        public async Task<ActionResult<User>> DeleteById(Guid id)
-        {
-            var result = await userInterface.DeleteById(id);
-
-            if (result == null)
-            {
-                return StatusCode(404, "There isn't a user with this id.");
-            }
-
-            return StatusCode(200, result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(createUserDto.Name));
         }
     }
 }

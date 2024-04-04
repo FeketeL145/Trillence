@@ -22,7 +22,6 @@ namespace Auth.Controllers
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
-
                 return StatusCode(400, errorMessage);
             }
 
@@ -32,14 +31,12 @@ namespace Auth.Controllers
         [HttpPost("AssignRole")]
         public async Task<ActionResult> AssignRole([FromBody] RoleDto model)
         {
+            var assignRoleSuccessful = await authService.AssignRole(model.Email, model.RoleName.ToUpper());
 
-            var assignRoleSuccesful = await authService.AssignRole(model.Email, model.RoleName.ToUpper());
-
-            if (!assignRoleSuccesful)
+            if (!assignRoleSuccessful)
             {
                 return BadRequest();
             }
-
 
             return StatusCode(200, "Role was assigned successfully.");
         }
@@ -48,8 +45,33 @@ namespace Auth.Controllers
         public async Task<ActionResult> Login([FromBody] LoginRequestDto model)
         {
             var loginResponse = await authService.Login(model);
-
             return StatusCode(200, loginResponse);
+        }
+
+        [HttpPut("change-username")]
+        public async Task<ActionResult> ChangeUsername([FromBody] ChangeUsernameDto model)
+        {
+            var success = await authService.ChangeUsername(model.OldUsername, model.NewUsername);
+
+            if (!success)
+            {
+                return BadRequest("Failed to change username.");
+            }
+
+            return Ok("Username changed successfully.");
+        }
+
+        [HttpPut("change-password")]
+        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordDto model)
+        {
+            var success = await authService.ChangePassword(model.Username, model.OldPassword, model.NewPassword);
+
+            if (!success)
+            {
+                return BadRequest("Failed to change password.");
+            }
+
+            return Ok("Password changed successfully.");
         }
     }
 }

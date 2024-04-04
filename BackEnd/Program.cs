@@ -18,7 +18,7 @@ builder.Services.AddScoped<IPlaylistsongInterface, PlaylistsongService>();
 builder.Services.AddScoped<ISongInterface, SongService>();
 builder.Services.AddScoped<IUserInterface, UserService>();
 builder.Services.AddScoped<IConnectionInterface, ConnectionService>();
-builder.Services.AddScoped<Mp3MetadataReader>();
+builder.Services.AddScoped<AudioMetadataReader>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

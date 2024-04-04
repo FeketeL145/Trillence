@@ -739,3 +739,7 @@ C:\Users\Fekete Laszlo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\refint\BackEnd
 C:\Users\Fekete Laszlo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.pdb
 C:\Users\Fekete Laszlo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\BackEnd.genruntimeconfig.cache
 C:\Users\Fekete Laszlo\Desktop\Trillence\BackEnd\obj\Debug\net8.0\ref\BackEnd.dll
+C:\Users\takac\Desktop\Trillence\BackEnd\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\takac\Desktop\Trillence\BackEnd\bin\Debug\net8.0\Moq.dll
+C:\Users\takac\Desktop\Trillence\BackEnd\bin\Debug\net8.0\nunit.framework.dll
+C:\Users\takac\Desktop\Trillence\BackEnd\bin\Debug\net8.0\nunit.framework.legacy.dll
