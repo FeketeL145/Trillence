@@ -15,6 +15,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import HomePage from "./pages/HomePage.js";
 import SearchPage from "./pages/SearchPage.js";
 import Login from "./pages/Login.js";
+import Logout from "./pages/Logout.js";
 import SpotDL from "./pages/Spotdl.js";
 import Register from "./pages/Register.js";
 import PasswordForgot from "./pages/ForgotPassword.js";
@@ -35,6 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-out" element={<Logout />} />
             <Route path="/sign-up" element={<Register />} />
             <Route path="/spotdl" element={<SpotDL />} />
             <Route path="/search" element={<SearchPage />} />

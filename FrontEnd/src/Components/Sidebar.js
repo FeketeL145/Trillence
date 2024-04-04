@@ -5,6 +5,7 @@ import * as FaIcons from "react-icons/fa";
 import { SidebarData, SidebarDataLogin } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
+import Cookies from 'js-cookie';
 
 const Nav = styled.div`
   @media screen and (max-width: 960px) {
@@ -43,10 +44,6 @@ const SidebarNav = styled.nav`
   }
 `;
 
-const SidebarNavBottom = styled.nav`
-  bottom: 0;
-`;
-
 const SidebarWrap = styled.div`
   width: 100%;
 `;
@@ -74,8 +71,11 @@ const Sidebar = () => {
   }, []);
 
   const renderLoginItems = () => {
-    // Ide majd Authentikáció feltételként
     var isLoggedIn = false;
+    if(Cookies.get('token') != null)
+    {
+      isLoggedIn = true;
+    }
     const loginItems = isLoggedIn
       ? SidebarDataLogin.filter((item) => item.title === "Sign out")
       : SidebarDataLogin.filter((item) => item.title === "Sign in");
@@ -105,7 +105,7 @@ const Sidebar = () => {
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}
-            <SidebarNavBottom>{renderLoginItems()}</SidebarNavBottom>
+            {renderLoginItems()}
           </SidebarWrap>
         </SidebarNav>
       </IconContext.Provider>

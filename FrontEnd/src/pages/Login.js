@@ -7,6 +7,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,8 +17,11 @@ function Login() {
         setError("Username or password is incorrect");
         return;
       }
-      if (rememberMe) {
+      if(token != null)
+      {
         Cookies.set('token', token, { expires: 7 });
+        Cookies.set('username', username, { expires: 7 });
+        window.location.href = '/';
       }
       console.log("Login Successful");
     } catch (error) {
@@ -69,24 +73,7 @@ function Login() {
               Forgot password?
             </p>
           </NavLink>
-          <div className="mb-3 d-grid">
-            <div className="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="customCheck1"  
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />
-              <label
-                className="custom-control-label px-2 unselectable"
-                htmlFor="customCheck1"
-              >
-                Remember me
-              </label>
-            </div>
-          </div>
-          <div className="d-grid">
+          <div className="d-grid mt-3">
             <button type="submit" className="btn btn-primary">
               Sign in
             </button>

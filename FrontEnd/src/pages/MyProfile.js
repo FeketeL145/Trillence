@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import Cookies from 'js-cookie';
 import ProfileDisplay from "../Components/ProfileDisplay";
 
 function MyProfile(){
-  const [isUserLoggedin, setUserLoggedin] = useState(false);
+  const [isUserLoggedin, setUserLoggedin] = useState(Cookies.get('token') != null);
   const [loading, setLoading] = useState(true);
-
+  //after 2000ms, timeout loading
   useEffect(() => {
+    setTimeout(() => {
       setLoading(false);
-      setUserLoggedin(true);
+    }, 600);
   })
     return(
         <div className="w-100 h-100">

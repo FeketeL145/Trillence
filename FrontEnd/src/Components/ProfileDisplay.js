@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React from "react";
 
 function ProfileDisplay() {
@@ -6,8 +7,7 @@ function ProfileDisplay() {
             <div className="card w-100 h-100" style={{backgroundColor: "#15171c"}}>
                 <div className="card-body p-4">
                     <div className="d-flex align-items-center">
-                        <img className="profile-img" src="https://placehold.co/600x600/EEE/31343C"/>
-                        <p className="whitetextbold display-5">Szomorú!</p>
+                        <p className="display-5 whitetextbold">Hi, {Cookies.get('username')}!</p>
                     </div>
                     <div className="card-content mt-4">
                         <p className="whitetext"></p>

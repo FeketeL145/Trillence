@@ -37,7 +37,7 @@ export const SidebarDataLogin = [
   },
   {
     title: "Sign out",
-    path: "/",
+    path: "/sign-out",
     icon: <FaIcons.FaSignOutAlt />,
   },
 ];
