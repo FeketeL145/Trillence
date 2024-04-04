@@ -115,5 +115,33 @@ namespace Auth.Service
 
             return loginResponseDto;
         }
+        public async Task<bool> ChangeUsername(string oldUsername, string newUsername)
+        {
+            var user = await userManager.FindByNameAsync(oldUsername);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.UserName = newUsername;
+            user.NormalizedUserName = newUsername.ToUpper();
+
+            var result = await userManager.UpdateAsync(user);
+            return result.Succeeded;
+        }
+
+        public async Task<bool> ChangePassword(string username, string oldPassword, string newPassword)
+        {
+            var user = await userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            var result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            return result.Succeeded;
+        }
     }
 }

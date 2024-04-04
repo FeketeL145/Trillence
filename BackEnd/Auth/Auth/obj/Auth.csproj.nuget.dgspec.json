@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {}
+    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
         "projectName": "Auth",
-        "projectPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
-        "packagesPath": "C:\\Users\\Fekete Laszlo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\obj\\",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+        "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Fekete Laszlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -52,31 +47,31 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[8.0.3, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[8.0.0-beta.2, )"
+              "version": "[8.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -102,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
