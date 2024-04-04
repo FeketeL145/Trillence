@@ -40,7 +40,7 @@ function App() {
             <Route path="/sign-up" element={<Register />} />
             <Route path="/spotdl" element={<SpotDL />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/settings/profile" element={<MyProfile/>} />
+            <Route path="/profile" element={<MyProfile/>} />
             <Route path="/PasswordForgot" element={<PasswordForgot />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
           </Routes>

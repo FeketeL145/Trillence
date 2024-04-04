@@ -43,17 +43,19 @@ function Register() {
   };
 
   return (
-    <div className="auth-wrapper">
+    <div className="p-5 w-100 h-100 d-flex justify-content-center align-items-center">
       <div
-        className="auth-inner"
+        className="card p-5"
         style={{
           backdropFilter: "blur(10px)",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
           color: "white",
           boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+          width: "30rem",
         }}
       >
         <form onSubmit={handleRegister}>
-          <h3 className="text-item whitetextbold">Register</h3>
+          <h3 className="whitetextbold text-center">Register</h3>
           <div className="mb-3">
             <label>Username</label>
             <input

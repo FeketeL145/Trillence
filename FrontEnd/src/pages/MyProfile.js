@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import ProfileDisplay from "../Components/ProfileDisplay";
 
-function MyProfile(){
-  const [isUserLoggedin, setUserLoggedin] = useState(Cookies.get('token') != null);
+function MyProfile() {
+  const [isUserLoggedin, setUserLoggedin] = useState(
+    Cookies.get("token") != null
+  );
   const [loading, setLoading] = useState(true);
   //after 2000ms, timeout loading
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 600);
-  })
-    return(
-        <div className="w-100 h-100">
+  });
+  return (
+    <div className="w-100 h-100">
       {loading ? (
         <div
           className="spotdlFrame"
@@ -39,7 +41,7 @@ function MyProfile(){
           ></div>
         </div>
       ) : isUserLoggedin ? (
-        <ProfileDisplay/>
+        <ProfileDisplay />
       ) : (
         <div
           className="spotdlFrame"
@@ -52,12 +54,14 @@ function MyProfile(){
           }}
         >
           <p className="whitetext">
-          <NavLink to={`/sign-in`} className="whitetextboldhoverable">Please Sign in to view your profile.</NavLink>
+            <NavLink to={`/sign-in`} className="whitetextboldhoverable">
+              Please Sign in to view your profile.
+            </NavLink>
           </p>
         </div>
       )}
     </div>
-    );
-};
+  );
+}
 
 export default MyProfile;

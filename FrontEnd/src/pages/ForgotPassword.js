@@ -1,16 +1,18 @@
 function ForgotPassword() {
   return (
-    <div className="auth-wrapper">
+    <div className="p-5 w-100 h-100 d-flex justify-content-center align-items-center">
       <div
-        className="auth-inner"
+        className="card p-5"
         style={{
           backdropFilter: "blur(10px)",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
           color: "white",
           boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+          width: "30rem",
         }}
       >
         <form>
-          <h3 className="whitetextbold">Forgotten Password</h3>
+          <h3 className="whitetextbold text-center">Forgotten Password</h3>
           <p className="whitetext text-center" style={{ fontSize: "15px" }}>
             Enter the email address associated with your account and we'll send
             you a link to reset your forgotten password

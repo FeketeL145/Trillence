@@ -102,7 +102,7 @@ const Sidebar = () => {
                 <FaIcons.FaTimes onClick={showSidebar} />
               </NavIcon>
             )}
-            {SidebarData.map((item, index) => {
+            {SidebarData.filter((item) => item.requireLoggedIn === true ? Cookies.get('token') != null : true).map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}
             {renderLoginItems()}
