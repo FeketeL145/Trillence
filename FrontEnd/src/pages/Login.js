@@ -41,7 +41,7 @@ function Login() {
           width: "30rem",
         }}
       >
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} autoComplete="on">
           <h3 className="whitetextbold text-center">Sign In</h3>
           <div className="mb-3">
             <label>Username</label>
@@ -49,6 +49,7 @@ function Login() {
               type="text"
               className="form-control"
               placeholder="Username"
+              autoComplete="username"
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -62,6 +63,7 @@ function Login() {
               type="password"
               className="form-control"
               placeholder="Password"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
