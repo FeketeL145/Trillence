@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence\\backend\\repositories\\services\\audiometadatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\audiometadatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence\\backend\\controllers\\spotifywebdownloadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\spotifywebdownloadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AudioMetadataReader.cs",
-              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\AudioMetadataReader.cs",
-              "RelativeDocumentMoniker": "Repositories\\Services\\AudioMetadataReader.cs",
-              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Repositories\\Services\\AudioMetadataReader.cs",
-              "RelativeToolTip": "Repositories\\Services\\AudioMetadataReader.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Title": "SpotifyWebDownloadController.cs",
+              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Controllers\\SpotifyWebDownloadController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SpotifyWebDownloadController.cs",
+              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Controllers\\SpotifyWebDownloadController.cs",
+              "RelativeToolTip": "Controllers\\SpotifyWebDownloadController.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAADwvx8AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T09:52:04.739Z",
+              "WhenOpened": "2024-04-08T07:24:52.859Z",
               "EditorCaption": ""
             }
           ]
