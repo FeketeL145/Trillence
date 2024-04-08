@@ -15,7 +15,6 @@ public class SpotifyWebDownloadController : ControllerBase
             {
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.Arguments = $"/c spotdl web";
-                process.StartInfo.WorkingDirectory = myMusicPath;
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.UseShellExecute = false;
@@ -23,18 +22,12 @@ public class SpotifyWebDownloadController : ControllerBase
 
                 process.Start();
 
-                string output = await process.StandardOutput.ReadToEndAsync();
-
-                process.WaitForExit();
-
-                Console.WriteLine($"CMD Output: {output}");
-
-                return Ok(new { Message = "Spotdl web closed." });
+                return Ok(new { Message = "Spotdl web started successfully." });
             }
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { Error = "Internal Server Error:" + ex });
+            return StatusCode(500, new { Error = "There was an error:" + ex });
         }
     }
 }
