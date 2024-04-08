@@ -10,13 +10,19 @@ import {
   useLocation,
 } from "react-router-dom";
 import Search from "../Components/Search";
-
+import AllSongs from "../Components/AllSongs";
+import FooterMusicPlayer from "../Components/MusicPlayer/FooterMusicPlayer";
 function HomePage() {
-  return (
-    <div>
-      
+  return(
+  <div className="w-100 h-100 hiddenscrollbar">
+    <AllSongs />
+    <div className="footer bg-dark" style={{ height: "10vh", position: "fixed", bottom: "0", width: "100%" }}>
+      <FooterMusicPlayer />
     </div>
-  );
+    
+  </div>
+  )
+  
 }
 
 export default HomePage;
