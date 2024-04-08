@@ -1,3 +1,6 @@
+//https://localhost:7106/api/Album/allalbum
+
+
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -7,7 +10,7 @@ function AllSongs() {
 
   useEffect(() => {
     setFetchPending(true);
-    fetch("https://localhost:7106/api/Song/allsong", {
+    fetch("https://localhost:7106/api/Album/allalbum", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

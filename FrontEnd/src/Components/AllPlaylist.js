@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-function AllSongs() {
+function AllPlaylist() {
   const [Songs, setSongs] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
 
@@ -25,9 +25,9 @@ function AllSongs() {
     <div>
       <div className=''>
         {isFetchPending ? (<div className='spinner-border'></div>) : (
-          <div className="d-flex row flex-nowrap overflow-auto hiddenscrollbar" >
+          <div className='d-flex flex-wrap'>
             {Songs.map((Songs) => (
-              <div className='songcard card p-4 mt-4 bg-dark rounded-8' style={{ maxWidth: "25%" }}>
+              <div className='container p-4 mt-4 m-2 bg-dark rounded-8'>
                 <div className="card-body">
                   <h5 className="card-title">{Songs.name}</h5>
                   <p className="card-text">{Songs.artist}</p>
@@ -40,4 +40,4 @@ function AllSongs() {
     </div>
   );
 };
-export default AllSongs;
+export default AllPlaylist;

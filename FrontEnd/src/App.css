@@ -41,3 +41,12 @@ a{
   overflow: hidden;
   position: relative;
 }
+
+.hiddenscrollbar{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+}
+.hiddenscrollbar::-webkit-scrollbar {
+  display: none; /*Chrome*/
+}
