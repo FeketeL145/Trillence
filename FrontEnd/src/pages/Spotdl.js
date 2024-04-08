@@ -31,6 +31,25 @@ const SpotDL = () => {
     checkLocalhost();
   }, []);
 
+  const handleDownload = () => {
+    fetch("https://localhost:7106/downloadweb", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // Add any other headers as needed
+      },
+      body: JSON.stringify({
+        // Add any data you want to send with the POST request
+      })
+    })
+      .then(response => {
+        // Handle response
+      })
+      .catch(error => {
+        // Handle error
+      });
+  };
+
   return (
     <div className="w-100 h-100">
       {loading ? (
@@ -58,11 +77,13 @@ const SpotDL = () => {
           ></div>
         </div>
       ) : localhostAvailable ? (
-        <iframe
-          title="SpotDL"
-          src="http://localhost:8800/"
-          className="spotdlFrame"
-        ></iframe>
+        <div>
+          <iframe
+            title="SpotDL"
+            src="http://localhost:8800/"
+            className="spotdlFrame"
+          ></iframe>
+        </div>
       ) : (
         <div
           className="spotdlFrame"
