@@ -57,20 +57,35 @@ function Register() {
           email: email,
         }),
       });
-
+  
       if (!response.ok) {
         const data = await response.json();
         setError(data.message || "Something went wrong");
       } else {
-        setError(null);
-        console.log("Registration successful");
+        const roleResponse = await fetch("https://localhost:7172/auth/AssignRole", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            roleName: "user"
+          }),
+        });
+  
+        if (!roleResponse.ok) {
+          const roleData = await roleResponse.json();
+          setError(roleData.message || "Failed to assign user role");
+        } else {
+          setError("Registration and role assignment successful");
+        }
       }
     } catch (error) {
       console.error("Error:", error);
       setError("Something went wrong");
     }
   };
-
+  
   const generateVerificationCode = () => {
     return Math.floor(100000 + Math.random() * 900000);
   };
