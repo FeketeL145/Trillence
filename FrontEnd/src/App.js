@@ -22,6 +22,18 @@ import PasswordForgot from "./pages/ForgotPassword.js";
 import ResetPassword from "./pages/ResetPassword.js";
 import MyProfile from "./pages/MyProfile.js";
 
+
+import Featuretester from "./pages/lotsofpages/Featuretester.js";
+/*Songs*/
+import SongDeleteById from './pages/lotsofpages/Songs/SongDeleteById';
+import SongList from './pages/lotsofpages/Songs/SongList2.js';
+import SongPost from './pages/lotsofpages/Songs/SongPost';
+import SongSinglePage from './pages/lotsofpages/Songs/SongSinglePage';
+import SongUpdatebyId from './pages/lotsofpages/Songs/SongUpdatebyId';
+/*Albums*/
+
+
+
 import "./App.css";
 import "./Components/MusicPlayer/AudioPlayer.js";
 import AudioPlayer from "./Components/MusicPlayer/AudioPlayer.js";
@@ -43,6 +55,14 @@ function App() {
             <Route path="/profile" element={<MyProfile/>} />
             <Route path="/PasswordForgot" element={<PasswordForgot />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
+
+
+            <Route path="/admin-featuretester" element={<Featuretester />} />
+            <Route path="/SongList" element={<SongList />} />
+            <Route path="/SongDeleteById:id" element={<SongDeleteById />} />
+            <Route path="/SongPost" element={<SongPost />} />
+            <Route path="/SongSinglePage:id" element={<SongSinglePage />} />
+            <Route path="/SongUpdatebyId:id" element={<SongUpdatebyId />} />
           </Routes>
         </div>
       </Router>

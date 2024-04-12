@@ -15,6 +15,12 @@ export const SidebarData = [
     requireLoggedIn: false,
   },
   {
+    title: "Featuretester",
+    path: "/admin-featuretester",
+    icon: <FaIcons.FaSearch />,
+    requireLoggedIn: false,
+  },
+  {
     title: "Playlists",
     path: "/playlists",
     icon: <FaIcons.FaList />,

@@ -1,15 +1,18 @@
+//https://localhost:7106/api/Album/allalbum
+
+
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-function AllSongs() {
-  const [Songs, setSongs] = useState([]);
+function AllAlbums() {
+  const [Albums, setAlbums] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setFetchPending(true);
-        const response = await fetch("https://localhost:7106/api/Song/allsong", {
+        const response = await fetch("https://localhost:7106/api/Album/allalbum", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -32,11 +35,12 @@ function AllSongs() {
       <div className=''>
         {isFetchPending ? (<div className='spinner-border'></div>) : (
           <div className="d-flex row flex-nowrap overflow-auto hiddenscrollbar" >
-            {Songs.map((Songs) => (
+            {Albums.map((Albums) => (
               <div className='songcard card p-4 mt-4 bg-dark rounded-8' style={{ maxWidth: "25%" }}>
                 <div className="card-body">
-                  <h5 className="card-title">{Songs.name}</h5>
-                  <p className="card-text">{Songs.artist}</p>
+                  <h5 className="card-title">{Albums.name}</h5>
+                  <p className="card-text">{Albums.artist}</p>
+                  <p>{Albums.released}</p>
                 </div>
               </div>
               ))}
@@ -46,4 +50,4 @@ function AllSongs() {
     </div>
   );
 };
-export default AllSongs;
+export default AllAlbums;

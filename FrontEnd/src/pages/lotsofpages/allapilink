@@ -1,0 +1,4 @@
+'https://localhost:7106/api/Playlistsong/allplaylistsong'
+'https://localhost:7106/api/Connection/allsongdetails'
+'https://localhost:7106/api/ArtistSong/allartistsong'
+https://localhost:7106/api/Album/allalbum'
