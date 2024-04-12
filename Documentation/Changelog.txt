@@ -1,5 +1,0 @@
-02.06 : (BIG)	Zenelejátszó hozzáadva, de kell hozzá backend és utánna átkell dolgozni teljesen
-
-02.12 : (BIG) 1 táblás adatbázis backendel létrehozva, frontendel összekötve, és még jelenleg egy konzol alk. ami zenéket beolvas és az alapján feltölti a frontendbe a zenelistát
-
-02.15 : (BIG) : forgotten password, settings, reset password, trello
