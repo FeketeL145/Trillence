@@ -61,8 +61,8 @@ function App() {
             <Route path="/SongList" element={<SongList />} />
             <Route path="/SongDeleteById:id" element={<SongDeleteById />} />
             <Route path="/SongPost" element={<SongPost />} />
-            <Route path="/SongSinglePage:id" element={<SongSinglePage />} />
-            <Route path="/SongUpdatebyId:id" element={<SongUpdatebyId />} />
+            <Route path="/SongSinglePage/:id" element={<SongSinglePage />} />
+            <Route path="/SongUpdatebyId/:id" element={<SongUpdatebyId />} />
           </Routes>
         </div>
       </Router>

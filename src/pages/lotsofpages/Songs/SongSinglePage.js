@@ -39,7 +39,7 @@ export function SongSinglePage() {
                         <p>{song.artistSongss}</p>
                         <p>{song.playlistSongss}</p>
                         <div>
-                            <NavLink to={`/Delete-Songs/${id}`} className="p-2">
+                            <NavLink to={`/SongDeleteById/${id}`} className="p-2">
                                 <button type="button" className="btn btn-outline-danger"><i className="bi bi-trash3"></i> Delete</button>
                             </NavLink>
                             <NavLink to={`/Modify-Songs/${id}`} className="p-2">

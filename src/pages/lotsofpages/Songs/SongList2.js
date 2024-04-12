@@ -29,12 +29,14 @@ function SongList2() {
           <div className="d-flex row flex-nowrap overflow-auto hiddenscrollbar" >
             {songs.map((song) => (
               <div key={song.id} className='songcard card p-4 mt-4 bg-dark rounded-8' style={{ maxWidth: "25%" }}>
+              <NavLink to={`/SongSinglePage/${song.id}`} className="card-title">
                 <div className="card-body">
-                  <NavLink to={`/SongSinglePage/${song.id}`} className="card-title">
+                  
                     <h5 className="card-title">{song.name}</h5>
                     <p className="card-text">{song.artist}</p>
-                  </NavLink>
+                  
                 </div>
+                </NavLink>
               </div>
             ))}
           </div>
