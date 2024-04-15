@@ -17,12 +17,13 @@ import SongList from './Songs/SongList2';
 import SongPost from './Songs/SongPost';
 import SongSinglePage from './Songs/SongSinglePage';
 import SongUpdatebyId from './Songs/SongUpdatebyId';
-import SongList2 from './Songs/SongList2';
+import FooterMusicPlayer from '../../Components/MusicPlayer/FooterMusicPlayer';
+
 
 function Featuretester() {
     return (
         <div>
-            <SongList2 />
+            <FooterMusicPlayer />
         </div>
     )
 }

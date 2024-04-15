@@ -35,8 +35,6 @@ import SongUpdatebyId from './pages/lotsofpages/Songs/SongUpdatebyId';
 
 
 import "./App.css";
-import "./Components/MusicPlayer/AudioPlayer.js";
-import AudioPlayer from "./Components/MusicPlayer/AudioPlayer.js";
 import Sidebar from "./Components/Sidebar.js";
 
 function App() {
