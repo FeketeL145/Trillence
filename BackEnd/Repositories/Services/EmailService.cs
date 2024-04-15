@@ -1,4 +1,4 @@
-﻿using BackEnd.Repositories.Interfaces;
+﻿/*using BackEnd.Repositories.Interfaces;
 using Email_Test_API.Models.Dtos;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -35,4 +35,4 @@ namespace BackEnd.Repositories.Services
             smtp.Disconnect(true);
         }
     }
-}
+}*/

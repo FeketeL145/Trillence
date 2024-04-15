@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 21. 09:03
+-- Létrehozás ideje: 2024. Ápr 15. 10:40
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -23,13 +24,24 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `trillence` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `trillence`;
 
+DELIMITER $$
+--
+-- Eljárások
+--
+DROP PROCEDURE IF EXISTS `DeleteOldVerifications`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteOldVerifications` ()   BEGIN
+    DELETE FROM verification WHERE created_at < NOW() - INTERVAL 2 MINUTE;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `albums`
 --
--- Létrehozva: 2024. Már 21. 06:22
--- Utolsó frissítés: 2024. Már 21. 08:03
+-- Létrehozva: 2024. Már 25. 09:08
+-- Utolsó frissítés: 2024. Ápr 11. 10:50
 --
 
 DROP TABLE IF EXISTS `albums`;
@@ -51,8 +63,8 @@ CREATE TABLE `albums` (
 --
 -- Tábla szerkezet ehhez a táblához `artist-song`
 --
--- Létrehozva: 2024. Már 20. 12:36
--- Utolsó frissítés: 2024. Már 21. 08:03
+-- Létrehozva: 2024. Már 25. 09:08
+-- Utolsó frissítés: 2024. Ápr 11. 10:50
 --
 
 DROP TABLE IF EXISTS `artist-song`;
@@ -75,8 +87,8 @@ CREATE TABLE `artist-song` (
 --
 -- Tábla szerkezet ehhez a táblához `artists`
 --
--- Létrehozva: 2024. Már 20. 12:36
--- Utolsó frissítés: 2024. Már 21. 08:03
+-- Létrehozva: 2024. Már 25. 09:08
+-- Utolsó frissítés: 2024. Ápr 11. 10:50
 --
 
 DROP TABLE IF EXISTS `artists`;
@@ -94,7 +106,7 @@ CREATE TABLE `artists` (
 --
 -- Tábla szerkezet ehhez a táblához `playlist-song`
 --
--- Létrehozva: 2024. Már 20. 12:36
+-- Létrehozva: 2024. Már 25. 09:08
 --
 
 DROP TABLE IF EXISTS `playlist-song`;
@@ -117,7 +129,7 @@ CREATE TABLE `playlist-song` (
 --
 -- Tábla szerkezet ehhez a táblához `playlists`
 --
--- Létrehozva: 2024. Már 20. 12:36
+-- Létrehozva: 2024. Már 25. 09:08
 --
 
 DROP TABLE IF EXISTS `playlists`;
@@ -138,8 +150,8 @@ CREATE TABLE `playlists` (
 --
 -- Tábla szerkezet ehhez a táblához `songs`
 --
--- Létrehozva: 2024. Már 20. 12:36
--- Utolsó frissítés: 2024. Már 21. 08:03
+-- Létrehozva: 2024. Már 25. 09:08
+-- Utolsó frissítés: 2024. Ápr 11. 10:50
 --
 
 DROP TABLE IF EXISTS `songs`;
@@ -162,7 +174,8 @@ CREATE TABLE `songs` (
 --
 -- Tábla szerkezet ehhez a táblához `users`
 --
--- Létrehozva: 2024. Már 20. 12:36
+-- Létrehozva: 2024. Már 25. 09:08
+-- Utolsó frissítés: 2024. Ápr 15. 08:35
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -173,6 +186,27 @@ CREATE TABLE `users` (
 
 --
 -- TÁBLA KAPCSOLATAI `users`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `verification`
+--
+-- Létrehozva: 2024. Ápr 12. 07:59
+-- Utolsó frissítés: 2024. Ápr 15. 08:36
+--
+
+DROP TABLE IF EXISTS `verification`;
+CREATE TABLE `verification` (
+  `Id` int(11) NOT NULL,
+  `code` varchar(6) NOT NULL,
+  `email` varchar(320) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- TÁBLA KAPCSOLATAI `verification`:
 --
 
 --
@@ -229,6 +263,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- A tábla indexei `verification`
+--
+ALTER TABLE `verification`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
@@ -236,13 +276,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `artist-song`
 --
 ALTER TABLE `artist-song`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT a táblához `playlist-song`
 --
 ALTER TABLE `playlist-song`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT a táblához `verification`
+--
+ALTER TABLE `verification`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -311,12 +357,33 @@ USE `phpmyadmin`;
 --
 
 --
+-- A tábla adatainak kiíratása `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'trillence', 'songs', '{\"sorted_col\":\"`Length` DESC\"}', '2024-04-03 11:01:39');
+
+--
 -- A(z) users tábla metaadatai
+--
+
+--
+-- A(z) verification tábla metaadatai
 --
 
 --
 -- A(z) trillence adatbázis metaadatai
 --
+
+DELIMITER $$
+--
+-- Események
+--
+DROP EVENT IF EXISTS `DeleteOldVerificationsEvent`$$
+CREATE DEFINER=`root`@`localhost` EVENT `DeleteOldVerificationsEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2024-04-12 10:22:00' ON COMPLETION NOT PRESERVE ENABLE DO CALL DeleteOldVerifications()$$
+
+DELIMITER ;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

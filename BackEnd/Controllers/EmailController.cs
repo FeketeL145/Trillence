@@ -1,4 +1,4 @@
-﻿using BackEnd.Repositories.Interfaces;
+﻿/*using BackEnd.Repositories.Interfaces;
 using Email_Test_API.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,4 +23,4 @@ namespace Email_Test_API.Controllers
             return StatusCode(200, "Levél elküldve.");
         }
     }
-}
+}*/

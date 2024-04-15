@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TrillenceContext>();
-builder.Services.AddScoped<IEmailInterface, EmailService>();
+//builder.Services.AddScoped<IEmailInterface, EmailService>();
 builder.Services.AddScoped<IAlbumInterface, AlbumService>();
 builder.Services.AddScoped<IArtistInterface, ArtistService>();
 builder.Services.AddScoped<IArtistSongInterface, ArtistSongService>();
@@ -18,6 +18,7 @@ builder.Services.AddScoped<IPlaylistsongInterface, PlaylistsongService>();
 builder.Services.AddScoped<ISongInterface, SongService>();
 builder.Services.AddScoped<IUserInterface, UserService>();
 builder.Services.AddScoped<IConnectionInterface, ConnectionService>();
+builder.Services.AddScoped<IVerificationInterface, VerificationService>();
 builder.Services.AddScoped<AudioMetadataReader>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";

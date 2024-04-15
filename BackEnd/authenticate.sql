@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 03. 11:13
+-- Létrehozás ideje: 2024. Ápr 15. 10:41
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -28,7 +29,7 @@ USE `authenticate`;
 --
 -- Tábla szerkezet ehhez a táblához `aspnetroleclaims`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
 --
 
 DROP TABLE IF EXISTS `aspnetroleclaims`;
@@ -41,8 +42,6 @@ CREATE TABLE `aspnetroleclaims` (
 
 --
 -- TÁBLA KAPCSOLATAI `aspnetroleclaims`:
---   `RoleId`
---       `aspnetroles` -> `Id`
 --
 
 -- --------------------------------------------------------
@@ -50,7 +49,8 @@ CREATE TABLE `aspnetroleclaims` (
 --
 -- Tábla szerkezet ehhez a táblához `aspnetroles`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
+-- Utolsó frissítés: 2024. Ápr 15. 08:39
 --
 
 DROP TABLE IF EXISTS `aspnetroles`;
@@ -70,7 +70,7 @@ CREATE TABLE `aspnetroles` (
 --
 -- Tábla szerkezet ehhez a táblához `aspnetuserclaims`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
 --
 
 DROP TABLE IF EXISTS `aspnetuserclaims`;
@@ -92,7 +92,7 @@ CREATE TABLE `aspnetuserclaims` (
 --
 -- Tábla szerkezet ehhez a táblához `aspnetuserlogins`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
 --
 
 DROP TABLE IF EXISTS `aspnetuserlogins`;
@@ -114,7 +114,8 @@ CREATE TABLE `aspnetuserlogins` (
 --
 -- Tábla szerkezet ehhez a táblához `aspnetuserroles`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
+-- Utolsó frissítés: 2024. Ápr 15. 08:35
 --
 
 DROP TABLE IF EXISTS `aspnetuserroles`;
@@ -136,7 +137,8 @@ CREATE TABLE `aspnetuserroles` (
 --
 -- Tábla szerkezet ehhez a táblához `aspnetusers`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
+-- Utolsó frissítés: 2024. Ápr 15. 08:35
 --
 
 DROP TABLE IF EXISTS `aspnetusers`;
@@ -161,13 +163,6 @@ CREATE TABLE `aspnetusers` (
 --
 -- TÁBLA KAPCSOLATAI `aspnetusers`:
 --
-
---
--- A tábla adatainak kiíratása `aspnetusers`
---
-
-INSERT INTO `aspnetusers` (`Id`, `UserName`, `NormalizedUserName`, `Email`, `NormalizedEmail`, `EmailConfirmed`, `PasswordHash`, `SecurityStamp`, `ConcurrencyStamp`, `PhoneNumber`, `PhoneNumberConfirmed`, `TwoFactorEnabled`, `LockoutEnd`, `LockoutEnabled`, `AccessFailedCount`) VALUES
-('2284fffe-7e5b-45c4-bf78-fe55981f8931', 'Quatromc145', 'QUATROMC145', 'quatromc145@gmail.com', 'QUATROMC145@GMAIL.COM', 0, 'AQAAAAIAAYagAAAAEOLGafKcd9brDQfWkospVqFruYCAr7a+mbLyM5gEdl6XXekVPCfFfpU257kecyP/ug==', 'OYIAEM2GXRU3ZTBPNW6WJKDEHND3SPXQ', '14124aa0-fab7-4184-8741-62bff7fb0282', NULL, 0, 0, NULL, 1, 0);
 
 --
 -- Eseményindítók `aspnetusers`
@@ -201,7 +196,7 @@ DELIMITER ;
 --
 -- Tábla szerkezet ehhez a táblához `aspnetusertokens`
 --
--- Létrehozva: 2024. Ápr 03. 06:48
+-- Létrehozva: 2024. Ápr 05. 06:46
 --
 
 DROP TABLE IF EXISTS `aspnetusertokens`;
@@ -221,13 +216,6 @@ CREATE TABLE `aspnetusertokens` (
 --
 -- Indexek a kiírt táblákhoz
 --
-
---
--- A tábla indexei `aspnetroleclaims`
---
-ALTER TABLE `aspnetroleclaims`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_AspNetRoleClaims_RoleId` (`RoleId`);
 
 --
 -- A tábla indexei `aspnetroles`
@@ -276,12 +264,6 @@ ALTER TABLE `aspnetusertokens`
 --
 
 --
--- AUTO_INCREMENT a táblához `aspnetroleclaims`
---
-ALTER TABLE `aspnetroleclaims`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `aspnetuserclaims`
 --
 ALTER TABLE `aspnetuserclaims`
@@ -290,12 +272,6 @@ ALTER TABLE `aspnetuserclaims`
 --
 -- Megkötések a kiírt táblákhoz
 --
-
---
--- Megkötések a táblához `aspnetroleclaims`
---
-ALTER TABLE `aspnetroleclaims`
-  ADD CONSTRAINT `FK_AspNetRoleClaims_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE;
 
 --
 -- Megkötések a táblához `aspnetuserclaims`
@@ -359,6 +335,7 @@ USE `phpmyadmin`;
 --
 -- A(z) authenticate adatbázis metaadatai
 --
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
