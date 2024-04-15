@@ -6,15 +6,15 @@ function FooterMusicPlayer () {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
-  const progressBarRef = useRef();
+  const progressBarRef = useState(0);
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(
     tracks[trackIndex]
   );
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const audioRef = useRef();
-  const playAnimationRef = useRef();
+  const audioRef = useState();
+  const playAnimationRef = useState();
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   }
@@ -98,7 +98,7 @@ const repeat = () => {
 
 
     return(
-    <div style={{ minHeight: 'calc(100vh - 100px)', overflowY: 'auto' }} className="d-flex d-flex align-items-stretch justify-content-between btw">
+    <div style={{height: '10vh', overflowY: 'auto' }} className="d-flex d-flex align-items-stretch justify-content-between btw">
 
       {/* Left side */}
 
@@ -135,23 +135,23 @@ const repeat = () => {
         <div className="align-items-center btw">
             <div className="controls">
             <button onClick={handlePrevious}>
-                <i className="bi bi-skip-start-fill"></i>
+              <i className="fa-solid fa-backward-fast"></i>
             </button>
             <button onClick={skipBackward}>
-                <i className="bi bi-skip-backward-fill"></i>
+            <i class="fa-solid fa-backward-step"></i>
             </button>
 
             <button onClick={togglePlayPause}>
-                {isPlaying ? <i className="bi bi-pause-circle-fill"></i> : <i className="bi bi-skip-end-circle-fill"></i>}
+                {isPlaying ? <i class="fa-solid fa-pause"></i> : <i class="fa-solid fa-play"></i>}
             </button>
             <button onClick={skipForward}>
-                <i className="bi bi-skip-forward-fill"></i>
+              <i className="fa-solid fa-forward-step"></i>
             </button>
             <button onClick={handleNext}>
-                <i className="bi bi-skip-end-fill"></i>
+              <i className="fa-solid fa-forward-fast"></i>
             </button>
             </div>
-            <div className="progress">
+            <div className="progress bg-dark">
               <span className="time current">{formatTime(timeProgress)}</span>
               <input
                 type="range"
@@ -170,13 +170,13 @@ const repeat = () => {
             <button onClick={() => setMuteVolume((prev) => !prev)}
             >
                 {muteVolume || volume < 1 ? (
-                <i className="bi bi-volume-mute-fill"></i>
+                  <i className="fa-solid fa-volume-xmark"></i>
                 ) : volume < 33 ? (
-                <i className="bi bi-volume-off-fill"></i>
+                  <i className="fa-solid fa-volume-off"></i>
                 ) : volume < 66 ? (
-                <i className="bi bi-volume-down-fill"></i>
+                  <i className="fa-solid fa-volume-low"></i>
                 ) : (
-                <i className="bi bi-volume-up-fill"></i>
+                  <i className="fa-solid fa-volume-high"></i>
                 )}
             </button>
             <input
