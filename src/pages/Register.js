@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -9,88 +10,84 @@ function Register() {
   const [error, setError] = useState(null);
   const [verificationCode, setVerificationCode] = useState("");
   const [showVerification, setShowVerification] = useState(false);
-  const [generatedCode, setGeneratedCode] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!username || !email || !password || !repeatPassword) {
-      setError("All fields are required");
+      setError("All fields are required.");
       return;
     }
 
-    if (password !== repeatPassword) {
-      setError("Passwords do not match");
+    if (password != repeatPassword) {
+      setError("Passwords do not match.");
       return;
     }
 
     try {
-      const code = generateVerificationCode();
-      setGeneratedCode(code);
-      await sendVerificationEmail(email, code);
+      await sendVerificationEmail(email);
       setShowVerification(true);
     } catch (error) {
       console.error("Error:", error);
-      setError("Failed to send verification email");
+      setError("Failed to send verification email.");
     }
   };
 
   const handleVerification = async (e) => {
     e.preventDefault();
     if (!verificationCode) {
-      setError("Verification code is required");
+      setError("Verification code is required.");
       return;
     }
     try {
-      if (verificationCode != generatedCode) {
-        setError("Wrong verification code.");
-        return;
-      }
-      const response = await fetch("https://localhost:7172/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userName: username,
-          password: password,
-          email: email,
-        }),
+      const verifyresponse = await axios.post('https://localhost:7106/api/Verification/verifycode', {
+        code: verificationCode,
+        email: email
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        setError(data.message || "Something went wrong");
+      if (verifyresponse.data === "Code matched successfully.") {
+        setError("Code matched successfully.");
+      }
+
+      if (verifyresponse.data === "Invalid code or email.") {
+        setError("Invalid code or email.");
+        return;
+      }
+
+      const response = await axios.post("https://localhost:7172/auth/register", {
+        userName: username,
+        password: password,
+        email: email,
+      });
+
+      if (response.data.ok) {
+        setError(response.data.message || "Something went wrong.");
       } else {
-        setError(null);
-        console.log("Registration successful");
+        const roleResponse = await axios.post("https://localhost:7172/auth/AssignRole", {
+          email: email,
+          roleName: "user"
+        });
+
+        if (roleResponse.data.ok) {
+          setError(roleResponse.data.message || "Failed to assign user role.");
+        } else {
+          setError("Registration and role assignment successful.");
+        }
       }
     } catch (error) {
       console.error("Error:", error);
-      setError("Something went wrong");
+      setError("Something went wrong.");
     }
   };
 
-  const generateVerificationCode = () => {
-    return Math.floor(100000 + Math.random() * 900000);
-  };
-
-  const sendVerificationEmail = async (email, code) => {
+  const sendVerificationEmail = async (email) => {
     try {
-      const response = await fetch("https://localhost:7106/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: email,
-          subject: "Verification Code",
-          body: `<h1>Your verification code is: ${code}</h1>`,
-        }),
+      const response = await axios.post("https://localhost:7106/api/Verification/verificationAndEmail", {
+        email: email,
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to send verification email");
+      if (response.status != 200) {
+        throw new Error("Failed to send verification email.");
       }
     } catch (error) {
       throw error;
@@ -163,7 +160,11 @@ function Register() {
                 className="form-control whitetext"
                 placeholder="Verification Code"
                 value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
+                onChange={(e) => {
+                  const inputVal = e.target.value.replace(/\D/g, '');
+                  setVerificationCode(inputVal.slice(0, 6));
+                }}
+                maxLength={6}
               />
             </div>
           )}
