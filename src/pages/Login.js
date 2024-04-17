@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthService from "../Components/AuthService";
 import Cookies from 'js-cookie';
+import axios from "axios";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -17,10 +18,15 @@ function Login() {
         setError("Username or password is incorrect");
         return;
       }
+      const response = await axios.post(`https://localhost:7172/auth/is-admin?username=${username}`)
+      console.log(username);
+      console.log(response.data);
+
       if(token != null)
       {
         Cookies.set('token', token, { expires: 7 });
         Cookies.set('username', username, { expires: 7 });
+        Cookies.set('isAdmin', response.data.isAdmin, { expires: 7 });
         window.location.href = '/';
       }
       console.log("Login Successful");

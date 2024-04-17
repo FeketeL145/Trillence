@@ -36,10 +36,16 @@ a{
 }
 
 .spotdlFrame{
-  width: 100%;
+  width: calc(100% - 15.6rem);
   height: 100%;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+}
+
+@media screen and (max-width: 960px) {
+  .spotdlFrame{
+    width: 100%;
+  }
 }
 
 .hiddenscrollbar{

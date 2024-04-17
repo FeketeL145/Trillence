@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
-import { SidebarData, SidebarDataLogin } from "./SidebarData";
+import { SidebarData, SidebarDataLogin, SidebarDataAdmin } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
 import Cookies from 'js-cookie';
@@ -81,9 +81,24 @@ const Sidebar = () => {
       : SidebarDataLogin.filter((item) => item.title === "Sign in");
 
     return loginItems.map((item, index) => {
-      return <SubMenu item={item} key={index} />;
+      return <SubMenu item={item} key={index} onClick={showSidebar}/>;
     });
   };
+
+  const renderAdminItems = () => {
+    var isAdmin = false;
+    if(Cookies.get('isAdmin') == "true")
+    {
+      isAdmin = true;
+    }
+    const adminItems = isAdmin
+    ? SidebarDataAdmin.filter((item) => item.requireAdmin === true)
+    : SidebarDataAdmin.filter((item) => item.requireAdmin === false);
+
+    return adminItems.map((item, index) => {
+      return <SubMenu item={item} key={index} onClick={showSidebar}/>;
+    });
+  }
 
   return (
     <>
@@ -103,8 +118,9 @@ const Sidebar = () => {
               </NavIcon>
             )}
             {SidebarData.filter((item) => item.requireLoggedIn === true ? Cookies.get('token') != null : true).map((item, index) => {
-              return <SubMenu item={item} key={index} />;
+              return <SubMenu item={item} key={index} onClick={showSidebar}/>;
             })}
+            {renderAdminItems()}
             {renderLoginItems()}
           </SidebarWrap>
         </SidebarNav>

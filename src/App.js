@@ -21,6 +21,7 @@ import Register from "./pages/Register.js";
 import PasswordForgot from "./pages/ForgotPassword.js";
 import ResetPassword from "./pages/ResetPassword.js";
 import MyProfile from "./pages/MyProfile.js";
+import AdminPanel from "./pages/AdminPanel.js";
 
 
 import Featuretester from "./pages/lotsofpages/Featuretester.js";
@@ -47,6 +48,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<Login />} />
             <Route path="/sign-out" element={<Logout />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
             <Route path="/sign-up" element={<Register />} />
             <Route path="/spotdl" element={<SpotDL />} />
             <Route path="/search" element={<SearchPage />} />
