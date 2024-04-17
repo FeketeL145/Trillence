@@ -9,5 +9,7 @@ namespace Auth.Service.IService
         Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
         Task<bool> ChangeUsername(string oldUsername, string newUsername);
         Task<bool> ChangePassword(string username, string oldPassword, string newPassword);
+        Task<bool> DeleteUser(string username);
+        Task<IsAdminDtoResponse> IsAdmin(string username);
     }
 }

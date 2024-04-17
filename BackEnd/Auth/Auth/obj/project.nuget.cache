@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RJUthpTiz0Qwp5y7Uy2HJgJo2AAg5gQPdX3Nhn/DJrhArsLf7lD+dsI6a8n7uZ9zVjBqhdhdFOUdyhUkuQLPQg==",
+  "dgSpecHash": "xc+it4Ys64UkiBY01aXqQyZxdrLO5ZAF2Ub1TwUCropuaKAuPZKDuFNrKje2SSfNdvbeQRF7AepOQmDkqjMAQw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+  "projectFilePath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\takac\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\takac\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.3\\microsoft.aspnetcore.authentication.jwtbearer.8.0.3.nupkg.sha512",

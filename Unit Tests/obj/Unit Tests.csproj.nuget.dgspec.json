@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\takac\\Desktop\\Trillence\\Unit Tests\\Unit Tests.csproj": {}
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
         "projectName": "BackEnd",
-        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
         "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\obj\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -81,6 +81,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Moq": {
               "target": "Package",
               "version": "[4.20.70, )"
@@ -121,18 +125,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\takac\\Desktop\\Trillence\\Unit Tests\\Unit Tests.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence\\Unit Tests\\Unit Tests.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
         "projectName": "Unit Tests",
-        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence\\Unit Tests\\Unit Tests.csproj",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
         "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence\\Unit Tests\\obj\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -149,8 +153,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj": {
-                "projectPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj"
+              "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
+                "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj"
               }
             }
           }
@@ -215,7 +219,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

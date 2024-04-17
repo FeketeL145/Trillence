@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {}
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj": {}
   },
   "projects": {
-    "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
         "projectName": "Auth",
-        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\Auth.csproj",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
         "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\Auth\\Auth\\obj\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",

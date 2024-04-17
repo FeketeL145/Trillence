@@ -143,5 +143,41 @@ namespace Auth.Service
             var result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
             return result.Succeeded;
         }
+        public async Task<bool> DeleteUser(string username)
+        {
+            var user = await userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            var result = await userManager.DeleteAsync(user);
+            return result.Succeeded;
+        }
+
+        public async Task<IsAdminDtoResponse> IsAdmin(string username)
+        {
+            IsAdminRequestDto isadminrequestDto = new IsAdminRequestDto()
+            {
+                Username = username,
+            };
+
+            var user = await userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            bool isAdmin = await userManager.IsInRoleAsync(user, "Admin");
+
+            IsAdminDtoResponse isadminresponseDto = new IsAdminDtoResponse()
+            {
+                IsAdmin = isAdmin,
+            };
+
+            return isadminresponseDto;
+        }
     }
 }

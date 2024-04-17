@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KxepqVxnQTNObAWm3oV1YBwaY9a/NL/c8zLo/VEpXeIaY3TzbnFjJ4HliUSQBI8TcRYH1TPrvrKUnCyjm/YfZA==",
+  "dgSpecHash": "1sDVniv4XdRdf5VsDttRRG+Oqrq7IotG0VCKmSHEp3WZyXLNFrdwq+MYySgKHRKme4wjEcAYIJF9uVqmjQ5urQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\takac\\Desktop\\Trillence\\BackEnd\\BackEnd.csproj",
+  "projectFilePath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\takac\\.nuget\\packages\\bouncycastle.cryptography\\2.3.0\\bouncycastle.cryptography.2.3.0.nupkg.sha512",
     "C:\\Users\\takac\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

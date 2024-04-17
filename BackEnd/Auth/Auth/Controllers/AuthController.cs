@@ -73,5 +73,26 @@ namespace Auth.Controllers
 
             return Ok("Password changed successfully.");
         }
+
+        [HttpDelete("delete-user/{username}")]
+        public async Task<IActionResult> DeleteUser(string username)
+        {
+            var success = await authService.DeleteUser(username);
+
+            if (!success)
+            {
+                return NotFound("User not found or unable to delete user.");
+            }
+
+            return Ok("User deleted successfully.");
+        }
+
+        [HttpPost("is-admin")]
+        public async Task<IActionResult> IsAdmin(string username)
+        {
+            var isAdmin = await authService.IsAdmin(username);
+
+            return Ok(isAdmin);
+        }
     }
 }
