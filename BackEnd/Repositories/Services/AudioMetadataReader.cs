@@ -21,7 +21,8 @@ namespace BackEnd
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-                string folderPath = config["Paths:SongFolder"];
+                string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                //string folderPath = config["Paths:SongFolder"];
                 folderPath = folderPath.Trim('"');
                 var files = Directory.EnumerateFiles(folderPath)
                 .Where(file => file.ToLower().EndsWith(".mp3") ||

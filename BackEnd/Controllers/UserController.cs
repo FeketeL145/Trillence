@@ -1,6 +1,4 @@
 ﻿using BackEnd.Models.Dtos;
-using BackEnd.Repositories.Interfaces;
-using BackEnd.Repositories.Services;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Moq;
 using NUnit.Framework;

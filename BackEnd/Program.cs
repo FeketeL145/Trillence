@@ -1,7 +1,7 @@
 global using BackEnd.Models;
+global using BackEnd.Repositories.Interfaces;
+global using BackEnd.Repositories.Services;
 using BackEnd;
-using BackEnd.Repositories.Interfaces;
-using BackEnd.Repositories.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,8 @@ builder.Services.AddScoped<IUserInterface, UserService>();
 builder.Services.AddScoped<IConnectionInterface, ConnectionService>();
 builder.Services.AddScoped<IVerificationInterface, VerificationService>();
 builder.Services.AddScoped<AudioMetadataReader>();
+builder.Services.AddScoped<IMusicStreamingInterface, MusicStreamingService>();
+
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

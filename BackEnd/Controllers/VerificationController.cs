@@ -1,6 +1,4 @@
 ﻿using BackEnd.Models.Dtos;
-using BackEnd.Repositories.Interfaces;
-using BackEnd.Repositories.Services;
 using Email_Test_API.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 

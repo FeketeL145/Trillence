@@ -1,5 +1,4 @@
-﻿using BackEnd.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd.Repositories.Services
 {

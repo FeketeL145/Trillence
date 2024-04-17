@@ -1,14 +1,9 @@
-﻿using BackEnd.Models;
-using BackEnd.Models.Dtos;
-using BackEnd.Repositories.Interfaces;
+﻿using BackEnd.Models.Dtos;
 using Email_Test_API.Models.Dtos;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
-using System.Threading.Tasks;
 
 namespace BackEnd.Repositories.Services
 {

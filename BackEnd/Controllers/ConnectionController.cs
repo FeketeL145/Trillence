@@ -1,5 +1,4 @@
-﻿using BackEnd.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
 {

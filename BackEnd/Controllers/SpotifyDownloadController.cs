@@ -15,7 +15,8 @@ public class SpotifyDownloadController : ControllerBase
                    .AddJsonFile("appsettings.json")
                    .Build();
 
-            string folderPath = config["Paths:SongFolder"];
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            //string folderPath = config["Paths:SongFolder"];
 
             var spotifyLink = request.SpotifyUrl;
 
