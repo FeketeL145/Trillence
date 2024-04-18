@@ -1,0 +1,16 @@
+.playerbuttons{
+    width: 20px;
+    height: 20px;
+}
+.szelesseg{
+    height: "10vh";
+    position: "fixed";
+    bottom: "0";
+    width: calc(100%-15.6rem);
+}
+.footerdiv{
+    width: calc(100%/3);
+}
+.volumeslider{
+    text-align: justify;
+}

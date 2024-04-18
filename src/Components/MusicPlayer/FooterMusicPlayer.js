@@ -98,7 +98,7 @@ const repeat = () => {
 
 
     return(
-      <div className="szelesseg footer bg-dark d-flex align-items-stretch justify-content-between text-nowrap btw ">
+    <div className="szelesseg footer bg-dark d-flex align-items-stretch justify-content-between text-nowrap btw ">
       
       <div className="align-items-start footerdiv">
         <audio
@@ -138,9 +138,9 @@ const repeat = () => {
 
       {/*MIDDLE*/}
       
-      <div className="align-items-center row footerdiv text-center text-white">
+      <div className="align-items-center row footerdiv text-center text-white btw">
         {/*CONTROLS*/}
-        <div className="text-white">
+        <div className="btw text-white">
           <button onClick={handlePrevious}>
             <i className="fa-solid fa-backward-fast playerbuttons"></i>
           </button>
@@ -161,7 +161,7 @@ const repeat = () => {
 
         {/*PROGRESS BAR*/}
         {/*NEED BUGFIX PROGRESS BAR IS OFFSET*/}
-        <div className="row bg-dark text-white" style={{ height: '2rem', flex: 3 }}>
+        <div className="row bg-dark text-white btw" style={{ height: '2rem', flex: 3 }}>
         <div className='col-2'>
             <span className="time current">{formatTime(timeProgress)}</span>
         </div>
@@ -186,8 +186,8 @@ const repeat = () => {
 
 
       {/*RIGHT*/}
-      <div className="align-items-end footerdiv">
-        <div className="text-end volumeslider">
+      <div className="align-items-end btw footerdiv">
+        <div className="text-end btw volumeslider">
         <button onClick={() => setMuteVolume((prev) => !prev)}>
             {muteVolume || volume < 1 ? (
               <i className="fa-solid fa-volume-xmark playerbuttons"></i>
@@ -213,106 +213,7 @@ const repeat = () => {
         </div>
       </div>
     </div>
-
     )
     
 }
 export default FooterMusicPlayer;
-/*
-<div style={{height: '10vh', overflowY: 'auto' }} className="d-flex d-flex align-items-stretch justify-content-between btw">
-
-
-
-      <div className="align-items-start btw">
-      <div className="card mt-5">
-    <audio
-      src={currentTrack.src}
-      ref={audioRef}
-      onLoadedMetadata={onLoadedMetadata}
-      onEnded={handleNext}
-    />
-    <div className="audio-info">
-      <div className="">
-        {currentTrack.thumbnail ? (
-          <img src={currentTrack.thumbnail} alt="audio avatar" style={{width: '50px', height: '50px'}}/>
-        ) : (
-          <div className="icon-wrapper">
-            <span className="audio-icon">
-              <i class="bi bi-question"></i>
-            </span>
-          </div>
-        )}
-      </div>
-      <div className="text">
-        <p className="title">{currentTrack.title}</p>
-        <p>{currentTrack.author}</p>
-      </div>
-    </div>
-  </div>
-  </div>
-
-
-
-  <div className="align-items-center btw">
-      <div className="controls">
-      <button onClick={handlePrevious}>
-        <i className="fa-solid fa-backward-fast"></i>
-      </button>
-      <button onClick={skipBackward}>
-      <i class="fa-solid fa-backward-step"></i>
-      </button>
-
-      <button onClick={togglePlayPause}>
-          {isPlaying ? <i class="fa-solid fa-pause"></i> : <i class="fa-solid fa-play"></i>}
-      </button>
-      <button onClick={skipForward}>
-        <i className="fa-solid fa-forward-step"></i>
-      </button>
-      <button onClick={handleNext}>
-        <i className="fa-solid fa-forward-fast"></i>
-      </button>
-      </div>
-      <div className="progress bg-dark">
-        <span className="time current">{formatTime(timeProgress)}</span>
-        <input
-          type="range"
-          ref={progressBarRef}
-          defaultValue="0"
-          onChange={handleProgressChange}
-        />
-        <span className="time">{formatTime(duration)}</span>
-    </div>
-  </div>
-
-
-
-  <div className="align-items-end btw">
-      <div className="volume">
-      <button onClick={() => setMuteVolume((prev) => !prev)}
-      >
-          {muteVolume || volume < 1 ? (
-            <i className="fa-solid fa-volume-xmark"></i>
-          ) : volume < 33 ? (
-            <i className="fa-solid fa-volume-off"></i>
-          ) : volume < 66 ? (
-            <i className="fa-solid fa-volume-low"></i>
-          ) : (
-            <i className="fa-solid fa-volume-high"></i>
-          )}
-      </button>
-      <input
-          type="range"
-          min={0}
-          max={100}
-          value={volume}
-          onChange={(e) => setVolume(e.target.value)}
-          style={{
-          background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)`,
-          }}
-      />
-      </div>
-  </div>
-</div>
-
-
-*/
