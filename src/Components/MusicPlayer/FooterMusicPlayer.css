@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+.playericon{
+    width: 0.8rem;
+    height: 0.8rem;
+    color: rgba(255,255,255,1);
+}
+
+.volumeslider{
+    text-align: left;
+}
+
+.musicThumbnail{
+    height: 5rem;
+    width: auto;
+=======
 .playerbuttons{
     width: 20px;
     height: 20px;
@@ -13,4 +28,5 @@
 }
 .volumeslider{
     text-align: justify;
+>>>>>>> 8981153f902e5aa9aaf288e854ae27dfc7e97567
 }

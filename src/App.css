@@ -42,8 +42,20 @@ a{
   position: fixed;
 }
 
+.musicPlayer{
+  width: calc(100% - 15.6rem);
+  height: 5rem;
+  position: fixed;
+  bottom:0;
+  background: #15171c;
+}
+
+
 @media screen and (max-width: 960px) {
   .spotdlFrame{
+    width: 100%;
+  }
+  .musicPlayer{
     width: 100%;
   }
 }
