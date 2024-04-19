@@ -179,14 +179,7 @@ return () => {
     <div className="playerBar w-100 h-100 d-flex align-items-stretch justify-content-between text-nowrap">
 
 
-<<<<<<< HEAD
       <div className="col row">
-=======
-    return(
-    <div className="szelesseg footer bg-dark d-flex align-items-stretch justify-content-between text-nowrap btw ">
-      
-      <div className="align-items-start footerdiv">
->>>>>>> 8981153f902e5aa9aaf288e854ae27dfc7e97567
         <audio
           ref={audioRef}
           onLoadedMetadata={onLoadedMetadata}
@@ -203,78 +196,18 @@ return () => {
         </div>
       </div>
 
-<<<<<<< HEAD
       <div className="align-items-center col footerdiv text-center text-white p-2">
         <div>
           <button onClick={handlePrevious} className='ms-2 btn'>
             <i className="fa-solid fa-backward-fast playericon" />
-=======
-      {/*MIDDLE*/}
-      
-      <div className="align-items-center row footerdiv text-center text-white btw">
-        {/*CONTROLS*/}
-        <div className="btw text-white">
-          <button onClick={handlePrevious}>
-            <i className="fa-solid fa-backward-fast playerbuttons"></i>
->>>>>>> 8981153f902e5aa9aaf288e854ae27dfc7e97567
           </button>
           <button onClick={skipBackward} className='ms-2 btn'>
             <i className="fa-solid fa-backward-step playericon" />
           </button>
 
-<<<<<<< HEAD
           <button onClick={togglePlayPause} className='ms-2 btn'>
             {isPlaying ? (
               <i className="fa-solid fa-pause playericon" />
-=======
-          <button onClick={togglePlayPause}>
-              {isPlaying ? <i class="fa-solid fa-pause playerbuttons"></i> : <i class="fa-solid fa-play playerbuttons"></i>}
-          </button>
-          <button onClick={skipForward}>
-            <i className="fa-solid fa-forward-step playerbuttons"></i>
-          </button>
-          <button onClick={handleNext}>
-            <i className="fa-solid fa-forward-fast playerbuttons"></i>
-          </button>
-        </div>
-
-        {/*PROGRESS BAR*/}
-        {/*NEED BUGFIX PROGRESS BAR IS OFFSET*/}
-        <div className="row bg-dark text-white btw" style={{ height: '2rem', flex: 3 }}>
-        <div className='col-2'>
-            <span className="time current">{formatTime(timeProgress)}</span>
-        </div>
-        <div className='col-8 text-center'>
-            <input
-                type="range"
-                ref={progressBarRef}
-                defaultValue="0"
-                onChange={handleProgressChange}
-                style={{ width: '100%' }}
-            />
-        </div>
-        <div className='col-2'>
-            <span className="time">{formatTime(duration)}</span>
-        </div>
-    </div>
-
-
-      </div>
-
-
-
-
-      {/*RIGHT*/}
-      <div className="align-items-end btw footerdiv">
-        <div className="text-end btw volumeslider">
-        <button onClick={() => setMuteVolume((prev) => !prev)}>
-            {muteVolume || volume < 1 ? (
-              <i className="fa-solid fa-volume-xmark playerbuttons"></i>
-            ) : volume < 33 ? (
-              <i className="fa-solid fa-volume-off playerbuttons"></i>
-            ) : volume < 66 ? (
-              <i className="fa-solid fa-volume-low playerbuttons"></i>
->>>>>>> 8981153f902e5aa9aaf288e854ae27dfc7e97567
             ) : (
               <i className="fa-solid fa-play playericon" />
             )}
@@ -334,13 +267,7 @@ return () => {
         </div>
       </div>
     </div>
-<<<<<<< HEAD
   );
 }
 
-=======
-    )
-    
-}
->>>>>>> 8981153f902e5aa9aaf288e854ae27dfc7e97567
 export default FooterMusicPlayer;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .playericon{
     width: 0.8rem;
     height: 0.8rem;
@@ -12,21 +11,4 @@
 .musicThumbnail{
     height: 5rem;
     width: auto;
-=======
-.playerbuttons{
-    width: 20px;
-    height: 20px;
-}
-.szelesseg{
-    height: "10vh";
-    position: "fixed";
-    bottom: "0";
-    width: calc(100%-15.6rem);
-}
-.footerdiv{
-    width: calc(100%/3);
-}
-.volumeslider{
-    text-align: justify;
->>>>>>> 8981153f902e5aa9aaf288e854ae27dfc7e97567
 }
