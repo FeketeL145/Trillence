@@ -18,12 +18,12 @@ import SongPost from './Songs/SongPost';
 import SongSinglePage from './Songs/SongSinglePage';
 import SongUpdatebyId from './Songs/SongUpdatebyId';
 import FooterMusicPlayer from '../../Components/MusicPlayer/FooterMusicPlayer';
-import AllPlaylist from '../../Components/Playlist/AllPlaylist';
+
 
 function Featuretester() {
     return (
         <div>
-            <AllPlaylist />
+            <FooterMusicPlayer />
         </div>
     )
 }
