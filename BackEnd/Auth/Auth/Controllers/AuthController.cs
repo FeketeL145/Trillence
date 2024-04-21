@@ -18,7 +18,7 @@ namespace Auth.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto model)
         {
-            var errorMessage = await authService.Register(model);
+            string errorMessage = await authService.Register(model);
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -31,7 +31,7 @@ namespace Auth.Controllers
         [HttpPost("AssignRole")]
         public async Task<ActionResult> AssignRole([FromBody] RoleDto model)
         {
-            var assignRoleSuccessful = await authService.AssignRole(model.Email, model.RoleName.ToUpper());
+            bool assignRoleSuccessful = await authService.AssignRole(model.Email, model.RoleName.ToUpper());
 
             if (!assignRoleSuccessful)
             {
@@ -44,14 +44,14 @@ namespace Auth.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginRequestDto model)
         {
-            var loginResponse = await authService.Login(model);
+            LoginResponseDto loginResponse = await authService.Login(model);
             return StatusCode(200, loginResponse);
         }
 
         [HttpPut("change-username")]
         public async Task<ActionResult> ChangeUsername([FromBody] ChangeUsernameDto model)
         {
-            var success = await authService.ChangeUsername(model.OldUsername, model.NewUsername);
+            bool success = await authService.ChangeUsername(model.OldUsername, model.NewUsername);
 
             if (!success)
             {
@@ -64,7 +64,7 @@ namespace Auth.Controllers
         [HttpPut("change-password")]
         public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordDto model)
         {
-            var success = await authService.ChangePassword(model.Username, model.OldPassword, model.NewPassword);
+            bool success = await authService.ChangePassword(model.Username, model.OldPassword, model.NewPassword);
 
             if (!success)
             {
@@ -77,7 +77,7 @@ namespace Auth.Controllers
         [HttpDelete("delete-user/{username}")]
         public async Task<IActionResult> DeleteUser(string username)
         {
-            var success = await authService.DeleteUser(username);
+            bool success = await authService.DeleteUser(username);
 
             if (!success)
             {
@@ -90,7 +90,7 @@ namespace Auth.Controllers
         [HttpPost("is-admin")]
         public async Task<IActionResult> IsAdmin(string username)
         {
-            var isAdmin = await authService.IsAdmin(username);
+            IsAdminDtoResponse isAdmin = await authService.IsAdmin(username);
 
             return Ok(isAdmin);
         }

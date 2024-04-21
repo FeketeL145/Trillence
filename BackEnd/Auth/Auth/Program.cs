@@ -11,11 +11,11 @@ namespace Auth
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<AppDbcontext>(option =>
             {
-                var connectionString = builder.Configuration.GetConnectionString("MysqlLocal");
+                string? connectionString = builder.Configuration.GetConnectionString("MysqlLocal");
                 option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
 
@@ -32,7 +32,7 @@ namespace Auth
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -44,7 +44,7 @@ namespace Auth
                         });
             });
 
-            var app = builder.Build();
+            WebApplication app = builder.Build();
 
             if (app.Environment.IsDevelopment())
             {

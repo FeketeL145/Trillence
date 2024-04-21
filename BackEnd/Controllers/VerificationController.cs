@@ -20,12 +20,12 @@ namespace BackEnd.Controllers
         {
             try
             {
-                var verification = await verificationInterface.Post(createVerificationDto);
+                Verification verification = await verificationInterface.Post(createVerificationDto);
                 EmailDto emailDto = new EmailDto(
                     createVerificationDto.Email, 
                     "Trillence - Verification Email");
 
-                var isEmailSent = await verificationInterface.SendVerificationEmail(emailDto, verification.Code);
+                bool isEmailSent = await verificationInterface.SendVerificationEmail(emailDto, verification.Code);
 
                 if (isEmailSent)
                     return StatusCode(200, "Verification email sent successfully.");
@@ -60,7 +60,7 @@ namespace BackEnd.Controllers
         [HttpGet("verificationbyid/{id}")]
         public async Task<ActionResult<Verification>> GetById(int id)
         {
-            var result = await verificationInterface.GetById(id);
+            Verification result = await verificationInterface.GetById(id);
             if (result == null)
             {
                 return StatusCode(404, "Verification with this id cannot be found.");
@@ -72,7 +72,7 @@ namespace BackEnd.Controllers
         [HttpGet("verificationbyemail/{email}")]
         public async Task<ActionResult<Verification>> GetByEmail(string email)
         {
-            var result = await verificationInterface.GetByEmail(email);
+            Verification result = await verificationInterface.GetByEmail(email);
             if (result == null)
             {
                 return StatusCode(404, "Verification with this email cannot be found.");
@@ -84,7 +84,7 @@ namespace BackEnd.Controllers
         [HttpPut("updatebyid/{id}")]
         public async Task<ActionResult<Verification>> Put(int id, ModifyVerificationDto modifyVerificationDto)
         {
-            var result = await verificationInterface.Put(id, modifyVerificationDto);
+            Verification result = await verificationInterface.Put(id, modifyVerificationDto);
 
             if (result == null)
             {
@@ -97,7 +97,7 @@ namespace BackEnd.Controllers
         [HttpDelete("deletebyid/{id}")]
         public async Task<ActionResult<Verification>> DeleteById(int id)
         {
-            var result = await verificationInterface.DeleteById(id);
+            Verification result = await verificationInterface.DeleteById(id);
 
             if (result == null)
             {

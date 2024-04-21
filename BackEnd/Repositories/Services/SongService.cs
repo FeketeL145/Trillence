@@ -14,7 +14,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<SongDto> Post(CreateSongDto createSongDto)
         {
-            var song = new Song
+            Song song = new Song
             {
                 Id = Guid.NewGuid(),
                 Name = createSongDto.Name,
@@ -40,7 +40,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<SongDto> Put(Guid id, ModifySongDto modifySongDto)
         {
-            var existingSong = await trillenceContext.Songs.FirstOrDefaultAsync(x => x.Id == id);
+            Song? existingSong = await trillenceContext.Songs.FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingSong != null)
             {
@@ -59,7 +59,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<Song> DeleteById(Guid id)
         {
-            var song = await trillenceContext.Songs.FirstOrDefaultAsync(x => x.Id == id);
+            Song? song = await trillenceContext.Songs.FirstOrDefaultAsync(x => x.Id == id);
 
             if (song != null)
             {

@@ -23,8 +23,8 @@ namespace BackEnd.Tests.Repositories.Services
         [Test]
         public async Task Post_ValidInput_ReturnsSongDto()
         {
-            var createSongDto = new CreateSongDto("Test Song", TimeSpan.FromSeconds(180), Guid.NewGuid(), "Rock");
-            var song = new Song
+            CreateSongDto createSongDto = new CreateSongDto("Test Song", TimeSpan.FromSeconds(180), Guid.NewGuid(), "Rock");
+            Song song = new Song
             {
                 Id = Guid.NewGuid(),
                 Name = createSongDto.Name,
@@ -34,7 +34,7 @@ namespace BackEnd.Tests.Repositories.Services
             };
             _mockContext.Setup(x => x.Songs.AddAsync(It.IsAny<Song>(), default)).ReturnsAsync((EntityEntry<Song>)null);
 
-            var result = await _songService.Post(createSongDto);
+            SongDto result = await _songService.Post(createSongDto);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(createSongDto.Name));

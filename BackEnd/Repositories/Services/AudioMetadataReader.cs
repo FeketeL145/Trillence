@@ -16,7 +16,7 @@ namespace BackEnd
         {
             try
             {
-                var config = new ConfigurationBuilder()
+                IConfigurationRoot config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
@@ -24,15 +24,15 @@ namespace BackEnd
                 string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
                 //string folderPath = config["Paths:SongFolder"];
                 folderPath = folderPath.Trim('"');
-                var files = Directory.EnumerateFiles(folderPath)
+                IEnumerable<string> files = Directory.EnumerateFiles(folderPath)
                 .Where(file => file.ToLower().EndsWith(".mp3") ||
                    file.ToLower().EndsWith(".flac") ||
                    file.ToLower().EndsWith(".m4a"));
 
 
-                foreach (var filePath in files)
+                foreach (string? filePath in files)
                 {
-                    using (var file = TagLib.File.Create(filePath))
+                    using (TagLib.File file = TagLib.File.Create(filePath))
                     {
                         string titleread = file.Tag.Title;
                         string albumread = file.Tag.Album;
@@ -48,10 +48,10 @@ namespace BackEnd
                         Console.WriteLine("Duration: " + durationread);
                         Console.WriteLine("Album's artist: " + artistread);
 
-                        var contributoryArtists = file.Tag.Performers;
-                        foreach (var artistName in contributoryArtists)
+                        string[] contributoryArtists = file.Tag.Performers;
+                        foreach (string? artistName in contributoryArtists)
                         {
-                            var artist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
+                            Artist? artist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
                             if (artist == null)
                             {
                                 artist = new Artist { Id = Guid.NewGuid(), Name = artistName };
@@ -67,10 +67,10 @@ namespace BackEnd
                             byte[] pictureData = picture.Data.Data;
 
                             string sanitizedAlbumName = SanitizeFileName(albumread);
-                            var album = await _trillenceContext.Albums.FirstOrDefaultAsync(a => a.Name == sanitizedAlbumName);
+                            Album? album = await _trillenceContext.Albums.FirstOrDefaultAsync(a => a.Name == sanitizedAlbumName);
                             if (album == null)
                             {
-                                var firstArtist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == file.Tag.FirstAlbumArtist);
+                                Artist? firstArtist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == file.Tag.FirstAlbumArtist);
                                 if (firstArtist == null)
                                 {
                                     firstArtist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == "Various Artists");
@@ -94,7 +94,7 @@ namespace BackEnd
                                 Console.WriteLine("Album art saved to: " + pictureFilePath);
                             }
 
-                            var song = await _trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == titleread);
+                            Song? song = await _trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == titleread);
                             if (song == null)
                             {
                                 song = new Song { Id = Guid.NewGuid(), Name = titleread, Length = durationread, AlbumId = album.Id, Genre = genreread };
@@ -102,9 +102,9 @@ namespace BackEnd
                                 await _trillenceContext.SaveChangesAsync();
                             }
 
-                            foreach (var artistName in contributoryArtists)
+                            foreach (string? artistName in contributoryArtists)
                             {
-                                var artist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
+                                Artist? artist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
                                 if (artist == null)
                                 {
                                     artist = new Artist { Id = Guid.NewGuid(), Name = artistName };
@@ -123,7 +123,7 @@ namespace BackEnd
                                 album = await _trillenceContext.Albums.FirstOrDefaultAsync(a => a.Name == sanitizedAlbumName);
                                 if (album == null)
                                 {
-                                    var firstArtist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == file.Tag.FirstAlbumArtist);
+                                    Artist? firstArtist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == file.Tag.FirstAlbumArtist);
                                     if (firstArtist == null)
                                     {
                                         firstArtist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == "Various Artists");
@@ -155,10 +155,10 @@ namespace BackEnd
                                     await _trillenceContext.SaveChangesAsync();
                                 }
 
-                                foreach (var artistName in contributoryArtists.Where(a => a != artistread))
+                                foreach (string? artistName in contributoryArtists.Where(a => a != artistread))
                                 {
-                                    var artist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
-                                    var artistSongExists = await _trillenceContext.ArtistSongs.AnyAsync(s => s.ArtistId == artist.Id && s.SongId == song.Id);
+                                    Artist? artist = await _trillenceContext.Artists.FirstOrDefaultAsync(a => a.Name == artistName);
+                                    bool artistSongExists = await _trillenceContext.ArtistSongs.AnyAsync(s => s.ArtistId == artist.Id && s.SongId == song.Id);
                                     if (!artistSongExists)
                                     {
                                         await _trillenceContext.ArtistSongs.AddAsync(new ArtistSong { ArtistId = artist.Id, SongId = song.Id });

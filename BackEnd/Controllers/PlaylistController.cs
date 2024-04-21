@@ -29,7 +29,7 @@ namespace BackEnd.Controllers
         [HttpGet("playlistbyid/{id}")]
         public async Task<ActionResult<Playlist>> GetById(Guid id)
         {
-            var result = await playlistInterface.GetById(id);
+            Playlist result = await playlistInterface.GetById(id);
             if (result == null)
             {
                 return StatusCode(404, "Playlist with this id cannot be found.");
@@ -41,7 +41,7 @@ namespace BackEnd.Controllers
         [HttpPut("updatebyid/{id}")]
         public async Task<ActionResult<Playlist>> Put(Guid id, ModifyPlaylistDto modifyPlaylistDto)
         {
-            var result = await playlistInterface.Put(id, modifyPlaylistDto);
+            Playlist result = await playlistInterface.Put(id, modifyPlaylistDto);
 
             if (result == null)
             {
@@ -54,7 +54,7 @@ namespace BackEnd.Controllers
         [HttpDelete("deletebyid/{id}")]
         public async Task<ActionResult<Playlist>> DeleteById(Guid id)
         {
-            var result = await playlistInterface.DeleteById(id);
+            Playlist result = await playlistInterface.DeleteById(id);
 
             if (result == null)
             {

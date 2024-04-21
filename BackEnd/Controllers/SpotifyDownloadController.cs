@@ -10,7 +10,7 @@ public class SpotifyDownloadController : ControllerBase
     {
         try
         {
-            var config = new ConfigurationBuilder()
+            IConfigurationRoot config = new ConfigurationBuilder()
                    .SetBasePath(Directory.GetCurrentDirectory())
                    .AddJsonFile("appsettings.json")
                    .Build();
@@ -18,9 +18,9 @@ public class SpotifyDownloadController : ControllerBase
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
             //string folderPath = config["Paths:SongFolder"];
 
-            var spotifyLink = request.SpotifyUrl;
+            string? spotifyLink = request.SpotifyUrl;
 
-            using (var process = new Process())
+            using (Process process = new Process())
             {
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.RedirectStandardInput = true;

@@ -23,15 +23,15 @@ namespace BackEnd.Tests.Repositories.Services
         [Test]
         public async Task Post_ValidInput_ReturnsArtistDto()
         {
-            var createArtistDto = new CreateArtistDto("Test Artist");
-            var artist = new Artist
+            CreateArtistDto createArtistDto = new CreateArtistDto("Test Artist");
+            Artist artist = new Artist
             {
                 Id = Guid.NewGuid(),
                 Name = createArtistDto.Name,
             };
             _mockContext.Setup(x => x.Artists.AddAsync(It.IsAny<Artist>(), default)).ReturnsAsync((EntityEntry<Artist>)null);
 
-            var result = await _artistService.Post(createArtistDto);
+            ArtistDto result = await _artistService.Post(createArtistDto);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(createArtistDto.Name));

@@ -14,7 +14,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<AlbumDto> Post(CreateAlbumDto createAlbumDto)
         {
-            var album = new Album
+            Album album = new Album
             {
                 Id = Guid.NewGuid(),
                 Name = createAlbumDto.Name,
@@ -38,7 +38,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<AlbumDto> Put(Guid id, ModifyAlbumDto modifyAlbumDto)
         {
-            var existingAlbum = await trillenceContext.Albums.FirstOrDefaultAsync(x => x.Id == id);
+            Album? existingAlbum = await trillenceContext.Albums.FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingAlbum != null)
             {
@@ -56,7 +56,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<Album> DeleteById(Guid id)
         {
-            var album = await trillenceContext.Albums.FirstOrDefaultAsync(x => x.Id == id);
+            Album? album = await trillenceContext.Albums.FirstOrDefaultAsync(x => x.Id == id);
 
             if (album != null)
             {

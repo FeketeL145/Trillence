@@ -23,8 +23,8 @@ namespace BackEnd.Tests.Repositories.Services
         [Test]
         public async Task Post_ValidInput_ReturnsAlbumDto()
         {
-            var createAlbumDto = new CreateAlbumDto("Test Album", 2022);
-            var album = new Album
+            CreateAlbumDto createAlbumDto = new CreateAlbumDto("Test Album", 2022);
+            Album album = new Album
             {
                 Id = Guid.NewGuid(),
                 Name = createAlbumDto.Name,
@@ -32,7 +32,7 @@ namespace BackEnd.Tests.Repositories.Services
             };
             _mockContext.Setup(x => x.Albums.AddAsync(It.IsAny<Album>(), default)).ReturnsAsync((EntityEntry<Album>)null);
 
-            var result = await _albumService.Post(createAlbumDto);
+            AlbumDto result = await _albumService.Post(createAlbumDto);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(createAlbumDto.Name));

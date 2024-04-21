@@ -14,7 +14,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<PlaylistSong> Post(CreatePlaylistSongDto createPlaylistsongDto)
         {
-            var playlistsong = new PlaylistSong
+            PlaylistSong playlistsong = new PlaylistSong
             {
                 SongId = createPlaylistsongDto.SongId,
                 PlaylistId = createPlaylistsongDto.PlaylistId,
@@ -37,7 +37,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<PlaylistSong> Put(Guid playlistid, Guid songid, ModifyPlaylistSongDto modifyPlaylistsongDto)
         {
-            var existingPlaylistsong = await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
+            PlaylistSong? existingPlaylistsong = await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
 
             if (existingPlaylistsong != null)
             {
@@ -55,7 +55,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<PlaylistSong> DeleteById(Guid playlistid, Guid songid)
         {
-            var playlistsong = await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
+            PlaylistSong? playlistsong = await trillenceContext.PlaylistSongs.FirstOrDefaultAsync(x => x.PlaylistId == playlistid && x.SongId == songid);
 
             if (playlistsong != null)
             {

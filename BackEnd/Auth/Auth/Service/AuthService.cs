@@ -25,7 +25,7 @@ namespace Auth.Service
 
         public async Task<bool> AssignRole(string email, string roleName)
         {
-            var user = appDbcontext.ApplicationUsers.FirstOrDefault(user => user.Email.ToLower() == email.ToLower());
+            ApplicationUser? user = appDbcontext.ApplicationUsers.FirstOrDefault(user => user.Email.ToLower() == email.ToLower());
 
             if (user != null)
             {
@@ -44,7 +44,7 @@ namespace Auth.Service
 
         public async Task<string> Register(RegisterRequestDto registerRequestDto)
         {
-            var existingEmail = await userManager.FindByEmailAsync(registerRequestDto.Email);
+            ApplicationUser? existingEmail = await userManager.FindByEmailAsync(registerRequestDto.Email);
             if (existingEmail != null)
             {
                 return "Email is already registered";
@@ -60,11 +60,11 @@ namespace Auth.Service
 
             try
             {
-                var result = await userManager.CreateAsync(user, registerRequestDto.Password);
+                IdentityResult result = await userManager.CreateAsync(user, registerRequestDto.Password);
 
                 if (result.Succeeded)
                 {
-                    var userToReturn = appDbcontext.ApplicationUsers.
+                    ApplicationUser userToReturn = appDbcontext.ApplicationUsers.
                         First(user => user.UserName == registerRequestDto.UserName);
 
 
@@ -89,7 +89,7 @@ namespace Auth.Service
 
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
-            var user = await appDbcontext.ApplicationUsers.
+            ApplicationUser? user = await appDbcontext.ApplicationUsers.
                 FirstOrDefaultAsync(user => user.UserName.ToLower() == loginRequestDto.UserName.ToLower());
 
             bool isValid = await userManager.CheckPasswordAsync(user, loginRequestDto.Password);
@@ -99,8 +99,8 @@ namespace Auth.Service
                 return new LoginResponseDto() {Token = "" };
             }
 
-            var roles = await userManager.GetRolesAsync(user);
-            var token = jwtTokenGenerator.GenerateToken(user, roles);
+            IList<string> roles = await userManager.GetRolesAsync(user);
+            string token = jwtTokenGenerator.GenerateToken(user, roles);
 
             RegisterResponseDto userDto = new()
             {
@@ -117,7 +117,7 @@ namespace Auth.Service
         }
         public async Task<bool> ChangeUsername(string oldUsername, string newUsername)
         {
-            var user = await userManager.FindByNameAsync(oldUsername);
+            ApplicationUser? user = await userManager.FindByNameAsync(oldUsername);
 
             if (user == null)
             {
@@ -127,32 +127,32 @@ namespace Auth.Service
             user.UserName = newUsername;
             user.NormalizedUserName = newUsername.ToUpper();
 
-            var result = await userManager.UpdateAsync(user);
+            IdentityResult result = await userManager.UpdateAsync(user);
             return result.Succeeded;
         }
 
         public async Task<bool> ChangePassword(string username, string oldPassword, string newPassword)
         {
-            var user = await userManager.FindByNameAsync(username);
+            ApplicationUser? user = await userManager.FindByNameAsync(username);
 
             if (user == null)
             {
                 return false;
             }
 
-            var result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            IdentityResult result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
             return result.Succeeded;
         }
         public async Task<bool> DeleteUser(string username)
         {
-            var user = await userManager.FindByNameAsync(username);
+            ApplicationUser? user = await userManager.FindByNameAsync(username);
 
             if (user == null)
             {
                 return false;
             }
 
-            var result = await userManager.DeleteAsync(user);
+            IdentityResult result = await userManager.DeleteAsync(user);
             return result.Succeeded;
         }
 
@@ -163,7 +163,7 @@ namespace Auth.Service
                 Username = username,
             };
 
-            var user = await userManager.FindByNameAsync(username);
+            ApplicationUser? user = await userManager.FindByNameAsync(username);
 
             if (user == null)
             {

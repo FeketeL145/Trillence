@@ -23,8 +23,8 @@ namespace BackEnd.Tests.Repositories.Services
         [Test]
         public async Task Post_ValidInput_ReturnsPlaylist()
         {
-            var createPlaylistDto = new CreatePlaylistDto("Test Playlist", Guid.NewGuid());
-            var playlist = new Playlist
+            CreatePlaylistDto createPlaylistDto = new CreatePlaylistDto("Test Playlist", Guid.NewGuid());
+            Playlist playlist = new Playlist
             {
                 Id = Guid.NewGuid(),
                 Name = createPlaylistDto.Name,
@@ -32,7 +32,7 @@ namespace BackEnd.Tests.Repositories.Services
             };
             _mockContext.Setup(x => x.Playlists.AddAsync(It.IsAny<Playlist>(), default)).ReturnsAsync((EntityEntry<Playlist>)null);
 
-            var result = await _playlistService.Post(createPlaylistDto);
+            Playlist result = await _playlistService.Post(createPlaylistDto);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(createPlaylistDto.Name));

@@ -16,7 +16,7 @@ namespace BackEnd.Controllers
         [HttpGet("allsongdetails")]
         public async Task<ActionResult<IEnumerable<object>>> GetAllSongDetails()
         {
-            var result = await _connection.GetAllSongDetails();
+            object result = await _connection.GetAllSongDetails();
 
             if (result != null)
             {
@@ -31,7 +31,7 @@ namespace BackEnd.Controllers
         [HttpGet("songdetails/{id}")]
         public async Task<ActionResult> GetSongDetailsById(Guid id)
         {
-            var result = _connection.GetSongDetailsById(id).Result;
+            object result = _connection.GetSongDetailsById(id).Result;
 
             if (result != null)
             {
@@ -46,7 +46,7 @@ namespace BackEnd.Controllers
         [HttpGet("allplaylistdetails")]
         public async Task<ActionResult<IEnumerable<object>>> GetAllPlaylistDetails()
         {
-            var result = await _connection.GetAllPlaylistDetails();
+            object result = await _connection.GetAllPlaylistDetails();
 
             if (result != null)
             {
@@ -61,7 +61,7 @@ namespace BackEnd.Controllers
         [HttpGet("playlistdetailsby/{id}")]
         public async Task<ActionResult> GetPlaylistDetailsById(Guid id)
         {
-            var result = _connection.GetPlaylistDetailsById(id).Result;
+            object result = _connection.GetPlaylistDetailsById(id).Result;
 
             if (result != null)
             {

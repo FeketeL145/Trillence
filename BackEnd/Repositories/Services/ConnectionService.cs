@@ -13,7 +13,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetAllSongDetails()
         {
-            var data = await _trillenceContext.Albums
+            List<Album> data = await _trillenceContext.Albums
                 .Include(album => album.Songs)
                     .ThenInclude(song => song.ArtistSongs)
                         .ThenInclude(artistSong => artistSong.Artist)
@@ -60,7 +60,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetSongDetailsById(Guid songId)
         {
-            var songData = await _trillenceContext.Songs
+            Song? songData = await _trillenceContext.Songs
         .Include(song => song.Album)
             .ThenInclude(album => album.Artist)
         .Include(song => song.ArtistSongs)
@@ -107,7 +107,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetAllPlaylistDetails()
         {
-            var data = await _trillenceContext.Users
+            List<User> data = await _trillenceContext.Users
                 .Include(user => user.Playlists)
                     .ThenInclude(playlist => playlist.PlaylistSongs)
                         .ThenInclude(playlistSong => playlistSong.Song)
@@ -119,7 +119,7 @@ namespace BackEnd.Repositories.Services
                 {
                     var songs = playlist.PlaylistSongs.Select(playlistSong =>
                     {
-                        var song = playlistSong.Song;
+                        Song song = playlistSong.Song;
                         return new
                         {
                             songId = song.Id,
@@ -148,7 +148,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<object> GetPlaylistDetailsById(Guid playlistId)
         {
-            var playlist = await _trillenceContext.Playlists
+            Playlist? playlist = await _trillenceContext.Playlists
                 .Include(p => p.User)
                 .Include(p => p.PlaylistSongs)
                     .ThenInclude(ps => ps.Song)

@@ -14,7 +14,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<UserDto> Post(CreateUserDto createUserDto)
         {
-            var user = new User
+            User user = new User
             {
                 Id = Guid.NewGuid(),
                 Name = createUserDto.Name,
@@ -37,7 +37,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<UserDto> Put(Guid id, ModifyUserDto modifyUserDto)
         {
-            var existingUser = await trillenceContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            User? existingUser = await trillenceContext.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingUser != null)
             {
@@ -54,7 +54,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<User> DeleteById(Guid id)
         {
-            var user = await trillenceContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            User? user = await trillenceContext.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             if (user != null)
             {

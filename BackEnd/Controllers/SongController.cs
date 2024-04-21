@@ -29,7 +29,7 @@ namespace BackEnd.Controllers
         [HttpGet("songbyid/{id}")]
         public async Task<ActionResult<Song>> GetById(Guid id)
         {
-            var result = await songInterface.GetById(id);
+            Song result = await songInterface.GetById(id);
             if (result == null)
             {
                 return StatusCode(404, "Song with this id cannot be found.");
@@ -41,7 +41,7 @@ namespace BackEnd.Controllers
         [HttpPut("updatebyid/{id}")]
         public async Task<ActionResult<Song>> Put(Guid id, ModifySongDto modifySongDto)
         {
-            var result = await songInterface.Put(id, modifySongDto);
+            SongDto result = await songInterface.Put(id, modifySongDto);
 
             if (result == null)
             {
@@ -54,7 +54,7 @@ namespace BackEnd.Controllers
         [HttpDelete("deletebyid/{id}")]
         public async Task<ActionResult<Song>> DeleteById(Guid id)
         {
-            var result = await songInterface.DeleteById(id);
+            Song result = await songInterface.DeleteById(id);
 
             if (result == null)
             {

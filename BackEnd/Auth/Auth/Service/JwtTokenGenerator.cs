@@ -19,11 +19,11 @@ namespace Auth.Service
 
         public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(jwtOptions.Secret);
+            byte[] key = Encoding.ASCII.GetBytes(jwtOptions.Secret);
 
-            var claimList = new List<Claim>
+            List<Claim> claimList = new List<Claim>
             {
 
                 new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
@@ -33,7 +33,7 @@ namespace Auth.Service
 
             claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-            var tokenDescription = new SecurityTokenDescriptor
+            SecurityTokenDescriptor tokenDescription = new SecurityTokenDescriptor
             {
                 Audience = jwtOptions.Audience,
                 Issuer = jwtOptions.Issuer,
@@ -42,7 +42,7 @@ namespace Auth.Service
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var token = tokenHandler.CreateToken(tokenDescription);
+            SecurityToken token = tokenHandler.CreateToken(tokenDescription);
 
             return tokenHandler.WriteToken(token);
         }

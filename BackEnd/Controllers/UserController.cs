@@ -21,15 +21,15 @@ namespace BackEnd.Tests.Repositories.Services
         [Test]
         public async Task Post_ValidInput_ReturnsUserDto()
         {
-            var createUserDto = new CreateUserDto("Test User");
-            var user = new User
+            CreateUserDto createUserDto = new CreateUserDto("Test User");
+            User user = new User
             {
                 Id = Guid.NewGuid(),
                 Name = createUserDto.Name,
             };
             _mockContext.Setup(x => x.Users.AddAsync(It.IsAny<User>(), default)).ReturnsAsync((EntityEntry<User>)null);
 
-            var result = await _userService.Post(createUserDto);
+            UserDto result = await _userService.Post(createUserDto);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(createUserDto.Name));

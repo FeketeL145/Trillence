@@ -11,7 +11,7 @@ public class SpotifyWebDownloadController : ControllerBase
         {
             string myMusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 
-            using (var process = new Process())
+            using (Process process = new Process())
             {
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.Arguments = $"/c spotdl web";
