@@ -68,3 +68,8 @@ a{
 .hiddenscrollbar::-webkit-scrollbar {
   display: none; /*Chrome*/
 }
+
+.proba1{
+  max-height: 50vh;
+  overflow: scroll;
+}

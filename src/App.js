@@ -31,8 +31,9 @@ import SongList from './pages/lotsofpages/Songs/SongList2.js';
 import SongPost from './pages/lotsofpages/Songs/SongPost';
 import SongSinglePage from './pages/lotsofpages/Songs/SongSinglePage';
 import SongUpdatebyId from './pages/lotsofpages/Songs/SongUpdatebyId';
-/*Albums*/
-
+/*playlist*/
+import AllPlaylist from './pages/lotsofpages/Playlist/AllPlaylist.js';
+import PlaylistSingleElement from './pages/lotsofpages/Playlist/PlaylistSingleElement.js';
 
 
 import "./App.css";
@@ -58,11 +59,14 @@ function App() {
 
 
             <Route path="/admin-featuretester" element={<Featuretester />} />
+
             <Route path="/SongList" element={<SongList />} />
             <Route path="/SongDeleteById:id" element={<SongDeleteById />} />
             <Route path="/SongPost" element={<SongPost />} />
             <Route path="/SongSinglePage/:id" element={<SongSinglePage />} />
             <Route path="/SongUpdatebyId/:id" element={<SongUpdatebyId />} />
+            <Route path="playlists" element={<AllPlaylist />} />
+            <Route path="playlist/:id" element={<PlaylistSingleElement />} />
           </Routes>
         </div>
       </Router>
