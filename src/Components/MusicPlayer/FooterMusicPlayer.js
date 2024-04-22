@@ -3,7 +3,7 @@ import './FooterMusicPlayer.css';
 
 function FooterMusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(60);
+  const [volume, setVolume] = useState(100);
   const [muteVolume, setMuteVolume] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
   const [audioReady, setAudioReady] = useState(false); 
@@ -12,7 +12,8 @@ function FooterMusicPlayer() {
   const [tracks, setTracks] = useState([]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [currentSongDetails, setCurrentSongDetails] = useState({ artistName: '', songName: '' });
+  const [currentSongDetails, setCurrentSongDetails] = useState({ artistName: '', songName: '', albumName: '' });
+  const [albumImage, setAlbumImage] = useState('https://via.placeholder.com/650');
   const audioRef = useRef(new Audio());
   const adjustedTimeRef = useRef(null); 
 
@@ -26,7 +27,8 @@ function FooterMusicPlayer() {
       const songDetails = data.flatMap(album =>
         album.songs.map(song => ({
           artistName: album.mainArtist.artistName,
-          songName: song.songName
+          songName: song.songName,
+          albumName: album.albumName
         }))
       );
       setTracks(songDetails);
@@ -55,6 +57,28 @@ function FooterMusicPlayer() {
   useEffect(() => {
     fetchCurrentSongDetails();
   }, [currentTrackIndex]);
+
+  useEffect(() => {
+    const fetchAlbumImage = async () => {
+      try {
+        const albumName = currentSongDetails.albumName; // Get the current album name
+        const response = await fetch(`https://localhost:7106/AlbumImage/${albumName}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch album image');
+        }
+        const imageBlob = await response.blob(); // Fetch the image
+        const objectUrl = URL.createObjectURL(imageBlob); // Create a URL for the image
+        setAlbumImage(objectUrl); // Update the state with the new image URL
+      } catch (error) {
+        console.error('Error fetching album image:', error);
+        setAlbumImage('https://via.placeholder.com/650'); // Fallback image in case of error
+      }
+    };
+
+    if (currentSongDetails.albumName) {
+      fetchAlbumImage(); // Fetch the album image when the song changes
+    }
+  }, [currentSongDetails]);
 
   useEffect(() => {
     const loadAudio = async () => {
@@ -93,21 +117,33 @@ function FooterMusicPlayer() {
     if (!userInteracted) {
       setUserInteracted(true);
     }
-
+  
     if (audioReady && adjustedTimeRef.current !== null) {
       audioRef.current.currentTime = adjustedTimeRef.current;
       adjustedTimeRef.current = null;
     }
-
-    setIsPlaying((prev) => !prev);
+  
+    setIsPlaying((prev) => !prev); // Toggle the playing state
   };
-
+  
   const skipForward = () => {
-    if(audioRef.current) audioRef.current.currentTime += 15;
+    if (audioRef.current) {
+      audioRef.current.currentTime += 15; // Skip forward by 15 seconds
+      if (isPlaying === false) {
+        audioRef.current.pause(); // If it was paused, pause it again
+        togglePlayPause();
+      }
+    }
   };
-
+  
   const skipBackward = () => {
-    if(audioRef.current) audioRef.current.currentTime -= 5;
+    if (audioRef.current) {
+      audioRef.current.currentTime -= 5; // Skip backward by 5 seconds
+      if (isPlaying === false) {
+        audioRef.current.pause(); // If it was paused, pause it again
+        togglePlayPause();
+      }
+    }
   };
 
   const handlePrevious = () => {
@@ -186,14 +222,32 @@ function FooterMusicPlayer() {
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
 
     // Cleanup function to remove event listeners
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener('timeupdate', updateProgress);
-        audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
-        audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
-      }
-    };
-  }, [userInteracted, isPlaying, duration]);
+    const cleanup = () => {
+    // Pause the audio when the component unmounts
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    // Remove event listeners
+    if (audioRef.current) {
+      audioRef.current.removeEventListener('timeupdate', updateProgress);
+      audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
+      audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
+    }
+  };
+
+  // Add event listeners and cleanup function
+  if (isPlaying && audioReady && userInteracted) {
+    if(audioRef.current) audioRef.current.play();
+  } else {
+    if(audioRef.current) audioRef.current.pause();
+  }
+
+  audioRef.current.addEventListener('timeupdate', updateProgress);
+  audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
+  audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+
+  return cleanup;
+}, [userInteracted, isPlaying, duration]);
 
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -214,7 +268,7 @@ function FooterMusicPlayer() {
   return (
     <div className="playerBar w-100 h-100 d-flex align-items-stretch justify-content-between text-nowrap">
       <div className="col row">
-        <img className="img-fluid musicThumbnail" src="https://via.placeholder.com/400" alt="music thumbnail" />
+        <img className="img-fluid musicThumbnail" src={albumImage} alt="Music thumbnail" />
         <div className="col-8">
           <div className="row">
             <p className="text-start whitetextbold text-wrap">{currentSongDetails.songName}</p>
