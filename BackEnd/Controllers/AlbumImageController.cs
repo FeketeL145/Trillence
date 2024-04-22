@@ -20,10 +20,10 @@ namespace BackEnd.Controllers
 
             if (imageData == null)
             {
-                return NotFound(); // Image not found
+                return NotFound();
             }
 
-            return File(imageData, "image/jpeg"); // You can change the content type based on your image type
+            return File(imageData, "image/jpeg");
         }
     }
 }

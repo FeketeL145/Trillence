@@ -16,7 +16,6 @@ public class SpotifyDownloadController : ControllerBase
                    .Build();
 
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-            //string folderPath = config["Paths:SongFolder"];
 
             string? spotifyLink = request.SpotifyUrl;
 

@@ -5,20 +5,19 @@ using Microsoft.Extensions.Caching.Memory;
 [ApiController]
 public class MusicStreamingController : ControllerBase
 {
-    private readonly IMusicStreamingInterface _musicStreamingService; // Correct naming convention with underscore
+    private readonly IMusicStreamingInterface _musicStreamingService;
     private readonly IMemoryCache _cacheService;
-    private readonly string[] _musicFiles; // Ensured consistent naming
+    private readonly string[] _musicFiles;
 
-    // Constructor for dependency injection
     public MusicStreamingController(
         IMusicStreamingInterface musicStreamingService,
         IMemoryCache memoryCache,
-        string[] musicFiles // Injected here
+        string[] musicFiles
     )
     {
-        _musicStreamingService = musicStreamingService; // Proper assignment
+        _musicStreamingService = musicStreamingService;
         _cacheService = memoryCache;
-        _musicFiles = musicFiles; // Correct assignment
+        _musicFiles = musicFiles;
     }
 
     [HttpGet("current")]
@@ -49,12 +48,10 @@ public class MusicStreamingController : ControllerBase
             string filePath = _musicFiles[currentIndex];
             TagLib.File file = TagLib.File.Create(filePath);
 
-            // Extract artist and song name
             string artistName = file.Tag?.FirstPerformer ?? "Unknown Artist";
             string songName = file.Tag?.Title ?? "Unknown Song";
             string albumName = file.Tag?.Album ?? "Unknown Album";
 
-            // Create and return the SongDetails object
             return new SongDetailsForPlayer
             {
                 ArtistName = artistName,

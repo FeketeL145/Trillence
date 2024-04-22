@@ -3214,19 +3214,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\takac\\.nuget\\packages\\": {}
+    "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\": {},
+    "H:\\Components\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
+      "projectUniqueName": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
       "projectName": "Auth",
-      "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
-      "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\obj\\",
+      "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Auth.csproj",
+      "packagesPath": "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "H:\\Components\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ChrisGamerHun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3234,6 +3239,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

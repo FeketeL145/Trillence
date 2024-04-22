@@ -22,7 +22,6 @@ namespace BackEnd
                     .Build();
 
                 string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-                //string folderPath = config["Paths:SongFolder"];
                 folderPath = folderPath.Trim('"');
                 IEnumerable<string> files = Directory.EnumerateFiles(folderPath)
                 .Where(file => file.ToLower().EndsWith(".mp3") ||

@@ -13,7 +13,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TrillenceContext>();
 builder.Services.AddMemoryCache();
-//builder.Services.AddScoped<IEmailInterface, EmailService>();
 builder.Services.AddScoped<IAlbumInterface, AlbumService>();
 builder.Services.AddScoped<IArtistInterface, ArtistService>();
 builder.Services.AddScoped<IArtistSongInterface, ArtistSongService>();
