@@ -1,18 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\",
+  "WorkspaceRootPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\repositories\\services\\musicstreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\musicstreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\controllers\\musicstreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\controllers\\musicstreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\musicstreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\repositories\\interfaces\\imusicstreaminginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\repositories\\services\\musicstreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\musicstreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\repositories\\interfaces\\imusicstreaminginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\interfaces\\imusicstreaminginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\models\\songdetailsforplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\songdetailsforplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MusicStreamingController.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\MusicStreamingController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MusicStreamingController.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\MusicStreamingController.cs",
-              "RelativeToolTip": "Controllers\\MusicStreamingController.cs",
-              "ViewState": "AQIAAG0AAAAAAAAAAAAIwG8AAABBAAAA",
+              "DocumentIndex": 3,
+              "Title": "SongDetailsForPlayer.cs",
+              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Models\\SongDetailsForPlayer.cs",
+              "RelativeDocumentMoniker": "Models\\SongDetailsForPlayer.cs",
+              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Models\\SongDetailsForPlayer.cs",
+              "RelativeToolTip": "Models\\SongDetailsForPlayer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:36:43.788Z",
+              "WhenOpened": "2024-04-22T09:23:23.698Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MusicStreamingService.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\MusicStreamingService.cs",
+              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\MusicStreamingService.cs",
               "RelativeDocumentMoniker": "Repositories\\Services\\MusicStreamingService.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\MusicStreamingService.cs",
+              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\MusicStreamingService.cs",
               "RelativeToolTip": "Repositories\\Services\\MusicStreamingService.cs",
-              "ViewState": "AQIAAEwAAAAAAAAAAAAAAF8AAAAAAAAA",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAIwEQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:35:24.591Z",
+              "WhenOpened": "2024-04-22T09:22:09.843Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "IMusicStreamingInterface.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IMusicStreamingInterface.cs",
+              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IMusicStreamingInterface.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IMusicStreamingInterface.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IMusicStreamingInterface.cs",
+              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IMusicStreamingInterface.cs",
               "RelativeToolTip": "Repositories\\Interfaces\\IMusicStreamingInterface.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA8AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:33:35.595Z",
+              "WhenOpened": "2024-04-22T09:22:03.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MusicStreamingController.cs",
+              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\MusicStreamingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MusicStreamingController.cs",
+              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\MusicStreamingController.cs",
+              "RelativeToolTip": "Controllers\\MusicStreamingController.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAAADwAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:21:56.496Z",
               "EditorCaption": ""
             }
           ]

@@ -52,12 +52,14 @@ public class MusicStreamingController : ControllerBase
             // Extract artist and song name
             string artistName = file.Tag?.FirstPerformer ?? "Unknown Artist";
             string songName = file.Tag?.Title ?? "Unknown Song";
+            string albumName = file.Tag?.Album ?? "Unknown Album";
 
             // Create and return the SongDetails object
             return new SongDetailsForPlayer
             {
                 ArtistName = artistName,
-                SongName = songName
+                SongName = songName,
+                AlbumName = albumName
             };
         }
         else

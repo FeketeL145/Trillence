@@ -64,29 +64,34 @@ public class MusicStreamingService : IMusicStreamingInterface
 
     public async Task<SongDetailsForPlayer> GetCurrentSongDetailsAsync()
     {
-        lock (_indexLock) // Ensure thread safety when accessing index
+        int currentIndex = _cache.Get<int>("CurrentIndex");
+        if (currentIndex >= 0 && currentIndex < _musicFiles.Length)
         {
-            int currentIndex = _cache.Get<int>("CurrentIndex");
-            if (currentIndex >= 0 && currentIndex < _musicFiles.Length)
-            {
-                string filePath = _musicFiles[currentIndex];
-                TagLib.File file = TagLib.File.Create(filePath);
+            string filePath = _musicFiles[currentIndex];
+            TagLib.File file = TagLib.File.Create(filePath);
 
-                // Extract artist and song name from file metadata
-                string artistName = file.Tag?.FirstPerformer ?? "Unknown Artist";
-                string songName = file.Tag?.Title ?? "Unknown Song";
+            // Log the file metadata to check if album tag is present
+            Console.WriteLine($"File: {filePath}");
+            Console.WriteLine($"Title: {file.Tag?.Title}");
+            Console.WriteLine($"Artist: {file.Tag?.FirstPerformer}");
+            Console.WriteLine($"Album: {file.Tag?.Album}");
 
-                // Return the SongDetails object with relevant information
-                return new SongDetailsForPlayer
-                {
-                    ArtistName = artistName,
-                    SongName = songName
-                };
-            }
-            else
+            // Extract artist, song name, and album name
+            string artistName = file.Tag?.FirstPerformer ?? "Unknown Artist";
+            string songName = file.Tag?.Title ?? "Unknown Song";
+            string albumName = file.Tag?.Album ?? "Unknown Album";
+
+            // Create and return the SongDetails object
+            return new SongDetailsForPlayer
             {
-                throw new InvalidOperationException("Current index is out of bounds.");
-            }
+                ArtistName = artistName,
+                SongName = songName,
+                AlbumName = albumName
+            };
+        }
+        else
+        {
+            throw new InvalidOperationException("Current index is out of bounds.");
         }
     }
 

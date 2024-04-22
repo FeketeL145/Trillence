@@ -25,6 +25,7 @@ builder.Services.AddScoped<IConnectionInterface, ConnectionService>();
 builder.Services.AddScoped<IVerificationInterface, VerificationService>();
 builder.Services.AddScoped<AudioMetadataReader>();
 builder.Services.AddScoped<IMusicStreamingInterface, MusicStreamingService>();
+builder.Services.AddScoped<IAlbumImageInterface, AlbumImageService>();
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {}
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
         "projectName": "BackEnd",
-        "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
-        "packagesPath": "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\obj\\",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
+        "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "H:\\Components\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ChrisGamerHun\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -134,21 +129,17 @@
         }
       }
     },
-    "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {
+    "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
+        "projectUniqueName": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
         "projectName": "Unit Tests",
-        "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
-        "packagesPath": "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\obj\\",
+        "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
+        "packagesPath": "C:\\Users\\takac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\Unit Tests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "H:\\Components\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ChrisGamerHun\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\takac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -156,15 +147,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
-                "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj"
+              "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
+                "projectPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj"
               }
             }
           }
