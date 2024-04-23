@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './FooterMusicPlayer.css';
 
-function FooterMusicPlayer() {
+function FooterMusicPlayer({ selectedSong }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
   const [muteVolume, setMuteVolume] = useState(false);
@@ -52,11 +52,8 @@ function FooterMusicPlayer() {
 
   useEffect(() => {
     fetchAllSongDetails();
-  }, []);
-
-  useEffect(() => {
     fetchCurrentSongDetails();
-  }, [currentTrackIndex]);
+  }, []);  
 
   useEffect(() => {
     const fetchAlbumImage = async () => {
@@ -81,22 +78,24 @@ function FooterMusicPlayer() {
   }, [currentSongDetails]);
 
   useEffect(() => {
-    const loadAudio = async () => {
-      try {
-        const response = await fetch('https://localhost:7106/api/MusicStreaming/current');
-        if (!response.ok) {
-          throw new Error('Failed to load audio file');
+    if (userInteracted) {
+      const loadAudio = async () => {
+        try {
+          const response = await fetch('https://localhost:7106/api/MusicStreaming/current');
+          if (!response.ok) {
+            throw new Error('Failed to load audio file');
+          }
+          const audioBlob = await response.blob();
+          const objectUrl = URL.createObjectURL(audioBlob);
+          audioRef.current.src = objectUrl;
+          audioRef.current.load();
+        } catch (error) {
+          console.error('Error loading audio:', error);
         }
-        const audioBlob = await response.blob();
-        const objectUrl = URL.createObjectURL(audioBlob);
-        audioRef.current.src = objectUrl;
-        audioRef.current.load();
-      } catch (error) {
-        console.error('Error loading audio:', error);
-      }
-    };
-    loadAudio();
-  }, [currentTrackIndex, tracks]);
+      };
+      loadAudio();
+    }
+  }, [currentTrackIndex, tracks, userInteracted]);  
   
   const loadAudio = async (url) => {
     try {
@@ -112,6 +111,56 @@ function FooterMusicPlayer() {
       console.error('Error loading audio:', error);
     }
   };
+
+  useEffect(() => {
+    const loadAudioByURL = async () => {
+      if (selectedSong !== '') {
+        try {
+          // Construct the URL for fetching audio
+          const encodedFileName = encodeURIComponent(selectedSong.trim()) + '.mp3';
+          const audioUrl = `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
+          const response = await fetch(audioUrl);
+          if (!response.ok) {
+            throw new Error('Failed to load audio file');
+          }
+          const audioBlob = await response.blob();
+          const objectUrl = URL.createObjectURL(audioBlob);
+          audioRef.current.src = objectUrl;
+          audioRef.current.load();
+  
+          // Extract song name from selectedSong (assuming it's in the format "artist - songName")
+          const songNameOnly = selectedSong.split(' - ')[1];
+          const encodedSongName = encodeURIComponent(songNameOnly);
+  
+          // Fetch song details by name
+          const songDetailsResponse = await fetch(`https://localhost:7106/api/Connection/songdetailsbyname/${encodedSongName}`);
+          if (!songDetailsResponse.ok) {
+            throw new Error('Failed to fetch song details');
+          }
+          const songDetailsData = await songDetailsResponse.json();
+  
+          // Update song details in state
+          setCurrentSongDetails({
+            artistName: songDetailsData.mainArtist.artistName,
+            songName: songDetailsData.songName,
+            albumName: songDetailsData.albumName
+          });
+  
+          // Fetch album image
+          const albumImageResponse = await fetch(`https://localhost:7106/AlbumImage/${encodeURIComponent(songDetailsData.albumName)}`);
+          if (!albumImageResponse.ok) {
+            throw new Error('Failed to fetch album image');
+          }
+          const albumImageBlob = await albumImageResponse.blob();
+          const albumImageObjectUrl = URL.createObjectURL(albumImageBlob);
+          setAlbumImage(albumImageObjectUrl);
+        } catch (error) {
+          console.error('Error loading audio:', error);
+        }
+      }
+    };
+    loadAudioByURL();
+  }, [selectedSong]);   
 
   const togglePlayPause = () => {
     if (!userInteracted) {
@@ -148,12 +197,18 @@ function FooterMusicPlayer() {
 
   const handlePrevious = () => {
     setCurrentTrackIndex((prevIndex) => (prevIndex === 0 ? tracks.length - 1 : prevIndex - 1));
-    loadAudio('https://localhost:7106/api/MusicStreaming/previous');
+    if (currentTrackIndex !== 0) {
+      loadAudio('https://localhost:7106/api/MusicStreaming/previous');
+      fetchCurrentSongDetails();
+    }
   };
-
+  
   const handleNext = () => {
     setCurrentTrackIndex((prevIndex) => (prevIndex === tracks.length - 1 ? 0 : prevIndex + 1));
-    loadAudio('https://localhost:7106/api/MusicStreaming/next');
+    if (currentTrackIndex !== tracks.length - 1) {
+      loadAudio('https://localhost:7106/api/MusicStreaming/next');
+      fetchCurrentSongDetails();
+    }
   };
 
   const handleProgressChange = (e) => {
