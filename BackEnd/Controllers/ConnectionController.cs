@@ -28,10 +28,25 @@ namespace BackEnd.Controllers
             }
         }
 
-        [HttpGet("songdetails/{id}")]
+        [HttpGet("songdetailsbyid/{id}")]
         public async Task<ActionResult> GetSongDetailsById(Guid id)
         {
             object result = _connection.GetSongDetailsById(id).Result;
+
+            if (result != null)
+            {
+                return StatusCode(200, result);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("songdetailsbyname/{songName}")]
+        public async Task<ActionResult> GetSongDetailsByName(string songName)
+        {
+            object result = _connection.GetSongDetailsByName(songName).Result;
 
             if (result != null)
             {

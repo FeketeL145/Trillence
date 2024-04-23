@@ -1,4 +1,6 @@
-﻿namespace BackEnd.Repositories.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace BackEnd.Repositories.Interfaces
 {
     public interface IMusicStreamingInterface
     {

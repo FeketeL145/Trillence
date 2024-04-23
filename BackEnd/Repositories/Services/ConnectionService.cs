@@ -105,6 +105,53 @@ namespace BackEnd.Repositories.Services
             return songDetails;
         }
 
+        public async Task<object> GetSongDetailsByName(string songName)
+        {
+            Song? songData = await _trillenceContext.Songs
+        .Include(song => song.Album)
+            .ThenInclude(album => album.Artist)
+        .Include(song => song.ArtistSongs)
+            .ThenInclude(artistSong => artistSong.Artist)
+        .FirstOrDefaultAsync(song => song.Name == songName);
+
+            if (songData == null)
+            {
+                return null;
+            }
+
+            var mainArtist = new
+            {
+                artistId = songData.Album.Artist.Id,
+                artistName = songData.Album.Artist.Name
+            };
+
+            var contributoryArtists = songData.ArtistSongs
+                .Where(artistSong => artistSong.ArtistId != mainArtist.artistId)
+                .Select(artistSong => new
+                {
+                    artistId = artistSong.Artist.Id,
+                    artistName = artistSong.Artist.Name
+                })
+                .ToList();
+
+            var contributoryArtistsSection = contributoryArtists.Any() ? contributoryArtists : null;
+
+            var songDetails = new
+            {
+                songId = songData.Id,
+                songName = songData.Name,
+                songLength = songData.Length,
+                songGenre = songData.Genre,
+                albumId = songData.Album.Id,
+                albumName = songData.Album.Name,
+                albumReleased = songData.Album.Released,
+                mainArtist = mainArtist,
+                contributoryArtists = contributoryArtistsSection
+            };
+
+            return songDetails;
+        }
+
         public async Task<object> GetAllPlaylistDetails()
         {
             List<User> data = await _trillenceContext.Users

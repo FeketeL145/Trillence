@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using System.Text.RegularExpressions;
 
 public class MusicStreamingService : IMusicStreamingInterface
 {
     private readonly string[] _musicFiles;
     private readonly IMemoryCache _cache;
     private static readonly object _indexLock = new object();
+    private SongDetailsForPlayer _previousSongDetails;
 
     public MusicStreamingService(IMemoryCache memoryCache)
     {
@@ -62,13 +62,6 @@ public class MusicStreamingService : IMusicStreamingInterface
         }
     }
 
-    private string CleanAlbumName(string albumName)
-    {
-        string invalidChars = "#%&{}\\<>*?/ $!'\"@:+=|`";
-        string pattern = $"[{Regex.Escape(invalidChars)}]";
-        return Regex.Replace(albumName, pattern, string.Empty);
-    }
-
     public async Task<SongDetailsForPlayer> GetCurrentSongDetailsAsync()
     {
         int currentIndex = _cache.Get<int>("CurrentIndex");
@@ -81,13 +74,14 @@ public class MusicStreamingService : IMusicStreamingInterface
             string songName = file.Tag?.Title ?? "Unknown Song";
             string albumName = file.Tag?.Album ?? "Unknown Album";
 
-            string cleanedAlbumName = CleanAlbumName(albumName);
+            char[] invalidChars = Path.GetInvalidFileNameChars();
+            string sanitizedAlbumName = new string(albumName.Where(c => !invalidChars.Contains(c)).ToArray());
 
             return new SongDetailsForPlayer
             {
                 ArtistName = artistName,
                 SongName = songName,
-                AlbumName = cleanedAlbumName
+                AlbumName = sanitizedAlbumName
             };
         }
         else
@@ -100,11 +94,31 @@ public class MusicStreamingService : IMusicStreamingInterface
     {
         string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), fileName);
 
-        if (!File.Exists(filePath))
+        if (!System.IO.File.Exists(filePath))
         {
             throw new FileNotFoundException("Music file not found.", filePath);
         }
 
         return filePath;
+    }
+
+    public async Task<SongDetailsForPlayer> GetUniqueSongDetailsAsync()
+    {
+        SongDetailsForPlayer currentSongDetails;
+        do
+        {
+            currentSongDetails = await GetCurrentSongDetailsAsync();
+        } while (IsSameAsPrevious(currentSongDetails));
+
+        _previousSongDetails = currentSongDetails;
+        return currentSongDetails;
+    }
+
+    private bool IsSameAsPrevious(SongDetailsForPlayer currentSongDetails)
+    {
+        return _previousSongDetails != null &&
+               _previousSongDetails.ArtistName == currentSongDetails.ArtistName &&
+               _previousSongDetails.SongName == currentSongDetails.SongName &&
+               _previousSongDetails.AlbumName == currentSongDetails.AlbumName;
     }
 }

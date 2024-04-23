@@ -42,26 +42,14 @@ public class MusicStreamingController : ControllerBase
     [HttpGet("current/details")]
     public async Task<SongDetailsForPlayer> GetCurrentSongDetailsAsync()
     {
-        int currentIndex = _cacheService.Get<int>("CurrentIndex");
-        if (currentIndex >= 0 && currentIndex < _musicFiles.Length)
+        try
         {
-            string filePath = _musicFiles[currentIndex];
-            TagLib.File file = TagLib.File.Create(filePath);
-
-            string artistName = file.Tag?.FirstPerformer ?? "Unknown Artist";
-            string songName = file.Tag?.Title ?? "Unknown Song";
-            string albumName = file.Tag?.Album ?? "Unknown Album";
-
-            return new SongDetailsForPlayer
-            {
-                ArtistName = artistName,
-                SongName = songName,
-                AlbumName = albumName
-            };
+            return await _musicStreamingService.GetCurrentSongDetailsAsync();
         }
-        else
+        catch (Exception ex)
         {
-            throw new InvalidOperationException("Current index is out of bounds.");
+            Console.Error.WriteLine($"Error fetching current song details: {ex.Message}");
+            return new SongDetailsForPlayer();
         }
     }
 
