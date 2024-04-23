@@ -38,15 +38,17 @@ import PlaylistSingleElement from './pages/lotsofpages/Playlist/PlaylistSingleEl
 
 import "./App.css";
 import Sidebar from "./Components/Sidebar.js";
+import FooterMusicPlayer from './Components/MusicPlayer/FooterMusicPlayer.js';
 
 function App() {
+  const [selectedSong, setSelectedSong] = useState('');
   return (
     <div className="App">
       <Router>
         <Sidebar />
         <div className="AppDisplayPage">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage setSelectedSong={setSelectedSong} />}/>
             <Route path="/sign-in" element={<Login />} />
             <Route path="/sign-out" element={<Logout />} />
             <Route path="/admin-panel" element={<AdminPanel />} />
@@ -69,19 +71,10 @@ function App() {
             <Route path="playlist/:id" element={<PlaylistSingleElement />} />
           </Routes>
         </div>
+        <FooterMusicPlayer selectedSong={selectedSong} />
       </Router>
     </div>
   );
-}
-
-{
-  /*
-Notes:
-- A reset passwordnek majd kell unique kulcs a linkhez
-- A loginok/registereknél meg kell csinálni az authentikációt a backenddel összekötve
-- Minden oldalt össze kell kötni a backenddel
-- NAGYON NAGYON KELL A CODE CLEANUP
-*/
 }
 
 export default App;

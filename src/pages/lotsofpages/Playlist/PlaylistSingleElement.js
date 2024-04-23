@@ -11,7 +11,9 @@ export function PlaylistSinglePage() {
     const [songs, setSongs] = useState([]);
     const [isFetchPendingplaylist, setFetchPendingplaylist] = useState(false);
     const [isFetchPendingsongs, setFetchPendingsongs] = useState(false);
-
+    const [Ismodifying, setIsmodifying] = useState(false);
+    const [AreYouSureToDelete, setAreYouSureToDelete] = useState(false);
+    const [EmptyPlaylistName, setEmptyPlaylistName] = useState(false);
     //It gets the playlistid and the songs for it
     useEffect(() => {
         setFetchPendingplaylist(true);
@@ -28,32 +30,19 @@ export function PlaylistSinglePage() {
     }, [playlistId]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setFetchPendingsongs(true);
-                const response = await fetch("https://localhost:7106/api/Connection/allsongdetails", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    },
-                });
-                const songsData = await response.json();
-                setSongs(songsData);
-            } catch (error) {
+        setFetchPendingsongs(true);
+        axios.get("https://localhost:7106/api/Connection/allsongdetails")
+            .then(response => {
+                setSongs(response.data);
+            })
+            .catch(error => {
                 console.log(error);
-            } finally {
+            })
+            .finally(() => {
                 setFetchPendingsongs(false);
-            }
-        };
-
-        fetchData();
+            });
     }, []);
-    /*
-    const handleAddSong = (addedsong, playlistid) => {
-        console.log(playlistid);
-        console.log(addedsong);
-    }*/
+
     
 const handleAddSong = async (songId, playlistId) => {
     try {
@@ -68,13 +57,39 @@ const handleAddSong = async (songId, playlistId) => {
 };
 const handleDeleteSong = async (songId, playlistId) => {
     try {
-        const response = await axios.delete(`https://localhost:7106/api/Playlistsong/${playlistId}%2C%${songId}`);
+        const response = await axios.delete(`https://localhost:7106/api/Playlistsong/${playlistId}/${songId}`);
         console.log(response.data);
     } catch (error) {
         console.log(error);
     }
 }
-    
+
+
+/*BACKEND HIBÁRA FUT*/
+const handleDeletePlaylist = async (playlistId) => {
+    try {
+        const response = await axios.delete(`https://localhost:7106/api/Playlist/deletebyid/${playlistId}`);
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+const handleModifyPlaylistName = async (newName) => {
+    try {
+        if (!newName.trim()) {
+            console.log("A playlist name cannot be empty.");
+            setEmptyPlaylistName(true);
+            return;
+        }
+        const response = await axios.put(`https://localhost:7106/api/Playlist/updatebyid/${playlistId}`, {
+            name: newName,
+            userId: Playlist.userId
+        });
+        console.log(response.data); // itt a válasz megjelenítése vagy további műveletek
+    } catch (error) {
+        console.log(error);
+    }   
+}
     return (
         <div className="p-5 m-auto text-center content bg-ivory">
             {isFetchPendingplaylist || !Playlist ? (
@@ -84,14 +99,47 @@ const handleDeleteSong = async (songId, playlistId) => {
                     <div className="card col-sm-8 d-inline-block p-2" style={{ borderRadius: '20px', backgroundColor: '#0A2234', color: 'white' }}>
                         <div className="card-body">
                             <p>{Playlist.playlistId}</p>
-                            <p>{Playlist.playlistName}</p>
+                            {Ismodifying ? (
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                handleModifyPlaylistName(e.target.elements.playlistName.value);
+                                }}>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    placeholder={Playlist.playlistName}
+                                    name="playlistName"
+                                />
+                                <button type="submit" className="btn btn-success">Save</button>
+                            </form>
+                            ) : (
+                                <p>{Playlist.playlistName}</p>
+                            )}
                             <div>
-                                <NavLink to={`/PlaylistDeleteById/${playlistId}`} className="p-2">
-                                    <button type="button" className="btn btn-outline-danger"><i className="bi bi-trash3"></i> Delete</button>
-                                </NavLink>
-                                <NavLink to={`/Modify-Playlists/${playlistId}`} className="p-2">
-                                    <button type="button" className="btn btn-outline-primary"><i className="bi bi-pencil-square"></i> Modify</button>
-                                </NavLink>
+                                <button type="button" className="btn btn-outline-success"><i className="bi bi-plus-circle"></i>play this playlist</button>
+
+                                <button type="button" className="btn btn-outline-primary" onClick={() => setIsmodifying(!Ismodifying)}><i className="bi bi-pencil-square"></i> Modify</button>
+                                {EmptyPlaylistName ? (
+                                    <card>
+                                        <p>Playlist name cannot be empty.</p>
+                                        <button type="button" className="btn btn-secondary" onClick={() => setEmptyPlaylistName(false)}>Close</button>
+                                    </card>
+                                ) : (<div></div>)}
+                                <button type="button" className="btn btn-outline-danger" onClick={() => setAreYouSureToDelete(!AreYouSureToDelete)}><i className="bi bi-trash3"></i> Delete</button>
+{/*NÁLAM NEM VOLT MODAL*/}
+                                {AreYouSureToDelete ? (
+                                    <div className="card row" style={{ borderRadius: '20px', backgroundColor: '#223848', color: 'white' }}>
+                                        <p>Are you sure you want to delete this playlist?</p>
+                                        <div className="col-6">
+                                        <button type="button" className="col m-2 btn btn-danger" onClick={() => handleDeletePlaylist(Playlist.playlistId)}>Sure, delete it</button>
+                                        </div>
+                                        <div className="col-6">
+                                            <button type="button" className="col m-2 btn btn-secondary" onClick={() => setAreYouSureToDelete(false)}>Close</button>
+                                        </div>
+                                    </div>
+                                ) : (<div></div>)}
+
+                                
                                 <NavLink to={`/playlists`} className="p-2">
                                     <button type="button" className="btn btn-outline-secondary"><i className="bi bi-arrow-left"></i> Back</button>
                                 </NavLink>
@@ -106,7 +154,7 @@ const handleDeleteSong = async (songId, playlistId) => {
                         {isFetchPendingplaylist ? (
                             <div className='spinner-border'></div>
                         ) : (
-                            <div className='d-flex flex-wrap proba1'>
+                            <div className='d-flex flex-wrap proba1 hiddenscrollbar'>
                                 {Playlist.length === 0 ? (
                                     <p>No playlists available.</p>
                                 ) : (
@@ -124,7 +172,7 @@ const handleDeleteSong = async (songId, playlistId) => {
                         )}
                     </div>
 
-                    <Search />
+                    {/*<Search />*/}
                     {/*Hozzáadni új zenéket*/}
                     <div>
                         <div className="">
@@ -156,70 +204,3 @@ const handleDeleteSong = async (songId, playlistId) => {
 }
 
 export default PlaylistSinglePage;
-
-
-/*
-import React, { useEffect, useState } from "react";
-
-function AllSongs({ onSongSelect }) {
-  const [songs, setSongs] = useState([]);
-  const [isFetchPending, setFetchPending] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setFetchPending(true);
-        const response = await fetch("https://localhost:7106/api/Connection/allsongdetails", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-        });
-        const songsData = await response.json();
-        setSongs(songsData);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setFetchPending(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleSongClick = (song, album) => {
-      const songName = `${album.mainArtist.artistName} - ${song.songName}`;
-      onSongSelect(songName);
-  };
-
-  return (
-    <div>
-      <div className="">
-        {isFetchPending ? (
-          <div className="spinner-border"></div>
-        ) : (
-          <div className="d-flex row flex-nowrap overflow-auto hiddenscrollbar">
-            {songs.map((album) =>
-              album.songs.map((song) => (
-                <div key={song.songId} className="songcard card p-4 mt-4 bg-dark rounded-8" style={{ maxWidth: "25%" }}>
-                  <button onClick={() => handleSongClick(song, album)}>
-                    <div className="card-body">
-                      <h5 className="card-title">{song.songName}</h5>
-                      <p className="card-text">{album.mainArtist.artistName}</p>
-                    </div>
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default AllSongs;
-
-
-*/

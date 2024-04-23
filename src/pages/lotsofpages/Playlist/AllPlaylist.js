@@ -31,7 +31,7 @@ function AllPlaylist() {
             {playlists.length === 0 ? (
               <p>No playlists available.</p>
             ) : (
-              playlists.map((playlist) => (
+                playlists.map((playlist) => (
                 <div key={playlist.id} className='container p-4 mt-4 m-2 bg-dark rounded-8'>
                   <NavLink to={`/playlist/${playlist.id}`}>
                   <div className="card-body">

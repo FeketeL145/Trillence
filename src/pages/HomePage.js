@@ -21,7 +21,6 @@ function HomePage() {
 
   const handleSongSelect = (songName) => {
     setSelectedSong(songName);
-    console.log(songName);
   };
 
   return (
