@@ -40,14 +40,21 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, onClick }) => {
   const [subnav, setSubnav] = useState(false);
 
   const showSubnav = () => setSubnav(!subnav);
 
+  const handleClick = () => {
+    onClick(); // Close the sidebar upon clicking a navigation button
+    if (item.subNav) {
+      showSubnav();
+    }
+  };
+
   return (
     <>
-      <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
+      <SidebarLink to={item.path} onClick={handleClick}>
         <div>
           {item.icon}
           <SidebarLabel>{item.title}</SidebarLabel>

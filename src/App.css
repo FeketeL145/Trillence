@@ -24,9 +24,9 @@ a{
   width: 100%;
   height:100%;
   position: fixed;
-  background-color: #297AD6;
   opacity: 1;
-  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #297AD6 50px ), repeating-linear-gradient( #00000055, #000000 );
+  background-image: url('./Components/img/TrillenceBackground.png');
+  background-size:cover;
 }
 
 @media screen and (max-width: 960px) {
@@ -47,7 +47,8 @@ a{
   height: 5rem;
   position: fixed;
   bottom:0;
-  background: #15171c;
+  background: rgba(21,23,28,0.7);
+  backdrop-filter: blur(15px);
 }
 
 

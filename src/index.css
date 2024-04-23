@@ -41,18 +41,13 @@ span,
 }
 
 .whitetextboldhoverable:hover {
-  font-size:35px;
+  font-size: 35px;
   font-family: "Montserrat", sans-serif;
   font-style: initial;
 }
 
-.settings-option{
-  border: #ffffff 1px solid;
-  border-radius: 10px;
-}
-
 @media screen and (max-width: 960px) {
-  .profile-img{
+  .profile-img {
     max-width: 7rem;
     height: 100%;
   }
@@ -117,4 +112,26 @@ html,
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 20px; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #15171c;
+  border-radius: 20px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

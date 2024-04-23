@@ -4,14 +4,12 @@ import * as FaIcons from "react-icons/fa";
 
 function ProfileDisplay() {
   return (
-    <div className="w-100 h-100 p-5">
+    <div className="w-100 h-100">
       <div
         className="w-100 h-100"
         style={{
           backdropFilter: "blur(10px)",
           backgroundColor: "rgba(0, 0, 0, 0.1)",
-          boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
-          borderRadius: "15px",
         }}
       >
         <div className="card-body p-4">
@@ -20,11 +18,14 @@ function ProfileDisplay() {
               Hi, {Cookies.get("username")}!
             </p>
           </div>
-          <div className="card-content mt-4">
-            <p className="whitetextbold">
-              <FaIcons.FaCog /> Settings
-            </p>
-            <div className="whitetext ps-2 settings-option">asd</div>
+          <p className="whitetextbold d-flex align-items-center">
+              <FaIcons.FaCog className="m-2"/>Settings
+          </p>
+          <div className="card-content d-flex align-items-center justify-content-center row">
+            <div className="d-flex align-items-center whitetext ps-2 settings-option row">
+            <button onClick={() => window.location.href = '/resetpassword'} className="btn col ms-2" style={{ backgroundColor: "#15171c", color: "white" }}>Change password</button>
+            <button className="btn col ms-2" style={{ backgroundColor: "#15171c", color: "white" }}>Change username</button>
+            </div>
           </div>
         </div>
       </div>

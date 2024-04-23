@@ -5,11 +5,10 @@ import * as FaIcons from "react-icons/fa";
 import { SidebarData, SidebarDataLogin, SidebarDataAdmin } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 const Nav = styled.div`
   @media screen and (max-width: 960px) {
-    background: #15171c;
     height: 80px;
     width: 100%;
     top: 0;
@@ -17,6 +16,8 @@ const Nav = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: left;
+    background: rgba(21, 23, 28, 1);
+    backdrop-filter: blur(15px);
   }
 `;
 
@@ -30,7 +31,8 @@ const NavIcon = styled(Link)`
 `;
 
 const SidebarNav = styled.nav`
-  background: #15171c;
+  background: rgba(21, 23, 28, 0.5);
+  backdrop-filter: blur(15px);
   width: 250px;
   height: 100vh;
   display: flex;
@@ -72,8 +74,7 @@ const Sidebar = () => {
 
   const renderLoginItems = () => {
     var isLoggedIn = false;
-    if(Cookies.get('token') != null)
-    {
+    if (Cookies.get("token") != null) {
       isLoggedIn = true;
     }
     const loginItems = isLoggedIn
@@ -81,24 +82,23 @@ const Sidebar = () => {
       : SidebarDataLogin.filter((item) => item.title === "Sign in");
 
     return loginItems.map((item, index) => {
-      return <SubMenu item={item} key={index} onClick={showSidebar}/>;
+      return <SubMenu item={item} key={index} onClick={showSidebar} />;
     });
   };
 
   const renderAdminItems = () => {
     var isAdmin = false;
-    if(Cookies.get('isAdmin') == "true")
-    {
+    if (Cookies.get("isAdmin") == "true") {
       isAdmin = true;
     }
     const adminItems = isAdmin
-    ? SidebarDataAdmin.filter((item) => item.requireAdmin === true)
-    : SidebarDataAdmin.filter((item) => item.requireAdmin === false);
+      ? SidebarDataAdmin.filter((item) => item.requireAdmin === true)
+      : SidebarDataAdmin.filter((item) => item.requireAdmin === false);
 
     return adminItems.map((item, index) => {
-      return <SubMenu item={item} key={index} onClick={showSidebar}/>;
+      return <SubMenu item={item} key={index} onClick={showSidebar} />;
     });
-  }
+  };
 
   return (
     <>
@@ -117,8 +117,12 @@ const Sidebar = () => {
                 <FaIcons.FaTimes onClick={showSidebar} />
               </NavIcon>
             )}
-            {SidebarData.filter((item) => item.requireLoggedIn === true ? Cookies.get('token') != null : true).map((item, index) => {
-              return <SubMenu item={item} key={index} onClick={showSidebar}/>;
+            {SidebarData.filter((item) =>
+              item.requireLoggedIn === true
+                ? Cookies.get("token") != null
+                : true
+            ).map((item, index) => {
+              return <SubMenu item={item} key={index} onClick={showSidebar} />;
             })}
             {renderAdminItems()}
             {renderLoginItems()}

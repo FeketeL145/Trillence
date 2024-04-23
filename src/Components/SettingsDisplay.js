@@ -29,8 +29,10 @@ function ProfileDisplay() {
         console.log('Username changed successfully');
         setUsertochange('');
         setNewusername('');
+        alert(`Username changed successfully\nFrom: ${usertochange} \nTo: ${newusername}`);
       } else {
         console.error('Failed to change username');
+        alert('Failed to change username');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -53,11 +55,13 @@ function ProfileDisplay() {
       });
       if (response.ok) {
         console.log('Password changed successfully');
+        alert(`Password changed successfully\nFor user: ${userpasswordtochange}`);
         setUserpasswordtochange('');
         setOldpassword('');
         setNewpassword('');
       } else {
         console.error('Failed to change password');
+        alert(`Failed to change password\nFor user: ${userpasswordtochange}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -73,9 +77,11 @@ function ProfileDisplay() {
       });
       if (response.ok) {
         console.log(`User ${usertodelete} deleted successfully`);
+        alert(`User ${usertodelete} deleted successfully`);
         setUsertodelete('');
       } else {
         console.error(`Failed to delete user ${usertodelete}`);
+        alert(`Failed to delete user ${usertodelete}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -99,9 +105,11 @@ function ProfileDisplay() {
       
       if (response.ok) {
         console.log(`User ${usertomakeadmin} assigned admin role successfully`);
+        alert(`User ${usertomakeadmin} assigned admin role successfully`);
         setUsertomakeadmin('');
       } else {
         console.error(`Failed to assign admin role to user ${usertomakeadmin}`);
+        alert(`Failed to assign admin role to user ${usertomakeadmin}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -109,29 +117,21 @@ function ProfileDisplay() {
   };
 
   return (
-    <div className="w-100 h-100 p-5">
+    <div className="w-100 h-100">
       <div
         className="w-100 h-100"
         style={{
           backdropFilter: "blur(10px)",
           backgroundColor: "rgba(0, 0, 0, 0.1)",
-          boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
-          borderRadius: "15px",
+          overflowY: "scroll",
         }}
       >
         <div className="card-body p-4">
-          <div className="d-flex align-items-center">
-            <p className="whitetext display-5">
-              Hi, {Cookies.get("username")}!
-            </p>
-          </div>
-          <div className="card-content mt-4" style={{
-          overflowY: "scroll",
-          height: "70vh"}}>
-            <p className="whitetextbold">
-              <FaIcons.FaCog /> Settings
-            </p>
-            <form onSubmit={handleUserNameModification}>
+        <h1 className="whitetextbold d-flex align-items-center">
+              <FaIcons.FaCog className="m-2"/> Administrator settings
+        </h1>
+          <div className="card-content p-4">
+          <form onSubmit={handleUserNameModification}>
           <h3 className="whitetextbold mt-3">Change Username</h3>
           <div>
             <div className="mb-1">
@@ -221,11 +221,11 @@ function ProfileDisplay() {
             </div>
           </div>
         </form>
-        <form onSubmit={handleMakeAdmin}>
-          <h3 className="whitetextbold mt-3">Make a user admin</h3>
+        <form onSubmit={handleMakeAdmin} className="mb-5">
+          <h3 className="whitetextbold mt-3">Add admin role to user</h3>
           <div>
             <div className="mb-1">
-              <label>Username</label>
+              <label>User email</label>
               <input
                 type="text"
                 className="form-control"

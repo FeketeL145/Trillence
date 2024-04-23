@@ -5,17 +5,11 @@ import { NavLink } from "react-router-dom";
 import SettingsDisplay from "../Components/SettingsDisplay";
 
 function AdminPanel() {
-  const [usertochange, setUsertochange] = useState("");
-  const [newusername, setNewusername] = useState("");
-  const [userpasswordtochange, setUserpasswordtochange] = useState("");
-  const [oldpassword, setOldpassword] = useState("");
-  const [newpassword, setNewpassword] = useState("");
-  const [usertodelete, setUsertodelete] = useState("");
   const [isUserAdmin, setUserAdmin] = useState(
     Cookies.get("isAdmin") != "false"
   );
   const [loading, setLoading] = useState(true);
-  //after 2000ms, timeout loading
+  //after 600ms, timeout loading
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -49,7 +43,7 @@ function AdminPanel() {
           ></div>
         </div>
       ) : isUserAdmin ? (
-        <SettingsDisplay/>
+        <SettingsDisplay className="spotdlFrame"/>
       ) : (
         <div
           className="spotdlFrame"
