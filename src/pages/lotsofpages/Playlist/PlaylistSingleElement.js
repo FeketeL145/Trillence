@@ -68,7 +68,7 @@ const handleAddSong = async (songId, playlistId) => {
 };
 const handleDeleteSong = async (songId, playlistId) => {
     try {
-        const response = await axios.delete(`https://localhost:7106/api/Playlistsong/${playlistId}%2C%${songId}`);
+        const response = await axios.delete(`https://localhost:7106/api/Playlistsong/${playlistId}/${songId}`);
         console.log(response.data);
     } catch (error) {
         console.log(error);
@@ -86,6 +86,7 @@ const handleDeleteSong = async (songId, playlistId) => {
                             <p>{Playlist.playlistId}</p>
                             <p>{Playlist.playlistName}</p>
                             <div>
+                                <button type="button" className="btn btn-outline-success"><i className="bi bi-plus-circle"></i>play this playlist</button>
                                 <NavLink to={`/PlaylistDeleteById/${playlistId}`} className="p-2">
                                     <button type="button" className="btn btn-outline-danger"><i className="bi bi-trash3"></i> Delete</button>
                                 </NavLink>
@@ -106,7 +107,7 @@ const handleDeleteSong = async (songId, playlistId) => {
                         {isFetchPendingplaylist ? (
                             <div className='spinner-border'></div>
                         ) : (
-                            <div className='d-flex flex-wrap proba1'>
+                            <div className='d-flex flex-wrap proba1 hiddenscrollbar'>
                                 {Playlist.length === 0 ? (
                                     <p>No playlists available.</p>
                                 ) : (
@@ -124,7 +125,7 @@ const handleDeleteSong = async (songId, playlistId) => {
                         )}
                     </div>
 
-                    <Search />
+                    {/*<Search />*/}
                     {/*Hozzáadni új zenéket*/}
                     <div>
                         <div className="">
