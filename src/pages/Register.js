@@ -71,7 +71,7 @@ function Register() {
         if (roleResponse.data.ok) {
           setError(roleResponse.data.message || "Failed to assign user role.");
         } else {
-          setError("Registration and role assignment successful.");
+          setError("Registration and role assignment successful!\n You can now log into your account.");
         }
       }
     } catch (error) {

@@ -31,13 +31,6 @@ export const SidebarData = [
     requireAdmin: false,
   },
   {
-    title: "SpotDL",
-    path: "/spotdl",
-    icon: <FaIcons.FaDownload />,
-    requireLoggedIn: true,
-    requireAdmin: false,
-  },
-  {
     title: "My Profile",
     path: "/profile",
     icon: <FaIcons.FaUser />,
@@ -64,6 +57,13 @@ export const SidebarDataAdmin = [
     title: "Admin Panel",
     path: "/admin-panel",
     icon: <FaIcons.FaLock />,
+    requireLoggedIn: true,
+    requireAdmin: true,
+  },
+  {
+    title: "SpotDL",
+    path: "/spotdl",
+    icon: <FaIcons.FaDownload />,
     requireLoggedIn: true,
     requireAdmin: true,
   },

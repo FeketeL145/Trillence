@@ -179,7 +179,7 @@ function ProfileDisplay() {
               <input
                 type="password"
                 className="form-control"
-                placeholder="Enter password"
+                placeholder="Enter current password"
                 value={oldpassword}
                 onChange={(e) => setOldpassword(e.target.value)}
               />
@@ -189,7 +189,7 @@ function ProfileDisplay() {
               <input
                 type="password"
                 className="form-control"
-                placeholder="Enter the new password"
+                placeholder="Enter a new password"
                 value={newpassword}
                 onChange={(e) => setNewpassword(e.target.value)}
               />
@@ -209,7 +209,7 @@ function ProfileDisplay() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter user to delete"
+                placeholder="Enter a username"
                 value={usertodelete}
                 onChange={(e) => setUsertodelete(e.target.value)}
               />
@@ -229,7 +229,7 @@ function ProfileDisplay() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter the email of the user to make admin"
+                placeholder="Enter an email address"
                 value={usertomakeadmin}
                 onChange={(e) => setUsertomakeadmin(e.target.value)}
               />

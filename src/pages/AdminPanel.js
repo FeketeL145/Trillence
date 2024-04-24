@@ -5,16 +5,15 @@ import { NavLink } from "react-router-dom";
 import SettingsDisplay from "../Components/SettingsDisplay";
 
 function AdminPanel() {
-  const [isUserAdmin, setUserAdmin] = useState(
-    Cookies.get("isAdmin") != "false"
-  );
+  const isAdminCookie = Cookies.get("isAdmin") === "true"; // Convert cookie to boolean
+  const [isUserAdmin, setUserAdmin] = useState(isAdminCookie);
   const [loading, setLoading] = useState(true);
-  //after 600ms, timeout loading
+  
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 600);
-  });
+  }, []); // Added empty dependency array to useEffect to ensure it only runs once
   
   return (
     <div className="w-100 h-100">
@@ -42,9 +41,7 @@ function AdminPanel() {
             role="status"
           ></div>
         </div>
-      ) : isUserAdmin ? (
-        <SettingsDisplay className="spotdlFrame"/>
-      ) : (
+      ) : !isUserAdmin ? ( // Changed condition here
         <div
           className="spotdlFrame"
           style={{
@@ -56,11 +53,13 @@ function AdminPanel() {
           }}
         >
           <p className="whitetext">
-            <NavLink to={`/sign-in`} className="whitetextboldhoverable">
+            <NavLink to={`/`} className="whitetextboldhoverable">
               You do not have permission to view this page
             </NavLink>
           </p>
         </div>
+      ) : (
+        <SettingsDisplay className="spotdlFrame"/> // This renders if isUserAdmin is true
       )}
     </div>
   );
