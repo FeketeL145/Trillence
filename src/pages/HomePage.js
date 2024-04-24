@@ -27,9 +27,7 @@ function HomePage() {
     <div className="w-100 h-100 hiddenscrollbar">
       <h1>Random zenék</h1>
       <AllSongs onSongSelect={handleSongSelect}/>
-      <div className="musicPlayer">
-        <FooterMusicPlayer selectedSong={selectedSong} />
-      </div>
+      <FooterMusicPlayer selectedSong={selectedSong} />
     </div>
   );
 }
