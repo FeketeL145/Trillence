@@ -1,17 +1,21 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 public class MusicStreamingService : IMusicStreamingInterface
 {
     private readonly string[] _musicFiles;
     private readonly IMemoryCache _cache;
+    private readonly TrillenceContext _dbContext;
     private static readonly object _indexLock = new object();
     private SongDetailsForPlayer _previousSongDetails;
 
-    public MusicStreamingService(IMemoryCache memoryCache)
+    public MusicStreamingService(IMemoryCache memoryCache, TrillenceContext dbContext)
     {
         _cache = memoryCache;
+        _dbContext = dbContext;
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         _musicFiles = Directory.GetFiles(folderPath, "*.mp3");
+
         if (_musicFiles.Length == 0)
         {
             throw new FileNotFoundException("No music files found in the folder.");
@@ -77,11 +81,37 @@ public class MusicStreamingService : IMusicStreamingInterface
             char[] invalidChars = Path.GetInvalidFileNameChars();
             string sanitizedAlbumName = new string(albumName.Where(c => !invalidChars.Contains(c)).ToArray());
 
+            var song = await _dbContext.Songs
+    .Join(
+        _dbContext.Albums,
+        song => song.AlbumId,
+        album => album.Id,
+        (song, album) => new { song, album }
+    )
+    .Join(
+        _dbContext.Artists,
+        album => album.album.ArtistId,
+        artist => artist.Id,
+        (songAlbum, artist) => new { songAlbum.song, songAlbum.album, artist }
+    )
+    .FirstOrDefaultAsync(result =>
+        result.artist.Name == artistName &&
+        result.album.Name == albumName &&
+        result.song.Name == songName);
+
+            if (song == null)
+            {
+                throw new InvalidOperationException($"No song found with Artist: {artistName}, Song: {songName}, Album: {albumName}.");
+            }
+
+            var songId = song.song.Id;
+
             return new SongDetailsForPlayer
             {
                 ArtistName = artistName,
                 SongName = songName,
-                AlbumName = sanitizedAlbumName
+                AlbumName = sanitizedAlbumName,
+                SongId = songId
             };
         }
         else

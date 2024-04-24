@@ -59,7 +59,14 @@ namespace BackEnd.Repositories.Services
 
             if (playlist != null)
             {
+                var playlistSongs = await trillenceContext.PlaylistSongs
+                    .Where(ps => ps.PlaylistId == id)
+                    .ToListAsync();
+
+                trillenceContext.PlaylistSongs.RemoveRange(playlistSongs);
+
                 trillenceContext.Playlists.Remove(playlist);
+
                 await trillenceContext.SaveChangesAsync();
             }
 
