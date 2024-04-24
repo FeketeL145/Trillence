@@ -1,17 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\",
+  "WorkspaceRootPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\controllers\\connectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\services\\verificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\verificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\services\\emailtemplate\\emailtemplate.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\emailtemplate\\emailtemplate.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\interfaces\\iemailinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\interfaces\\iemailinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\controllers\\connectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\connectioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\repositories\\interfaces\\iconnectioninterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\interfaces\\iconnectioninterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\interfaces\\iconnectioninterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\takac\\desktop\\trillence backend\\backend\\repositories\\services\\connectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\services\\connectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\connectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,15 +42,80 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmailTemplate.html",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\EmailTemplate\\EmailTemplate.html",
+              "RelativeDocumentMoniker": "Repositories\\Services\\EmailTemplate\\EmailTemplate.html",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\EmailTemplate\\EmailTemplate.html",
+              "RelativeToolTip": "Repositories\\Services\\EmailTemplate\\EmailTemplate.html",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAAGMAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-04-24T10:02:47.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BackEnd",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj",
+              "RelativeDocumentMoniker": "BackEnd.csproj",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj",
+              "RelativeToolTip": "BackEnd.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-04-24T10:01:53.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VerificationService.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\VerificationService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\VerificationService.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\VerificationService.cs",
+              "RelativeToolTip": "Repositories\\Services\\VerificationService.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAIwCoAAAC9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T08:58:48.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\EmailService.cs",
+              "RelativeToolTip": "Repositories\\Services\\EmailService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T08:58:40.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IEmailInterface.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\IEmailInterface.cs",
+              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IEmailInterface.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\IEmailInterface.cs",
+              "RelativeToolTip": "Repositories\\Interfaces\\IEmailInterface.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T08:58:34.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ConnectionService.cs",
-              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\ConnectionService.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\ConnectionService.cs",
               "RelativeDocumentMoniker": "Repositories\\Services\\ConnectionService.cs",
-              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\ConnectionService.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\ConnectionService.cs",
               "RelativeToolTip": "Repositories\\Services\\ConnectionService.cs",
               "ViewState": "AQIAAGUAAAAAAAAAAADwv2sAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -38,11 +123,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "ConnectionController.cs",
-              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\ConnectionController.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Controllers\\ConnectionController.cs",
               "RelativeDocumentMoniker": "Controllers\\ConnectionController.cs",
-              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\ConnectionController.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Controllers\\ConnectionController.cs",
               "RelativeToolTip": "Controllers\\ConnectionController.cs",
               "ViewState": "AQIAABkAAAAAAAAAAADwvx4AAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -51,15 +136,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "IConnectionInterface.cs",
-              "DocumentMoniker": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IConnectionInterface.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\IConnectionInterface.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IConnectionInterface.cs",
-              "ToolTip": "C:\\Users\\takac\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IConnectionInterface.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\IConnectionInterface.cs",
               "RelativeToolTip": "Repositories\\Interfaces\\IConnectionInterface.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-23T10:04:11.616Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1524,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

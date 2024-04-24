@@ -39,12 +39,25 @@ namespace BackEnd.Repositories.Services
         {
             try
             {
+                // Load HTML content from file
+                string htmlContent = await File.ReadAllTextAsync("C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\EmailTemplate\\EmailTemplate.html");
+
+                // Replace placeholders in HTML content with actual verification code
+                htmlContent = htmlContent.Replace("{code}", code);
+
+                // Create a new MimeMessage
                 MimeMessage email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse(configuration.GetSection("EmailSettings:EmailUserName").Value));
                 email.To.Add(MailboxAddress.Parse(request.To));
                 email.Subject = request.Subject;
-                email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = $"<h1>Here is your verification code: {code}</h1>" };
 
+                // Set the HTML body
+                email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+                {
+                    Text = htmlContent
+                };
+
+                // Connect to the SMTP server and send the email
                 using SmtpClient smtp = new SmtpClient();
                 smtp.Connect(configuration.GetSection("EmailSettings:EmailHost").Value, 587, SecureSocketOptions.StartTls);
                 smtp.Authenticate(configuration.GetSection("EmailSettings:EmailUserName").Value, configuration.GetSection("EmailSettings:EmailPassword").Value);

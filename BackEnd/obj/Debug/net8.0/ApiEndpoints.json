@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "BackEnd.Controllers.AlbumImageController",
+    "Method": "GetAlbumImage",
+    "RelativePath": "AlbumImage/{albumName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "albumName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BackEnd.Controllers.AlbumController",
     "Method": "Post",
     "RelativePath": "api/Album/album",
@@ -470,7 +486,7 @@
   {
     "ContainingType": "BackEnd.Controllers.ConnectionController",
     "Method": "GetSongDetailsById",
-    "RelativePath": "api/Connection/songdetails/{id}",
+    "RelativePath": "api/Connection/songdetailsbyid/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -484,6 +500,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BackEnd.Controllers.ConnectionController",
+    "Method": "GetSongDetailsByName",
+    "RelativePath": "api/Connection/songdetailsbyname/{songName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "songName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MetadataController",
     "Method": "GetMetadata",
     "RelativePath": "api/Metadata",
@@ -491,6 +523,72 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetCurrentSong",
+    "RelativePath": "api/MusicStreaming/current",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetCurrentSongDetailsAsync",
+    "RelativePath": "api/MusicStreaming/current/details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "BackEnd.Models.SongDetailsForPlayer",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetNextSong",
+    "RelativePath": "api/MusicStreaming/next",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetPreviousSong",
+    "RelativePath": "api/MusicStreaming/previous",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "Stream",
+    "RelativePath": "api/MusicStreaming/stream",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -906,16 +1004,16 @@
     ]
   },
   {
-    "ContainingType": "BackEnd.Controllers.UserController",
+    "ContainingType": "BackEnd.Controllers.VerificationController",
     "Method": "Get",
-    "RelativePath": "api/User/alluser",
+    "RelativePath": "api/Verification/allverification",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BackEnd.Models.User, BackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BackEnd.Models.Verification, BackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -926,22 +1024,22 @@
     ]
   },
   {
-    "ContainingType": "BackEnd.Controllers.UserController",
+    "ContainingType": "BackEnd.Controllers.VerificationController",
     "Method": "DeleteById",
-    "RelativePath": "api/User/deletebyid/{id}",
+    "RelativePath": "api/Verification/deletebyid/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Guid",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "BackEnd.Models.User",
+        "Type": "BackEnd.Models.Verification",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -952,27 +1050,27 @@
     ]
   },
   {
-    "ContainingType": "BackEnd.Controllers.UserController",
+    "ContainingType": "BackEnd.Controllers.VerificationController",
     "Method": "Put",
-    "RelativePath": "api/User/updatebyid/{id}",
+    "RelativePath": "api/Verification/updatebyid/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Guid",
+        "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "modifyUserDto",
-        "Type": "BackEnd.Models.Dtos.ModifyUserDto",
+        "Name": "modifyVerificationDto",
+        "Type": "BackEnd.Models.Dtos.ModifyVerificationDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "BackEnd.Models.User",
+        "Type": "BackEnd.Models.Verification",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -983,22 +1081,38 @@
     ]
   },
   {
-    "ContainingType": "BackEnd.Controllers.UserController",
-    "Method": "Post",
-    "RelativePath": "api/User/user",
+    "ContainingType": "BackEnd.Controllers.VerificationController",
+    "Method": "PostAndSendVerificationEmail",
+    "RelativePath": "api/Verification/verificationAndEmail",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createUserDto",
-        "Type": "BackEnd.Models.Dtos.CreateUserDto",
+        "Name": "createVerificationDto",
+        "Type": "BackEnd.Models.Dtos.CreateVerificationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.VerificationController",
+    "Method": "GetByEmail",
+    "RelativePath": "api/Verification/verificationbyemail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "BackEnd.Models.Dtos.UserDto",
+        "Type": "BackEnd.Models.Verification",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1009,22 +1123,22 @@
     ]
   },
   {
-    "ContainingType": "BackEnd.Controllers.UserController",
+    "ContainingType": "BackEnd.Controllers.VerificationController",
     "Method": "GetById",
-    "RelativePath": "api/User/userbyid/{id}",
+    "RelativePath": "api/Verification/verificationbyid/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Guid",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "BackEnd.Models.User",
+        "Type": "BackEnd.Models.Verification",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1033,6 +1147,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.VerificationController",
+    "Method": "VerifyCode",
+    "RelativePath": "api/Verification/verifycode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "BackEnd.Models.VerificationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "SpotifyDownloadController",
@@ -1058,22 +1188,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Email_Test_API.Controllers.EmailController",
-    "Method": "SendEmail",
-    "RelativePath": "email",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Email_Test_API.Models.Dtos.EmailDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   }
 ]

@@ -17,6 +17,70 @@
   },
   {
     "ContainingType": "Auth.Controllers.AuthController",
+    "Method": "ChangePassword",
+    "RelativePath": "auth/change-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Auth.Models.Dtos.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Auth.Controllers.AuthController",
+    "Method": "ChangeUsername",
+    "RelativePath": "auth/change-username",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Auth.Models.Dtos.ChangeUsernameDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Auth.Controllers.AuthController",
+    "Method": "DeleteUser",
+    "RelativePath": "auth/delete-user/{username}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Auth.Controllers.AuthController",
+    "Method": "IsAdmin",
+    "RelativePath": "auth/is-admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Auth.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "auth/login",
     "HttpMethod": "POST",
