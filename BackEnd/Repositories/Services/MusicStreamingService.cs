@@ -78,6 +78,10 @@ public class MusicStreamingService : IMusicStreamingInterface
             string songName = file.Tag?.Title ?? "Unknown Song";
             string albumName = file.Tag?.Album ?? "Unknown Album";
 
+            int lastBackslashIndex = filePath.LastIndexOf('\\');
+            int lastDotIndex = filePath.LastIndexOf('.');
+            string actualtitle = filePath.Substring(lastBackslashIndex + 1, lastDotIndex - lastBackslashIndex - 1);
+
             char[] invalidChars = Path.GetInvalidFileNameChars();
             string sanitizedAlbumName = new string(albumName.Where(c => !invalidChars.Contains(c)).ToArray());
 
@@ -96,8 +100,8 @@ public class MusicStreamingService : IMusicStreamingInterface
     )
     .FirstOrDefaultAsync(result =>
         result.artist.Name == artistName &&
-        result.album.Name == albumName &&
-        result.song.Name == songName);
+        result.album.Name == sanitizedAlbumName &&
+        result.song.Name == actualtitle);
 
             if (song == null)
             {

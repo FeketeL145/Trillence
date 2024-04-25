@@ -33,14 +33,17 @@ namespace BackEnd
                 {
                     using (TagLib.File file = TagLib.File.Create(filePath))
                     {
-                        string titleread = file.Tag.Title;
+                        string titleread = file.Name;
+                        int lastBackslashIndex = filePath.LastIndexOf('\\');
+                        int lastDotIndex = filePath.LastIndexOf('.');
+                        string actualtitle = filePath.Substring(lastBackslashIndex + 1, lastDotIndex - lastBackslashIndex - 1);
                         string albumread = file.Tag.Album;
                         string genreread = file.Tag.FirstGenre ?? "Unknown";
                         uint yearread = file.Tag.Year;
                         TimeSpan durationread = file.Properties.Duration;
                         string artistread = file.Tag.FirstAlbumArtist;
 
-                        Console.WriteLine("Title: " + titleread);
+                        Console.WriteLine("Title: " + actualtitle);
                         Console.WriteLine("Album: " + albumread);
                         Console.WriteLine("Genre: " + genreread);
                         Console.WriteLine("Year: " + yearread);
@@ -93,10 +96,10 @@ namespace BackEnd
                                 Console.WriteLine("Album art saved to: " + pictureFilePath);
                             }
 
-                            Song? song = await _trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == titleread);
+                            Song? song = await _trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == actualtitle);
                             if (song == null)
                             {
-                                song = new Song { Id = Guid.NewGuid(), Name = titleread, Length = durationread, AlbumId = album.Id, Genre = genreread };
+                                song = new Song { Id = Guid.NewGuid(), Name = actualtitle, Length = durationread, AlbumId = album.Id, Genre = genreread };
                                 await _trillenceContext.Songs.AddAsync(song);
                                 await _trillenceContext.SaveChangesAsync();
                             }
@@ -146,10 +149,10 @@ namespace BackEnd
                                     Console.WriteLine("Album art saved to: " + pictureFilePath);
                                 }
 
-                                song = await _trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == titleread);
+                                song = await _trillenceContext.Songs.FirstOrDefaultAsync(s => s.Name == actualtitle);
                                 if (song == null)
                                 {
-                                    song = new Song { Id = Guid.NewGuid(), Name = titleread, Length = durationread, AlbumId = album.Id, Genre = genreread };
+                                    song = new Song { Id = Guid.NewGuid(), Name = actualtitle, Length = durationread, AlbumId = album.Id, Genre = genreread };
                                     await _trillenceContext.Songs.AddAsync(song);
                                     await _trillenceContext.SaveChangesAsync();
                                 }

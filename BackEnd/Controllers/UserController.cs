@@ -1,38 +1,70 @@
-﻿using BackEnd.Models.Dtos;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Moq;
-using NUnit.Framework;
+﻿using Microsoft.AspNetCore.Mvc;
+using BackEnd.Models.Dtos;
 
-namespace BackEnd.Tests.Repositories.Services
+namespace BackEnd.Controllers
 {
-    [TestFixture]
-    public class UserTest
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
     {
-        private Mock<TrillenceContext> _mockContext;
-        private IUserInterface _userService;
+        private readonly IUserInterface _userService;
 
-        [SetUp]
-        public void Setup()
+        public UserController(IUserInterface userService)
         {
-            _mockContext = new Mock<TrillenceContext>();
-            _userService = new UserService(_mockContext.Object);
+            _userService = userService;
         }
 
-        [Test]
-        public async Task Post_ValidInput_ReturnsUserDto()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
         {
-            CreateUserDto createUserDto = new CreateUserDto("Test User");
-            User user = new User
+            var users = await _userService.GetAll();
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> GetUserById(Guid id)
+        {
+            var user = await _userService.GetById(id);
+
+            if (user == null)
             {
-                Id = Guid.NewGuid(),
-                Name = createUserDto.Name,
-            };
-            _mockContext.Setup(x => x.Users.AddAsync(It.IsAny<User>(), default)).ReturnsAsync((EntityEntry<User>)null);
+                return NotFound();
+            }
 
-            UserDto result = await _userService.Post(createUserDto);
+            return Ok(user);
+        }
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Name, Is.EqualTo(createUserDto.Name));
+        [HttpPost]
+        public async Task<ActionResult<UserDto>> CreateUser(CreateUserDto createUserDto)
+        {
+            var user = await _userService.Post(createUserDto);
+            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(Guid id, ModifyUserDto modifyUserDto)
+        {
+            var updatedUser = await _userService.Put(id, modifyUserDto);
+
+            if (updatedUser == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> DeleteUser(Guid id)
+        {
+            var deletedUser = await _userService.DeleteById(id);
+
+            if (deletedUser == null)
+            {
+                return NotFound();
+            }
+
+            return deletedUser;
         }
     }
 }
