@@ -28,7 +28,7 @@ function AllSongs({ onSongSelect }) {
   }, []);
 
   const handleSongClick = (song, album) => {
-      const songName = `${album.mainArtist.artistName} - ${song.songName}`;
+      const songName = `${song.songName}`;
       onSongSelect(songName);
   };
 
@@ -44,7 +44,7 @@ function AllSongs({ onSongSelect }) {
                 <div key={song.songId} className="songcard card p-4 mt-4 bg-dark rounded-8" style={{ maxWidth: "25%" }}>
                   <button onClick={() => handleSongClick(song, album)}>
                     <div className="card-body">
-                      <h5 className="card-title">{song.songName}</h5>
+                      <h5 className="card-title">{song.songName.replace(/^[^-]*-/, '')}</h5>
                       <p className="card-text">{album.mainArtist.artistName}</p>
                     </div>
                   </button>

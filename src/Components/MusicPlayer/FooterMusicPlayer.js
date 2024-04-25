@@ -119,23 +119,19 @@ function FooterMusicPlayer({ selectedSong }) {
       if (selectedSong !== '') {
         try {
           // Construct the URL for fetching audio
-          const encodedFileName = encodeURIComponent(selectedSong.trim()) + '.mp3';
+          const encodedFileName = encodeURIComponent(selectedSong) + '.mp3';
           const audioUrl = `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
           const response = await fetch(audioUrl);
           if (!response.ok) {
             throw new Error('Failed to load audio file');
           }
           const audioBlob = await response.blob();
-          const objectUrl = URL.createObjectURL(audioBlob);
+          const objectUrl = await URL.createObjectURL(audioBlob);
           audioRef.current.src = objectUrl;
-          audioRef.current.load();
-
-          // Extract song name from selectedSong (assuming it's in the format "artist - songName")
-          const songNameOnly = selectedSong.split(' - ')[1];
-          const encodedSongName = encodeURIComponent(songNameOnly);
+          await audioRef.current.load();
 
           // Fetch song details by name
-          const songDetailsResponse = await fetch(`https://localhost:7106/api/Connection/songdetailsbyname/${encodedSongName}`);
+          const songDetailsResponse = await fetch(`https://localhost:7106/api/Connection/songdetailsbyname/${selectedSong}`);
           if (!songDetailsResponse.ok) {
             throw new Error('Failed to fetch song details');
           }
@@ -197,20 +193,14 @@ function FooterMusicPlayer({ selectedSong }) {
     }
   };
 
-  const handlePrevious = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex === 0 ? tracks.length - 1 : prevIndex - 1));
-    if (currentTrackIndex !== 0) {
-      loadAudio('https://localhost:7106/api/MusicStreaming/previous');
-      fetchCurrentSongDetails();
-    }
+  const handlePrevious = async () => {
+      await loadAudio('https://localhost:7106/api/MusicStreaming/previous');
+      await fetchCurrentSongDetails();
   };
 
-  const handleNext = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex === tracks.length - 1 ? 0 : prevIndex + 1));
-    if (currentTrackIndex !== tracks.length - 1) {
-      loadAudio('https://localhost:7106/api/MusicStreaming/next');
-      fetchCurrentSongDetails();
-    }
+  const handleNext = async () => {
+      await loadAudio('https://localhost:7106/api/MusicStreaming/next');
+      await fetchCurrentSongDetails();
   };
 
   const handleProgressChange = (e) => {
@@ -334,20 +324,14 @@ function FooterMusicPlayer({ selectedSong }) {
     }
   };
 
-
-
-
-
-
-
-  return (
-    <div className="Musicplayer btw">
+ return (
+    <div className="musicPlayer">
       <BrowserView className=" d-flex align-items-stretch justify-content-between text-nowrap">
         <div className="col row">
           <img className="img-fluid musicThumbnail" src={albumImage} alt="Music thumbnail" />
           <div className="col-8">
             <div className="row">
-              <p className="text-start whitetextbold text-wrap">{currentSongDetails.songName}</p>
+              <p className="text-start whitetextbold text-wrap">{currentSongDetails.songName.replace(/^[^-]*-/, '')}</p>
             </div>
             <div className="row">
               <p className="text-start whitetext" style={{ fontSize: "12px", marginTop: "-15px" }}>{currentSongDetails.artistName}</p>
@@ -400,7 +384,6 @@ function FooterMusicPlayer({ selectedSong }) {
 
         <div className="d-flex align-items-center justify-content-end col footerdiv p-2">
           <div className="text-end volumeslider">
-            <button onClick={() => setFavourites(currentSongDetails.id)}><i className="fa-regular fa-heart"></i></button>
             <button
               onClick={() => {
                 const newMuteStatus = !muteVolume;

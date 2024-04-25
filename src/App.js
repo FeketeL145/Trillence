@@ -71,7 +71,6 @@ function App() {
             <Route path="playlist/:id" element={<PlaylistSingleElement />} />
           </Routes>
         </div>
-        <FooterMusicPlayer selectedSong={selectedSong} />
       </Router>
     </div>
   );

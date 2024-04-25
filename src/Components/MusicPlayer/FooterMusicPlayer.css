@@ -1,14 +1,14 @@
-.playericon {
+.playericon{
     width: 0.8rem;
     height: 0.8rem;
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255,255,255,1);
 }
 
-.volumeslider {
+.volumeslider{
     text-align: left;
 }
 
-.musicThumbnail {
+.musicThumbnail{
     height: 5rem;
     width: auto;
 }
