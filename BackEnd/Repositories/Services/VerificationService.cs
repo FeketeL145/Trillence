@@ -4,6 +4,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
+using MimeKit.Utils;
 
 namespace BackEnd.Repositories.Services
 {
@@ -39,23 +40,22 @@ namespace BackEnd.Repositories.Services
         {
             try
             {
-                // Load HTML content from file
-                string htmlContent = await File.ReadAllTextAsync("C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\EmailTemplate\\EmailTemplate.html");
-
-                // Replace placeholders in HTML content with actual verification code
-                htmlContent = htmlContent.Replace("{code}", code);
-
-                // Create a new MimeMessage
-                MimeMessage email = new MimeMessage();
+                var email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse(configuration.GetSection("EmailSettings:EmailUserName").Value));
                 email.To.Add(MailboxAddress.Parse(request.To));
                 email.Subject = request.Subject;
 
-                // Set the HTML body
-                email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+                var bodyBuilder = new BodyBuilder();
+                using (StreamReader SourceReader = System.IO.File.OpenText("EmailTemplate.html"))
                 {
-                    Text = htmlContent
-                };
+                    bodyBuilder.HtmlBody = SourceReader.ReadToEnd();
+                }
+                bodyBuilder.HtmlBody = bodyBuilder.HtmlBody.Replace("{code}", code);
+
+                
+
+                // Set the HTML body
+                email.Body = bodyBuilder.ToMessageBody();
 
                 // Connect to the SMTP server and send the email
                 using SmtpClient smtp = new SmtpClient();
