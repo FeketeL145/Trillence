@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, Navigate } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
@@ -10,7 +10,40 @@ function Register() {
   const [error, setError] = useState(null);
   const [verificationCode, setVerificationCode] = useState("");
   const [showVerification, setShowVerification] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(120);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if(showVerification){
+        setTimeLeft((prevTimeLeft) => {
+          return prevTimeLeft - 1;
+        });
+      }
+      else
+      {
+        setTimeLeft(120);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  const formattedMinutes = String(minutes).padStart(1, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
+  const timeExpired = timeLeft <= 0;
+
+  const sendVerificationAgain = async () => {
+    setTimeLeft(120);
+    try {
+      await sendVerificationEmail(email);
+    }
+    catch (error) {
+      console.error("Error:", error);
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,7 +59,7 @@ function Register() {
 
     try {
       await sendVerificationEmail(email);
-      setShowVerification(true);
+      await setShowVerification(true);
     } catch (error) {
       console.error("Error:", error);
       setError("Failed to send verification email.");
@@ -40,10 +73,13 @@ function Register() {
       return;
     }
     try {
-      const verifyresponse = await axios.post('https://localhost:7106/api/Verification/verifycode', {
-        code: verificationCode,
-        email: email
-      });
+      const verifyresponse = await axios.post(
+        "https://localhost:7106/api/Verification/verifycode",
+        {
+          code: verificationCode,
+          email: email,
+        }
+      );
 
       if (verifyresponse.data === "Code matched successfully.") {
         setError("Code matched successfully.");
@@ -54,24 +90,33 @@ function Register() {
         return;
       }
 
-      const response = await axios.post("https://localhost:7172/auth/register", {
-        userName: username,
-        password: password,
-        email: email,
-      });
+      const response = await axios.post(
+        "https://localhost:7172/auth/register",
+        {
+          userName: username,
+          password: password,
+          email: email,
+        }
+      );
 
       if (response.data.ok) {
         setError(response.data.message || "Something went wrong.");
       } else {
-        const roleResponse = await axios.post("https://localhost:7172/auth/AssignRole", {
-          email: email,
-          roleName: "user"
-        });
+        const roleResponse = await axios.post(
+          "https://localhost:7172/auth/AssignRole",
+          {
+            email: email,
+            roleName: "user",
+          }
+        );
 
         if (roleResponse.data.ok) {
           setError(roleResponse.data.message || "Failed to assign user role.");
         } else {
-          setError("Registration and role assignment successful!\n You can now log into your account.");
+          setError(
+            "Registration successful!\n You can now log into your account."
+          );
+          Navigate("/sign-in");
         }
       }
     } catch (error) {
@@ -82,9 +127,12 @@ function Register() {
 
   const sendVerificationEmail = async (email) => {
     try {
-      const response = await axios.post("https://localhost:7106/api/Verification/verificationAndEmail", {
-        email: email,
-      });
+      const response = await axios.post(
+        "https://localhost:7106/api/Verification/verificationAndEmail",
+        {
+          email: email,
+        }
+      );
 
       if (response.status != 200) {
         throw new Error("Failed to send verification email.");
@@ -161,17 +209,30 @@ function Register() {
                 placeholder="Verification Code"
                 value={verificationCode}
                 onChange={(e) => {
-                  const inputVal = e.target.value.replace(/\D/g, '');
+                  const inputVal = e.target.value.replace(/\D/g, "");
                   setVerificationCode(inputVal.slice(0, 6));
                 }}
                 maxLength={6}
               />
+              {showVerification ? (
+              <p>
+                {timeExpired ? (
+                  <p className="whitetext text-center mt-3" style={{textDecoration: "underline", textUnderlineOffset: "2px"}} onClick={sendVerificationAgain}>Request another code</p>
+                ) : (
+                  <p className="whitetext text-secondary text-center mt-3">
+                    You can request another code in: {formattedMinutes}:
+                    {formattedSeconds}
+                  </p>
+                )}
+              </p>
+            ) : null}
             </div>
           )}
-          <div className="d-grid mt-4">
+          <div className="d-grid">
             <button type="submit" className="btn btn-primary">
               {showVerification ? "Verify" : "Sign Up"}
             </button>
+            
           </div>
           {!showVerification && (
             <NavLink to={`/sign-in`}>
