@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { lazy, Suspense} from "react";
 import "./FooterMusicPlayer.css";
 import axios from "axios";
 import {
@@ -383,7 +384,7 @@ function FooterMusicPlayer({ selectedSong }) {
           <div className="col-8">
             <div className="row">
               <p className="text-start whitetextbold text-wrap">
-                {currentSongDetails.songName.replace(/^[^-]*-/, "")}
+                {currentSongDetails.songName}
               </p>
             </div>
             <div className="row">

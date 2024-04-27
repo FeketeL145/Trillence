@@ -221,7 +221,7 @@ function ProfileDisplay() {
             </div>
           </div>
         </form>
-        <form onSubmit={handleMakeAdmin} className="mb-5">
+        <form onSubmit={handleMakeAdmin}>
           <h3 className="whitetextbold mt-3">Add admin role to user</h3>
           <div>
             <div className="mb-1">

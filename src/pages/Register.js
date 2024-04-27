@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import axios from "axios";
 
 function Register() {
@@ -11,16 +12,15 @@ function Register() {
   const [verificationCode, setVerificationCode] = useState("");
   const [showVerification, setShowVerification] = useState(false);
   const [timeLeft, setTimeLeft] = useState(120);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if(showVerification){
+      if (showVerification) {
         setTimeLeft((prevTimeLeft) => {
           return prevTimeLeft - 1;
         });
-      }
-      else
-      {
+      } else {
         setTimeLeft(120);
       }
     }, 1000);
@@ -28,6 +28,13 @@ function Register() {
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    if (Cookies.get("token") != null) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  });
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
 
@@ -39,8 +46,7 @@ function Register() {
     setTimeLeft(120);
     try {
       await sendVerificationEmail(email);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error:", error);
     }
   };
@@ -144,105 +150,139 @@ function Register() {
 
   return (
     <div className="auth-wrapper">
-      <div
-        className="auth-inner"
-        style={{
-          backdropFilter: "blur(10px)",
-          color: "white",
-          boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
-        }}
-      >
-        <form onSubmit={showVerification ? handleVerification : handleSubmit}>
-          <h3 className="text-item whitetextbold">Register</h3>
-          {error && <p className="error-message">{error}</p>}
-          {!showVerification && (
-            <div>
+      {!isLoggedIn ? (
+        <div
+          className="auth-inner"
+          style={{
+            backdropFilter: "blur(10px)",
+            color: "white",
+            boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+          }}
+        >
+          <form onSubmit={showVerification ? handleVerification : handleSubmit}>
+            <h3 className="text-item whitetextbold">Register</h3>
+            {error && <p className="error-message">{error}</p>}
+            {!showVerification && (
+              <div>
+                <div className="mb-3">
+                  <label>Username</label>
+                  <input
+                    type="text"
+                    className="form-control whitetext"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Email address</label>
+                  <input
+                    type="email"
+                    className="form-control whitetext"
+                    placeholder="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    className="form-control whitetext"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Repeat password</label>
+                  <input
+                    type="password"
+                    className="form-control whitetext"
+                    placeholder="Repeat password"
+                    value={repeatPassword}
+                    onChange={(e) => setRepeatPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+            {showVerification && (
               <div className="mb-3">
-                <label>Username</label>
+                <p>Email sent to {email}</p>
+                <label>Verification Code</label>
                 <input
                   type="text"
                   className="form-control whitetext"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Verification Code"
+                  value={verificationCode}
+                  onChange={(e) => {
+                    const inputVal = e.target.value.replace(/\D/g, "");
+                    setVerificationCode(inputVal.slice(0, 6));
+                  }}
+                  maxLength={6}
                 />
-              </div>
-              <div className="mb-3">
-                <label>Email address</label>
-                <input
-                  type="email"
-                  className="form-control whitetext"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control whitetext"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label>Repeat password</label>
-                <input
-                  type="password"
-                  className="form-control whitetext"
-                  placeholder="Repeat password"
-                  value={repeatPassword}
-                  onChange={(e) => setRepeatPassword(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-          {showVerification && (
-            <div className="mb-3">
-              <p>Email sent to {email}</p>
-              <label>Verification Code</label>
-              <input
-                type="text"
-                className="form-control whitetext"
-                placeholder="Verification Code"
-                value={verificationCode}
-                onChange={(e) => {
-                  const inputVal = e.target.value.replace(/\D/g, "");
-                  setVerificationCode(inputVal.slice(0, 6));
-                }}
-                maxLength={6}
-              />
-              {showVerification ? (
-              <p>
-                {timeExpired ? (
-                  <p className="whitetext text-center mt-3" style={{textDecoration: "underline", textUnderlineOffset: "2px"}} onClick={sendVerificationAgain}>Request another code</p>
-                ) : (
-                  <p className="whitetext text-secondary text-center mt-3">
-                    You can request another code in: {formattedMinutes}:
-                    {formattedSeconds}
+                {showVerification ? (
+                  <p>
+                    {timeExpired ? (
+                      <p
+                        className="whitetext text-center mt-3"
+                        style={{
+                          textDecoration: "underline",
+                          textUnderlineOffset: "2px",
+                        }}
+                        onClick={sendVerificationAgain}
+                      >
+                        Request another code
+                      </p>
+                    ) : (
+                      <p className="whitetext text-secondary text-center mt-3">
+                        You can request another code in: {formattedMinutes}:
+                        {formattedSeconds}
+                      </p>
+                    )}
                   </p>
-                )}
-              </p>
-            ) : null}
+                ) : null}
+              </div>
+            )}
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary">
+                {showVerification ? "Verify" : "Sign Up"}
+              </button>
             </div>
-          )}
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              {showVerification ? "Verify" : "Sign Up"}
-            </button>
-            
-          </div>
-          {!showVerification && (
-            <NavLink to={`/sign-in`}>
-              <p className="forgot-password text-secondary whitetext mt-2">
-                Already have an account?
-              </p>
+            {!showVerification && (
+              <NavLink to={`/sign-in`}>
+                <p className="forgot-password text-secondary whitetext mt-2">
+                  Already have an account?
+                </p>
+              </NavLink>
+            )}
+          </form>
+        </div>
+      ) : (
+        <div
+          className="auth-inner"
+          style={{
+            backdropFilter: "blur(10px)",
+            color: "white",
+            boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+          }}
+        >
+          <p className="whitetext text-center" style={{ fontSize: "25px" }}>
+            You're already signed in as :
+          </p>
+          <h1 className="whitetextbold text-center">
+            {Cookies.get("username")}
+          </h1>
+          <div className="d-grid mt-3">
+            <NavLink to={`/`} className="btn btn-primary mb-3">
+              Go back
             </NavLink>
-          )}
-        </form>
-      </div>
+            <NavLink to={`/sign-out`} className="btn btn-danger">
+              Sign out
+            </NavLink>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

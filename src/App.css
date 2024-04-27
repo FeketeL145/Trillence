@@ -21,8 +21,9 @@ a{
 
 .AppDisplayPage{
   padding-left: 15.6rem;
+  padding-bottom: 5rem;
   width: 100%;
-  height:100%;
+  height: 100%;
   position: fixed;
   opacity: 1;
   background-image: url('./Components/img/TrillenceBackground.png');
@@ -35,9 +36,9 @@ a{
   }
 }
 
-.spotdlFrame{
+.embedFrame{
   width: calc(100% - 15.6rem);
-  height: 100%;
+  height: calc(100% - 5rem);
   overflow: hidden;
   position: fixed;
 }

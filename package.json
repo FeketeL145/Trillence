@@ -11,6 +11,7 @@
     "bootstrap-icons": "^1.11.3",
     "js-cookie": "^3.0.5",
     "js-cookies": "^1.0.4",
+    "lazy": "^1.0.11",
     "mdb-ui-kit": "^7.1.0",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",

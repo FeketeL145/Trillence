@@ -38,7 +38,7 @@ const SpotDL = () => {
     <div>
       {loading ? (
         <div
-          className="spotdlFrame"
+          className="embedFrame"
           style={{
             color: "white",
             backdropFilter: "blur(10px)",
@@ -65,11 +65,11 @@ const SpotDL = () => {
           <iframe
             title="SpotDL"
             src="http://localhost:8800/"
-            className="spotdlFrame"
+            className="embedFrame"
           ></iframe>
         ) : (
           <div
-            className="spotdlFrame"
+            className="embedFrame"
             style={{
               color: "white",
               backdropFilter: "blur(10px)",
@@ -89,7 +89,7 @@ const SpotDL = () => {
         )
       ) : (
         <div
-          className="spotdlFrame"
+          className="embedFrame"
           style={{
             color: "white",
             backdropFilter: "blur(10px)",

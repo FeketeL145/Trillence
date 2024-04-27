@@ -43,9 +43,6 @@
         overflow-y: hidden;
         height: 100vh;
     }
-    .musicThumbnailFullScreen{
-
-    }
     .musicThumbnail {
         height: 3rem;
         width: auto;

@@ -19,7 +19,7 @@ function AdminPanel() {
     <div className="w-100 h-100">
       {loading ? (
         <div
-          className="spotdlFrame"
+          className="embedFrame"
           style={{
             color: "white",
             backdropFilter: "blur(10px)",
@@ -43,7 +43,7 @@ function AdminPanel() {
         </div>
       ) : !isUserAdmin ? ( // Changed condition here
         <div
-          className="spotdlFrame"
+          className="embedFrame"
           style={{
             color: "white",
             backdropFilter: "blur(10px)",
@@ -59,7 +59,7 @@ function AdminPanel() {
           </p>
         </div>
       ) : (
-        <SettingsDisplay className="spotdlFrame"/> // This renders if isUserAdmin is true
+        <SettingsDisplay className="embedFrame"/> // This renders if isUserAdmin is true
       )}
     </div>
   );

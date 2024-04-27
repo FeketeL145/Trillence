@@ -17,13 +17,6 @@ export const SidebarData = [
     requireAdmin: false,
   },
   {
-    title: "Featuretester",
-    path: "/admin-featuretester",
-    icon: <FaIcons.FaSearch />,
-    requireLoggedIn: false,
-    requireAdmin: false,
-  },
-  {
     title: "Playlists",
     path: "/playlists",
     icon: <FaIcons.FaList />,
@@ -63,7 +56,14 @@ export const SidebarDataAdmin = [
   {
     title: "SpotDL",
     path: "/spotdl",
-    icon: <FaIcons.FaDownload />,
+    icon: <FaIcons.FaSpotify />,
+    requireLoggedIn: true,
+    requireAdmin: true,
+  },
+  {
+    title: "Featuretester",
+    path: "/admin-featuretester",
+    icon: <FaIcons.FaAirFreshener />,
     requireLoggedIn: true,
     requireAdmin: true,
   },

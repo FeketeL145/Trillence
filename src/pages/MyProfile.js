@@ -18,7 +18,7 @@ function MyProfile() {
     <div className="w-100 h-100">
       {loading ? (
         <div
-          className="spotdlFrame"
+          className="embedFrame"
           style={{
             color: "white",
             backdropFilter: "blur(10px)",
@@ -44,7 +44,7 @@ function MyProfile() {
         <ProfileDisplay />
       ) : (
         <div
-          className="spotdlFrame"
+          className="embedFrame"
           style={{
             color: "white",
             backdropFilter: "blur(10px)",

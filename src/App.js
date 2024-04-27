@@ -8,6 +8,7 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+import Cookies from "js-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -42,6 +43,8 @@ import FooterMusicPlayer from './Components/MusicPlayer/FooterMusicPlayer.js';
 
 function App() {
   const [selectedSong, setSelectedSong] = useState('');
+   
+  
   return (
     <div className="App">
       <Router>
@@ -58,10 +61,7 @@ function App() {
             <Route path="/profile" element={<MyProfile/>} />
             <Route path="/PasswordForgot" element={<PasswordForgot />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
-
-
             <Route path="/admin-featuretester" element={<Featuretester />} />
-
             <Route path="/SongList" element={<SongList />} />
             <Route path="/SongDeleteById:id" element={<SongDeleteById />} />
             <Route path="/SongPost" element={<SongPost />} />
@@ -71,6 +71,7 @@ function App() {
             <Route path="playlist/:id" element={<PlaylistSingleElement />} />
           </Routes>
         </div>
+      <FooterMusicPlayer selectedSong={selectedSong} />
       </Router>
     </div>
   );
