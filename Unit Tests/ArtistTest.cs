@@ -29,7 +29,11 @@ namespace BackEnd.Tests.Repositories.Services
                 Id = Guid.NewGuid(),
                 Name = createArtistDto.Name,
             };
+#pragma warning disable CS8600
+#pragma warning disable CS8620
             _mockContext.Setup(x => x.Artists.AddAsync(It.IsAny<Artist>(), default)).ReturnsAsync((EntityEntry<Artist>)null);
+#pragma warning restore CS8620
+#pragma warning restore CS8600
 
             ArtistDto result = await _artistService.Post(createArtistDto);
 

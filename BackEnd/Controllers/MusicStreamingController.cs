@@ -91,6 +91,83 @@ public class MusicStreamingController : ControllerBase
         }
     }
 
+    [HttpGet("playlist/{playlistId}/current")]
+    public async Task<IActionResult> GetCurrentSongFromPlaylist(Guid playlistId)
+    {
+        try
+        {
+            string filePath = await _musicStreamingService.GetCurrentMusicFilePathFromPlaylistAsync(playlistId);
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return NotFound("Current music file not found.");
+            }
+
+            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "audio/mpeg", enableRangeProcessing: true);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpGet("currentplaylist/{playlistId}/details")]
+    public async Task<SongDetailsForPlayer> GetCurrentPlaylistSongDetailsAsync(Guid playlistId)
+    {
+        try
+        {
+            return await _musicStreamingService.GetCurrentPlaylistSongDetailsAsync(playlistId);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error fetching current song details: {ex.Message}");
+            return new SongDetailsForPlayer();
+        }
+    }
+
+    [HttpGet("playlist/{playlistId}/next")]
+    public async Task<IActionResult> GetNextSongFromPlaylist(Guid playlistId)
+    {
+        try
+        {
+            string filePath = await _musicStreamingService.GetNextMusicFilePathFromPlaylistAsync(playlistId);
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return NotFound("Next music file not found.");
+            }
+
+            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "audio/mpeg", enableRangeProcessing: true);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpGet("playlist/{playlistId}/previous")]
+    public async Task<IActionResult> GetPreviousSongFromPlaylist(Guid playlistId)
+    {
+        try
+        {
+            string filePath = await _musicStreamingService.GetPreviousMusicFilePathFromPlaylistAsync(playlistId);
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return NotFound("Previous music file not found.");
+            }
+
+            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "audio/mpeg", enableRangeProcessing: true);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
     [HttpGet("stream")]
     public async Task<IActionResult> Stream(string fileName)
     {

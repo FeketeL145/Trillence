@@ -30,7 +30,11 @@ namespace BackEnd.Tests.Repositories.Services
                 Name = createPlaylistDto.Name,
                 UserId = createPlaylistDto.UserId,
             };
+#pragma warning disable CS8600
+#pragma warning disable CS8620
             _mockContext.Setup(x => x.Playlists.AddAsync(It.IsAny<Playlist>(), default)).ReturnsAsync((EntityEntry<Playlist>)null);
+#pragma warning restore CS8620
+#pragma warning restore CS8600
 
             Playlist result = await _playlistService.Post(createPlaylistDto);
 

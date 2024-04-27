@@ -15,11 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="authenticate.sql" />
     <None Remove="Current Database.png" />
     <None Remove="DBTerv.png" />
+    <None Remove="EmailTemplate.html" />
     <None Remove="First Trillence DB.sql" />
     <None Remove="trillence-without-data.sql" />
     <None Remove="trillence.sql" />
+    <None Remove="TrillenceBackground.png" />
+    <None Remove="TrillenceLogoLarge.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,18 +47,6 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="taglib-sharp-netstandard2.0" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="EmailTemplate.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="TrillenceBackground.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="TrillenceLogoLarge.svg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

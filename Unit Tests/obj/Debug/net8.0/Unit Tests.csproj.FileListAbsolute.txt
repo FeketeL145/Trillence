@@ -1126,3 +1126,6 @@ C:\Users\Fekete Laszlo\Desktop\Trillence Backend\Unit Tests\obj\Debug\net8.0\ref
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\Unit Tests\obj\Debug\net8.0\Unit Tests.pdb
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\Unit Tests\obj\Debug\net8.0\Unit Tests.genruntimeconfig.cache
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\Unit Tests\obj\Debug\net8.0\ref\Unit Tests.dll
+C:\Users\ChrisGamerHun\Desktop\Trillence BackEnd\Unit Tests\bin\Debug\net8.0\EmailTemplate.html
+C:\Users\ChrisGamerHun\Desktop\Trillence BackEnd\Unit Tests\bin\Debug\net8.0\TrillenceBackground.png
+C:\Users\ChrisGamerHun\Desktop\Trillence BackEnd\Unit Tests\bin\Debug\net8.0\TrillenceLogoLarge.svg

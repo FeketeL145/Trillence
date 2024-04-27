@@ -27,7 +27,7 @@
 
                 return File.ReadAllBytes(imagePath);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\Unit Tests.csproj": {}
+    "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj": {
+    "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
         "projectName": "BackEnd",
-        "projectPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj",
-        "packagesPath": "C:\\Users\\Fekete Laszlo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\obj\\",
+        "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj",
+        "packagesPath": "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "H:\\Components\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Fekete Laszlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ChrisGamerHun\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -130,24 +130,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\Unit Tests.csproj": {
+    "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\Unit Tests.csproj",
+        "projectUniqueName": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
         "projectName": "Unit Tests",
-        "projectPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\Unit Tests.csproj",
-        "packagesPath": "C:\\Users\\Fekete Laszlo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\obj\\",
+        "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
+        "packagesPath": "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "H:\\Components\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Fekete Laszlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ChrisGamerHun\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -163,8 +163,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj": {
-                "projectPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj"
+              "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
+                "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj"
               }
             }
           }
@@ -229,7 +229,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

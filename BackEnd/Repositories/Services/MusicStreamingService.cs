@@ -5,6 +5,7 @@ public class MusicStreamingService : IMusicStreamingInterface
 {
     private readonly string[] _musicFiles;
     private readonly IMemoryCache _cache;
+    private readonly IMemoryCache _playlistcache;
     private readonly TrillenceContext _dbContext;
     private static readonly object _indexLock = new object();
     private SongDetailsForPlayer _previousSongDetails;
@@ -12,6 +13,7 @@ public class MusicStreamingService : IMusicStreamingInterface
     public MusicStreamingService(IMemoryCache memoryCache, TrillenceContext dbContext)
     {
         _cache = memoryCache;
+        _playlistcache = memoryCache;
         _dbContext = dbContext;
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         _musicFiles = Directory.GetFiles(folderPath, "*.mp3");
@@ -28,7 +30,24 @@ public class MusicStreamingService : IMusicStreamingInterface
                 currentIndex = 0;
                 _cache.Set("CurrentIndex", currentIndex);
             }
+            if (!_playlistcache.TryGetValue("CurrentIndex", out int playlistCurrentIndex))
+            {
+                currentIndex = 0;
+                _playlistcache.Set("CurrentIndex", playlistCurrentIndex);
+            }
         }
+    }
+
+    public async Task<string> GetMusicFilePathAsync(string fileName)
+    {
+        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), fileName);
+
+        if (!System.IO.File.Exists(filePath))
+        {
+            throw new FileNotFoundException("Music file not found.", filePath);
+        }
+
+        return filePath;
     }
 
     public async Task<string> GetCurrentMusicFilePathAsync()
@@ -66,6 +85,51 @@ public class MusicStreamingService : IMusicStreamingInterface
         }
     }
 
+    public async Task<ICollection<Song>> GetSongsFromPlaylistAsync(Guid playlistId)
+    {
+        return await _dbContext.PlaylistSongs
+            .Where(ps => ps.PlaylistId == playlistId)
+            .Select(ps => ps.Song)
+            .ToListAsync();
+    }
+
+    public async Task<string> GetCurrentMusicFilePathFromPlaylistAsync(Guid playlistId)
+    {
+        var songs = await GetSongsFromPlaylistAsync(playlistId);
+        string cacheKey = $"Playlist_{playlistId}_Index";
+        int playlistCurrentIndex = _playlistcache.GetOrCreate(cacheKey, entry => 0);
+
+        if (playlistCurrentIndex >= 0 && playlistCurrentIndex < songs.Count)
+        {
+            var currentSong = songs.ElementAt(playlistCurrentIndex);
+            return GetMusicFilePath(currentSong.Name);
+        }
+
+        throw new InvalidOperationException("Invalid song index.");
+    }
+
+    public async Task<string> GetNextMusicFilePathFromPlaylistAsync(Guid playlistId)
+    {
+        var songs = await GetSongsFromPlaylistAsync(playlistId);
+
+        int playlistCurrentIndex = _playlistcache.Get<int>($"Playlist_{playlistId}_Index");
+        playlistCurrentIndex = (playlistCurrentIndex + 1) % songs.Count;
+        _playlistcache.Set($"Playlist_{playlistId}_Index", playlistCurrentIndex);
+        var currentSong = songs.ElementAt(playlistCurrentIndex);
+        return GetMusicFilePath(currentSong.Name);
+    }
+
+    public async Task<string> GetPreviousMusicFilePathFromPlaylistAsync(Guid playlistId)
+    {
+        var songs = await GetSongsFromPlaylistAsync(playlistId);
+
+        int playlistCurrentIndex = _playlistcache.Get<int>($"Playlist_{playlistId}_Index");
+        playlistCurrentIndex = (playlistCurrentIndex - 1 + songs.Count) % songs.Count;
+        _playlistcache.Set($"Playlist_{playlistId}_Index", playlistCurrentIndex);
+        var currentSong = songs.ElementAt(playlistCurrentIndex);
+        return GetMusicFilePath(currentSong.Name);
+    }
+
     public async Task<SongDetailsForPlayer> GetCurrentSongDetailsAsync()
     {
         int currentIndex = _cache.Get<int>("CurrentIndex");
@@ -78,44 +142,21 @@ public class MusicStreamingService : IMusicStreamingInterface
             string songName = file.Tag?.Title ?? "Unknown Song";
             string albumName = file.Tag?.Album ?? "Unknown Album";
 
-            int lastBackslashIndex = filePath.LastIndexOf('\\');
-            int lastDotIndex = filePath.LastIndexOf('.');
-            string actualtitle = filePath.Substring(lastBackslashIndex + 1, lastDotIndex - lastBackslashIndex - 1);
-
-            char[] invalidChars = Path.GetInvalidFileNameChars();
-            string sanitizedAlbumName = new string(albumName.Where(c => !invalidChars.Contains(c)).ToArray());
-
             var song = await _dbContext.Songs
-    .Join(
-        _dbContext.Albums,
-        song => song.AlbumId,
-        album => album.Id,
-        (song, album) => new { song, album }
-    )
-    .Join(
-        _dbContext.Artists,
-        album => album.album.ArtistId,
-        artist => artist.Id,
-        (songAlbum, artist) => new { songAlbum.song, songAlbum.album, artist }
-    )
-    .FirstOrDefaultAsync(result =>
-        result.artist.Name == artistName &&
-        result.album.Name == sanitizedAlbumName &&
-        result.song.Name == actualtitle);
+                .Where(s => s.Name == songName)
+                .FirstOrDefaultAsync();
 
             if (song == null)
             {
                 throw new InvalidOperationException($"No song found with Artist: {artistName}, Song: {songName}, Album: {albumName}.");
             }
 
-            var songId = song.song.Id;
-
             return new SongDetailsForPlayer
             {
                 ArtistName = artistName,
                 SongName = songName,
-                AlbumName = sanitizedAlbumName,
-                SongId = songId
+                AlbumName = albumName,
+                SongId = song.Id
             };
         }
         else
@@ -124,16 +165,61 @@ public class MusicStreamingService : IMusicStreamingInterface
         }
     }
 
-    public async Task<string> GetMusicFilePathAsync(string fileName)
+    public async Task<SongDetailsForPlayer> GetCurrentPlaylistSongDetailsAsync(Guid playlistId)
     {
-        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), fileName);
+        string cacheKey = $"Playlist_{playlistId}_Index";
+        int playlistCurrentIndex = _playlistcache.GetOrCreate(cacheKey, entry => 0);
 
-        if (!System.IO.File.Exists(filePath))
+        var playlistSongs = await GetSongsFromPlaylistAsync(playlistId);
+
+        if (playlistCurrentIndex >= 0 && playlistCurrentIndex < playlistSongs.Count)
         {
-            throw new FileNotFoundException("Music file not found.", filePath);
-        }
+            var currentSong = playlistSongs.ElementAt(playlistCurrentIndex);
+            string filePath = GetMusicFilePath(currentSong.Name);
 
-        return filePath;
+            if (!System.IO.File.Exists(filePath))
+            {
+                throw new FileNotFoundException("Music file not found.", filePath);
+            }
+
+            TagLib.File file = TagLib.File.Create(filePath);
+
+            string artistName = file.Tag?.FirstPerformer ?? "Unknown Artist";
+            string songName = file.Tag?.Title ?? "Unknown Song";
+            string albumName = file.Tag?.Album ?? "Unknown Album";
+
+            string fileName = file.Name ?? "Unknown Filename";
+            int lastSlashIndex = fileName.LastIndexOf("\\");
+            fileName = fileName.Substring(lastSlashIndex + 1);
+            int lastDotIndex = fileName.LastIndexOf('.');
+            fileName = fileName.Substring(0, lastDotIndex);
+
+            var song = await _dbContext.Songs
+                .FirstOrDefaultAsync(s => s.Name == fileName);
+
+            if (song == null)
+            {
+                throw new InvalidOperationException($"No song found with Artist: {artistName}, Song: {songName}, Album: {albumName}.");
+            }
+
+            return new SongDetailsForPlayer
+            {
+                ArtistName = artistName,
+                SongName = songName,
+                AlbumName = albumName,
+                SongId = song.Id
+            };
+        }
+        else
+        {
+            throw new InvalidOperationException("Invalid song index.");
+        }
+    }
+
+    private string GetMusicFilePath(string songName)
+    {
+        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+        return Path.Combine(folderPath, $"{songName}.mp3");
     }
 
     public async Task<SongDetailsForPlayer> GetUniqueSongDetailsAsync()

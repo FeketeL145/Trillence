@@ -4,7 +4,6 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
-using MimeKit.Utils;
 
 namespace BackEnd.Repositories.Services
 {
@@ -52,12 +51,8 @@ namespace BackEnd.Repositories.Services
                 }
                 bodyBuilder.HtmlBody = bodyBuilder.HtmlBody.Replace("{code}", code);
 
-                
-
-                // Set the HTML body
                 email.Body = bodyBuilder.ToMessageBody();
 
-                // Connect to the SMTP server and send the email
                 using SmtpClient smtp = new SmtpClient();
                 smtp.Connect(configuration.GetSection("EmailSettings:EmailHost").Value, 587, SecureSocketOptions.StartTls);
                 smtp.Authenticate(configuration.GetSection("EmailSettings:EmailUserName").Value, configuration.GetSection("EmailSettings:EmailPassword").Value);
@@ -72,7 +67,6 @@ namespace BackEnd.Repositories.Services
                 return false;
             }
         }
-
 
         public async Task<IEnumerable<Verification>> GetAll()
         {

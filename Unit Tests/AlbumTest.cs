@@ -30,7 +30,11 @@ namespace BackEnd.Tests.Repositories.Services
                 Name = createAlbumDto.Name,
                 Released = createAlbumDto.Released,
             };
+#pragma warning disable CS8620
+#pragma warning disable CS8600
             _mockContext.Setup(x => x.Albums.AddAsync(It.IsAny<Album>(), default)).ReturnsAsync((EntityEntry<Album>)null);
+#pragma warning restore CS8600
+#pragma warning restore CS8620
 
             AlbumDto result = await _albumService.Post(createAlbumDto);
 

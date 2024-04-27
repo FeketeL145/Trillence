@@ -29,7 +29,11 @@ namespace BackEnd.Tests.Repositories.Services
                 Id = Guid.NewGuid(),
                 Name = createUserDto.Name,
             };
+#pragma warning disable CS8600
+#pragma warning disable CS8620
             _mockContext.Setup(x => x.Users.AddAsync(It.IsAny<User>(), default)).ReturnsAsync((EntityEntry<User>)null);
+#pragma warning restore CS8620
+#pragma warning restore CS8600
 
             UserDto result = await _userService.Post(createUserDto);
 

@@ -32,7 +32,11 @@ namespace BackEnd.Tests.Repositories.Services
                 AlbumId = createSongDto.AlbumId,
                 Genre = createSongDto.Genres,
             };
+#pragma warning disable CS8600
+#pragma warning disable CS8620
             _mockContext.Setup(x => x.Songs.AddAsync(It.IsAny<Song>(), default)).ReturnsAsync((EntityEntry<Song>)null);
+#pragma warning restore CS8620
+#pragma warning restore CS8600
 
             SongDto result = await _songService.Post(createSongDto);
 

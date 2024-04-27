@@ -51,7 +51,7 @@ namespace BackEnd.Controllers
             return StatusCode(200, result);
         }
 
-        [HttpDelete("deletebyid/{playlistid, songid}")]
+        [HttpDelete("deletebyid/{playlistid}/{songid}")]
         public async Task<ActionResult<PlaylistSong>> DeleteById(Guid playlistid, Guid songid)
         {
             PlaylistSong result = await playlistsongInterface.DeleteById(playlistid, songid);
