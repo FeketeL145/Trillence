@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './FooterMusicPlayer.css';
 import axios from "axios";
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-function FooterMusicPlayer({ selectedSong }) {
+function PlaylistMusicPlayer({ selectedSong, playlistId }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
   const [muteVolume, setMuteVolume] = useState(false);
@@ -40,7 +40,7 @@ function FooterMusicPlayer({ selectedSong }) {
 
   const fetchCurrentSongDetails = async () => {
     try {
-      const response = await fetch('https://localhost:7106/api/MusicStreaming/current/details');
+      const response = await fetch(`https://localhost:7106/api/MusicStreaming/currentplaylist/${playlistId}/details`);
       if (!response.ok) {
         throw new Error('Failed to fetch current song details');
       }
@@ -82,7 +82,7 @@ function FooterMusicPlayer({ selectedSong }) {
     if (userInteracted) {
       const loadAudio = async () => {
         try {
-          const response = await fetch('https://localhost:7106/api/MusicStreaming/current');
+          const response = await fetch(`https://localhost:7106/api/MusicStreaming/playlist/${playlistId}/current`);
           if (!response.ok) {
             throw new Error('Failed to load audio file');
           }
@@ -197,7 +197,7 @@ function FooterMusicPlayer({ selectedSong }) {
       audioRef.current.pause(); // If it was paused, pause it again
       togglePlayPause();
     }
-      await loadAudio('https://localhost:7106/api/MusicStreaming/previous');
+      await loadAudio(`https://localhost:7106/api/MusicStreaming/playlist/${playlistId}/previous`);
       await fetchCurrentSongDetails();
   };
 
@@ -206,7 +206,7 @@ function FooterMusicPlayer({ selectedSong }) {
       audioRef.current.pause(); // If it was paused, pause it again
       togglePlayPause();
     }
-      await loadAudio('https://localhost:7106/api/MusicStreaming/next');
+      await loadAudio(`https://localhost:7106/api/MusicStreaming/playlist/${playlistId}/next`);
       await fetchCurrentSongDetails();
   };
 
@@ -318,18 +318,6 @@ function FooterMusicPlayer({ selectedSong }) {
   if (tracks.length === 0) {
     return null; // or render a loading indicator
   }
-
-  const Favourites = async (songId) => {
-    try {
-      const response = await axios.post("https://localhost:7106/api/Playlistsong/playlistsong", {
-        playlistId: "c9429c24-fc5a-4e30-85ea-b5b550a54e47",
-        songId: songId
-      });
-      console.log(response.data); // itt a válasz megjelenítése vagy további műveletek
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
  return (
     <div className="musicPlayer">
@@ -513,10 +501,7 @@ function FooterMusicPlayer({ selectedSong }) {
 
       </MobileView>
     </div>
-
-
-
   );
 }
 
-export default FooterMusicPlayer;
+export default PlaylistMusicPlayer;
