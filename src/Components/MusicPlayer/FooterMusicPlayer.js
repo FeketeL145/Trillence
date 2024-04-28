@@ -139,7 +139,7 @@ function FooterMusicPlayer({ selectedSong }) {
           // Update song details in state
           setCurrentSongDetails({
             artistName: songDetailsData.mainArtist.artistName,
-            songName: songDetailsData.songName,
+            songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ''),
             albumName: songDetailsData.albumName
           });
 
