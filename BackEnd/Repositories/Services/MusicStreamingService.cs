@@ -142,8 +142,16 @@ public class MusicStreamingService : IMusicStreamingInterface
             string songName = file.Tag?.Title ?? "Unknown Song";
             string albumName = file.Tag?.Album ?? "Unknown Album";
 
+            string fileName = file.Name;
+
+            int lastDotIndex = fileName.LastIndexOf('.');
+            fileName = lastDotIndex > 0 ? fileName.Substring(0, lastDotIndex) : fileName;
+
+            int lastBackslashIndex = fileName.LastIndexOf('\\');
+            fileName = lastBackslashIndex >= 0 ? fileName.Substring(lastBackslashIndex + 1) : fileName;
+
             var song = await _dbContext.Songs
-                .Where(s => s.Name == songName)
+                .Where(s => s.Name == fileName)
                 .FirstOrDefaultAsync();
 
             if (song == null)
