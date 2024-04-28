@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "../../../App.css";
-import FooterMusicPlayer from "../../../Components/MusicPlayer/FooterMusicPlayer";
 import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPlayer";
 export function PlaylistSinglePage() {
     const { id } = useParams(); // Get the playlist ID from the URL
