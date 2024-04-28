@@ -24,13 +24,21 @@ namespace Auth
 
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("AuthSettings:JwtOptions"));
 
-            builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-
             builder.Services.AddScoped<IAuth, AuthService>();
+            builder.Services.AddScoped<AppDbcontext>();
+            builder.Services.AddScoped<UserManager<ApplicationUser>>();
+            builder.Services.AddScoped<RoleManager<IdentityRole>>();
+            builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.BuildServiceProvider(new ServiceProviderOptions
+            {
+                ValidateScopes = true,
+                ValidateOnBuild = true,
+            });
 
             string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             builder.Services.AddCors(options =>

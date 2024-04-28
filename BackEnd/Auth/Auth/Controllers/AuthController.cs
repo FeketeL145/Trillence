@@ -9,10 +9,12 @@ namespace Auth.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuth authService;
+        private readonly IConfiguration configuration;
 
-        public AuthController(IAuth authService)
+        public AuthController(IAuth authService, IConfiguration configuration)
         {
             this.authService = authService;
+            this.configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -65,6 +67,34 @@ namespace Auth.Controllers
         public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordDto model)
         {
             bool success = await authService.ChangePassword(model.Username, model.OldPassword, model.NewPassword);
+
+            if (!success)
+            {
+                return BadRequest("Failed to change password.");
+            }
+
+            return Ok("Password changed successfully.");
+        }
+
+        [HttpPost("send-reset-email")]
+        public async Task<IActionResult> SendResetTokenEmail([FromQuery] string emailAddress)
+        {
+            bool emailSent = await authService.SendResetTokenEmail(emailAddress);
+
+            if (emailSent)
+            {
+                return Ok("Reset email sent successfully.");
+            }
+            else
+            {
+                return StatusCode(500, "Failed to send reset email.");
+            }
+        }
+
+        [HttpPut("reset-password")]
+        public async Task<ActionResult> ForgotPassword([FromBody] ResetPasswordDto model)
+        {
+            bool success = await authService.ForgotPassword(model.EmailAddress, model.NewPassword, model.resetToken);
 
             if (!success)
             {

@@ -2,8 +2,12 @@
 using Auth.Models;
 using Auth.Models.Dtos;
 using Auth.Service.IService;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using System.Configuration;
 
 namespace Auth.Service
 {
@@ -12,15 +16,27 @@ namespace Auth.Service
         private readonly AppDbcontext appDbcontext;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-
+        private readonly IConfiguration configuration;
         private readonly IJwtTokenGenerator jwtTokenGenerator;
 
-        public AuthService(AppDbcontext appDbcontext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IJwtTokenGenerator jwtTokenGenerator)
+        private static bool isProcessingResetTokenEmail = false;
+
+        public AuthService(AppDbcontext appDbcontext,
+                           UserManager<ApplicationUser> userManager,
+                           RoleManager<IdentityRole> roleManager,
+                           IConfiguration configuration,
+                           IJwtTokenGenerator jwtTokenGenerator)
         {
             this.appDbcontext = appDbcontext;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.configuration = configuration;
             this.jwtTokenGenerator = jwtTokenGenerator;
+        }
+
+        public AuthService(IConfiguration configuration)
+        {
+            this.configuration = configuration;
         }
 
         public async Task<bool> AssignRole(string email, string roleName)
@@ -143,6 +159,83 @@ namespace Auth.Service
             IdentityResult result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
             return result.Succeeded;
         }
+
+        public async Task<bool> SendResetTokenEmail(string emailAddress)
+        {
+            if (isProcessingResetTokenEmail)
+            {
+                throw new InvalidOperationException("Recursive call detected. Exiting.");
+            }
+
+            isProcessingResetTokenEmail = true;
+
+            try
+            {
+                var email = new MimeMessage();
+                var emailUser = configuration.GetSection("EmailSettings:EmailUserName").Value;
+
+                if (string.IsNullOrEmpty(emailUser))
+                {
+                    throw new ArgumentNullException("Email user is not configured.");
+                }
+
+                ApplicationUser? user = await userManager.FindByEmailAsync(emailAddress);
+                if (user == null)
+                {
+                    throw new InvalidOperationException($"User with email '{emailAddress}' not found.");
+                }
+
+                email.From.Add(MailboxAddress.Parse(emailUser));
+                email.To.Add(MailboxAddress.Parse(emailAddress));
+                email.Subject = "Trillence - Reset Password";
+
+                var bodyBuilder = new BodyBuilder();
+
+                if (!File.Exists("EmailTemplate.html"))
+                {
+                    throw new FileNotFoundException("Email template not found.");
+                }
+
+                using (StreamReader sourceReader = File.OpenText("EmailTemplate.html"))
+                {
+                    bodyBuilder.HtmlBody = sourceReader.ReadToEnd();
+                }
+
+                string resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+                bodyBuilder.HtmlBody = bodyBuilder.HtmlBody.Replace("{resetToken}", resetToken);
+
+                email.Body = bodyBuilder.ToMessageBody();
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Connect(configuration.GetSection("EmailSettings:EmailHost").Value, 587, SecureSocketOptions.StartTls);
+                    smtp.Authenticate(emailUser, configuration.GetSection("EmailSettings:EmailPassword").Value);
+                    smtp.Send(email);
+                    smtp.Disconnect(true);
+                }
+
+                return true;
+            }
+            finally
+            {
+                isProcessingResetTokenEmail = false;
+            }
+        }
+
+        public async Task<bool> ForgotPassword(string emailAddress, string newPassword, string resetToken)
+        {
+            ApplicationUser? user = await userManager.FindByEmailAsync(emailAddress);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            IdentityResult result = await userManager.ResetPasswordAsync(user, resetToken, newPassword);
+
+            return result.Succeeded;
+        }
+
         public async Task<bool> DeleteUser(string username)
         {
             ApplicationUser? user = await userManager.FindByNameAsync(username);

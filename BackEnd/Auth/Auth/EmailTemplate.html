@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      style="
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(21, 23, 28);
+    font-weight: 400;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  ">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      background: rgb(21, 23, 28);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    ">
+    <div style="
+        height: 50%;
+        width: 50%;
+        padding: 50px;
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        box-shadow: #000000 0px 5px 10px;
+      ">
+        <div style="text-align: center;">
+            <h2>Your password reset token is:</h2>
+            <h3 style="font-weight: 10;">{resetToken}</h3>
+            <br />
+            <p>
+                Enter this code into the Trillence app, to confirm your email.
+            </p>
+            <p style="
+            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            color: lightslategray;
+          ">
+                If you encounter any issues, please contact
+                <a href="mailto:trillenceproject@gmail.com" style="text-decoration: none; font-weight: 700; color: white;">
+                    trillenceproject@gmail.com
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

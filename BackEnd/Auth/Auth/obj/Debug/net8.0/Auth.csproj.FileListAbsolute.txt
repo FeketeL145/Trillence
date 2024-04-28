@@ -1067,3 +1067,6 @@ C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\Auth\Auth\obj\Debug\net
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.pdb
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\Auth\Auth\obj\Debug\net8.0\Auth.genruntimeconfig.cache
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\Auth\Auth\obj\Debug\net8.0\ref\Auth.dll
+C:\Users\ChrisGamerHun\Desktop\Trillence BackEnd\BackEnd\Auth\Auth\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\ChrisGamerHun\Desktop\Trillence BackEnd\BackEnd\Auth\Auth\bin\Debug\net8.0\MailKit.dll
+C:\Users\ChrisGamerHun\Desktop\Trillence BackEnd\BackEnd\Auth\Auth\bin\Debug\net8.0\MimeKit.dll

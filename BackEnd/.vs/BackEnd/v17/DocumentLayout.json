@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\repositories\\services\\musicstreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\musicstreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\controllers\\musicstreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\musicstreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\service\\iservice\\iauth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\service\\iservice\\iauth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\repositories\\interfaces\\imusicstreaminginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\interfaces\\imusicstreaminginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IMusicStreamingInterface.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IMusicStreamingInterface.cs",
-              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IMusicStreamingInterface.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Interfaces\\IMusicStreamingInterface.cs",
-              "RelativeToolTip": "Repositories\\Interfaces\\IMusicStreamingInterface.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAD4vw4AAAAIAAAA",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Program.cs",
+              "RelativeDocumentMoniker": "Auth\\Auth\\Program.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Program.cs",
+              "RelativeToolTip": "Auth\\Auth\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T17:48:48.835Z",
+              "WhenOpened": "2024-04-28T16:11:38.625Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MusicStreamingController.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\MusicStreamingController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MusicStreamingController.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\MusicStreamingController.cs",
-              "RelativeToolTip": "Controllers\\MusicStreamingController.cs",
-              "ViewState": "AQIAAH0AAAAAAAAAAAD4v3sAAAAxAAAA",
+              "Title": "IAuth.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\IService\\IAuth.cs",
+              "RelativeDocumentMoniker": "Auth\\Auth\\Service\\IService\\IAuth.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\IService\\IAuth.cs",
+              "RelativeToolTip": "Auth\\Auth\\Service\\IService\\IAuth.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T17:48:40.494Z",
+              "WhenOpened": "2024-04-27T19:44:23.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\AuthService.cs",
+              "RelativeDocumentMoniker": "Auth\\Auth\\Service\\AuthService.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\AuthService.cs",
+              "RelativeToolTip": "Auth\\Auth\\Service\\AuthService.cs",
+              "ViewState": "AQIAANoAAAAAAAAAAAAIwOIAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T19:34:48.955Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MusicStreamingService.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\MusicStreamingService.cs",
-              "RelativeDocumentMoniker": "Repositories\\Services\\MusicStreamingService.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\MusicStreamingService.cs",
-              "RelativeToolTip": "Repositories\\Services\\MusicStreamingService.cs",
-              "ViewState": "AQIAAFgAAAAAAAAAAAD4v4UAAAAFAAAA",
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Auth\\Auth\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Auth\\Auth\\Controllers\\AuthController.cs",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGsAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T09:54:13.75Z",
+              "WhenOpened": "2024-04-27T19:34:46.985Z",
               "EditorCaption": ""
             }
           ]
