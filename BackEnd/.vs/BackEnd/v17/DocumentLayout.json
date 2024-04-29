@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\",
+  "WorkspaceRootPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\service\\iservice\\iauth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\service\\iservice\\iauth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\interfaces\\isonginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\interfaces\\isonginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,59 +26,77 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Program.cs",
-              "RelativeDocumentMoniker": "Auth\\Auth\\Program.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Program.cs",
-              "RelativeToolTip": "Auth\\Auth\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "SongController.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Controllers\\SongController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SongController.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Controllers\\SongController.cs",
+              "RelativeToolTip": "Controllers\\SongController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBkAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T16:11:38.625Z",
+              "WhenOpened": "2024-04-29T10:32:47.796Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IAuth.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\IService\\IAuth.cs",
-              "RelativeDocumentMoniker": "Auth\\Auth\\Service\\IService\\IAuth.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\IService\\IAuth.cs",
-              "RelativeToolTip": "Auth\\Auth\\Service\\IService\\IAuth.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA1AAAA",
+              "Title": "ISongInterface.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\ISongInterface.cs",
+              "RelativeDocumentMoniker": "Repositories\\Interfaces\\ISongInterface.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\ISongInterface.cs",
+              "RelativeToolTip": "Repositories\\Interfaces\\ISongInterface.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T19:44:23.883Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\AuthService.cs",
-              "RelativeDocumentMoniker": "Auth\\Auth\\Service\\AuthService.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Service\\AuthService.cs",
-              "RelativeToolTip": "Auth\\Auth\\Service\\AuthService.cs",
-              "ViewState": "AQIAANoAAAAAAAAAAAAIwOIAAABTAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T19:34:48.955Z",
+              "WhenOpened": "2024-04-29T10:32:43.637Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Auth\\Auth\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Auth\\Auth\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Auth\\Auth\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGsAAABEAAAA",
+              "Title": "SongService.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\SongService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\SongService.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\SongService.cs",
+              "RelativeToolTip": "Repositories\\Services\\SongService.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAYwCAAAAB9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T19:34:46.985Z",
+              "WhenOpened": "2024-04-29T10:32:40.333Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Auth\\Auth\\Program.cs",
+              "RelativeDocumentMoniker": "Auth\\Auth\\Program.cs",
+              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Auth\\Auth\\Program.cs",
+              "RelativeToolTip": "Auth\\Auth\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T16:11:38.625Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1524,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

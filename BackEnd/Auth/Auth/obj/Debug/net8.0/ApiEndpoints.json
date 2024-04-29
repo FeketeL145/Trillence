@@ -110,5 +110,37 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Auth.Controllers.AuthController",
+    "Method": "ForgotPassword",
+    "RelativePath": "auth/reset-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Auth.Models.Dtos.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Auth.Controllers.AuthController",
+    "Method": "SendResetTokenEmail",
+    "RelativePath": "auth/send-reset-email",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "emailAddress",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

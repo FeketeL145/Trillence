@@ -28,9 +28,18 @@ namespace BackEnd.Repositories.Services
             return song.AsDto();
         }
 
-        public async Task<IEnumerable<Song>> GetAll()
+        public async Task<IEnumerable<Song>> GetAll(int pageNumber)
         {
-            return await trillenceContext.Songs.ToListAsync();
+            var songs = await trillenceContext.Songs.OrderBy(x => x.Name).Skip((pageNumber - 1) * 10).Take(10).ToListAsync();
+
+            return songs;
+        }
+
+        public async Task<int> GetCount()
+        {
+            int songs = trillenceContext.Songs.Count();
+
+            return songs;
         }
 
         public async Task<Song> GetById(Guid id)

@@ -21,9 +21,14 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("allsong")]
-        public async Task<IEnumerable<Song>> Get()
+        public async Task<IEnumerable<Song>> Get(int pageNumber)
         {
-            return await songInterface.GetAll();
+            return await songInterface.GetAll(pageNumber);
+        }
+        [HttpGet("songcount")]
+        public async Task<int> GetCount()
+        {
+            return await songInterface.GetCount();
         }
 
         [HttpGet("songbyid/{id}")]

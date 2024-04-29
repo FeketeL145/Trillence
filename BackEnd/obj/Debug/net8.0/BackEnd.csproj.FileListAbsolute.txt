@@ -1635,6 +1635,3 @@ C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\obj\Debug\net8.0\refint
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\obj\Debug\net8.0\BackEnd.pdb
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\obj\Debug\net8.0\BackEnd.genruntimeconfig.cache
 C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\obj\Debug\net8.0\ref\BackEnd.dll
-C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\bin\Debug\net8.0\EmailTemplate.html
-C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\bin\Debug\net8.0\TrillenceBackground.png
-C:\Users\Fekete Laszlo\Desktop\Trillence Backend\BackEnd\bin\Debug\net8.0\TrillenceLogoLarge.svg

@@ -557,12 +557,86 @@
   },
   {
     "ContainingType": "MusicStreamingController",
+    "Method": "GetCurrentPlaylistSongDetailsAsync",
+    "RelativePath": "api/MusicStreaming/currentplaylist/{playlistId}/details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "playlistId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BackEnd.Models.SongDetailsForPlayer",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MusicStreamingController",
     "Method": "GetNextSong",
     "RelativePath": "api/MusicStreaming/next",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetCurrentSongFromPlaylist",
+    "RelativePath": "api/MusicStreaming/playlist/{playlistId}/current",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "playlistId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetNextSongFromPlaylist",
+    "RelativePath": "api/MusicStreaming/playlist/{playlistId}/next",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "playlistId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MusicStreamingController",
+    "Method": "GetPreviousSongFromPlaylist",
+    "RelativePath": "api/MusicStreaming/playlist/{playlistId}/previous",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "playlistId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -743,7 +817,7 @@
   {
     "ContainingType": "BackEnd.Controllers.PlaylistsongController",
     "Method": "DeleteById",
-    "RelativePath": "api/Playlistsong/deletebyid/{playlistid, songid}",
+    "RelativePath": "api/Playlistsong/deletebyid/{playlistid}/{songid}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -751,16 +825,11 @@
       {
         "Name": "playlistid",
         "Type": "System.Guid",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "songid",
         "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "playlistid, songid",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -881,7 +950,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[BackEnd.Models.Song, BackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -974,6 +1049,26 @@
   },
   {
     "ContainingType": "BackEnd.Controllers.SongController",
+    "Method": "GetCount",
+    "RelativePath": "api/Song/songcount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.SongController",
     "Method": "Put",
     "RelativePath": "api/Song/updatebyid/{id}",
     "HttpMethod": "PUT",
@@ -994,6 +1089,125 @@
     "ReturnTypes": [
       {
         "Type": "BackEnd.Models.Song",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.UserController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BackEnd.Models.Dtos.UserDto, BackEnd, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.UserController",
+    "Method": "CreateUser",
+    "RelativePath": "api/User",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createUserDto",
+        "Type": "BackEnd.Models.Dtos.CreateUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BackEnd.Models.Dtos.UserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.UserController",
+    "Method": "GetUserById",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BackEnd.Models.Dtos.UserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.UserController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "modifyUserDto",
+        "Type": "BackEnd.Models.Dtos.ModifyUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackEnd.Controllers.UserController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BackEnd.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
