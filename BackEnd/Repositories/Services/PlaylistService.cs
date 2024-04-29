@@ -14,11 +14,19 @@ namespace BackEnd.Repositories.Services
 
         public async Task<Playlist> Post(CreatePlaylistDto createPlaylistDto)
         {
+            var user = await trillenceContext.Users
+                .FirstOrDefaultAsync(u => u.Name == createPlaylistDto.Username);
+
+            if (user == null)
+            {
+                throw new ArgumentException("User not found");
+            }
+
             Playlist playlist = new Playlist
             {
                 Id = Guid.NewGuid(),
                 Name = createPlaylistDto.Name,
-                UserId = createPlaylistDto.UserId,
+                UserId = user.Id,
             };
 
             await trillenceContext.Playlists.AddAsync(playlist);
