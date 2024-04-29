@@ -37,8 +37,8 @@ function AllSongs({ onSongSelect }) {
       const response2 = await axios.get(
         `https://localhost:7106/api/Song/songcount`
       );
-
-      const songsWithAlbumData = await Promise.all(
+  
+      const newSongs = await Promise.all(
         response.data.map(async (song) => {
           const albumName = await fetchAlbumData(song.albumId);
           let albumImage = null;
@@ -48,13 +48,21 @@ function AllSongs({ onSongSelect }) {
           return { ...song, albumName, albumImage };
         })
       );
-      setSongs((prevSongs) => [...prevSongs, ...songsWithAlbumData]);
+  
+      // If it's the first page, set the songs directly
+      if (pageNumber === 1) {
+        setSongs(newSongs);
+      } else {
+        // If it's not the first page, append new songs to the existing ones
+        setSongs((prevSongs) => [...prevSongs, ...newSongs]);
+      }
+  
       setTotalItems(response2.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
       setFetchPending(false);
-      setIsLoading(false); // Set loading state to false after fetching data
+      setIsLoading(false);
     }
   };
   const fetchAlbumData = async (albumId) => {
