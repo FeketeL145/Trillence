@@ -54,8 +54,16 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
   useEffect(() => {
     fetchAllSongDetails();
     fetchCurrentSongDetails();
-  }, []);
 
+    // Cleanup function to stop audio when the component unmounts
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0; // Reset audio position
+      }
+    };
+  }, [playlistId]);
+  
   useEffect(() => {
     const fetchAlbumImage = async () => {
       try {
