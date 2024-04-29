@@ -17,6 +17,7 @@ function FooterMusicPlayer({ selectedSong }) {
   const [albumImage, setAlbumImage] = useState('https://via.placeholder.com/650');
   const audioRef = useRef(new Audio());
   const adjustedTimeRef = useRef(null);
+  const timeoutRef = useRef(null);
   const [PhoneFullScreen, setPhoneFullScreen] = useState(false);
   const fetchAllSongDetails = async () => {
     try {
@@ -218,14 +219,17 @@ function FooterMusicPlayer({ selectedSong }) {
 
   const handleProgressMouseUp = () => {
     if (userInteracted) {
-      setIsPlaying(true); // Resume playback if it was playing
+      setIsPlaying(true); // Resume playback
       if (adjustedTimeRef.current !== null) {
-        if (audioRef.current) audioRef.current.currentTime = adjustedTimeRef.current; // Set playback to adjusted time
-        adjustedTimeRef.current = null; // Reset adjusted time after use
+        if (audioRef.current) {
+          audioRef.current.currentTime = adjustedTimeRef.current; // Set adjusted time
+        }
+        adjustedTimeRef.current = null; // Reset adjusted time
       }
     }
   };
 
+  // Effect to manage audio event listeners and playback
   useEffect(() => {
     const updateProgress = () => {
       if (audioRef.current) {
@@ -240,7 +244,7 @@ function FooterMusicPlayer({ selectedSong }) {
           );
         }
 
-        if (currentTime >= duration) {
+        if (audioReady && currentTime >= duration) {
           handleNext(); // Automatically play the next song
           fetchCurrentSongDetails(); // Fetch details for the new song
         }
@@ -270,38 +274,22 @@ function FooterMusicPlayer({ selectedSong }) {
       if (audioRef.current) audioRef.current.pause();
     }
 
-    // Add event listeners
-    audioRef.current.addEventListener('timeupdate', updateProgress);
-    audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-    audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+    // Add event listeners to audio element
+    if (audioRef.current) {
+      audioRef.current.addEventListener('timeupdate', updateProgress);
+      audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
+      audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+    }
 
-    // Cleanup function to remove event listeners
-    const cleanup = () => {
-      // Pause the audio when the component unmounts
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-      // Remove event listeners
+    return () => {
+      // Cleanup when component unmounts or effect re-renders
       if (audioRef.current) {
         audioRef.current.removeEventListener('timeupdate', updateProgress);
         audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
         audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       }
     };
-
-    // Add event listeners and cleanup function
-    if (isPlaying && audioReady && userInteracted) {
-      if (audioRef.current) audioRef.current.play();
-    } else {
-      if (audioRef.current) audioRef.current.pause();
-    }
-
-    audioRef.current.addEventListener('timeupdate', updateProgress);
-    audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-    audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
-
-    return cleanup;
-  }, [userInteracted, isPlaying, duration]);
+  }, [isPlaying, audioReady, userInteracted, duration]); // Dependency array
 
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -318,18 +306,6 @@ function FooterMusicPlayer({ selectedSong }) {
   if (tracks.length === 0) {
     return null; // or render a loading indicator
   }
-
-  const Favourites = async (songId) => {
-    try {
-      const response = await axios.post("https://localhost:7106/api/Playlistsong/playlistsong", {
-        playlistId: "c9429c24-fc5a-4e30-85ea-b5b550a54e47",
-        songId: songId
-      });
-      console.log(response.data); // itt a válasz megjelenítése vagy további műveletek
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
  return (
     <div className="musicPlayer">

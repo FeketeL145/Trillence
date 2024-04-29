@@ -47,7 +47,7 @@ export const SidebarDataLogin = [
 
 export const SidebarDataAdmin = [
   {
-    title: "Admin Panel",
+    title: "Admin panel",
     path: "/admin-panel",
     icon: <FaIcons.FaLock />,
     requireLoggedIn: true,

@@ -240,7 +240,7 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
           );
         }
 
-        if (currentTime >= duration) {
+        if (audioReady && currentTime >= duration) {
           handleNext(); // Automatically play the next song
           fetchCurrentSongDetails(); // Fetch details for the new song
         }
@@ -270,38 +270,22 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
       if (audioRef.current) audioRef.current.pause();
     }
 
-    // Add event listeners
-    audioRef.current.addEventListener('timeupdate', updateProgress);
-    audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-    audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+    // Add event listeners to audio element
+    if (audioRef.current) {
+      audioRef.current.addEventListener('timeupdate', updateProgress);
+      audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
+      audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+    }
 
-    // Cleanup function to remove event listeners
-    const cleanup = () => {
-      // Pause the audio when the component unmounts
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-      // Remove event listeners
+    return () => {
+      // Cleanup when component unmounts or effect re-renders
       if (audioRef.current) {
         audioRef.current.removeEventListener('timeupdate', updateProgress);
         audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
         audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       }
     };
-
-    // Add event listeners and cleanup function
-    if (isPlaying && audioReady && userInteracted) {
-      if (audioRef.current) audioRef.current.play();
-    } else {
-      if (audioRef.current) audioRef.current.pause();
-    }
-
-    audioRef.current.addEventListener('timeupdate', updateProgress);
-    audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-    audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
-
-    return cleanup;
-  }, [userInteracted, isPlaying, duration]);
+  }, [isPlaying, audioReady, userInteracted, duration]); // Dependency array
 
   const formatTime = (time) => {
     if (time && !isNaN(time)) {

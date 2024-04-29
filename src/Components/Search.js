@@ -1,131 +1,58 @@
-import React, { useEffect, useState } from "react";
-import "./AllSongs.css";
+import React, { useState, useEffect } from 'react';
+import stringSimilarity from 'string-similarity'; // Install string-similarity package
 
-function Search({ onSongSelect }) {
+function Search() {
   const [songs, setSongs] = useState([]);
-  const [isFetchPending, setFetchPending] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setFetchPending(true);
-        const response = await fetch("https://localhost:7106/api/Connection/allsongdetails", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-        });
-        const songsData = await response.json();
-        songsData.sort((a, b) => a.mainArtist.artistName.localeCompare(b.mainArtist.artistName));
-        setSongs(songsData);
-        setFilteredSongs(songsData);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setFetchPending(false);
-      }
-    };
-
-    fetchData();
+    // Fetch song data from the API endpoint
+    fetch('https://localhost:7106/api/Song/allsong')
+      .then(response => response.json())
+      .then(data => setSongs(data))
+      .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  useEffect(() => {
-    const filterSongs = () => {
-      if (!searchQuery.trim()) {
-        setFilteredSongs(songs);
-        return;
-      }
+  const handleSearch = event => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
 
-      const formattedQuery = searchQuery.trim().toLowerCase();
-      const filtered = songs.filter(album => {
-        const artistName = album.mainArtist.artistName.toLowerCase();
+    // Filter songs based on forgiving matches and sort by similarity score
+    const forgivingMatches = songs.filter(song => {
+      const nameSimilarity = song.name ? stringSimilarity.compareTwoStrings(query, song.name.toLowerCase()) : 0;
+      const artistSimilarity = song.artist ? stringSimilarity.compareTwoStrings(query, song.artist.toLowerCase()) : 0;
+      return nameSimilarity > 0.125 || artistSimilarity > 0.125;
+    }).sort((a, b) => {
+      const nameSimilarityA = a.name ? stringSimilarity.compareTwoStrings(query, a.name.toLowerCase()) : 0;
+      const artistSimilarityA = a.artist ? stringSimilarity.compareTwoStrings(query, a.artist.toLowerCase()) : 0;
+      const nameSimilarityB = b.name ? stringSimilarity.compareTwoStrings(query, b.name.toLowerCase()) : 0;
+      const artistSimilarityB = b.artist ? stringSimilarity.compareTwoStrings(query, b.artist.toLowerCase()) : 0;
+      const similarityA = Math.max(nameSimilarityA, artistSimilarityA);
+      const similarityB = Math.max(nameSimilarityB, artistSimilarityB);
+      return similarityB - similarityA;
+    });
 
-        // Check if the artist name matches
-        if (artistName.includes(formattedQuery)) {
-          return true;
-        }
-
-        // Iterate through album songs and check each song's name
-        for (let i = 0; i < album.songs.length; i++) {
-          const songName = album.songs[i].songName.toLowerCase();
-          const songDistance = levenshteinDistance(songName, formattedQuery);
-
-          // Consider a match if the distance is below a certain threshold
-          const threshold = 3; // Adjust as needed
-          if (songDistance <= threshold) {
-            return true; // Return true if any song matches
-          }
-        }
-
-        return false; // No match found
-      });
-
-      setFilteredSongs(filtered);
-    };
-
-    filterSongs();
-  }, [searchQuery, songs]);
-
-  const handleSongClick = (song) => {
-    onSongSelect(song);
-  };
-
-  const levenshteinDistance = (s1, s2) => {
-    const len1 = s1.length;
-    const len2 = s2.length;
-
-    const matrix = [];
-    for (let i = 0; i <= len1; i++) {
-      matrix[i] = [i];
-    }
-    for (let j = 0; j <= len2; j++) {
-      matrix[0][j] = j;
-    }
-
-    for (let i = 1; i <= len1; i++) {
-      for (let j = 1; j <= len2; j++) {
-        const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j - 1] + cost
-        );
-      }
-    }
-
-    return matrix[len1][len2];
+    setFilteredSongs(forgivingMatches);
   };
 
   return (
-    <div className="embedFrame overflow-auto">
+    <div>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search songs..."
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className="search-input"
+        onChange={handleSearch}
       />
-      {isFetchPending ? (
-        <div className="spinner-border"></div>
-      ) : (
-        <div className="song-grid hiddenscrollbar">
-          {filteredSongs.map((album, index) =>
-            album.songs.map((song, songIndex) => (
-              <div key={`${index}-${songIndex}`} className="songcard card">
-                <button onClick={() => handleSongClick(song)}>
-                  <div className="card-body">
-                    <h5 className="card-title">{song.songName.replace(/^[^-]*-/, '')}</h5>
-                    <p className="card-text">{album.mainArtist.artistName}</p>
-                  </div>
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+      <ul>
+        {filteredSongs.map(song => (
+          <li key={song.id}>
+            <div>{song.name}</div>
+            <div>{song.artist}</div>
+            <div>{song.length}</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
