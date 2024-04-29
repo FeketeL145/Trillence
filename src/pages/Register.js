@@ -246,7 +246,9 @@ function Register() {
             )}
             <div className="d-grid">
               <button type="submit" className="btn btn-primary">
-                {showVerification ? "Verify" : "Sign Up"}
+                <span className="whitetext">
+                  {showVerification ? "Verify" : "Sign Up"}
+                </span>
               </button>
             </div>
             {!showVerification && (
@@ -275,10 +277,10 @@ function Register() {
           </h1>
           <div className="d-grid mt-3">
             <NavLink to={`/`} className="btn btn-primary mb-3">
-              Go back
+              <span className="whitetext">Go back</span>
             </NavLink>
             <NavLink to={`/sign-out`} className="btn btn-danger">
-              Sign out
+              <span className="whitetext">Sign out</span>
             </NavLink>
           </div>
         </div>

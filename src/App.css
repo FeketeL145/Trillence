@@ -1,42 +1,43 @@
-/*Segít megtalálni a dolgoknak a helyzetét*/
-.bt{
+/*Testing*/
+.bt {
   border: 1px solid black;
 }
-.btw{
+.btw {
   border: 1px solid white;
 }
 
-a{
+/*Rest of the css*/
+
+a {
   text-decoration: none;
   color: black;
 }
 
 .bg-dark {
-  color: #F9F6EE;
+  color: #f9f6ee;
 }
-.text-justify{
+.text-justify {
   text-align: justify;
 }
 
-
-.AppDisplayPage{
+.AppDisplayPage {
   padding-left: 15.6rem;
   padding-bottom: 5rem;
   width: 100%;
   height: 100%;
   position: fixed;
   opacity: 1;
-  background-image: url('./Components/img/TrillenceBackground.png');
-  background-size:cover;
+  background-image: url("./Components/img/TrillenceBackground.png");
+  background-size: cover;
 }
 
 @media screen and (max-width: 960px) {
-  .AppDisplayPage{
-    padding-left:0rem;
+  .AppDisplayPage {
+    padding-left: 0rem;
   }
 }
 
-.embedFrame{
+.embedFrame {
   width: calc(100% - 15.6rem);
   height: calc(100% - 5rem);
   overflow: hidden;
@@ -44,50 +45,39 @@ a{
 }
 
 @media screen and (max-width: 960px) {
-  .embedFrame{
+  .embedFrame {
     width: 100%;
   }
 }
 
-.hiddenscrollbar{
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
+.hiddenscrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .hiddenscrollbar::-webkit-scrollbar {
-  display: none; /*Chrome*/
+  display: none;
 }
 
-.proba1{
+.proba1 {
   max-height: 50vh;
   overflow: scroll;
 }
-
 
 /*Styling all of the scrollbars*/
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: darkgray; 
+  background: darkgray;
   border-radius: 20px;
 }
- 
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 20px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
-
-
-
-
-
-/*FORMAT CODE SHIFT+ALT+F*/

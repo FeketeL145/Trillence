@@ -1,7 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './FooterMusicPlayer.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./FooterMusicPlayer.css";
 import axios from "axios";
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect";
 function FooterMusicPlayer({ selectedSong }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
@@ -13,42 +18,52 @@ function FooterMusicPlayer({ selectedSong }) {
   const [tracks, setTracks] = useState([]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [currentSongDetails, setCurrentSongDetails] = useState({ artistName: '', songName: '', albumName: '' });
-  const [albumImage, setAlbumImage] = useState('https://via.placeholder.com/650');
+  const [currentSongDetails, setCurrentSongDetails] = useState({
+    artistName: "",
+    songName: "",
+    albumName: "",
+  });
+  const [albumImage, setAlbumImage] = useState(
+    "https://via.placeholder.com/650"
+  );
   const audioRef = useRef(new Audio());
   const adjustedTimeRef = useRef(null);
   const timeoutRef = useRef(null);
   const [PhoneFullScreen, setPhoneFullScreen] = useState(false);
   const fetchAllSongDetails = async () => {
     try {
-      const response = await fetch('https://localhost:7106/api/Connection/allsongdetails');
+      const response = await fetch(
+        "https://localhost:7106/api/Connection/allsongdetails"
+      );
       if (!response.ok) {
-        throw new Error('Failed to fetch all song details');
+        throw new Error("Failed to fetch all song details");
       }
       const data = await response.json();
-      const songDetails = data.flatMap(album =>
-        album.songs.map(song => ({
+      const songDetails = data.flatMap((album) =>
+        album.songs.map((song) => ({
           artistName: album.mainArtist.artistName,
           songName: song.songName,
-          albumName: album.albumName
+          albumName: album.albumName,
         }))
       );
       setTracks(songDetails);
     } catch (error) {
-      console.error('Error fetching all song details:', error);
+      console.error("Error fetching all song details:", error);
     }
   };
 
   const fetchCurrentSongDetails = async () => {
     try {
-      const response = await fetch('https://localhost:7106/api/MusicStreaming/current/details');
+      const response = await fetch(
+        "https://localhost:7106/api/MusicStreaming/current/details"
+      );
       if (!response.ok) {
-        throw new Error('Failed to fetch current song details');
+        throw new Error("Failed to fetch current song details");
       }
       const data = await response.json();
       setCurrentSongDetails(data);
     } catch (error) {
-      console.error('Error fetching current song details:', error);
+      console.error("Error fetching current song details:", error);
     }
   };
 
@@ -61,16 +76,18 @@ function FooterMusicPlayer({ selectedSong }) {
     const fetchAlbumImage = async () => {
       try {
         const albumName = currentSongDetails.albumName; // Get the current album name
-        const response = await fetch(`https://localhost:7106/AlbumImage/${albumName}`);
+        const response = await fetch(
+          `https://localhost:7106/AlbumImage/${albumName}`
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch album image');
+          throw new Error("Failed to fetch album image");
         }
         const imageBlob = await response.blob(); // Fetch the image
         const objectUrl = URL.createObjectURL(imageBlob); // Create a URL for the image
         setAlbumImage(objectUrl); // Update the state with the new image URL
       } catch (error) {
-        console.error('Error fetching album image:', error);
-        setAlbumImage('https://via.placeholder.com/650'); // Fallback image in case of error
+        console.error("Error fetching album image:", error);
+        setAlbumImage("https://via.placeholder.com/650"); // Fallback image in case of error
       }
     };
 
@@ -83,16 +100,18 @@ function FooterMusicPlayer({ selectedSong }) {
     if (userInteracted) {
       const loadAudio = async () => {
         try {
-          const response = await fetch('https://localhost:7106/api/MusicStreaming/current');
+          const response = await fetch(
+            "https://localhost:7106/api/MusicStreaming/current"
+          );
           if (!response.ok) {
-            throw new Error('Failed to load audio file');
+            throw new Error("Failed to load audio file");
           }
           const audioBlob = await response.blob();
           const objectUrl = URL.createObjectURL(audioBlob);
           audioRef.current.src = objectUrl;
           audioRef.current.load();
         } catch (error) {
-          console.error('Error loading audio:', error);
+          console.error("Error loading audio:", error);
         }
       };
       loadAudio();
@@ -103,27 +122,27 @@ function FooterMusicPlayer({ selectedSong }) {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to load audio file');
+        throw new Error("Failed to load audio file");
       }
       const audioBlob = await response.blob();
       const objectUrl = URL.createObjectURL(audioBlob);
       audioRef.current.src = objectUrl;
       audioRef.current.load();
     } catch (error) {
-      console.error('Error loading audio:', error);
+      console.error("Error loading audio:", error);
     }
   };
 
   useEffect(() => {
     const loadAudioByURL = async () => {
-      if (selectedSong !== '') {
+      if (selectedSong !== "") {
         try {
           // Construct the URL for fetching audio
-          const encodedFileName = encodeURIComponent(selectedSong) + '.mp3';
+          const encodedFileName = encodeURIComponent(selectedSong) + ".mp3";
           const audioUrl = `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
           const response = await fetch(audioUrl);
           if (!response.ok) {
-            throw new Error('Failed to load audio file');
+            throw new Error("Failed to load audio file");
           }
           const audioBlob = await response.blob();
           const objectUrl = await URL.createObjectURL(audioBlob);
@@ -131,29 +150,35 @@ function FooterMusicPlayer({ selectedSong }) {
           await audioRef.current.load();
 
           // Fetch song details by name
-          const songDetailsResponse = await fetch(`https://localhost:7106/api/Connection/songdetailsbyname/${selectedSong}`);
+          const songDetailsResponse = await fetch(
+            `https://localhost:7106/api/Connection/songdetailsbyname/${selectedSong}`
+          );
           if (!songDetailsResponse.ok) {
-            throw new Error('Failed to fetch song details');
+            throw new Error("Failed to fetch song details");
           }
           const songDetailsData = await songDetailsResponse.json();
 
           // Update song details in state
           setCurrentSongDetails({
             artistName: songDetailsData.mainArtist.artistName,
-            songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ''),
-            albumName: songDetailsData.albumName
+            songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ""),
+            albumName: songDetailsData.albumName,
           });
 
           // Fetch album image
-          const albumImageResponse = await fetch(`https://localhost:7106/AlbumImage/${encodeURIComponent(songDetailsData.albumName)}`);
+          const albumImageResponse = await fetch(
+            `https://localhost:7106/AlbumImage/${encodeURIComponent(
+              songDetailsData.albumName
+            )}`
+          );
           if (!albumImageResponse.ok) {
-            throw new Error('Failed to fetch album image');
+            throw new Error("Failed to fetch album image");
           }
           const albumImageBlob = await albumImageResponse.blob();
           const albumImageObjectUrl = URL.createObjectURL(albumImageBlob);
           setAlbumImage(albumImageObjectUrl);
         } catch (error) {
-          console.error('Error loading audio:', error);
+          console.error("Error loading audio:", error);
         }
       }
     };
@@ -198,8 +223,8 @@ function FooterMusicPlayer({ selectedSong }) {
       audioRef.current.pause(); // If it was paused, pause it again
       togglePlayPause();
     }
-      await loadAudio('https://localhost:7106/api/MusicStreaming/previous');
-      await fetchCurrentSongDetails();
+    await loadAudio("https://localhost:7106/api/MusicStreaming/previous");
+    await fetchCurrentSongDetails();
   };
 
   const handleNext = async () => {
@@ -207,8 +232,8 @@ function FooterMusicPlayer({ selectedSong }) {
       audioRef.current.pause(); // If it was paused, pause it again
       togglePlayPause();
     }
-      await loadAudio('https://localhost:7106/api/MusicStreaming/next');
-      await fetchCurrentSongDetails();
+    await loadAudio("https://localhost:7106/api/MusicStreaming/next");
+    await fetchCurrentSongDetails();
   };
 
   const handleProgressChange = (e) => {
@@ -239,7 +264,7 @@ function FooterMusicPlayer({ selectedSong }) {
         if (progressBarRef.current) {
           progressBarRef.current.value = currentTime;
           progressBarRef.current.style.setProperty(
-            '--range-progress',
+            "--range-progress",
             `${(currentTime / duration) * 100}%`
           );
         }
@@ -276,17 +301,23 @@ function FooterMusicPlayer({ selectedSong }) {
 
     // Add event listeners to audio element
     if (audioRef.current) {
-      audioRef.current.addEventListener('timeupdate', updateProgress);
-      audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-      audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+      audioRef.current.addEventListener("timeupdate", updateProgress);
+      audioRef.current.addEventListener("canplaythrough", handleCanPlayThrough);
+      audioRef.current.addEventListener("loadedmetadata", onLoadedMetadata);
     }
 
     return () => {
       // Cleanup when component unmounts or effect re-renders
       if (audioRef.current) {
-        audioRef.current.removeEventListener('timeupdate', updateProgress);
-        audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
-        audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
+        audioRef.current.removeEventListener("timeupdate", updateProgress);
+        audioRef.current.removeEventListener(
+          "canplaythrough",
+          handleCanPlayThrough
+        );
+        audioRef.current.removeEventListener(
+          "loadedmetadata",
+          onLoadedMetadata
+        );
       }
     };
   }, [isPlaying, audioReady, userInteracted, duration]); // Dependency array
@@ -299,7 +330,7 @@ function FooterMusicPlayer({ selectedSong }) {
       const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
       return `${formatMinutes}:${formatSeconds}`;
     }
-    return '00:00';
+    return "00:00";
   };
 
   // Render only when tracks are available
@@ -307,45 +338,56 @@ function FooterMusicPlayer({ selectedSong }) {
     return null; // or render a loading indicator
   }
 
- return (
+  return (
     <div className="musicPlayer">
       <BrowserView className=" d-flex align-items-stretch justify-content-between text-nowrap">
         <div className="col row">
-          <img className="img-fluid musicThumbnail" src={albumImage} alt="Music thumbnail" />
+          <img
+            className="img-fluid musicThumbnail"
+            src={albumImage}
+            alt="Music thumbnail"
+          />
           <div className="col-8">
             <div className="row">
-              <p className="text-start whitetextbold text-wrap">{currentSongDetails.songName}</p>
+              <p className="text-start whitetextbold text-wrap">
+                {currentSongDetails.songName}
+              </p>
             </div>
             <div className="row">
-              <p className="text-start whitetext" style={{ fontSize: "12px", marginTop: "-15px" }}>{currentSongDetails.artistName}</p>
+              <p
+                className="text-start whitetext"
+                style={{ fontSize: "12px", marginTop: "-15px" }}
+              >
+                {currentSongDetails.artistName}
+              </p>
             </div>
           </div>
         </div>
 
         <div className="align-items-center col footerdiv text-center text-white p-2">
           <div>
-            <button onClick={handlePrevious} className='ms-2 btn'>
+            <button onClick={handlePrevious} className="ms-2 btn">
               <i className="fa-solid fa-backward-fast playericon" />
             </button>
-            <button onClick={skipBackward} className='ms-2 btn'>
+            <button onClick={skipBackward} className="ms-2 btn">
               <i className="fa-solid fa-backward-step playericon" />
             </button>
-            <button onClick={togglePlayPause} className='ms-2 btn'>
+            <button onClick={togglePlayPause} className="ms-2 btn">
               {isPlaying ? (
                 <i className="fa-solid fa-pause playericon" />
               ) : (
                 <i className="fa-solid fa-play playericon" />
               )}
             </button>
-            <button onClick={skipForward} className='ms-2 btn'>
+            <button onClick={skipForward} className="ms-2 btn">
               <i className="fa-solid fa-forward-step playericon" />
             </button>
-            <button onClick={handleNext} className='ms-2 btn'>
+            <button onClick={handleNext} className="ms-2 btn">
               <i className="fa-solid fa-forward-fast playericon " />
             </button>
           </div>
 
-          <div className="row text-white" style={{ height: '2rem', flex: 3 }}>
+          <div className="row text-white" style={{ height: "2rem", flex: 3 }}>
             <div className="col-2">
               <span className="time current">{formatTime(timeProgress)}</span>
             </div>
@@ -356,7 +398,7 @@ function FooterMusicPlayer({ selectedSong }) {
                 defaultValue="0"
                 onChange={handleProgressChange}
                 onMouseUp={handleProgressMouseUp}
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             </div>
             <div className="col-2">
@@ -376,7 +418,7 @@ function FooterMusicPlayer({ selectedSong }) {
                   audioRef.current.volume = newMuteStatus ? 0 : volume / 100; // Adjusts the audio volume
                 }
               }}
-              className='btn '
+              className="btn "
             >
               {muteVolume || volume < 1 ? (
                 <i className="fa-solid fa-volume-xmark playericon" />
@@ -410,88 +452,104 @@ function FooterMusicPlayer({ selectedSong }) {
                 }
               }}
             />
-
           </div>
         </div>
       </BrowserView>
       <MobileView className=" d-flex align-items-stretch justify-content-between text-nowrap">
         {PhoneFullScreen ? (
-          <div className='row col'>
-            <div className='row'>
-              <button className='fa-solid fa-arrow-down playericon' onClick={() => setPhoneFullScreen(false)}></button>
+          <div className="row col">
+            <div className="row">
+              <button
+                className="fa-solid fa-arrow-down playericon"
+                onClick={() => setPhoneFullScreen(false)}
+              ></button>
             </div>
-            <div className='row'>
-              <img className="img-fluid musicThumbnailFullScreen" src={albumImage} alt="Music thumbnail" />
+            <div className="row">
+              <img
+                className="img-fluid musicThumbnailFullScreen"
+                src={albumImage}
+                alt="Music thumbnail"
+              />
             </div>
-            <div className='row'>
+            <div className="row">
               <input
                 type="range"
                 ref={progressBarRef}
                 defaultValue="0"
                 onChange={handleProgressChange}
                 onMouseUp={handleProgressMouseUp}
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             </div>
-            <div className='row'>
-              <div className='col align-self-start text-start'>
+            <div className="row">
+              <div className="col align-self-start text-start">
                 <span className="time current">{formatTime(timeProgress)}</span>
               </div>
-              <div className='col align-self-end text-end'>
+              <div className="col align-self-end text-end">
                 <span className="time">{formatTime(duration)}</span>
               </div>
             </div>
-            <div className='row'>
-              <button onClick={handlePrevious} className='ms-2 btn col'>
+            <div className="row">
+              <button onClick={handlePrevious} className="ms-2 btn col">
                 <i className="fa-solid fa-backward-fast playericon" />
               </button>
-              <button onClick={skipBackward} className='ms-2 btn col'>
+              <button onClick={skipBackward} className="ms-2 btn col">
                 <i className="fa-solid fa-backward-step playericon" />
               </button>
-              <button onClick={togglePlayPause} className='ms-2 btn col'>
+              <button onClick={togglePlayPause} className="ms-2 btn col">
                 {isPlaying ? (
                   <i className="fa-solid fa-pause playericon" />
                 ) : (
                   <i className="fa-solid fa-play playericon" />
                 )}
               </button>
-              <button onClick={skipForward} className='ms-2 btn col'>
+              <button onClick={skipForward} className="ms-2 btn col">
                 <i className="fa-solid fa-forward-step playericon" />
               </button>
-              <button onClick={handleNext} className='ms-2 btn col'>
+              <button onClick={handleNext} className="ms-2 btn col">
                 <i className="fa-solid fa-forward-fast playericon " />
               </button>
             </div>
           </div>
         ) : (
           <div className="row col">
-            <img className="img-fluid musicThumbnail" src={albumImage} alt="Music thumbnail" />
+            <img
+              className="img-fluid musicThumbnail"
+              src={albumImage}
+              alt="Music thumbnail"
+            />
             <div className="col">
               <div className="row">
-                <p className="text-start whitetextbold">{currentSongDetails.songName}</p>
+                <p className="text-start whitetextbold">
+                  {currentSongDetails.songName}
+                </p>
               </div>
               <div className="row">
-                <p className="text-start whitetext" style={{ fontSize: "12px", marginTop: "-15px" }}>{currentSongDetails.artistName}</p>
+                <p
+                  className="text-start whitetext"
+                  style={{ fontSize: "12px", marginTop: "-15px" }}
+                >
+                  {currentSongDetails.artistName}
+                </p>
               </div>
             </div>
-            <div className='col'>
-              <button onClick={togglePlayPause} className='ms-2 btn'>
+            <div className="col">
+              <button onClick={togglePlayPause} className="ms-2 btn">
                 {isPlaying ? (
                   <i className="fa-solid fa-pause playericon" />
                 ) : (
                   <i className="fa-solid fa-play playericon" />
                 )}
               </button>
-              <button className='fa-solid fa-arrow-up btn' onClick={() => setPhoneFullScreen(true)}></button>
+              <button
+                className="fa-solid fa-arrow-up btn"
+                onClick={() => setPhoneFullScreen(true)}
+              ></button>
             </div>
           </div>
         )}
-
       </MobileView>
     </div>
-
-
-
   );
 }
 

@@ -12,13 +12,14 @@
 }
 
 .song-card {
-  width: 25vw;
-  height: 25vw;
+  width: 20vw;
+  height: 20vw;
   background-size: contain;
   box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.125); /* White inner shadow */
-  border-radius: 20px;
+  border-radius: 1vw;
+  padding: 0.5vw;
 }
 .song-details {
-  backdrop-filter: blur(5px) brightness(80%);
-  border-radius: 20px;
+  backdrop-filter: blur(15px) saturate(0.8) brightness(0.8);
+  border-radius: 0.75vw;
 }

@@ -1,51 +1,50 @@
-.playericon{
-    width: 0.8rem;
-    height: 0.8rem;
-    color: rgba(255,255,255,1);
+.playericon {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: rgba(255, 255, 255, 1);
 }
 
-.volumeslider{
-    text-align: left;
+.volumeslider {
+  text-align: left;
 }
 
-.musicThumbnail{
-    height: 5rem;
-    width: auto;
+.musicThumbnail {
+  height: 5rem;
+  width: auto;
 }
 
 .musicPlayer {
-    width: calc(100% - 15.6rem);
-    height: 5rem;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    background: rgba(21, 23, 28, 0.7);
-    backdrop-filter: blur(15px);
-
+  width: calc(100% - 15.6rem);
+  height: 5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: rgba(21, 23, 28, 0.7);
+  backdrop-filter: blur(15px);
 }
 
 @media screen and (max-width: 960px) {
-    .musicPlayer {
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        font-size: 16px;
-        overflow-y: hidden;
-        height: 3rem;
-        overflow: scroll;
-    }
+  .musicPlayer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-size: 16px;
+    overflow-y: hidden;
+    height: 3rem;
+    overflow: scroll;
+  }
 
-    .MusicPlayerFullScreen {
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        font-size: 16px;
-        overflow-y: hidden;
-        height: 100vh;
-    }
-    .musicThumbnail {
-        height: 3rem;
-        width: auto;
-        border-radius: 10px;
-    }
+  .MusicPlayerFullScreen {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-size: 16px;
+    overflow-y: hidden;
+    height: 100vh;
+  }
+  .musicThumbnail {
+    height: 3rem;
+    width: auto;
+    border-radius: 10px;
+  }
 }

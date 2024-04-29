@@ -1,10 +1,10 @@
-import Cookies from 'js-cookie';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ChangeUsername() {
-  const [newusername, setNewusername] = useState('');
-  const [error, setError] = useState('');
+  const [newusername, setNewusername] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleUsernameModification = async (e) => {
@@ -12,34 +12,34 @@ function ChangeUsername() {
 
     try {
       const response = await fetch(
-        'https://localhost:7172/auth/change-username',
+        "https://localhost:7172/auth/change-username",
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            oldUsername: Cookies.get('username'),
+            oldUsername: Cookies.get("username"),
             newUsername: newusername,
           }),
         }
       );
 
       if (response.ok) {
-        console.log('Username changed successfully');
-        setError('Username changed successfully');
+        console.log("Username changed successfully");
+        setError("Username changed successfully");
 
-        Cookies.set('username', newusername, { path: '/' });
+        Cookies.set("username", newusername, { path: "/", expires: 7 });
 
-        setNewusername('');
+        setNewusername("");
 
-        navigate('/profile');
+        navigate("/profile");
       } else {
-        console.error('Failed to change username');
-        setError('Failed to change username');
+        console.error("Failed to change username");
+        setError("Failed to change username");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       setError(`Error: ${error.message}`);
     }
   };
@@ -49,17 +49,18 @@ function ChangeUsername() {
       <div
         className="card p-5"
         style={{
-          backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
-          color: 'white',
-          boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-          width: '30rem',
+          backdropFilter: "blur(10px)",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          color: "white",
+          boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+          width: "30rem",
         }}
       >
         <form onSubmit={handleUsernameModification}>
           <h3 className="whitetextbold text-center">Change Username</h3>
           <p className="whitetext text-center">
-            Please enter your new username in the input field, then press change username.
+            Please enter your new username in the input field, then press change
+            username.
           </p>
           <p className="whitetext">{error}</p>
           <div className="mb-3">
@@ -73,7 +74,7 @@ function ChangeUsername() {
           </div>
           <div className="d-grid pt-4">
             <button type="submit" className="btn btn-primary">
-              Change username
+              <span className="whitetext">Change username</span>
             </button>
           </div>
         </form>

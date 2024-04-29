@@ -105,12 +105,12 @@ const Sidebar = () => {
       <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
           {windowWidth < 960 && (
-            <NavIcon to="#">
-              <FaIcons.FaBars onClick={showSidebar} />
+            <NavIcon to="#" onClick={showSidebar} sidebar={sidebar}>
+              <FaIcons.FaBars />
             </NavIcon>
           )}
         </Nav>
-        <SidebarNav sidebar={sidebar}>
+        <SidebarNav sidebar={sidebar ? 1 : 0}>
           <SidebarWrap>
             {windowWidth < 960 && (
               <NavIcon to="#">

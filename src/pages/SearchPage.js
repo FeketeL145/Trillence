@@ -1,10 +1,4 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import {
-  Routes,
-  Route,
-  useNavigationType,
-  useLocation,
-} from "react-router-dom";
 import SearchBar from "../Components/Search";
 
 function SearchPage() {

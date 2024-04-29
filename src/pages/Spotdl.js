@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LoadingComponent from "../Components/LoadingComponent";
 import Cookies from "js-cookie";
 import { NavLink } from "react-router-dom";
 
@@ -6,7 +7,7 @@ const SpotDL = () => {
   const [localhostAvailable, setLocalhostAvailable] = useState(false);
   const [loading, setLoading] = useState(true); // Initially, set loading to true
   const isAdminCookie = Cookies.get("isAdmin") === "true"; // Convert cookie to boolean
-  const [isUserAdmin, setUserAdmin] = useState(isAdminCookie);
+  const [isUserAdmin] = useState(isAdminCookie);
 
   useEffect(() => {
     const checkLocalhost = () => {
@@ -37,29 +38,7 @@ const SpotDL = () => {
   return (
     <div>
       {loading ? (
-        <div
-          className="embedFrame"
-          style={{
-            color: "white",
-            backdropFilter: "blur(10px)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div
-            className="spinner-grow spinner-grow-sm m-2 text-white"
-            role="status"
-          ></div>
-          <div
-            className="spinner-grow spinner-grow-sm m-2 text-white"
-            role="status"
-          ></div>
-          <div
-            className="spinner-grow spinner-grow-sm m-2 text-white"
-            role="status"
-          ></div>
-        </div>
+        <LoadingComponent />
       ) : isUserAdmin ? (
         localhostAvailable ? (
           <iframe
@@ -82,8 +61,8 @@ const SpotDL = () => {
               className="whitetext text-center ps-2"
               style={{ fontSize: "30px" }}
             >
-              SpotDL is not available, please make sure it was installed
-              correctly on the host machine.
+              SpotDL is not available, please make sure it's running on the host
+              machine.
             </p>
           </div>
         )

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import LoadingComponent from "../Components/LoadingComponent";
 import axios from "axios";
 import "./AllSongs.css";
 
-function AllSongs({ onSongSelect }) {
+function AllSongs({ onSongSelect, updateSongs }) {
   const [songs, setSongs] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
   const [albumImages, setAlbumImages] = useState({});
@@ -12,20 +13,24 @@ function AllSongs({ onSongSelect }) {
   const [albumName, setAlbumName] = useState("");
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
-  
-
   useEffect(() => {
     if (pageNumber != 1) {
       fetchData(pageNumber);
-    }
-    else{
+    } else {
       fetchData(1);
     }
   }, [pageNumber]); // Make useEffect depend on pageNumber
 
+  useEffect(() => {
+    if (pageNumber === 1) {
+      updateSongs(songs);
+    }
+  });
+
   const loadMore = () => {
     const nextPageNumber = pageNumber + 1;
     setPageNumber(nextPageNumber); // Update pageNumber to trigger useEffect
+    updateSongs(songs);
   };
 
   const fetchData = async (pageNumber) => {
@@ -37,7 +42,7 @@ function AllSongs({ onSongSelect }) {
       const response2 = await axios.get(
         `https://localhost:7106/api/Song/songcount`
       );
-  
+
       const newSongs = await Promise.all(
         response.data.map(async (song) => {
           const albumName = await fetchAlbumData(song.albumId);
@@ -48,7 +53,7 @@ function AllSongs({ onSongSelect }) {
           return { ...song, albumName, albumImage };
         })
       );
-  
+
       // If it's the first page, set the songs directly
       if (pageNumber === 1) {
         setSongs(newSongs);
@@ -56,7 +61,7 @@ function AllSongs({ onSongSelect }) {
         // If it's not the first page, append new songs to the existing ones
         setSongs((prevSongs) => [...prevSongs, ...newSongs]);
       }
-  
+
       setTotalItems(response2.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -103,7 +108,7 @@ function AllSongs({ onSongSelect }) {
   return (
     <div className="embedFrame overflow-auto">
       {isLoading ? ( // Conditionally render loading state
-        <div>Loading...</div>
+        <LoadingComponent />
       ) : (
         <div className="song-grid hiddenscrollbar">
           {songs.map((song, index) => (

@@ -132,12 +132,12 @@ function ProfileDisplay() {
   const refreshSongs = async (e) => {
     const res = axios.get("https://localhost:7106/api/Metadata");
 
-    if(res.ok){
+    if (res.ok) {
       alert("Songs reloaded successfully.");
-    }else{
+    } else {
       alert("Failed to reload songs.");
     }
-  }
+  };
 
   return (
     <div className="w-100 h-100">
@@ -155,7 +155,9 @@ function ProfileDisplay() {
           </h1>
           <div className="card-content p-4">
             <form onSubmit={handleUserNameModification}>
-              <h3 className="whitetextbold mt-3"><FaIcons.FaUser/> Change Username</h3>
+              <h3 className="whitetextbold mt-3">
+                <FaIcons.FaUser /> Change Username
+              </h3>
               <div>
                 <div className="mb-1">
                   <label>Username</label>
@@ -178,14 +180,16 @@ function ProfileDisplay() {
                   />
                   <div className="d-grid mt-2">
                     <button type="submit" className="btn btn-primary">
-                     Change Username
+                      <span className="whitetext">Change Username</span>
                     </button>
                   </div>
                 </div>
               </div>
             </form>
             <form onSubmit={handlePasswordModification}>
-              <h3 className="whitetextbold mt-3"><FaIcons.FaKey/> Change Password</h3>
+              <h3 className="whitetextbold mt-3">
+                <FaIcons.FaKey /> Change Password
+              </h3>
               <div>
                 <div className="mb-1">
                   <label>Username</label>
@@ -220,12 +224,14 @@ function ProfileDisplay() {
               </div>
               <div className="d-grid mt-2">
                 <button type="submit" className="btn btn-primary">
-                 Change Password
+                  <span className="whitetext">Change Password</span>
                 </button>
               </div>
             </form>
             <form onSubmit={handleUserDeletion}>
-              <h3 className="whitetextbold mt-3"><FaIcons.FaUserMinus/> Delete User</h3>
+              <h3 className="whitetextbold mt-3">
+                <FaIcons.FaUserMinus /> Delete User
+              </h3>
               <div>
                 <div className="mb-1">
                   <label>Username</label>
@@ -238,14 +244,16 @@ function ProfileDisplay() {
                   />
                   <div className="d-grid mt-2">
                     <button type="submit" className="btn btn-danger">
-                     Delete User
+                      <span className="whitetext">Delete User</span>
                     </button>
                   </div>
                 </div>
               </div>
             </form>
             <form onSubmit={handleMakeAdmin}>
-              <h3 className="whitetextbold mt-3"><FaIcons.FaUserShield/> Add admin role to user</h3>
+              <h3 className="whitetextbold mt-3">
+                <FaIcons.FaUserShield /> Add admin role to user
+              </h3>
               <div>
                 <div className="mb-1">
                   <label>User email</label>
@@ -258,7 +266,7 @@ function ProfileDisplay() {
                   />
                   <div className="d-grid mt-2">
                     <button type="submit" className="btn btn-warning">
-                     Make Admin
+                      <span className="whitetext">Make Admin</span>
                     </button>
                   </div>
                 </div>

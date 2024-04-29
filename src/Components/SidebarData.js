@@ -60,11 +60,4 @@ export const SidebarDataAdmin = [
     requireLoggedIn: true,
     requireAdmin: true,
   },
-  {
-    title: "Featuretester",
-    path: "/admin-featuretester",
-    icon: <FaIcons.FaAirFreshener />,
-    requireLoggedIn: true,
-    requireAdmin: true,
-  },
 ];

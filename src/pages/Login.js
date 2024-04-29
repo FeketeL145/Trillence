@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AuthService from "../Components/AuthService";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -8,17 +8,15 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useState(() => {
     if (Cookies.get("token") != null) {
       setLoggedIn(true);
-    }
-    else {
+    } else {
       setLoggedIn(false);
     }
-  })
+  });
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -40,7 +38,7 @@ function Login() {
         Cookies.set("isAdmin", response.data.isAdmin, { expires: 7 });
         window.location.href = "/";
       }
-      
+
       console.log("Login Successful");
     } catch (error) {
       setError(error);
@@ -98,7 +96,7 @@ function Login() {
             </NavLink>
             <div className="d-grid mt-3">
               <button type="submit" className="btn btn-primary">
-                Sign in
+                <span className="whitetext">Sign in</span>
               </button>
             </div>
             <div className="text-center whitetext mt-4">
@@ -123,13 +121,15 @@ function Login() {
           <p className="whitetext text-center" style={{ fontSize: "25px" }}>
             You're already signed in as :
           </p>
-          <h1 className="whitetextbold text-center">{Cookies.get("username")}</h1>
+          <h1 className="whitetextbold text-center">
+            {Cookies.get("username")}
+          </h1>
           <div className="d-grid mt-3">
             <NavLink to={`/`} className="btn btn-primary mb-3">
-              Go back
+              <span className="whitetext">Go back</span>
             </NavLink>
             <NavLink to={`/sign-out`} className="btn btn-danger">
-              Sign out
+              <span className="whitetext">Sign out</span>
             </NavLink>
           </div>
         </div>

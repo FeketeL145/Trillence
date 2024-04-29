@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React from "react";
 import * as FaIcons from "react-icons/fa";
-import {useState} from "react";
+import { useState } from "react";
 function ResetPassword() {
   const [userpasswordtochange, setUserpasswordtochange] = useState("");
   const [oldpassword, setOldpassword] = useState("");
@@ -9,7 +9,6 @@ function ResetPassword() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState("");
 
-  
   const handlePasswordModification = async (e) => {
     e.preventDefault();
 
@@ -27,7 +26,7 @@ function ResetPassword() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: Cookies.get('username'),
+            username: Cookies.get("username"),
             oldPassword: oldpassword,
             newPassword: newpassword,
           }),
@@ -63,7 +62,9 @@ function ResetPassword() {
       >
         <form onSubmit={handlePasswordModification}>
           <h3 className="whitetextbold text-center">Reset Password</h3>
-          <p className="whitetext text-center">Enter your old and new password</p>
+          <p className="whitetext text-center">
+            Enter your old and new password
+          </p>
           <p className="whitetext">{error}</p>
           <div className="mb-3">
             <label>Current password</label>
@@ -97,7 +98,7 @@ function ResetPassword() {
           </div>
           <div className="d-grid pt-4">
             <button type="submit" className="btn btn-primary">
-              Change password
+              <span className="whitetext">Change password</span>
             </button>
           </div>
         </form>
