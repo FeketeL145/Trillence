@@ -15,6 +15,7 @@ import Logout from "./pages/Logout.js";
 import Register from "./pages/Register.js";
 import PasswordForgot from "./pages/ForgotPassword.js";
 import ResetPassword from "./pages/ResetPassword.js";
+import ChangeUsername from "./pages/ChangeUsername.js";
 import SpotDL from "./pages/Spotdl.js";
 import MyProfile from "./pages/MyProfile.js";
 import AdminPanel from "./pages/AdminPanel.js";
@@ -68,6 +69,7 @@ function AppContent({ setSelectedSong, selectedSong }) {
             <Route path="/profile" element={<MyProfile />} />
             <Route path="/PasswordForgot" element={<PasswordForgot />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
+            <Route path="/ChangeUsername" element={<ChangeUsername />} />
             <Route path="/admin-featuretester" element={<Featuretester />} />
             <Route path="/SongList" element={<SongList />} />
             <Route path="/SongDeleteById/:id" element={<SongDeleteById />} />
