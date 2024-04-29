@@ -10,9 +10,17 @@ function AllSongs({ onSongSelect }) {
   const [totalItems, setTotalItems] = useState(0);
   const [currentAlbumId, setCurrentAlbumId] = useState("");
   const [albumName, setAlbumName] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
+  
 
   useEffect(() => {
-    fetchData(pageNumber);
+    if (pageNumber != 1) {
+      fetchData(pageNumber);
+    }
+    else{
+      fetchData(1);
+    }
   }, [pageNumber]); // Make useEffect depend on pageNumber
 
   const loadMore = () => {
@@ -46,9 +54,9 @@ function AllSongs({ onSongSelect }) {
       console.error("Error fetching data:", error);
     } finally {
       setFetchPending(false);
+      setIsLoading(false); // Set loading state to false after fetching data
     }
   };
-
   const fetchAlbumData = async (albumId) => {
     try {
       const response = await axios.get(
@@ -86,28 +94,35 @@ function AllSongs({ onSongSelect }) {
 
   return (
     <div className="embedFrame overflow-auto">
-      <div className="song-grid hiddenscrollbar">
-        {songs.map((song, index) => (
-          <div
-            key={`${song.id}-${index}`} // Ensure unique key using index
-            className="card song-card"
-            style={{
-              backgroundImage: `url(${
-                song.albumImage || "https://via.placeholder.com/650"
-              })`,
-            }}
-            onClick={() => handleSongClick(song.name)}
-          >
-            <div className="song-details w-100 h-100 d-flex align-items-center justify-content-center">
-              <div className="text-center" onClick={() => handleSongClick(song.name)}>
-                <h3 className="whitetextbold">{song.name.split(" - ")[1]}</h3>
-                <p className="whitetext">{song.name.split(" - ")[0]}</p>
+      {isLoading ? ( // Conditionally render loading state
+        <div>Loading...</div>
+      ) : (
+        <div className="song-grid hiddenscrollbar">
+          {songs.map((song, index) => (
+            <div
+              key={`${song.id}-${index}`} // Ensure unique key using index
+              className="card song-card"
+              style={{
+                backgroundImage: `url(${
+                  song.albumImage || "https://via.placeholder.com/650"
+                })`,
+              }}
+              onClick={() => handleSongClick(song.name)}
+            >
+              <div className="song-details w-100 h-100 d-flex align-items-center justify-content-center">
+                <div
+                  className="text-center"
+                  onClick={() => handleSongClick(song.name)}
+                >
+                  <h3 className="whitetextbold">{song.name.split(" - ")[1]}</h3>
+                  <p className="whitetext">{song.name.split(" - ")[0]}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      {songs.length < totalItems && (
+          ))}
+        </div>
+      )}
+      {!isLoading && songs.length < totalItems && (
         <div className="text-center mt-3">
           <button
             className="btn btn-primary"
