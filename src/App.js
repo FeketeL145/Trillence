@@ -68,7 +68,7 @@ function AppContent({ setSelectedSong, selectedSong }) {
           <Route path="/admin-panel" element={<AdminPanel />} />
           <Route path="/sign-up" element={<Register />} />
           <Route path="/spotdl" element={<SpotDL />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/search" element={<SearchPage setSelectedSong={setSelectedSong} />} />
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/PasswordForgot" element={<PasswordForgot />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />

@@ -5,13 +5,16 @@ import { Card, Button } from "react-bootstrap";
 import LoadingComponent from "./LoadingComponent";
 import "./AllSongs.css";
 import * as FaIcons from "react-icons/fa";
+import FooterMusicPlayer from "../Components/MusicPlayer/FooterMusicPlayer";
 
-function Search({ onSongSelect }) {
+function Search(props) {
   const [songs, setSongs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
   const [noResults, setNoResults] = useState(false);
+
+  
 
   useEffect(() => {
     fetchData();
@@ -102,11 +105,10 @@ function Search({ onSongSelect }) {
     }
   };
 
-  const handleSongClick = (song) => {
-    const songName = `${song}`;
-    console.log(songName);
-    onSongSelect(songName);
+  const handleSongSelect = (songName) => {
+    props.setSelectedSong(songName);
   };
+
 
   return (
     <div className="d-flex justify-content-center">
@@ -137,24 +139,14 @@ function Search({ onSongSelect }) {
                   <Card
                     className="song-card"
                     style={{
-                      backgroundImage: `url(${
-                        song.albumImage ||
-                        "https://via.placeholder.com/650"
-                      })`,
+                      backgroundImage: `url(${song.albumImage || "https://via.placeholder.com/650"})`,
                     }}
-                    onClick={() => handleSongClick(song.name)}
+                    onClick={() => handleSongSelect(song.name)} // Passing the song name to handleSongClick
                   >
                     <Card.Body className="song-details d-flex align-items-center justify-content-center">
-                      <div
-                        className="text-center"
-                        onClick={() => handleSongClick(song.name)}
-                      >
-                        <Card.Title className="whitetextbold songtitle">
-                          {song.name}
-                        </Card.Title>
-                        <Card.Subtitle className="whitetext songartist">
-                          {song.artist}
-                        </Card.Subtitle>
+                      <div className="text-center">
+                        <Card.Title className="whitetextbold songtitle">{song.name}</Card.Title> {/* Song title */}
+                        <Card.Subtitle className="whitetext songartist">{song.artist}</Card.Subtitle>
                       </div>
                     </Card.Body>
                   </Card>
@@ -164,6 +156,7 @@ function Search({ onSongSelect }) {
           </div>
         )}
       </div>
+      <FooterMusicPlayer selectedSong={props.selectedSong} />
     </div>
   );
 }
