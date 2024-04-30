@@ -50,11 +50,25 @@ a {
 @media screen and (max-width: 960px) {
   .embedFrame {
     width: 100%;
+    height: calc(100% - 10rem);
   }
   .searchFrame{
     top: 8rem;
     width: 100%;
     height: calc(100% - 10rem);
+    overflow: hidden;
+    position: fixed;
+  }
+}
+@media screen and (max-width: 760px) {
+  .embedFrame {
+    width: 100%;
+    height: calc(100% - 10rem);
+  }
+  .searchFrame{
+    top: 8rem;
+    width: 100%;
+    height: calc(100% - 13rem);
     overflow: hidden;
     position: fixed;
   }

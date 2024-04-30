@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import LoadingComponent from "../Components/LoadingComponent";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import "./AllSongs.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function AllSongs({ onSongSelect, updateSongs }) {
   const [songs, setSongs] = useState([]);
@@ -11,13 +13,27 @@ function AllSongs({ onSongSelect, updateSongs }) {
   const [totalItems, setTotalItems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
+  const notify = (currentlyPlaying) => {
+    toast.info(`Now playing:\n ${currentlyPlaying}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
   useEffect(() => {
     if (pageNumber != 1) {
       fetchData(pageNumber);
     } else {
       fetchData(1);
     }
-  }, [pageNumber]); 
+  }, [pageNumber]);
 
   useEffect(() => {
     if (pageNumber === 1) {
@@ -27,7 +43,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
 
   const loadMore = () => {
     const nextPageNumber = pageNumber + 1;
-    setPageNumber(nextPageNumber); 
+    setPageNumber(nextPageNumber);
     updateSongs(songs);
   };
 
@@ -80,7 +96,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
 
   const handleSongClick = (song) => {
     const songName = `${song}`;
-    console.log(songName);
+    notify(songName);
     onSongSelect(songName);
   };
 
@@ -92,22 +108,35 @@ function AllSongs({ onSongSelect, updateSongs }) {
       if (!response.ok) {
         throw new Error("Failed to fetch album image");
       }
-      const imageBlob = await response.blob(); 
-      const objectUrl = URL.createObjectURL(imageBlob); 
-      return objectUrl; 
+      const imageBlob = await response.blob();
+      const objectUrl = URL.createObjectURL(imageBlob);
+      return objectUrl;
     } catch (error) {
       console.error("Error fetching album image:", error);
-      return "https://via.placeholder.com/650"; 
+      return "https://via.placeholder.com/650";
     }
   };
 
   return (
     <div className="d-flex justify-content-center">
       <div className="embedFrame overflow-auto">
-        {isLoading ? ( 
+        <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
+        {isLoading ? (
           <LoadingComponent />
         ) : (
-          <div className="container-fluid">
+          <div className="container-fluid mt-3">
             <div className="row">
               {songs.map((song, index) => (
                 <div key={`${song.id}-${index}`} className="col-md-3 mb-4">
@@ -141,13 +170,17 @@ function AllSongs({ onSongSelect, updateSongs }) {
         )}
         {!isLoading && songs.length < totalItems && (
           <div className="text-center mt-3 mb-5">
-            <Button
-              variant="primary"
+            <button
+              className="btn loadmorebutton"
               onClick={loadMore}
               disabled={isFetchPending}
             >
-              {isFetchPending ? "Loading..." : "Load More"}
-            </Button>
+              {isFetchPending ? (
+                <span className="whitetext">Loading...</span>
+              ) : (
+                <span className="whitetext">Load more songs</span>
+              )}
+            </button>
           </div>
         )}
       </div>

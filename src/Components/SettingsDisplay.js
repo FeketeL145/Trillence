@@ -3,6 +3,7 @@ import React from "react";
 import * as FaIcons from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import { FaI } from "react-icons/fa6";
 function ProfileDisplay() {
   const [usertochange, setUsertochange] = useState("");
@@ -13,6 +14,32 @@ function ProfileDisplay() {
   const [usertodelete, setUsertodelete] = useState("");
   const [usertomakeadmin, setUsertomakeadmin] = useState("");
 
+  const notifySuccess = (message) => {
+    toast.success(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+  const notifyError = (message) => {
+    toast.error(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   const handleUserNameModification = async (e) => {
     e.preventDefault();
     try {
@@ -33,12 +60,10 @@ function ProfileDisplay() {
         console.log("Username changed successfully");
         setUsertochange("");
         setNewusername("");
-        alert(
-          `Username changed successfully\nFrom: ${usertochange} \nTo: ${newusername}`
-        );
+        notifySuccess("Username changed successfully");
       } else {
         console.error("Failed to change username");
-        alert("Failed to change username");
+        notifyError("Failed to change username");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -64,15 +89,13 @@ function ProfileDisplay() {
       );
       if (response.ok) {
         console.log("Password changed successfully");
-        alert(
-          `Password changed successfully\nFor user: ${userpasswordtochange}`
-        );
+        notifySuccess(`Password changed successfully For user:\n ${userpasswordtochange}`);
         setUserpasswordtochange("");
         setOldpassword("");
         setNewpassword("");
       } else {
         console.error("Failed to change password");
-        alert(`Failed to change password\nFor user: ${userpasswordtochange}`);
+        notifyError(`Failed to change password\nFor user: ${userpasswordtochange}`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -90,11 +113,11 @@ function ProfileDisplay() {
       );
       if (response.ok) {
         console.log(`User ${usertodelete} deleted successfully`);
-        alert(`User ${usertodelete} deleted successfully`);
+        notifySuccess(`User ${usertodelete} deleted successfully`);
         setUsertodelete("");
       } else {
         console.error(`Failed to delete user ${usertodelete}`);
-        alert(`Failed to delete user ${usertodelete}`);
+        notifyError(`Failed to delete user: ${usertodelete}`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -118,35 +141,39 @@ function ProfileDisplay() {
 
       if (response.ok) {
         console.log(`User ${usertomakeadmin} assigned admin role successfully`);
-        alert(`User ${usertomakeadmin} assigned admin role successfully`);
+        notifySuccess(`User ${usertomakeadmin} assigned admin role successfully`);
         setUsertomakeadmin("");
       } else {
         console.error(`Failed to assign admin role to user ${usertomakeadmin}`);
-        alert(`Failed to assign admin role to user ${usertomakeadmin}`);
+        notifyError(`Failed to assign admin role to user: ${usertomakeadmin}`);
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
-  const refreshSongs = async (e) => {
-    const res = axios.get("https://localhost:7106/api/Metadata");
-
-    if (res.ok) {
-      alert("Songs reloaded successfully.");
-    } else {
-      alert("Failed to reload songs.");
-    }
-  };
-
   return (
-    <div className="w-100 h-100">
+    <div className="embedFrame">
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
       <div
         className="w-100 h-100"
         style={{
           backdropFilter: "blur(10px)",
           backgroundColor: "rgba(0, 0, 0, 0.1)",
           overflowY: "scroll",
+          overflowX: "hidden",
         }}
       >
         <div className="card-body p-4">

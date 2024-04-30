@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
+import LoadingComponent from "../../../Components/LoadingComponent.js";
+import "./Playlist.css";
 
 function getUsernameFromTokenCookie() {
   const cookies = document.cookie.split("; ");
@@ -47,6 +49,11 @@ function AllPlaylist() {
   const handleCreatePlaylist = () => {
     const username = getUsernameFromTokenCookie();
     if (username) {
+      if (newPlaylistName.length < 3) {
+        alert("Playlist name must contain at least 3 characters.");
+        return;
+      }
+  
       fetch("https://localhost:7106/api/Playlist/playlist", {
         method: "POST",
         headers: {
@@ -74,48 +81,25 @@ function AllPlaylist() {
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center mb-4">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="New playlist name"
-          value={newPlaylistName}
-          onChange={(e) => setNewPlaylistName(e.target.value)}
-        />
-        <button
-          className="btn btn-primary ms-2"
-          onClick={handleCreatePlaylist}
-        >
-          Create Playlist
-        </button>
+        <div className="input-group inputgroupplaylist m-2">
+          <input
+            type="text"
+            className="form-control playlistnamefield"
+            placeholder="New playlist name"
+            value={newPlaylistName}
+            onChange={(e) => setNewPlaylistName(e.target.value)}
+          />
+          <button
+            className="btn d-flex align-items-center justify-content-center createplaylistbutton"
+            onClick={handleCreatePlaylist}
+          >
+            Create Playlist
+          </button>
+        </div>
       </div>
 
       {isFetchPending ? (
-        <div
-          className="embedFrame"
-          style={{
-            color: "white",
-            backdropFilter: "blur(10px)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            width: "100%",
-            marginTop: "-2%",
-          }}
-        >
-          <div
-            className="spinner-grow spinner-grow-sm m-2 text-white"
-            role="status"
-          ></div>
-          <div
-            className="spinner-grow spinner-grow-sm m-2 text-white"
-            role="status"
-          ></div>
-          <div
-            className="spinner-grow spinner-grow-sm m-2 text-white"
-              role="status"
-          ></div>
-        </div>
+        <LoadingComponent />
       ) : playlists.length === 0 ? (
         <div
           style={{
@@ -129,23 +113,28 @@ function AllPlaylist() {
             marginTop: "-2%",
           }}
         >
-          <p className="whitetext" style={{ fontSize: "30px", marginTop: "-9%" }}>
+          <p
+            className="whitetext"
+            style={{ fontSize: "30px", marginTop: "-9%" }}
+          >
             There aren't any playlists available.
           </p>
         </div>
       ) : (
         <div className="d-flex flex-wrap">
           {playlists.map((playlist) => (
-            <div
-              key={playlist.id}
-              className="container p-4 mt-4 m-2 bg-dark rounded-8"
-            >
-              <NavLink to={`/playlist/${playlist.id}`}>
+            <NavLink className="playlistcard m-2" to={`/playlist/${playlist.id}`}>
+              <div key={playlist.id}>
                 <div className="card-body">
-                  <h5 className="card-title">{playlist.name}</h5>
+                  <h5
+                    className="card-title whitetext"
+                    style={{ color: "white" }}
+                  >
+                    {playlist.name}
+                  </h5>
                 </div>
-              </NavLink>
-            </div>
+              </div>
+            </NavLink>
           ))}
         </div>
       )}

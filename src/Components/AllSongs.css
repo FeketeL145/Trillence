@@ -38,11 +38,15 @@
 }
 
 .searchbar{
-  width: 80%;
   height: 2rem;
+  margin-left: 0.01rem;
+  margin-top: 0.5rem;
   background: rgba(21, 23, 28, 1);
   border: 0px;
   color:white;
+}
+.searchwidth{
+  width: 80%;
 }
 .searchbar::placeholder{
   color:rgba(255,255,255,0.5);
@@ -59,6 +63,12 @@
   background: rgba(21, 23, 28, 1);
   color:white;
   padding-right: 20px;
+  margin-top: 0.5rem;
+}
+.loadmorebutton{
+  background: rgba(21, 23, 28, 0.4);
+  backdrop-filter: blur(15px);
+  color:white;
 }
 @media screen and (max-width: 1400px) {
   .songtitle {
@@ -75,5 +85,14 @@
   }
   .songartist {
     font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 760px){
+  .searchbutton{
+    padding-right: 10px;
+  }
+  .searchwidth{
+    width: 90%;
   }
 }

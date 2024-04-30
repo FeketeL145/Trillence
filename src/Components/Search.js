@@ -110,19 +110,19 @@ function Search({ onSongSelect }) {
 
   return (
     <div className="d-flex justify-content-center">
-      <div className="input-group w-75">
+      <div className="input-group searchwidth">
         <input
           type="text"
           placeholder="Search songs..."
           value={searchQuery}
           onChange={handleSearch}
-          className="row col-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 mt-2 searchbar form-control"
+          className="row col-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 searchbar form-control"
         />
-        <span className="col-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 searchbutton rounded d-flex justify-content-end align-items-center">
+        <span className="col-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 searchbutton rounded d-flex justify-content-end align-items-center">
           <FaIcons.FaSearch />
         </span>
       </div>
-      <div className="searchFrame overflow-auto row">
+      <div className="searchFrame row overflow-auto hiddenscrollbar">
         {isFetchPending ? (
           <LoadingComponent />
         ) : noResults ? (

@@ -23,6 +23,7 @@ function FooterMusicPlayer({ selectedSong }) {
     songName: "",
     albumName: "",
   });
+  const scrollTextRef = useRef(null); // Added useRef hook
   const [albumImage, setAlbumImage] = useState(
     "https://via.placeholder.com/650"
   );
@@ -93,6 +94,26 @@ function FooterMusicPlayer({ selectedSong }) {
 
     if (currentSongDetails.albumName) {
       fetchAlbumImage(); // Fetch the album image when the song changes
+    }
+  }, [currentSongDetails]);
+
+  useEffect(() => {
+    // Dynamically add 'scroll-text' class if the text overflows the parent element
+    const checkOverflow = () => {
+      if (scrollTextRef.current && scrollTextRef.current.parentElement) {
+        const isOverflowing =
+          scrollTextRef.current.offsetWidth < scrollTextRef.current.parentElement.offsetWidth;
+        return isOverflowing;
+      }
+      return false;
+    };
+  
+    if (scrollTextRef.current) {
+      if (checkOverflow()) {
+        scrollTextRef.current.classList.add("scroll-text"); // Add class if overflow
+      } else {
+        scrollTextRef.current.classList.remove("scroll-text"); // Remove class if no overflow
+      }
     }
   }, [currentSongDetails]);
 
@@ -347,16 +368,19 @@ function FooterMusicPlayer({ selectedSong }) {
             src={albumImage}
             alt="Music thumbnail"
           />
-          <div className="col-8">
+          <div className="col-4 songdetailsplayer">
             <div className="row">
-              <p className="text-start whitetextbold text-wrap">
+              <p
+                className={`text-start whitetextbold songtitleplayer`}
+                ref={scrollTextRef}
+              >
                 {currentSongDetails.songName}
               </p>
             </div>
             <div className="row">
               <p
-                className="text-start whitetext"
-                style={{ fontSize: "12px", marginTop: "-15px" }}
+                className="text-start whitetext songartistplayer"
+                style={{ whiteSpace: "nowrap", overflow: "hidden" }}
               >
                 {currentSongDetails.artistName}
               </p>

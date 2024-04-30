@@ -23,28 +23,83 @@
   backdrop-filter: blur(15px);
 }
 
+.songdetailsplayer {
+  margin-left: -10px;
+  overflow-x: hidden;
+}
+.songtitleplayer {
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+.songartistplayer {
+  font-size: 0.85rem;
+  margin-top: -1rem;
+  overflow-x: hidden;
+}
+#scroll-text {
+  /* initial position */
+  -moz-transform: translateX(0%);
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+
+  /* animation properties */
+  -moz-animation: scrollingText 15s linear infinite;
+  -webkit-animation: scrollingText 15s linear infinite;
+  animation: scrollingText 15s linear infinite;
+  animation-delay: 3s; /* Delay the start of the animation by 3 seconds */
+}
+
+/* for Firefox */
+@-moz-keyframes scrollingText {
+  from {
+    -moz-transform: translateX(0%);
+  }
+  to {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+/* for Chrome */
+@-webkit-keyframes scrollingText {
+  from {
+    -webkit-transform: translateX(0%);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@keyframes scrollingText {
+  from {
+    -moz-transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+  to {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
 @media screen and (max-width: 960px) {
   .musicPlayer {
     width: 100%;
+    height: 5rem;
     position: fixed;
     bottom: 0;
-    font-size: 16px;
-    overflow-y: hidden;
-    height: 3rem;
-    overflow: scroll;
+    right: 0;
+    background: rgba(21, 23, 28, 0.7);
+    backdrop-filter: blur(15px);
   }
-
-  .MusicPlayerFullScreen {
+}
+@media screen and (max-width: 760px) {
+  .musicPlayer {
     width: 100%;
+    height: 5rem;
     position: fixed;
     bottom: 0;
-    font-size: 16px;
-    overflow-y: hidden;
-    height: 100vh;
-  }
-  .musicThumbnail {
-    height: 3rem;
-    width: auto;
-    border-radius: 10px;
+    right: 0;
+    background: rgba(21, 23, 28, 0.7);
+    backdrop-filter: blur(15px);
   }
 }

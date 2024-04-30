@@ -1,0 +1,34 @@
+.playlistnamefield {
+  width: 80%;
+  height: 2rem;
+  background: rgba(21, 23, 28, 1);
+  border: 0px;
+  color: white;
+}
+.playlistnamefield::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.playlistnamefield:focus {
+  background: rgba(21, 23, 28, 1);
+  backdrop-filter: blur(15px);
+  color: white;
+  border: 0px;
+  outline: none;
+}
+.createplaylistbutton {
+  height: 2rem;
+  background: rgb(13, 43, 117);
+  color: white;
+  padding-right: 20px;
+}
+.inputgroupplaylist{
+    width: 80%;
+}
+.playlistcard{
+    background: rgba(21, 23, 28, 0.7);
+    backdrop-filter: blur(15px);
+    box-shadow: inset 0 0 10px 5px rgba(255,255,255,0.03);
+    padding: 10px;
+    width: 100%;
+    border-radius: 15px;
+}
