@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import * as FaIcons from "react-icons/fa";
 import "./FooterMusicPlayer.css";
 import axios from "axios";
 import {
@@ -30,7 +31,7 @@ function FooterMusicPlayer({ selectedSong }) {
   const audioRef = useRef(new Audio());
   const adjustedTimeRef = useRef(null);
   const timeoutRef = useRef(null);
-  const [PhoneFullScreen, setPhoneFullScreen] = useState(false);
+  const [isFullscreen, setFullscreen] = useState(false);
   const fetchAllSongDetails = async () => {
     try {
       const response = await fetch(
@@ -255,6 +256,10 @@ function FooterMusicPlayer({ selectedSong }) {
     }
   };
 
+  const handleFullscreen = () => {
+    setFullscreen((prev) => !prev);
+  };
+
   // Effect to manage audio event listeners and playback
   useEffect(() => {
     const updateProgress = () => {
@@ -340,8 +345,8 @@ function FooterMusicPlayer({ selectedSong }) {
   }
 
   return (
-    <div className="musicPlayer">
-      <BrowserView className=" d-flex align-items-stretch justify-content-between text-nowrap">
+    <div>
+      <BrowserView className=" d-flex align-items-stretch justify-content-between text-nowrap musicPlayer">
         <div className="col row">
           <img
             className="img-fluid musicThumbnail"
@@ -350,9 +355,7 @@ function FooterMusicPlayer({ selectedSong }) {
           />
           <div className="col-6 songdetailsplayer">
             <div className="row">
-              <p
-                className={`text-start whitetextbold songtitleplayer`}
-              >
+              <p className={`text-start whitetextbold songtitleplayer`}>
                 <TextScroll text={currentSongDetails.songName} />
               </p>
             </div>
@@ -459,99 +462,168 @@ function FooterMusicPlayer({ selectedSong }) {
           </div>
         </div>
       </BrowserView>
-      <MobileView className=" d-flex align-items-stretch justify-content-between text-nowrap">
-        {PhoneFullScreen ? (
-          <div className="row col">
-            <div className="row">
-              <button
-                className="fa-solid fa-arrow-down playericon"
-                onClick={() => setPhoneFullScreen(false)}
-              ></button>
-            </div>
-            <div className="row">
-              <img
-                className="img-fluid musicThumbnailFullScreen"
-                src={albumImage}
-                alt="Music thumbnail"
-              />
-            </div>
-            <div className="row">
-              <input
-                type="range"
-                ref={progressBarRef}
-                defaultValue="0"
-                onChange={handleProgressChange}
-                onMouseUp={handleProgressMouseUp}
-                style={{ width: "100%" }}
-              />
-            </div>
-            <div className="row">
-              <div className="col align-self-start text-start">
-                <span className="time current">{formatTime(timeProgress)}</span>
-              </div>
-              <div className="col align-self-end text-end">
-                <span className="time">{formatTime(duration)}</span>
-              </div>
-            </div>
-            <div className="row">
-              <button onClick={handlePrevious} className="ms-2 btn col">
-                <i className="fa-solid fa-backward-fast playericon" />
-              </button>
-              <button onClick={skipBackward} className="ms-2 btn col">
-                <i className="fa-solid fa-backward-step playericon" />
-              </button>
-              <button onClick={togglePlayPause} className="ms-2 btn col">
-                {isPlaying ? (
-                  <i className="fa-solid fa-pause playericon" />
-                ) : (
-                  <i className="fa-solid fa-play playericon" />
-                )}
-              </button>
-              <button onClick={skipForward} className="ms-2 btn col">
-                <i className="fa-solid fa-forward-step playericon" />
-              </button>
-              <button onClick={handleNext} className="ms-2 btn col">
-                <i className="fa-solid fa-forward-fast playericon " />
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="row col">
+      {isFullscreen ? (
+        <div></div>
+      ) : (
+        <MobileView className="musicPlayerMobile">
+          <div className="row" onClick={handleFullscreen}>
             <img
               className="img-fluid musicThumbnail"
               src={albumImage}
               alt="Music thumbnail"
             />
-            <div className="col">
+            <div className="col-7 songdetailsplayerMobile">
               <div className="row">
-                <p className="text-start whitetextbold">
-                  {currentSongDetails.songName}
+                <p className={`text-start whitetextbold songtitleplayerMobile`}>
+                  <TextScroll text={currentSongDetails.songName} />
                 </p>
               </div>
               <div className="row">
                 <p
-                  className="text-start whitetext"
-                  style={{ fontSize: "12px", marginTop: "-15px" }}
+                  className="text-start whitetext songartistplayerMobile"
+                  style={{ whiteSpace: "nowrap", overflow: "hidden" }}
                 >
                   {currentSongDetails.artistName}
                 </p>
               </div>
             </div>
-            <div className="col">
-              <button onClick={togglePlayPause} className="ms-2 btn">
-                {isPlaying ? (
-                  <i className="fa-solid fa-pause playericon" />
-                ) : (
-                  <i className="fa-solid fa-play playericon" />
-                )}
-              </button>
-              <button
-                className="fa-solid fa-arrow-up btn"
-                onClick={() => setPhoneFullScreen(true)}
-              ></button>
+            <button onClick={togglePlayPause} className="col-2 btn">
+              {isPlaying ? (
+                <FaIcons.FaPause className="playericonMobile" />
+              ) : (
+                <FaIcons.FaPlay className="playericonMobile" />
+              )}
+            </button>
+          </div>
+        </MobileView>
+      )}
+      <MobileView
+        className={isFullscreen ? 'position-fullscreen musicPlayerMobileFullscreen' : 'position-normal musicPlayerMobileFullscreen'}
+      >
+        <p className="closebuttonMobileFullscreen whitetext" onClick={handleFullscreen}>
+          <FaIcons.FaAngleDown/>
+        </p>
+        <div className="row thumbnailContainerMobile d-flex align-items-center justify-content-center">
+          <img
+            className="img-fluid musicThumbnailMobileFullscreen"
+            src={albumImage}
+            alt="Music thumbnail"
+          />
+          <div className="songdetailsplayerMobileFullscreen">
+            <div className="row">
+              <p
+                className={`text-center whitetextbold songtitleplayerMobileFullscreen`}
+              >
+                <TextScroll text={currentSongDetails.songName} />
+              </p>
+            </div>
+            <div className="row">
+              <p
+                className="text-center whitetext songartistplayerMobileFullscreen"
+                style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+              >
+                {currentSongDetails.artistName}
+              </p>
             </div>
           </div>
-        )}
+        </div>
+
+        <div className="align-items-center songcontrolsMobileFullscreen">
+          <div className="row text-white" style={{ height: "2rem", flex: 3 }}>
+            <div className="row m-0">
+              <input
+                type="range"
+                className="progressBar w-100"
+                ref={progressBarRef}
+                defaultValue="0"
+                onChange={handleProgressChange}
+                onMouseUp={handleProgressMouseUp}
+              />
+            </div>
+            <div className="row m-0 mt-1">
+              <div className="col-2">
+                <span className="time current" style={{ fontSize: "1rem" }}>
+                  {formatTime(timeProgress)}
+                </span>
+              </div>
+              <div className="col-8 text-center"></div>
+              <div className="col-2">
+                <span className="time" style={{ fontSize: "1rem" }}>
+                  {formatTime(duration)}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="text-center mt-2">
+            <button onClick={handlePrevious} className="ms-2 btn">
+              <FaIcons.FaFastBackward className="playericonMobileFullscreen" />
+            </button>
+            <button onClick={skipBackward} className="ms-2 btn">
+              <FaIcons.FaStepBackward className="playericonMobileFullscreen" />
+            </button>
+            <button onClick={togglePlayPause} className="ms-2 btn">
+              {isPlaying ? (
+                <FaIcons.FaPause className="playericonMobileFullscreenPlayPause" />
+              ) : (
+                <FaIcons.FaPlay className="playericonMobileFullscreenPlayPause" />
+              )}
+            </button>
+            <button onClick={skipForward} className="ms-2 btn">
+              <FaIcons.FaStepForward className="playericonMobileFullscreen" />
+            </button>
+            <button onClick={handleNext} className="ms-2 btn">
+              <FaIcons.FaFastForward className="playericonMobileFullscreen" />
+            </button>
+          </div>
+        </div>
+
+        <div className="volumesliderMobileFullscreen">
+          <div>
+            <button
+              onClick={() => {
+                const newMuteStatus = !muteVolume;
+                setMuteVolume(newMuteStatus);
+
+                if (audioRef.current) {
+                  audioRef.current.volume = newMuteStatus ? 0 : volume / 100; // Adjusts the audio volume
+                }
+              }}
+              className="btn"
+            >
+              {muteVolume || volume < 1 ? (
+                <FaIcons.FaVolumeMute className="playericonMobileFullscreen" />
+              ) : volume < 33 ? (
+                <FaIcons.FaVolumeOff className="playericonMobileFullscreen" />
+              ) : volume < 66 ? (
+                <FaIcons.FaVolumeDown className="playericonMobileFullscreen" />
+              ) : (
+                <FaIcons.FaVolumeUp className="playericonMobileFullscreen" />
+              )}
+            </button>
+            <input
+              type="range"
+              className="volume-slider progressBar"
+              step="1"
+              min="0"
+              max="100"
+              value={muteVolume ? 0 : volume} // Display 0 if muted
+              onChange={(e) => {
+                const newVolume = parseFloat(e.target.value);
+
+                if (audioRef.current) {
+                  audioRef.current.volume = newVolume / 100; // Adjust the audio volume
+                }
+
+                setVolume(newVolume);
+
+                // If muted, unmute when adjusting the slider
+                if (muteVolume && newVolume > 0) {
+                  setMuteVolume(false); // Unmute when adjusting the volume slider
+                }
+              }}
+            />
+          </div>
+        </div>
       </MobileView>
     </div>
   );

@@ -69,52 +69,6 @@
   height: 2rem;
   width: 1rem;
 }
-
-#scroll-text {
-  /* initial position */
-  -moz-transform: translateX(0%);
-  -webkit-transform: translateX(0%);
-  transform: translateX(0%);
-
-  /* animation properties */
-  -moz-animation: scrollingText 15s linear infinite;
-  -webkit-animation: scrollingText 15s linear infinite;
-  animation: scrollingText 15s linear infinite;
-  animation-delay: 3s; /* Delay the start of the animation by 3 seconds */
-}
-
-/* for Firefox */
-@-moz-keyframes scrollingText {
-  from {
-    -moz-transform: translateX(0%);
-  }
-  to {
-    -moz-transform: translateX(-100%);
-  }
-}
-
-/* for Chrome */
-@-webkit-keyframes scrollingText {
-  from {
-    -webkit-transform: translateX(0%);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-  }
-}
-
-@keyframes scrollingText {
-  from {
-    -moz-transform: translateX(0%);
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-  to {
-    -moz-transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-  }
-}
 @media screen and (max-width: 960px) {
   .musicPlayer {
     width: 100%;
@@ -135,5 +89,120 @@
     right: 0;
     background: rgba(21, 23, 28, 0.7);
     backdrop-filter: blur(15px);
+  }
+}
+
+
+.musicPlayerMobile{
+  width: 100%;
+  height: 5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: rgba(21, 23, 28, 0.7);
+  backdrop-filter: blur(15px);
+}
+.playericonMobile {
+  width: 3vh;
+  height: 3vh;
+  color: rgba(255, 255, 255, 1);
+}
+.volumesliderMobile{
+  display: none;
+}
+.songdetailsplayerMobile {
+  margin-left: -1.5vh;
+  overflow-x: hidden;
+}
+.songtitleplayerMobile {
+  font-size: 2vh;
+  white-space: nowrap;
+}
+.songartistplayerMobile {
+  font-size: 1.5vh;
+  margin-top: -1.5vh;
+  overflow-x: hidden;
+}
+/*Music player Fullscreen*/
+.musicPlayerMobileFullscreen{
+  width: 100%;
+  height: calc(100% - 5rem);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: rgba(21, 23, 28, 0.7);
+  backdrop-filter: blur(15px);
+}
+.playericonMobileFullscreen {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgba(255, 255, 255, 1);
+}
+.playericonMobileFullscreenPlayPause{
+  width: 2rem;
+  height: 2rem;
+  color: rgba(255, 255, 255, 1);
+}
+.volumesliderMobileFullscreen {
+  text-align: center;
+}
+.musicThumbnailMobileFullscreen {
+  height: 100%;
+  width: 100%;
+}
+.thumbnailContainerMobile{
+  height: 45vh;
+  width: 45vh;
+  margin:auto;
+  margin-bottom: 14vh;
+}
+.songdetailsplayerMobileFullscreen{
+  margin-top: 1vh;
+  text-align: center;
+}
+.songtitleplayerMobileFullscreen{
+  font-size: 4vh;
+  width: 100%;
+}
+.songartistplayerMobileFullscreen{
+  font-size: 3vh;
+  margin-top: -3vh;
+  width: 100%;
+}
+.songcontrolsMobileFullscreen{
+  width: 95%;
+  margin:auto;
+}
+
+.closebuttonMobileFullscreen{
+  width: 100%;
+  text-align: center;
+  margin-top:1vh;
+  margin-bottom: 1vh;
+  font-size: 4vh;
+}
+
+.position-normal {
+  animation-delay: 0.01s;
+  animation: moveScreen 0.2s forwards;
+}
+.position-fullscreen {
+  transform: translateY(100%);
+  animation: moveScreenBack 0.2s forwards;
+}
+@keyframes moveScreen {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes moveScreenBack {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
