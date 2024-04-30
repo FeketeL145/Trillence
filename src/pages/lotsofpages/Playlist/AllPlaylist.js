@@ -3,10 +3,13 @@ import { NavLink } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import Cookies from "js-cookie";
 import { ToastContainer, toast, Bounce } from "react-toastify";
+import Swal from 'sweetalert2';
+
 import LoadingComponent from "../../../Components/LoadingComponent.js";
 import "./Playlist.css";
+import "@sweetalert2/theme-dark/dark.css";
 
-function getUsernameFromTokenCookie() {
+function getUsernameFromCookie() {
   if (Cookies.get("username") != null) {
     return Cookies.get("username");
   } else {
@@ -37,11 +40,11 @@ function AllPlaylist() {
       });
   }, []);
 
-  const handleCreatePlaylist = () => {
-    const username = getUsernameFromTokenCookie();
+  const handleCreatePlaylist = async () => {
+    const username = getUsernameFromCookie();
     if (username) {
       if (newPlaylistName.length < 3) {
-        toast.error("Playlist name must contain at least 3 characters");
+        await toast.error("Playlist name must contain at least 3 characters");
         return;
       }
       fetch("https://localhost:7106/api/Playlist/playlist", {

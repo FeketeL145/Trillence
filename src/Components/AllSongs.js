@@ -13,8 +13,9 @@ function AllSongs({ onSongSelect, updateSongs }) {
   const [totalItems, setTotalItems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const notify = (currentlyPlaying) => {
-    toast.info(`Now playing:\n ${currentlyPlaying}`, {
+  /*const notify = async (currentlyPlaying) => {
+    await toast.dismiss();
+    await toast.info(`Now playing:\n ${currentlyPlaying}`, {
       position: "top-right",
       autoClose: 1500,
       hideProgressBar: false,
@@ -25,7 +26,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
       theme: "dark",
       transition: Bounce,
     });
-  };
+  };*/
 
   useEffect(() => {
     if (pageNumber != 1) {
@@ -35,15 +36,15 @@ function AllSongs({ onSongSelect, updateSongs }) {
     }
   }, [pageNumber]);
 
-  const loadMore = () => {
-    const nextPageNumber = pageNumber + 1;
-    setPageNumber(nextPageNumber);
-    updateSongs(songs);
+  const loadMore = async () => {
+    const nextPageNumber = await pageNumber + 1;
+    await setPageNumber(nextPageNumber);
+    await updateSongs(songs);
   };
 
   const fetchData = async (pageNumber) => {
     try {
-      setFetchPending(true);
+      await setFetchPending(true);
       const response = await axios.get(
         `https://localhost:7106/api/Song/allsongpaginated?pageNumber=${pageNumber}`
       );
@@ -52,28 +53,28 @@ function AllSongs({ onSongSelect, updateSongs }) {
       );
 
       const newSongs = await Promise.all(
-        response.data.map(async (song) => {
+        await response.data.map(async (song) => {
           const albumName = await fetchAlbumData(song.albumId);
-          let albumImage = null;
+          let albumImage = await null;
           if (albumName) {
             albumImage = await fetchAlbumImage(albumName);
           }
-          return { ...song, albumName, albumImage };
+          return await { ...song, albumName, albumImage };
         })
       );
 
       if (pageNumber === 1) {
-        setSongs(newSongs);
+        await setSongs(newSongs);
       } else {
-        setSongs((prevSongs) => [...prevSongs, ...newSongs]);
+        await setSongs((prevSongs) => [...prevSongs, ...newSongs]);
       }
 
-      setTotalItems(response2.data);
+      await setTotalItems(response2.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setFetchPending(false);
-      setIsLoading(false);
+      await setFetchPending(false);
+      await setIsLoading(false);
     }
   };
   const fetchAlbumData = async (albumId) => {
@@ -81,18 +82,22 @@ function AllSongs({ onSongSelect, updateSongs }) {
       const response = await axios.get(
         `https://localhost:7106/api/Album/albumbyid/${albumId}`
       );
-      return response.data.name;
+      return await response.data.name;
     } catch (error) {
       console.error("Error fetching album data:", error);
-      return null;
+      return await null;
     }
   };
 
-  const handleSongClick = (song, songindex) => {
-    const songName = `${song}`;
-    const songIndex = `${songindex}`;
-    notify(songName);
-    onSongSelect(songIndex);
+  const handleSongClick = async (song, songindex) => {
+    try {
+      const songName = `${song}`;
+      const songIndex = `${songindex}`;
+      await onSongSelect(songIndex);
+      updateSongs(songs);
+    } catch (error) {
+      console.error("Error handling song click:", error);
+    }
   };
 
   const fetchAlbumImage = async (albumName) => {
@@ -104,7 +109,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
         throw new Error("Failed to fetch album image");
       }
       const imageBlob = await response.blob();
-      const objectUrl = URL.createObjectURL(imageBlob);
+      const objectUrl = await URL.createObjectURL(imageBlob);
       return objectUrl;
     } catch (error) {
       console.error("Error fetching album image:", error);

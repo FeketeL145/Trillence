@@ -7,6 +7,9 @@ import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPl
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as FaIcons from "react-icons/fa";
+import Swal from "sweetalert2";
+import "@sweetalert2/theme-dark/dark.css";
+
 export function PlaylistSinglePage() {
   const { id } = useParams(); // Get the playlist ID from the URL
   const [playlistId, setPlaylistId] = useState(id); // Ensure the state is initialized
@@ -18,8 +21,9 @@ export function PlaylistSinglePage() {
   const [AreYouSureToDelete, setAreYouSureToDelete] = useState(false);
   const [EmptyPlaylistName, setEmptyPlaylistName] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
-  const notify = (message) => {
-    toast.info(`${message}`, {
+  const notify = async (message) => {
+    await toast.dismiss();
+    await toast.info(`${message}`, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -88,30 +92,40 @@ export function PlaylistSinglePage() {
     }
   };
 
-  const handlePlayPlaylist = () => {
+  const handlePlayPlaylist = async () => {
     if (Playlist.songs.length === 0) {
-      notify("Playlist is empty\nAdd songs to play."); // Call the notify function when there are no songs
+      await notify("Playlist is empty\nAdd songs to play."); // Call the notify function when there are no songs
     } else {
-      setIsPlayerVisible(true); // Show the player when there are songs
+      await setIsPlayerVisible(true); // Show the player when there are songs
     }
   };
 
+  const handleDeletePlaylistClicked = async (playlistId) => {
+    Swal.fire({
+      title: "Are you sure you want to delete this playlist?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Playlist deleted!",
+          text: "The playlist has been successfully deleted.",
+          icon: "success",
+        }).then(handleDeletePlaylist(playlistId));
+      }
+    });
+  };
   const handleDeletePlaylist = async (playlistId) => {
     try {
       const response = await axios.delete(
         `https://localhost:7106/api/Playlist/deletebyid/${playlistId}`
       );
       console.log(response.data);
-
-      // Display toast message
-      toast.success(
-        `Playlist ${response.data.name} successfully deleted.\nRedirecting...`
-      );
-
-      // Set a delay of 3 seconds before redirecting
-      setTimeout(() => {
-        window.location.href = "/playlists";
-      }, 3000);
+      window.location.href = "/playlists";
     } catch (error) {
       console.log(error);
     }
@@ -169,7 +183,7 @@ export function PlaylistSinglePage() {
             <div className="card-body">
               {Ismodifying ? (
                 <form
-                className="mb-2"
+                  className="mb-2"
                   onSubmit={(e) => {
                     e.preventDefault();
                     handleModifyPlaylistName(
@@ -204,38 +218,6 @@ export function PlaylistSinglePage() {
               ) : (
                 <div></div>
               )}
-              {AreYouSureToDelete ? (
-                <div
-                  className="card row justify-content-center align-items-center p-2"
-                  style={{
-                    backgroundColor: "rgba(50, 50, 50, 0)",
-                    color: "white",
-                    border: "none",
-                  }}
-                >
-                  <p>Are you sure you want to delete this playlist?</p>
-                  <div className="col-6">
-                    <button
-                      type="button"
-                      className="col m-2 btn btn-danger"
-                      onClick={() => handleDeletePlaylist(Playlist.playlistId)}
-                    >
-                      Sure, delete it
-                    </button>
-                  </div>
-                  <div className="col-6">
-                    <button
-                      type="button"
-                      className="col m-2 btn btn-secondary"
-                      onClick={() => setAreYouSureToDelete(false)}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div></div>
-              )}
               <div className="row">
                 <button
                   type="button"
@@ -256,25 +238,32 @@ export function PlaylistSinglePage() {
                 <button
                   type="button"
                   className="btn btn-outline-danger col ms-2"
-                  onClick={() => setAreYouSureToDelete(!AreYouSureToDelete)}
+                  onClick={handleDeletePlaylistClicked}
                 >
-                  <i className="bi bi-trash3"></i> Delete
+                  <FaIcons.FaTrashAlt /> Delete
                 </button>
 
-                <button
-                  type="button"
+                <NavLink
+                  to={`/playlists`}
                   className="btn btn-outline-secondary col ms-2"
-                  onClick={handleBack}
                 >
-                  <i className="bi bi-arrow-left"></i> Back
-                </button>
+                  <FaIcons.FaArrowLeft /> Back
+                </NavLink>
               </div>
             </div>
           </div>
 
           {/*Listában lévő zenék*/}
-          <div className="row whitetext rounded-2 mt-4" style={{ backdropFilter: "blur(20px)", backgroundColor: "rgba(50, 50, 50, 0.5)"}}>
-            <p className="whitetextbold" style={{ fontSize:"3vh"}}>Songs in this playlist:</p>
+          <div
+            className="row whitetext rounded-2 mt-4"
+            style={{
+              backdropFilter: "blur(20px)",
+              backgroundColor: "rgba(50, 50, 50, 0.5)",
+            }}
+          >
+            <p className="whitetextbold" style={{ fontSize: "3vh" }}>
+              Songs in this playlist:
+            </p>
             {isFetchPendingplaylist ? (
               <div className="spinner-border"></div>
             ) : (
@@ -292,7 +281,7 @@ export function PlaylistSinglePage() {
                           <h5 className="card-title">{song.songName}</h5>
                           <p className="card-text">{song.artist}</p>
                           <button
-                          className="btn btn-danger"
+                            className="btn btn-danger"
                             onClick={() =>
                               handleDeleteSong(song.songId, playlistId)
                             }
@@ -329,13 +318,13 @@ export function PlaylistSinglePage() {
                             {album.mainArtist.artistName}
                           </p>
                           <button
-                          className="btn btn-outline-success"
-                          style={{ color: "white" }}
+                            className="btn btn-outline-success"
+                            style={{ color: "white" }}
                             onClick={() =>
                               handleAddSong(song.songId, Playlist.playlistId)
                             }
                           >
-                            <FaIcons.FaPlus/> Add song to playlist
+                            <FaIcons.FaPlus /> Add song to playlist
                           </button>
                         </div>
                       </div>

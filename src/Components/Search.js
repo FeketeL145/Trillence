@@ -115,8 +115,8 @@ function Search(props) {
     }
   };
 
-  const handleSongSelect = (songindex) => {
-    props.setSelectedSong(songindex);
+  const handleSongSelect = async (songindex) => {
+    await props.setSelectedSong(songindex);
     console.log(songindex);
   };
 

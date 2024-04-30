@@ -1,24 +1,27 @@
 .scroll-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.scroll-content {
+  display: inline-block;
+}
+
+@keyframes scrollAnimation {
+  0% {
+    transform: translateX(0%);
   }
-  
-  .scroll-content {
-    display: inline-block;
+  50% {
+    transform: translateX(-70%);
   }
-  
-  @keyframes scrollAnimation {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-70%);
-    }
+  100% {
+    transform: translateX(0%);
   }
-  
-  .scrolling {
-    animation-delay: 3s;
-    animation: scrollAnimation 15s linear infinite;
-  }
+}
+
+.scrolling {
+  animation-delay: 3s;
+  animation: scrollAnimation 15s linear infinite;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import * as FaIcons from "react-icons/fa";
 import { SidebarData, SidebarDataLogin, SidebarDataAdmin } from "./SidebarData";
 import SubMenu from "./SubMenu";
@@ -104,11 +105,11 @@ const Sidebar = () => {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
-          {windowWidth < 960 && (
+          {windowWidth < 960 || isMobile ? (
             <NavIcon to="#" onClick={showSidebar} sidebar={sidebar}>
               <FaIcons.FaBars />
             </NavIcon>
-          )}
+          ) : null}
         </Nav>
         <SidebarNav sidebar={sidebar ? 1 : 0}>
           <SidebarWrap>

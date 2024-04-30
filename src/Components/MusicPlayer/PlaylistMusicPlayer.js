@@ -7,6 +7,7 @@ import {
   isBrowser,
   isMobile,
 } from "react-device-detect";
+import AllSongs from "../AllSongs";
 function PlaylistMusicPlayer({ selectedSong, playlistId }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
@@ -71,9 +72,9 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
     fetchCurrentSongDetails();
 
     // Cleanup function to stop audio when the component unmounts
-    return () => {
+    return async () => {
       if (audioRef.current) {
-        audioRef.current.pause();
+        await audioRef.current.pause();
         audioRef.current.currentTime = 0; // Reset audio position
       }
     };
@@ -192,7 +193,7 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
     loadAudioByURL();
   }, [selectedSong]);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     if (!userInteracted) {
       setUserInteracted(true);
     }
@@ -202,33 +203,33 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
       adjustedTimeRef.current = null;
     }
 
-    setIsPlaying((prev) => !prev); // Toggle the playing state
+    await setIsPlaying((prev) => !prev); // Toggle the playing state
   };
 
-  const skipForward = () => {
+  const skipForward = async () => {
     if (audioRef.current) {
       audioRef.current.currentTime += 15; // Skip forward by 15 seconds
       if (isPlaying === false) {
-        audioRef.current.pause(); // If it was paused, pause it again
-        togglePlayPause();
+        await audioRef.current.pause(); // If it was paused, pause it again
+        await togglePlayPause();
       }
     }
   };
 
-  const skipBackward = () => {
+  const skipBackward = async () => {
     if (audioRef.current) {
       audioRef.current.currentTime -= 5; // Skip backward by 5 seconds
       if (isPlaying === false) {
-        audioRef.current.pause(); // If it was paused, pause it again
-        togglePlayPause();
+        await audioRef.current.pause(); // If it was paused, pause it again
+        await togglePlayPause();
       }
     }
   };
 
   const handlePrevious = async () => {
     if (isPlaying === false) {
-      audioRef.current.pause(); // If it was paused, pause it again
-      togglePlayPause();
+      await audioRef.current.pause(); // If it was paused, pause it again
+      await togglePlayPause();
     }
     await loadAudio(
       `https://localhost:7106/api/MusicStreaming/playlist/${playlistId}/previous`
@@ -238,8 +239,8 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
 
   const handleNext = async () => {
     if (isPlaying === false) {
-      audioRef.current.pause(); // If it was paused, pause it again
-      togglePlayPause();
+      await audioRef.current.pause(); // If it was paused, pause it again
+      await togglePlayPause();
     }
     await loadAudio(
       `https://localhost:7106/api/MusicStreaming/playlist/${playlistId}/next`
@@ -247,15 +248,15 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
     await fetchCurrentSongDetails();
   };
 
-  const handleProgressChange = (e) => {
+  const handleProgressChange = async (e) => {
     const newTime = parseFloat(e.target.value);
     adjustedTimeRef.current = newTime; // Store the adjusted time
-    setTimeProgress(newTime);
+    await setTimeProgress(newTime);
   };
 
-  const handleProgressMouseUp = () => {
+  const handleProgressMouseUp = async () => {
     if (userInteracted) {
-      setIsPlaying(true); // Resume playback if it was playing
+      await setIsPlaying(true); // Resume playback if it was playing
       if (adjustedTimeRef.current !== null) {
         if (audioRef.current)
           audioRef.current.currentTime = adjustedTimeRef.current; // Set playback to adjusted time
@@ -285,18 +286,18 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
       }
     };
 
-    const handleCanPlayThrough = () => {
+    const handleCanPlayThrough = async () => {
       setAudioReady(true);
       if (userInteracted) {
-        if (audioRef.current) audioRef.current.play();
+        if (audioRef.current) await audioRef.current.play();
       }
     };
 
-    const onLoadedMetadata = () => {
+    const onLoadedMetadata = async () => {
       if (progressBarRef.current) {
         if (audioRef.current) {
           const seconds = audioRef.current.duration;
-          setDuration(seconds);
+          await setDuration(seconds);
           progressBarRef.current.max = seconds;
         }
       }

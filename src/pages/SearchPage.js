@@ -4,8 +4,8 @@ import { useState } from "react";
 
 function SearchPage(props) {
 
-  const handleSongSelect = (songName) => {
-    props.setSelectedSong(songName);
+  const handleSongSelect = async (songName) => {
+    await props.setSelectedSong(songName);
   };
 
   return (

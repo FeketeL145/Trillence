@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sweetalert2/theme-dark": "^5.0.16",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -24,6 +25,7 @@
     "react-toastify": "^10.0.5",
     "string-similarity": "^4.0.4",
     "styled-components": "^6.1.8",
+    "sweetalert2": "^11.10.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
@@ -21,11 +22,6 @@ import SpotDL from "./pages/Spotdl.js";
 import MyProfile from "./pages/MyProfile.js";
 import AdminPanel from "./pages/AdminPanel.js";
 /* Import from Lotsofpages */
-import SongDeleteById from "./pages/lotsofpages/Songs/SongDeleteById";
-import SongList from "./pages/lotsofpages/Songs/SongList2.js";
-import SongPost from "./pages/lotsofpages/Songs/SongPost";
-import SongSinglePage from "./pages/lotsofpages/Songs/SongSinglePage";
-import SongUpdatebyId from "./pages/lotsofpages/Songs/SongUpdatebyId";
 import AllPlaylist from "./pages/lotsofpages/Playlist/AllPlaylist.js";
 import PlaylistSingleElement from "./pages/lotsofpages/Playlist/PlaylistSingleElement.js";
 /*Import from Components */
@@ -39,6 +35,7 @@ function isExcluded(path, patterns) {
 function App() {
   const [selectedSong, setSelectedSong] = useState("");
 
+  /*useState(() => {}, [setSelectedSongName]); */
   return (
     <Router>
       <AppContent
@@ -54,8 +51,10 @@ function AppContent({ setSelectedSong, selectedSong }) {
 
   const excludedPatterns = [new RegExp("^/playlist/.*$")];
 
+  /*setToast={setToast} */
   return (
     <div className="App">
+      <ToastContainer />
       <Sidebar />
       <div className="AppDisplayPage">
         <Routes>
@@ -68,16 +67,14 @@ function AppContent({ setSelectedSong, selectedSong }) {
           <Route path="/admin-panel" element={<AdminPanel />} />
           <Route path="/sign-up" element={<Register />} />
           <Route path="/spotdl" element={<SpotDL />} />
-          <Route path="/search" element={<SearchPage setSelectedSong={setSelectedSong} />} />
+          <Route
+            path="/search"
+            element={<SearchPage setSelectedSong={setSelectedSong} />}
+          />
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/PasswordForgot" element={<PasswordForgot />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/ChangeUsername" element={<ChangeUsername />} />
-          <Route path="/SongList" element={<SongList />} />
-          <Route path="/SongDeleteById/:id" element={<SongDeleteById />} />
-          <Route path="/SongPost" element={<SongPost />} />
-          <Route path="/SongSinglePage/:id" element={<SongSinglePage />} />
-          <Route path="/SongUpdatebyId/:id" element={<SongUpdatebyId />} />
           <Route path="/playlists" element={<AllPlaylist />} />
           <Route path="/playlist/:id" element={<PlaylistSingleElement />} />
         </Routes>

@@ -4,8 +4,8 @@ import AllSongs from "../Components/AllSongs";
 function HomePage(props) {
   const [songs, setSongs] = useState([]);
 
-  const handleSongSelect = (songName) => {
-    props.setSelectedSong(songName);
+  const handleSongSelect = async (songName) => {
+    await props.setSelectedSong(songName);
   };
 
   const updateSongs = (newSongs) => {

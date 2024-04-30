@@ -20,7 +20,7 @@ function FooterMusicPlayer({ selectedSong }) {
     songName: "",
     albumName: "",
   });
-  const songnumber = +selectedSong;
+  const songnumber =+ selectedSong;
   const [albumImage, setAlbumImage] = useState(
     "https://via.placeholder.com/650"
   );
@@ -34,13 +34,13 @@ function FooterMusicPlayer({ selectedSong }) {
         `https://localhost:7106/api/Song/allsong`
       );
       const songList = await Promise.all(
-        response.data.map(async (song, index) => {
-          let songIndex = index;
+        await response.data.map(async (song, index) => {
+          let songIndex = await index;
           const albumName = await fetchAlbumData(song.albumId);
-          return { ...song, albumName, songIndex };
+          return await { ...song, albumName, songIndex };
         })
       );
-      setTracks(songList);
+      await setTracks(songList);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -50,10 +50,10 @@ function FooterMusicPlayer({ selectedSong }) {
       const response = await axios.get(
         `https://localhost:7106/api/Album/albumbyid/${albumId}`
       );
-      return response.data.name;
+      return await response.data.name;
     } catch (error) {
       console.error("Error fetching album data:", error);
-      return null;
+      return await null;
     }
   };
 
@@ -66,7 +66,7 @@ function FooterMusicPlayer({ selectedSong }) {
         throw new Error("Failed to fetch current song details");
       }
       const data = await response.json();
-      setCurrentSongDetails(data);
+      await setCurrentSongDetails(data);
     } catch (error) {
       console.error("Error fetching current song details:", error);
     }
@@ -81,28 +81,31 @@ function FooterMusicPlayer({ selectedSong }) {
   }, []); // This effect runs only once, on component mount
 
   useEffect(() => {
-    setCurrentTrackIndex(songnumber);
-  }, [selectedSong]);
+    const setCurrentTrackIndexAsync = async () => {
+      setCurrentTrackIndex(songnumber);
+    };
+  
+    setCurrentTrackIndexAsync();
+  }, [selectedSong]);  
 
   useEffect(() => {
     if (selectedSong !== -1) {
-      // Replace `defaultValue` with your default value for `selectedSong`
       loadAudioByURL();
     }
   }, [selectedSong, tracks, currentTrackIndex]);
 
   const loadAudioByURL = async () => {
       try {
-        const songQuery = tracks[currentTrackIndex].name;
-        const encodedFileName = encodeURIComponent(songQuery) + ".mp3";
-        const audioUrl = `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
+        const songQuery = await tracks[currentTrackIndex].name;
+        const encodedFileName = await encodeURIComponent(songQuery) + ".mp3";
+        const audioUrl = await `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
         const response = await fetch(audioUrl);
         if (!response.ok) {
           throw new Error("Failed to load audio file");
         }
         const audioBlob = await response.blob();
         const objectUrl = await URL.createObjectURL(audioBlob);
-        audioRef.current.src = objectUrl;
+        audioRef.current.src = await objectUrl;
         await audioRef.current.load();
   
         // Fetch song details by name
@@ -115,7 +118,7 @@ function FooterMusicPlayer({ selectedSong }) {
         const songDetailsData = await songDetailsResponse.json();
   
         // Update song details in state
-        setCurrentSongDetails({
+        await setCurrentSongDetails({
           artistName: songDetailsData.mainArtist.artistName,
           songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ""),
           albumName: songDetailsData.albumName,
@@ -129,80 +132,80 @@ function FooterMusicPlayer({ selectedSong }) {
           throw new Error("Failed to fetch album image");
         }
         const albumImageBlob = await albumImageResponse.blob();
-        const albumImageObjectUrl = URL.createObjectURL(albumImageBlob);
-        setAlbumImage(albumImageObjectUrl);
+        const albumImageObjectUrl = await URL.createObjectURL(albumImageBlob);
+        await setAlbumImage(albumImageObjectUrl);
         if (isPlaying === false) {
-          audioRef.current.pause(); // If it was paused, pause it again
-          togglePlayPause();
+          await audioRef.current.pause(); // If it was paused, pause it again
+          await togglePlayPause();
         }
       } catch (error) {
         console.error("Error loading audio:", error);
       }
   };
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     if (!userInteracted) {
-      setUserInteracted(true);
+      await setUserInteracted(true);
     }
 
     if (audioReady && adjustedTimeRef.current !== null) {
-      audioRef.current.currentTime = adjustedTimeRef.current;
-      adjustedTimeRef.current = null;
+      audioRef.current.currentTime = await adjustedTimeRef.current;
+      adjustedTimeRef.current = await null;
     }
 
-    setIsPlaying((prev) => !prev); // Toggle the playing state
+    await setIsPlaying((prev) => !prev); // Toggle the playing state
   };
 
-  const skipForward = () => {
+  const skipForward = async () => {
     if (audioRef.current) {
-      audioRef.current.currentTime += 15; // Skip forward by 15 seconds
+      audioRef.current.currentTime += await 15; // Skip forward by 15 seconds
       if (isPlaying === false) {
-        audioRef.current.pause(); // If it was paused, pause it again
-        togglePlayPause();
+        await audioRef.current.pause(); // If it was paused, pause it again
+        await togglePlayPause();
       }
     }
   };
 
-  const skipBackward = () => {
+  const skipBackward = async () => {
     if (audioRef.current) {
-      audioRef.current.currentTime -= 5; // Skip backward by 5 seconds
+      audioRef.current.currentTime -= await 5; // Skip backward by 5 seconds
       if (isPlaying === false) {
-        audioRef.current.pause(); // If it was paused, pause it again
-        togglePlayPause();
+        await audioRef.current.pause(); // If it was paused, pause it again
+        await togglePlayPause();
       }
     }
   };
 
   const handlePrevious = async () => {
     if (isPlaying === false) {
-      audioRef.current.pause(); // If it was paused, pause it again
-      togglePlayPause();
+      await audioRef.current.pause(); // If it was paused, pause it again
+      await togglePlayPause();
     }
-    setCurrentTrackIndex((currentTrackIndex - 1 + tracks.length) % tracks.length);
+    await setCurrentTrackIndex((currentTrackIndex - 1 + tracks.length) % tracks.length);
     await fetchCurrentSongDetails();
   };
 
   const handleNext = async () => {
     if (isPlaying === false) {
-      audioRef.current.pause(); // If it was paused, pause it again
-      togglePlayPause();
+      await audioRef.current.pause(); // If it was paused, pause it again
+      await togglePlayPause();
     }
-    setCurrentTrackIndex((currentTrackIndex + 1) % tracks.length);
+    await setCurrentTrackIndex((currentTrackIndex + 1) % tracks.length);
     await fetchCurrentSongDetails();
   };
 
-  const handleProgressChange = (e) => {
-    const newTime = parseFloat(e.target.value);
-    adjustedTimeRef.current = newTime; // Store the adjusted time
-    setTimeProgress(newTime);
+  const handleProgressChange = async (e) => {
+    const newTime = await parseFloat(e.target.value);
+    adjustedTimeRef.current = await newTime; // Store the adjusted time
+    await setTimeProgress(newTime);
   };
 
-  const handleProgressMouseUp = () => {
+  const handleProgressMouseUp = async () => {
     if (userInteracted) {
-      setIsPlaying(true); // Resume playback
+      await setIsPlaying(true); // Resume playback
       if (adjustedTimeRef.current !== null) {
         if (audioRef.current) {
-          audioRef.current.currentTime = adjustedTimeRef.current; // Set adjusted time
+          audioRef.current.currentTime = await adjustedTimeRef.current; // Set adjusted time
         }
         adjustedTimeRef.current = null; // Reset adjusted time
       }
@@ -213,50 +216,62 @@ function FooterMusicPlayer({ selectedSong }) {
     setFullscreen((prev) => !prev);
   };
 
+  useEffect(() => {
+    const handleAudioPlayback = async () => {
+      if (isPlaying && audioReady && userInteracted) {
+        if (audioRef.current) await audioRef.current.play();
+      } else {
+        if (audioRef.current) await audioRef.current.pause();
+      }
+    };
+  
+    handleAudioPlayback();
+  
+    // Cleanup function
+    return async () => {
+      // Pause the audio when the component unmounts or when dependencies change
+      if (audioRef.current) await audioRef.current.pause();
+    };
+  }, [isPlaying, audioReady, userInteracted]);  
+
   // Effect to manage audio event listeners and playback
   useEffect(() => {
-    const updateProgress = () => {
+    const updateProgress = async () => {
       if (audioRef.current) {
-        const currentTime = audioRef.current.currentTime;
-        setTimeProgress(currentTime);
+        const currentTime = await audioRef.current.currentTime;
+        await setTimeProgress(currentTime);
 
         if (progressBarRef.current) {
-          progressBarRef.current.value = currentTime;
-          progressBarRef.current.style.setProperty(
+          progressBarRef.current.value = await currentTime;
+          await progressBarRef.current.style.setProperty(
             "--range-progress",
             `${(currentTime / duration) * 100}%`
           );
         }
 
         if (audioReady && currentTime >= duration) {
-          handleNext(); // Automatically play the next song
-          fetchCurrentSongDetails(); // Fetch details for the new song
+          await handleNext(); // Automatically play the next song
+          await fetchCurrentSongDetails(); // Fetch details for the new song
         }
       }
     };
 
-    const handleCanPlayThrough = () => {
-      setAudioReady(true);
+    const handleCanPlayThrough = async () => {
+      await setAudioReady(true);
       if (userInteracted) {
-        if (audioRef.current) audioRef.current.play();
+        if (audioRef.current) await audioRef.current.play();
       }
     };
 
-    const onLoadedMetadata = () => {
+    const onLoadedMetadata = async () => {
       if (progressBarRef.current) {
         if (audioRef.current) {
-          const seconds = audioRef.current.duration;
-          setDuration(seconds);
-          progressBarRef.current.max = seconds;
+          const seconds = await audioRef.current.duration;
+          await setDuration(seconds);
+          progressBarRef.current.max = await seconds;
         }
       }
     };
-
-    if (isPlaying && audioReady && userInteracted) {
-      if (audioRef.current) audioRef.current.play();
-    } else {
-      if (audioRef.current) audioRef.current.pause();
-    }
 
     // Add event listeners to audio element
     if (audioRef.current) {

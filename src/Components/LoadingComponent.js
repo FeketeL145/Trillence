@@ -1,4 +1,5 @@
 import React from "react";
+import { FaAsymmetrik } from "react-icons/fa";
 
 function LoadingComponent() {
   return (

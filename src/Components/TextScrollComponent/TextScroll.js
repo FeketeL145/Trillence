@@ -12,15 +12,17 @@ const TextScroll = ({ text }) => {
       setScrolling(true);
       const containerWidth = container.offsetWidth;
       const contentWidth = contentRef.current.offsetWidth;
-      const scrollInterval = setInterval(() => {
-        const interval = Math.max(20, 2000 / (contentWidth / containerWidth)); // Dynamic interval calculation
-        if (container.scrollLeft === contentWidth - containerWidth) {
-          container.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          container.scrollBy({ left: 1, behavior: 'smooth' });
-        }
-      }, 20);
-      return () => clearInterval(scrollInterval);
+      setTimeout(() => {
+        const scrollInterval = setInterval(() => {
+          const interval = Math.max(20, 2000 / (contentWidth / containerWidth)); // Dynamic interval calculation
+          if (container.scrollLeft === contentWidth - containerWidth) {
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            container.scrollBy({ left: 1, behavior: 'smooth' });
+          }
+        }, 20);
+        return () => clearInterval(scrollInterval);
+      }, 3000); // Add a delay of 3000ms before starting the animation loop
     } else {
       setScrolling(false);
     }

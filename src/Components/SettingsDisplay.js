@@ -14,8 +14,9 @@ function ProfileDisplay() {
   const [usertodelete, setUsertodelete] = useState("");
   const [usertomakeadmin, setUsertomakeadmin] = useState("");
 
-  const notifySuccess = (message) => {
-    toast.success(`${message}`, {
+  const notifySuccess = async (message) => {
+    await toast.dismiss();
+    await toast.success(`${message}`, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -27,8 +28,9 @@ function ProfileDisplay() {
       transition: Bounce,
     });
   };
-  const notifyError = (message) => {
-    toast.error(`${message}`, {
+  const notifyError = async (message) => {
+    await toast.dismiss();
+    await toast.error(`${message}`, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -58,12 +60,12 @@ function ProfileDisplay() {
       );
       if (response.ok) {
         console.log("Username changed successfully");
-        setUsertochange("");
-        setNewusername("");
-        notifySuccess("Username changed successfully");
+        await setUsertochange("");
+        await setNewusername("");
+        await notifySuccess("Username changed successfully");
       } else {
         console.error("Failed to change username");
-        notifyError("Failed to change username");
+        await notifyError("Failed to change username");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -89,13 +91,13 @@ function ProfileDisplay() {
       );
       if (response.ok) {
         console.log("Password changed successfully");
-        notifySuccess(`Password changed successfully For user:\n ${userpasswordtochange}`);
-        setUserpasswordtochange("");
-        setOldpassword("");
-        setNewpassword("");
+        await notifySuccess(`Password changed successfully For user:\n ${userpasswordtochange}`);
+        await setUserpasswordtochange("");
+        await setOldpassword("");
+        await setNewpassword("");
       } else {
         console.error("Failed to change password");
-        notifyError(`Failed to change password\nFor user: ${userpasswordtochange}`);
+        await notifyError(`Failed to change password\nFor user: ${userpasswordtochange}`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -113,11 +115,11 @@ function ProfileDisplay() {
       );
       if (response.ok) {
         console.log(`User ${usertodelete} deleted successfully`);
-        notifySuccess(`User ${usertodelete} deleted successfully`);
-        setUsertodelete("");
+        await notifySuccess(`User ${usertodelete} deleted successfully`);
+        await setUsertodelete("");
       } else {
         console.error(`Failed to delete user ${usertodelete}`);
-        notifyError(`Failed to delete user: ${usertodelete}`);
+        await notifyError(`Failed to delete user: ${usertodelete}`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -141,11 +143,11 @@ function ProfileDisplay() {
 
       if (response.ok) {
         console.log(`User ${usertomakeadmin} assigned admin role successfully`);
-        notifySuccess(`User ${usertomakeadmin} assigned admin role successfully`);
-        setUsertomakeadmin("");
+        await notifySuccess(`User ${usertomakeadmin} assigned admin role successfully`);
+        await setUsertomakeadmin("");
       } else {
         console.error(`Failed to assign admin role to user ${usertomakeadmin}`);
-        notifyError(`Failed to assign admin role to user: ${usertomakeadmin}`);
+        await notifyError(`Failed to assign admin role to user: ${usertomakeadmin}`);
       }
     } catch (error) {
       console.error("Error:", error);
