@@ -102,6 +102,9 @@
   background: rgba(21, 23, 28, 0.7);
   backdrop-filter: blur(15px);
 }
+.mobileSmallContainer{
+  width: 103.1vw;
+}
 .playericonMobile {
   width: 3vh;
   height: 3vh;
@@ -111,7 +114,8 @@
   display: none;
 }
 .songdetailsplayerMobile {
-  margin-left: -1.5vh;
+  height:100%;
+  align-items: center;
   overflow-x: hidden;
 }
 .songtitleplayerMobile {
@@ -120,7 +124,7 @@
 }
 .songartistplayerMobile {
   font-size: 1.5vh;
-  margin-top: -1.5vh;
+  margin-top: -4vh;
   overflow-x: hidden;
 }
 /*Music player Fullscreen*/

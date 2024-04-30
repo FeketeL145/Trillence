@@ -35,12 +35,6 @@ function AllSongs({ onSongSelect, updateSongs }) {
     }
   }, [pageNumber]);
 
-  useEffect(() => {
-    if (pageNumber === 1) {
-      updateSongs(songs);
-    }
-  });
-
   const loadMore = () => {
     const nextPageNumber = pageNumber + 1;
     setPageNumber(nextPageNumber);
@@ -94,10 +88,11 @@ function AllSongs({ onSongSelect, updateSongs }) {
     }
   };
 
-  const handleSongClick = (song) => {
+  const handleSongClick = (song, songindex) => {
     const songName = `${song}`;
-    notify(songName);
-    onSongSelect(songName);
+    const songIndex = `${songindex}`;
+    notify(songName + " " + songIndex);
+    onSongSelect(songIndex);
   };
 
   const fetchAlbumImage = async (albumName) => {
@@ -147,12 +142,11 @@ function AllSongs({ onSongSelect, updateSongs }) {
                         song.albumImage || "https://via.placeholder.com/650"
                       })`,
                     }}
-                    onClick={() => handleSongClick(song.name)}
+                    onClick={() => handleSongClick(song.name, index)}
                   >
                     <Card.Body className="song-details d-flex align-items-center justify-content-center">
                       <div
                         className="text-center"
-                        onClick={() => handleSongClick(song.name)}
                       >
                         <Card.Title className="whitetextbold songtitle">
                           {song.name.split(" - ")[1]}
