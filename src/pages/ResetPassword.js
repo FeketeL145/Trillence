@@ -33,7 +33,6 @@ function ResetPassword() {
         }
       );
       if (response.ok) {
-        console.log("Password changed successfully");
         setError(`Password changed successfully`);
         setUserpasswordtochange("");
         setOldpassword("");

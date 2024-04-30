@@ -29,8 +29,6 @@ function Login() {
       const response = await axios.post(
         `https://localhost:7172/auth/is-admin?username=${username}`
       );
-      console.log(username);
-      console.log(response.data);
 
       if (token != null) {
         Cookies.set("token", token, { expires: 7 });
@@ -38,8 +36,6 @@ function Login() {
         Cookies.set("isAdmin", response.data.isAdmin, { expires: 7 });
         window.location.href = "/";
       }
-
-      console.log("Login Successful");
     } catch (error) {
       setError(error);
     }

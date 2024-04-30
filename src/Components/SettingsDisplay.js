@@ -59,7 +59,6 @@ function ProfileDisplay() {
         }
       );
       if (response.ok) {
-        console.log("Username changed successfully");
         await setUsertochange("");
         await setNewusername("");
         await notifySuccess("Username changed successfully");
@@ -90,7 +89,6 @@ function ProfileDisplay() {
         }
       );
       if (response.ok) {
-        console.log("Password changed successfully");
         await notifySuccess(`Password changed successfully For user:\n ${userpasswordtochange}`);
         await setUserpasswordtochange("");
         await setOldpassword("");
@@ -114,7 +112,6 @@ function ProfileDisplay() {
         }
       );
       if (response.ok) {
-        console.log(`User ${usertodelete} deleted successfully`);
         await notifySuccess(`User ${usertodelete} deleted successfully`);
         await setUsertodelete("");
       } else {
@@ -142,7 +139,6 @@ function ProfileDisplay() {
       });
 
       if (response.ok) {
-        console.log(`User ${usertomakeadmin} assigned admin role successfully`);
         await notifySuccess(`User ${usertomakeadmin} assigned admin role successfully`);
         await setUsertomakeadmin("");
       } else {
@@ -151,6 +147,20 @@ function ProfileDisplay() {
       }
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  const handleMetadataRead = async () => {
+    try {
+      const res = await axios.get(`https://localhost:7106/api/Metadata`);
+      if (res.status === 200) {
+        notifySuccess("Metadata read successfully");
+        // Process the metadata here
+      } else {
+        notifyError("Failed to read metadata");
+      }
+    } catch (error) {
+      notifyError(`Error: ${error}`);
     }
   };
 
@@ -296,6 +306,20 @@ function ProfileDisplay() {
                   <div className="d-grid mt-2">
                     <button type="submit" className="btn btn-warning">
                       <span className="whitetext">Make Admin</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <form onSubmit={handleMetadataRead}>
+              <h3 className="whitetextbold mt-3">
+                <FaIcons.FaDatabase /> Read metadata from song storage
+              </h3>
+              <div>
+                <div className="mb-1">
+                  <div className="d-grid mt-2">
+                    <button type="submit" className="btn btn-primary">
+                      <span className="whitetext">Read metadata</span>
                     </button>
                   </div>
                 </div>

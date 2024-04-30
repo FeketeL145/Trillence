@@ -36,3 +36,9 @@
   height: 100%; /* Set the desired height for the scrollable area */
   overflow-y: auto; /* Enable vertical scrolling */
 }
+.playlistSongsFrame{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid white;
+}

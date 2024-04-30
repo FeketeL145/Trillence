@@ -21,7 +21,7 @@ function FooterMusicPlayer({ selectedSong }) {
     songName: "",
     albumName: "",
   });
-  const songnumber =+ selectedSong;
+  const songnumber = +selectedSong;
   const [albumImage, setAlbumImage] = useState(
     "https://via.placeholder.com/650"
   );
@@ -82,77 +82,77 @@ function FooterMusicPlayer({ selectedSong }) {
   }, []); // This effect runs only once, on component mount
 
   useEffect(() => {
-    if (selectedSong !== -1 && currentTrackIndex >= 0) { // Ensure correct track index
+    if (selectedSong !== -1 && currentTrackIndex >= 0) {
+      // Ensure correct track index
       const handleSongSelect = async (songIndex) => {
         // Set the track index and wait for it to complete before other operations
         await setCurrentTrackIndex(songIndex);
       };
-      handleSongSelect(selectedSong);    
+      handleSongSelect(selectedSong);
     }
   }, [selectedSong]); // Include both as dependencies
 
   useEffect(() => {
-    if (currentTrackIndex >= 0) {
+    if (tracks.length > 0 && currentTrackIndex < tracks.length) {
       loadAudioByURL();
     }
   }, [currentTrackIndex]);
 
   useEffect(() => {
-    if(effectCounter < 2){
-    if (selectedSong !== -1) {
+    if (effectCounter < 2) {
       loadAudioByURL();
+      setEffectCounter(effectCounter + 1);
     }
-    setEffectCounter((prevCount) => prevCount + 1);
-  }
-  }, []);
+  }, [selectedSong, tracks]);
 
   const loadAudioByURL = async () => {
-      try {
-        const songQuery = await tracks[currentTrackIndex].name;
-        const encodedFileName = await encodeURIComponent(songQuery) + ".mp3";
-        const audioUrl = await `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
-        const response = await fetch(audioUrl);
-        if (!response.ok) {
-          throw new Error("Failed to load audio file");
-        }
-        const audioBlob = await response.blob();
-        const objectUrl = await URL.createObjectURL(audioBlob);
-        audioRef.current.src = await objectUrl;
-        await audioRef.current.load();
-  
-        // Fetch song details by name
-        const songDetailsResponse = await fetch(
-          `https://localhost:7106/api/Connection/songdetailsbyname/${songQuery}`
-        );
-        if (!songDetailsResponse.ok) {
-          throw new Error("Failed to fetch song details");
-        }
-        const songDetailsData = await songDetailsResponse.json();
-  
-        // Update song details in state
-        await setCurrentSongDetails({
-          artistName: songDetailsData.mainArtist.artistName,
-          songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ""),
-          albumName: songDetailsData.albumName,
-        });
-        const albumImageResponse = await fetch(
-          `https://localhost:7106/AlbumImage/${encodeURIComponent(
-            songDetailsData.albumName
-          )}`
-        );
-        if (!albumImageResponse.ok) {
-          throw new Error("Failed to fetch album image");
-        }
-        const albumImageBlob = await albumImageResponse.blob();
-        const albumImageObjectUrl = await URL.createObjectURL(albumImageBlob);
-        await setAlbumImage(albumImageObjectUrl);
-        if (isPlaying === false) {
-          await audioRef.current.pause(); // If it was paused, pause it again
-          await togglePlayPause();
-        }
-      } catch (error) {
-        console.error("Error loading audio:", error);
+    try {
+      const songQuery = await tracks[currentTrackIndex].name;
+      const encodedFileName = (await encodeURIComponent(songQuery)) + ".mp3";
+      const audioUrl =
+        await `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
+      const response = await fetch(audioUrl);
+      if (!response.ok) {
+        throw new Error("Failed to load audio file");
       }
+      const audioBlob = await response.blob();
+      const objectUrl = await URL.createObjectURL(audioBlob);
+      audioRef.current.src = await objectUrl;
+      await audioRef.current.load();
+
+      // Fetch song details by name
+      const songDetailsResponse = await fetch(
+        `https://localhost:7106/api/Connection/songdetailsbyname/${songQuery}`
+      );
+      if (!songDetailsResponse.ok) {
+        throw new Error("Failed to fetch song details");
+      }
+      const songDetailsData = await songDetailsResponse.json();
+
+      // Update song details in state
+      await setCurrentSongDetails({
+        artistName: songDetailsData.mainArtist.artistName,
+        songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ""),
+        albumName: songDetailsData.albumName,
+      });
+      const albumImageResponse = await fetch(
+        `https://localhost:7106/AlbumImage/${encodeURIComponent(
+          songDetailsData.albumName
+        )}`
+      );
+      if (!albumImageResponse.ok) {
+        throw new Error("Failed to fetch album image");
+      }
+      const albumImageBlob = await albumImageResponse.blob();
+      const albumImageObjectUrl = await URL.createObjectURL(albumImageBlob);
+      await setAlbumImage(albumImageObjectUrl);
+      if (isPlaying === false) {
+        await audioRef.current.pause(); // If it was paused, pause it again
+        await togglePlayPause();
+      }
+    } catch (error) {
+      console.error("Error loading audio:", error);
+    }
   };
 
   const togglePlayPause = async () => {
@@ -180,9 +180,9 @@ function FooterMusicPlayer({ selectedSong }) {
 
   const skipBackward = async () => {
     if (audioRef.current) {
-      audioRef.current.currentTime -= await 5; // Skip backward by 5 seconds
+      audioRef.current.currentTime -= await 5; 
       if (isPlaying === false) {
-        await audioRef.current.pause(); // If it was paused, pause it again
+        await audioRef.current.pause(); 
         await togglePlayPause();
       }
     }
@@ -190,16 +190,13 @@ function FooterMusicPlayer({ selectedSong }) {
 
   const handlePrevious = async (ctIndex) => {
     if (tracks.length > 0) {
-      console.log(ctIndex);
       const newIndex = (ctIndex - 1 + tracks.length) % tracks.length;
-      console.log(newIndex);
       await setCurrentTrackIndex(newIndex);
     }
   };
-  
+
   const handleNext = async (ctIndex) => {
     if (tracks.length > 0) {
-      console.log(ctIndex);
       const newIndex = (ctIndex + 1) % tracks.length;
       await setCurrentTrackIndex(newIndex);
     }
@@ -207,7 +204,7 @@ function FooterMusicPlayer({ selectedSong }) {
 
   const handleProgressChange = async (e) => {
     const newTime = await parseFloat(e.target.value);
-    adjustedTimeRef.current = await newTime; // Store the adjusted time
+    adjustedTimeRef.current = await newTime; 
     await setTimeProgress(newTime);
   };
 
@@ -235,15 +232,15 @@ function FooterMusicPlayer({ selectedSong }) {
         if (audioRef.current) await audioRef.current.pause();
       }
     };
-  
+
     handleAudioPlayback();
-  
+
     // Cleanup function
     return async () => {
       // Pause the audio when the component unmounts or when dependencies change
       if (audioRef.current) await audioRef.current.pause();
     };
-  }, [isPlaying, audioReady, userInteracted]);  
+  }, [isPlaying, audioReady, userInteracted]);
 
   // Effect to manage audio event listeners and playback
   useEffect(() => {
@@ -327,57 +324,60 @@ function FooterMusicPlayer({ selectedSong }) {
     <div>
       {!isMobile ? (
         <div className=" d-flex align-items-stretch justify-content-between text-nowrap musicPlayer">
-          {(currentTrackIndex !== -1) ? (
+          {currentTrackIndex !== -1 ? (
             <div className="col row">
-            <img
-              className="img-fluid musicThumbnail"
-              src={albumImage}
-              alt="Music thumbnail"
-            />
-            <div className="col-6 songdetailsplayer">
-              <div className="row">
-                <p className={`text-start whitetextbold songtitleplayer`}>
-                  <TextScroll text={currentSongDetails.songName} />
-                </p>
-              </div>
-              <div className="row">
-                <p
-                  className="text-start whitetext songartistplayer"
-                  style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                >
-                  {currentSongDetails.artistName}
-                </p>
+              <img
+                className="img-fluid musicThumbnail"
+                src={albumImage}
+                alt="Music thumbnail"
+              />
+              <div className="col-6 songdetailsplayer">
+                <div className="row">
+                  <p className={`text-start whitetextbold songtitleplayer`}>
+                    <TextScroll text={currentSongDetails.songName} />
+                  </p>
+                </div>
+                <div className="row">
+                  <p
+                    className="text-start whitetext songartistplayer"
+                    style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                  >
+                    {currentSongDetails.artistName}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
           ) : (
             <div className="col row">
-            <img
-              className="img-fluid musicThumbnail"
-              src={albumImage}
-              alt="Music thumbnail"
-            />
-            <div className="col-6 songdetailsplayer">
-              <div className="row">
-                <p className={`text-start whitetextbold songtitleplayer`}>
-                  <TextScroll text="No song selected" />
-                </p>
-              </div>
-              <div className="row">
-                <p
-                  className="text-start whitetext songartistplayer"
-                  style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                >
-                  Select a song to play
-                </p>
+              <img
+                className="img-fluid musicThumbnail"
+                src={albumImage}
+                alt="Music thumbnail"
+              />
+              <div className="col-6 songdetailsplayer">
+                <div className="row">
+                  <p className={`text-start whitetextbold songtitleplayer`}>
+                    <TextScroll text="No song selected" />
+                  </p>
+                </div>
+                <div className="row">
+                  <p
+                    className="text-start whitetext songartistplayer"
+                    style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                  >
+                    Select a song to play
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
           )}
 
           <div className="align-items-center col footerdiv text-center text-white p-2">
             <div>
-              <button onClick={() => handlePrevious(currentTrackIndex)} className="ms-2 btn">
+              <button
+                onClick={() => handlePrevious(currentTrackIndex)}
+                className="ms-2 btn"
+              >
                 <i className="fa-solid fa-backward-fast playericon" />
               </button>
               <button onClick={skipBackward} className="ms-2 btn">
@@ -393,7 +393,10 @@ function FooterMusicPlayer({ selectedSong }) {
               <button onClick={skipForward} className="ms-2 btn">
                 <i className="fa-solid fa-forward-step playericon" />
               </button>
-              <button onClick={() => handleNext(currentTrackIndex)} className="ms-2 btn">
+              <button
+                onClick={() => handleNext(currentTrackIndex)}
+                className="ms-2 btn"
+              >
                 <i className="fa-solid fa-forward-fast playericon " />
               </button>
             </div>
@@ -567,7 +570,10 @@ function FooterMusicPlayer({ selectedSong }) {
                 </div>
               </div>
               <div className="text-center mt-2">
-                <button onClick={() => handlePrevious(currentTrackIndex)} className="ms-2 btn">
+                <button
+                  onClick={() => handlePrevious(currentTrackIndex)}
+                  className="ms-2 btn"
+                >
                   <FaIcons.FaFastBackward className="playericonMobileFullscreen" />
                 </button>
                 <button onClick={skipBackward} className="ms-2 btn">
@@ -583,7 +589,10 @@ function FooterMusicPlayer({ selectedSong }) {
                 <button onClick={skipForward} className="ms-2 btn">
                   <FaIcons.FaStepForward className="playericonMobileFullscreen" />
                 </button>
-                <button onClick={() => handleNext(currentTrackIndex)} className="ms-2 btn">
+                <button
+                  onClick={() => handleNext(currentTrackIndex)}
+                  className="ms-2 btn"
+                >
                   <FaIcons.FaFastForward className="playericonMobileFullscreen" />
                 </button>
               </div>

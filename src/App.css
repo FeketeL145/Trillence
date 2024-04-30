@@ -93,11 +93,6 @@ a {
   display: none;
 }
 
-.proba1 {
-  max-height: 50vh;
-  overflow: scroll;
-}
-
 /*Styling all of the scrollbars*/
 ::-webkit-scrollbar {
   width: 8px;

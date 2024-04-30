@@ -4,23 +4,21 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../App.css";
 import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPlayer";
-import AllSongPlaylist from "../../../Components/AllSongPlaylist";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as FaIcons from "react-icons/fa";
 import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark/dark.css";
+import LoadingComponent from "../../../Components/LoadingComponent";
 
 export function PlaylistSinglePage() {
   const Navigate = useNavigate();
   const { id } = useParams(); // Get the playlist ID from the URL
   const [playlistId, setPlaylistId] = useState(id); // Ensure the state is initialized
   const [Playlist, setPlaylist] = useState(null);
+  const [updated, setUpdated] = useState("");
   const [songs, setSongs] = useState([]);
   const [isFetchPendingplaylist, setFetchPendingplaylist] = useState(false);
-  const [isFetchPendingsongs, setFetchPendingsongs] = useState(false);
-  const [Ismodifying, setIsmodifying] = useState(false);
-  const [EmptyPlaylistName, setEmptyPlaylistName] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const notify = async (message) => {
     await toast.dismiss();
@@ -37,10 +35,21 @@ export function PlaylistSinglePage() {
     });
   };
   useEffect(() => {
+    axios
+      .get("https://localhost:7106/api/Connection/allsongdetails")
+      .then((response) => {
+        setSongs(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
     setFetchPendingplaylist(true);
     axios
       .get(
-        `https://localhost:7106/api/Connection/playlistdetailsby/${playlistId}`
+        `https://localhost:7106/api/Connection/playlistdetailsbyid/${playlistId}`
       )
       .then((response) => {
         setPlaylist(response.data);
@@ -51,43 +60,15 @@ export function PlaylistSinglePage() {
       .finally(() => {
         setFetchPendingplaylist(false);
       });
-  }, [playlistId]);
+  }, [updated]);
 
-  useEffect(() => {
-    setFetchPendingsongs(true);
-    axios
-      .get("https://localhost:7106/api/Connection/allsongdetails")
-      .then((response) => {
-        setSongs(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setFetchPendingsongs(false);
-      });
-  }, []);
-
-  const handleAddSong = async (songId, playlistId) => {
-    try {
-      const response = await axios.post(
-        "https://localhost:7106/api/Playlistsong/playlistsong",
-        {
-          playlistId: playlistId,
-          songId: songId,
-        }
-      );
-      console.log(response.data); // itt a válasz megjelenítése vagy további műveletek
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const handleDeleteSong = async (songId, playlistId) => {
     try {
       const response = await axios.delete(
         `https://localhost:7106/api/Playlistsong/deletebyid/${playlistId}/${songId}`
       );
       setSongs((songs) => songs.filter((song) => song.songId !== songId));
+      setUpdated((prev) => prev + 1);
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +83,6 @@ export function PlaylistSinglePage() {
   };
 
   const handleDeletePlaylistClicked = async (playlistId) => {
-    console.log(playlistId);
     Swal.fire({
       title: "Are you sure you want to delete this playlist?",
       text: "You won't be able to revert this!",
@@ -120,12 +100,9 @@ export function PlaylistSinglePage() {
 
   const handleDeletePlaylist = async (recievedPlaylistId) => {
     try {
-      console.log(recievedPlaylistId);
       const response = await axios.delete(
         `https://localhost:7106/api/Playlist/deletebyid/${recievedPlaylistId}`
       );
-
-      console.log(response.data);
       Swal.fire({
         title: "Playlist deleted!",
         text: "The playlist has been successfully deleted.",
@@ -137,13 +114,24 @@ export function PlaylistSinglePage() {
       console.log(error);
     }
   };
-  const handleModifyPlaylistName = async (newName) => {
+  const handleModifyPlaylistName = async (playlistId) => {
+    const { value: newName } = await Swal.fire({
+      title: "Enter the new playlist name",
+      input: "text",
+      inputPlaceholder: "Playlist name",
+      showCancelButton: true,
+    });
+    if (newName) {
+      Swal.fire({
+        icon: "success",
+        title: "Successfully changed playlist name",
+      });
+      modifyPlaylistName(newName, playlistId);
+    }
+  };
+
+  const modifyPlaylistName = async (newName, playlistId) => {
     try {
-      if (!newName.trim()) {
-        console.log("A playlist name cannot be empty.");
-        setEmptyPlaylistName(true);
-        return;
-      }
       const response = await axios.put(
         `https://localhost:7106/api/Playlist/updatebyid/${playlistId}`,
         {
@@ -151,13 +139,14 @@ export function PlaylistSinglePage() {
           userId: Playlist.userId,
         }
       );
-      console.log(response.data); // itt a válasz megjelenítése vagy további műveletek
+      setUpdated((prev) => prev + 1);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <div className="p-5 m-auto text-center content">
+    <div className="text-center content">
       <ToastContainer
         position="top-right"
         autoClose={2500}
@@ -172,11 +161,11 @@ export function PlaylistSinglePage() {
         transition={Bounce}
       />
       {isFetchPendingplaylist || !Playlist ? (
-        <div className="spinner-border"></div>
+        <LoadingComponent />
       ) : (
-        <div>
+        <div className="embedFrame d-flex flex-column justify-content-center align-items-center p-4">
           <div
-            className="card col-sm-8 d-inline-block p-2 overflow-auto"
+            className="card col-sm-8 d-inline-block overflow-auto"
             style={{
               borderRadius: "20px",
               backgroundColor: "rgba(50, 50, 50, 0.5)",
@@ -185,73 +174,38 @@ export function PlaylistSinglePage() {
             }}
           >
             <div className="card-body">
-              {Ismodifying ? (
-                <form
-                  className="mb-2"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleModifyPlaylistName(
-                      e.target.elements.playlistName.value
-                    );
-                  }}
-                >
-                  <input
-                    type="text"
-                    className="form-control mb-2"
-                    placeholder={Playlist.playlistName}
-                    name="playlistName"
-                  />
-                  <button type="submit" className="btn btn-success">
-                    Save
-                  </button>
-                </form>
-              ) : (
-                <p className="whitetextbold">{Playlist.playlistName}</p>
-              )}
-              {EmptyPlaylistName ? (
-                <card>
-                  <p>Playlist name cannot be empty.</p>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => setEmptyPlaylistName(false)}
-                  >
-                    Close
-                  </button>
-                </card>
-              ) : (
-                <div></div>
-              )}
+              <h2 className="whitetextbold mb-2">{Playlist.playlistName}</h2>
               <div className="row">
                 <button
                   type="button"
-                  className="btn btn-outline-success col ms-2"
+                  className="btn btn-outline-success col ms-2 d-flex align-items-center justify-content-center"
                   onClick={handlePlayPlaylist}
                 >
-                  <i className="bi bi-plus-circle"></i> Play this playlist
+                  <FaIcons.FaPlayCircle className="m-1" />
+                  Play this playlist
                 </button>
 
                 <button
                   type="button"
-                  className="btn btn-outline-primary col ms-2"
-                  onClick={() => setIsmodifying(!Ismodifying)}
+                  className="btn btn-outline-primary col ms-2 d-flex align-items-center justify-content-center"
+                  onClick={() => handleModifyPlaylistName(playlistId)}
                 >
-                  <i className="bi bi-pencil-square"></i> Rename
+                  <FaIcons.FaPencilAlt className="m-1" /> Rename
                 </button>
 
                 <button
                   type="button"
-                  className="btn btn-outline-danger col ms-2"
+                  className="btn btn-outline-danger col ms-2 d-flex align-items-center justify-content-center"
                   onClick={() => handleDeletePlaylistClicked(playlistId)}
                 >
-                  <FaIcons.FaTrashAlt /> Delete
+                  <FaIcons.FaTrashAlt className="m-1" /> Delete
                 </button>
 
                 <NavLink
                   to={`/playlists`}
-                  className="btn btn-outline-secondary col ms-2"
+                  className="btn btn-outline-secondary col ms-2 d-flex align-items-center justify-content-center"
                 >
-                  <FaIcons.FaArrowLeft /> Back
+                  <FaIcons.FaArrowLeft className="m-1" /> Back
                 </NavLink>
               </div>
             </div>
@@ -259,7 +213,7 @@ export function PlaylistSinglePage() {
 
           {/*Listában lévő zenék*/}
           <div
-            className="row whitetext rounded-2 mt-4"
+            className="row whitetext rounded-2 mt-4 playlistSongsFrame"
             style={{
               backdropFilter: "blur(20px)",
               backgroundColor: "rgba(50, 50, 50, 0.5)",
@@ -271,7 +225,7 @@ export function PlaylistSinglePage() {
             {isFetchPendingplaylist ? (
               <div className="spinner-border"></div>
             ) : (
-              <div className="d-flex flex-wrap proba1 hiddenscrollbar justify-content-center align-items-center">
+              <div className="d-flex flex-wrap hiddenscrollbar justify-content-center align-items-center btw h-100 w-100 overflow-auto" style={{paddingBottom: "5vh"}}>
                 {Playlist && Playlist.songs ? (
                   Playlist.songs.length === 0 ? (
                     <p className="whitetext">No songs in this playlist.</p>
@@ -302,9 +256,6 @@ export function PlaylistSinglePage() {
               </div>
             )}
           </div>
-          {/*Hozzáadni új zenéket*/}
-
-              <AllSongPlaylist/>
           {isPlayerVisible && <PlaylistMusicPlayer playlistId={playlistId} />}
         </div>
       )}

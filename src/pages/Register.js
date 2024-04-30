@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -13,6 +13,7 @@ function Register() {
   const [showVerification, setShowVerification] = useState(false);
   const [timeLeft, setTimeLeft] = useState(120);
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let intervalId;
@@ -87,6 +88,7 @@ function Register() {
 
       if (verifyresponse.data === "Code matched successfully.") {
         setError("Code matched successfully.");
+
       }
 
       if (verifyresponse.data === "Invalid code or email.") {
@@ -120,7 +122,7 @@ function Register() {
           setError(
             "Registration successful!\n You can now log into your account."
           );
-          window.location.href = "/sign-in";
+          navigate("/sign-in");
         }
       }
     } catch (error) {

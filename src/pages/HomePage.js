@@ -10,7 +10,6 @@ function HomePage(props) {
 
   const updateSongs = async (newSongs) => {
     await setSongs(newSongs);
-    console.log(songs);
   };
 
   return (

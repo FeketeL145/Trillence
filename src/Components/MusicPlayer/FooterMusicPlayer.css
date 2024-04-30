@@ -54,8 +54,8 @@
   border-radius: 20px;
 }
 .progressBar::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none; /* Centers thumb on the track */
+  -webkit-appearance: none; 
+  appearance: none; 
   background-color: rgba(41, 122, 214, 1);
   border-radius: 100%;
   margin-top: -4px;
@@ -63,8 +63,8 @@
   width: 1rem;    
 }
 .progressBar::-moz-range-thumb {
-  border: none; /*Removes extra border that FF applies*/
-  border-radius: 0; /*Removes default border-radius that FF applies*/
+  border: none; 
+  border-radius: 0; 
   background-color: rgba(41, 122, 214, 1);
   height: 2rem;
   width: 1rem;
@@ -127,7 +127,7 @@
   margin-top: -4vh;
   overflow-x: hidden;
 }
-/*Music player Fullscreen*/
+
 .musicPlayerMobileFullscreen{
   width: 100%;
   height: calc(100% - 5rem);

@@ -3,19 +3,11 @@ import { NavLink } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import Cookies from "js-cookie";
 import { ToastContainer, toast, Bounce } from "react-toastify";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 import LoadingComponent from "../../../Components/LoadingComponent.js";
 import "./Playlist.css";
 import "@sweetalert2/theme-dark/dark.css";
-
-function getUsernameFromCookie() {
-  if (Cookies.get("username") != null) {
-    return Cookies.get("username");
-  } else {
-    return null;
-  }
-}
 
 function AllPlaylist() {
   const [playlists, setPlaylists] = useState([]);
@@ -24,25 +16,34 @@ function AllPlaylist() {
 
   useEffect(() => {
     setFetchPending(true);
-    fetch("https://localhost:7106/api/Playlist/allplaylist", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://localhost:7106/api/Connection/playlistdetailsbyusername/${Cookies.get(
+        "username"
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((playlists) => {
-        setPlaylists(playlists);
+        const playlistDetails = playlists.map((playlist) => ({
+          id: playlist.playlistId,
+          name: playlist.playlistName,
+          songCount: playlist.songs.length,
+        }));
+        setPlaylists(playlistDetails);
       })
       .catch(console.error)
       .finally(() => {
         setFetchPending(false);
-        console.log(playlists);
       });
   }, []);
 
   const handleCreatePlaylist = async () => {
-    const username = getUsernameFromCookie();
+    const username = Cookies.get("username");
     if (username) {
       if (newPlaylistName.length < 3) {
         await toast.error("Playlist name must contain at least 3 characters");
@@ -108,12 +109,10 @@ function AllPlaylist() {
       {isFetchPending ? (
         <LoadingComponent />
       ) : playlists.length === 0 ? (
-        <div
-          className="h-100 w-100 d-flex justify-content-center align-items-center"
-        >
+        <div className="h-100 w-100 d-flex justify-content-center align-items-center">
           <div
             className="whitetext text-center w-100 h-100"
-            style={{ fontSize: "30px"}}
+            style={{ fontSize: "30px" }}
           >
             There aren't any playlists available.
           </div>
@@ -126,9 +125,14 @@ function AllPlaylist() {
                 className="playlistcard col-md-2 m-2"
                 to={`/playlist/${playlist.id}`}
                 key={playlist.id}
+                style={{ cursor: "pointer" }}
               >
-                <div className="d-flex justify-content-center align-items-center w-100 h-100" style={{ overflowX: "hidden" }}>
+                <div
+                  className="d-flex flex-column justify-content-center align-items-center w-100 h-100"
+                  style={{ overflowX: "hidden" }}
+                >
                   <h5 className="whitetext">{playlist.name}</h5>
+                  <p className="whitetext">{playlist.songCount} songs</p>
                 </div>
               </NavLink>
             ))}

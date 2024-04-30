@@ -404,6 +404,7 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
             <div className="col-8 text-center">
               <input
                 type="range"
+                className="progressBar"
                 ref={progressBarRef}
                 defaultValue="0"
                 onChange={handleProgressChange}
@@ -442,7 +443,7 @@ function PlaylistMusicPlayer({ selectedSong, playlistId }) {
             </button>
             <input
               type="range"
-              className="volume-slider"
+              className="volume-slider progressBar"
               step="1"
               min="0"
               max="100"

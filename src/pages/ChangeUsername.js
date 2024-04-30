@@ -26,7 +26,6 @@ function ChangeUsername() {
       );
 
       if (response.ok) {
-        console.log("Username changed successfully");
         setError("Username changed successfully");
 
         Cookies.set("username", newusername, { path: "/", expires: 7 });
