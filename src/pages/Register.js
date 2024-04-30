@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -15,18 +15,16 @@ function Register() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (showVerification) {
-        setTimeLeft((prevTimeLeft) => {
-          return prevTimeLeft - 1;
-        });
-      } else {
-        setTimeLeft(120);
-      }
-    }, 1000);
-
+    let intervalId;
+    if (showVerification) {
+      intervalId = setInterval(() => {
+        setTimeLeft((prevTimeLeft) => Math.max(prevTimeLeft - 1, 0));
+      }, 1000);
+    } else {
+      setTimeLeft(120); // Reset timer if not showing verification
+    }
     return () => clearInterval(intervalId);
-  }, []);
+  }, [showVerification]); // Add `showVerification` to the dependency array  
 
   useEffect(() => {
     if (Cookies.get("token") != null) {
@@ -122,7 +120,7 @@ function Register() {
           setError(
             "Registration successful!\n You can now log into your account."
           );
-          Navigate("/sign-in");
+          window.location.href = "/sign-in";
         }
       }
     } catch (error) {
