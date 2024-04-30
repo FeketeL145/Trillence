@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
-import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import LoadingComponent from "../../../Components/LoadingComponent.js";
 import "./Playlist.css";
 
 function getUsernameFromTokenCookie() {
-  const cookies = document.cookie.split("; ");
-  const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
-
-  if (tokenCookie) {
-    const token = tokenCookie.split("=")[1];
-    try {
-      const decodedToken = jwtDecode(token);
-      return decodedToken.name;
-    } catch (error) {
-      console.error("Error decoding token:", error);
-      return null;
-    }
+  if (Cookies.get("username") != null) {
+    return Cookies.get("username");
+  } else {
+    return null;
   }
-
-  return null;
 }
 
 function AllPlaylist() {
@@ -50,10 +41,9 @@ function AllPlaylist() {
     const username = getUsernameFromTokenCookie();
     if (username) {
       if (newPlaylistName.length < 3) {
-        alert("Playlist name must contain at least 3 characters.");
+        toast.error("Playlist name must contain at least 3 characters");
         return;
       }
-  
       fetch("https://localhost:7106/api/Playlist/playlist", {
         method: "POST",
         headers: {
@@ -79,7 +69,20 @@ function AllPlaylist() {
   };
 
   return (
-    <div>
+    <div className="embedFrame">
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="d-flex justify-content-center align-items-center mb-4">
         <div className="input-group inputgroupplaylist m-2">
           <input
@@ -102,15 +105,10 @@ function AllPlaylist() {
         <LoadingComponent />
       ) : playlists.length === 0 ? (
         <div
+          className="embedFrame"
           style={{
-            color: "white",
             backdropFilter: "blur(10px)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            width: "100%",
-            marginTop: "-2%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
           <p
@@ -121,21 +119,20 @@ function AllPlaylist() {
           </p>
         </div>
       ) : (
-        <div className="d-flex flex-wrap">
-          {playlists.map((playlist) => (
-            <NavLink className="playlistcard m-2" to={`/playlist/${playlist.id}`}>
-              <div key={playlist.id}>
-                <div className="card-body">
-                  <h5
-                    className="card-title whitetext"
-                    style={{ color: "white" }}
-                  >
-                    {playlist.name}
-                  </h5>
+        <div className="container-fluid mt-3 embedFrame">
+          <div className="row justify-content-center">
+            {playlists.map((playlist) => (
+              <NavLink
+                className="playlistcard col-md-2 m-2"
+                to={`/playlist/${playlist.id}`}
+                key={playlist.id}
+              >
+                <div className="d-flex justify-content-center align-items-center w-100 h-100">
+                  <h5 className="whitetext">{playlist.name}</h5>
                 </div>
-              </div>
-            </NavLink>
-          ))}
+              </NavLink>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -5,7 +5,6 @@ import { Card, Button } from "react-bootstrap";
 import LoadingComponent from "./LoadingComponent";
 import "./AllSongs.css";
 import * as FaIcons from "react-icons/fa";
-import FooterMusicPlayer from "../Components/MusicPlayer/FooterMusicPlayer";
 
 function Search(props) {
   const [songs, setSongs] = useState([]);
@@ -13,8 +12,6 @@ function Search(props) {
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
   const [noResults, setNoResults] = useState(false);
-
-  
 
   useEffect(() => {
     fetchData();
@@ -26,7 +23,13 @@ function Search(props) {
       const response = await axios.get(
         `https://localhost:7106/api/Song/allsong`
       );
-      setSongs(response.data);
+      const newSongs = await Promise.all(
+        response.data.map(async (song, index) => {
+          // Added index parameter
+          return { ...song, originalIndex: index }; // Include original index
+        })
+      );
+      setSongs(newSongs);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -38,7 +41,7 @@ function Search(props) {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
 
-    // Fetch album data and image only when needed
+    // Filter songs based on similarity
     const newFilteredSongs = await Promise.all(
       songs.map(async (song) => {
         const nameSimilarity = song.name
@@ -53,13 +56,20 @@ function Search(props) {
           if (albumName) {
             albumImage = await fetchAlbumImage(albumName);
           }
-          return { ...song, albumName, albumImage, nameSimilarity, artistSimilarity }; // Include similarity scores
+          return {
+            ...song,
+            albumName,
+            albumImage,
+            nameSimilarity,
+            artistSimilarity,
+          }; // Include similarity scores
         }
         return null;
       })
     );
 
     const filteredSongs = newFilteredSongs.filter(Boolean);
+    
 
     // Sort filteredSongs based on the sum of similarity scores in descending order
     filteredSongs.sort((a, b) => {
@@ -105,10 +115,10 @@ function Search(props) {
     }
   };
 
-  const handleSongSelect = (songName) => {
-    props.setSelectedSong(songName);
+  const handleSongSelect = (songindex) => {
+    props.setSelectedSong(songindex);
+    console.log(songindex);
   };
-
 
   return (
     <div className="d-flex justify-content-center">
@@ -139,14 +149,21 @@ function Search(props) {
                   <Card
                     className="song-card"
                     style={{
-                      backgroundImage: `url(${song.albumImage || "https://via.placeholder.com/650"})`,
+                      backgroundImage: `url(${
+                        song.albumImage || "https://via.placeholder.com/650"
+                      })`,
                     }}
-                    onClick={() => handleSongSelect(song.name)} // Passing the song name to handleSongClick
+                    onClick={() => handleSongSelect(song.originalIndex)} // Passing the song name to handleSongClick
                   >
                     <Card.Body className="song-details d-flex align-items-center justify-content-center">
                       <div className="text-center">
-                        <Card.Title className="whitetextbold songtitle">{song.name}</Card.Title> {/* Song title */}
-                        <Card.Subtitle className="whitetext songartist">{song.artist}</Card.Subtitle>
+                        <Card.Title className="whitetextbold songtitle">
+                          {song.name}
+                        </Card.Title>{" "}
+                        {/* Song title */}
+                        <Card.Subtitle className="whitetext songartist">
+                          {song.artist}
+                        </Card.Subtitle>
                       </div>
                     </Card.Body>
                   </Card>
@@ -156,7 +173,6 @@ function Search(props) {
           </div>
         )}
       </div>
-      <FooterMusicPlayer selectedSong={props.selectedSong} />
     </div>
   );
 }

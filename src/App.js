@@ -83,7 +83,7 @@ function AppContent({ setSelectedSong, selectedSong }) {
         </Routes>
       </div>
 
-      {!isExcluded(location.pathname, excludedPatterns) && (
+      {!isExcluded(location.pathname, excludedPatterns) && selectedSong && (
         <FooterMusicPlayer selectedSong={selectedSong} />
       )}
     </div>
