@@ -1,12 +1,16 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import SearchComponent from "../Components/Search";
+import Search from "../Components/Search";
+import { useState } from "react";
 
-function SearchPage() {
+function SearchPage(props) {
+
+  const handleSongSelect = (songName) => {
+    props.setSelectedSong(songName);
+  };
+
   return (
     <div>
-      <div>
-        <SearchComponent/>
-      </div>
+      <Search setSelectedSong={handleSongSelect} /> {/* Pass correct handler */}
     </div>
   );
 }
