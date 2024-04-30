@@ -50,13 +50,20 @@ function Search({ onSongSelect }) {
           if (albumName) {
             albumImage = await fetchAlbumImage(albumName);
           }
-          return { ...song, albumName, albumImage };
+          return { ...song, albumName, albumImage, nameSimilarity, artistSimilarity }; // Include similarity scores
         }
         return null;
       })
     );
 
     const filteredSongs = newFilteredSongs.filter(Boolean);
+
+    // Sort filteredSongs based on the sum of similarity scores in descending order
+    filteredSongs.sort((a, b) => {
+      const similarityA = a.nameSimilarity + a.artistSimilarity;
+      const similarityB = b.nameSimilarity + b.artistSimilarity;
+      return similarityB - similarityA;
+    });
 
     if (filteredSongs.length === 0 && query.length > 3) {
       setNoResults(true);
@@ -104,22 +111,24 @@ function Search({ onSongSelect }) {
   return (
     <div className="d-flex justify-content-center">
       <div className="input-group w-75">
-      <input
-        type="text"
-        placeholder="Search songs..."
-        value={searchQuery}
-        onChange={handleSearch}
-        className="row col-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 mt-2 searchbar form-control"
-      />
-      <span className="col-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 searchbutton rounded d-flex justify-content-end align-items-center">
-        <FaIcons.FaSearch/>
-      </span>
+        <input
+          type="text"
+          placeholder="Search songs..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="row col-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 mt-2 searchbar form-control"
+        />
+        <span className="col-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 mt-2 searchbutton rounded d-flex justify-content-end align-items-center">
+          <FaIcons.FaSearch />
+        </span>
       </div>
       <div className="searchFrame overflow-auto row">
         {isFetchPending ? (
           <LoadingComponent />
         ) : noResults ? (
-          <div className="text-center whitetextbold w-100 h-100 d-flex justify-content-center align-items-center"><h1>There are no results for your search</h1></div>
+          <div className="text-center whitetextbold w-100 h-100 d-flex justify-content-center align-items-center">
+            <h1>There are no results for your search</h1>
+          </div>
         ) : (
           <div className="container-fluid">
             <div className="row">
@@ -129,7 +138,8 @@ function Search({ onSongSelect }) {
                     className="song-card"
                     style={{
                       backgroundImage: `url(${
-                        song.albumImage || "https://via.placeholder.com/650"
+                        song.albumImage ||
+                        "https://via.placeholder.com/650"
                       })`,
                     }}
                     onClick={() => handleSongClick(song.name)}
