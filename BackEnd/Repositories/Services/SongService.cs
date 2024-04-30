@@ -28,9 +28,16 @@ namespace BackEnd.Repositories.Services
             return song.AsDto();
         }
 
-        public async Task<IEnumerable<Song>> GetAll(int pageNumber)
+        public async Task<IEnumerable<Song>> GetAllWithPage(int pageNumber)
         {
             var songs = await trillenceContext.Songs.OrderBy(x => x.Name).Skip((pageNumber - 1) * 10).Take(10).ToListAsync();
+
+            return songs;
+        }
+
+        public async Task<IEnumerable<Song>> GetAll()
+        {
+            var songs = await trillenceContext.Songs.OrderBy(x => x.Name).ToListAsync();
 
             return songs;
         }

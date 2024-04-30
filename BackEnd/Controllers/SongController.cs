@@ -20,11 +20,17 @@ namespace BackEnd.Controllers
             return StatusCode(201, await songInterface.Post(createSongDto));
         }
 
-        [HttpGet("allsong")]
-        public async Task<IEnumerable<Song>> Get(int pageNumber)
+        [HttpGet("allsongpaginated")]
+        public async Task<IEnumerable<Song>> GetAllWithPage(int pageNumber)
         {
-            return await songInterface.GetAll(pageNumber);
+            return await songInterface.GetAllWithPage(pageNumber);
         }
+        [HttpGet("allsong")]
+        public async Task<IEnumerable<Song>> Get()
+        {
+            return await songInterface.GetAll();
+        }
+
         [HttpGet("songcount")]
         public async Task<int> GetCount()
         {
