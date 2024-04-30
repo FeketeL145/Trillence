@@ -11,7 +11,7 @@ function FooterMusicPlayer({ selectedSong }) {
   const [userInteracted, setUserInteracted] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
   const progressBarRef = useRef(null);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(1);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(-1);
   const [tracks, setTracks] = useState([]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -20,6 +20,7 @@ function FooterMusicPlayer({ selectedSong }) {
     songName: "",
     albumName: "",
   });
+  const songnumber = +selectedSong;
   const [albumImage, setAlbumImage] = useState(
     "https://via.placeholder.com/650"
   );
@@ -27,27 +28,6 @@ function FooterMusicPlayer({ selectedSong }) {
   const adjustedTimeRef = useRef(null);
   const timeoutRef = useRef(null);
   const [isFullscreen, setFullscreen] = useState(false);
-  const fetchAllSongDetails = async () => {
-    try {
-      const response = await fetch(
-        "https://localhost:7106/api/Connection/allsongdetails"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch all song details");
-      }
-      const data = await response.json();
-      const songDetails = data.flatMap((album) =>
-        album.songs.map((song) => ({
-          artistName: album.mainArtist.artistName,
-          songName: song.songName,
-          albumName: album.albumName,
-        }))
-      );
-      setTracks(songDetails);
-    } catch (error) {
-      console.error("Error fetching all song details:", error);
-    }
-  };
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -57,11 +37,7 @@ function FooterMusicPlayer({ selectedSong }) {
         response.data.map(async (song, index) => {
           let songIndex = index;
           const albumName = await fetchAlbumData(song.albumId);
-          let albumImage = null;
-          if (albumName) {
-            albumImage = await fetchAlbumImage(albumName);
-          }
-          return { ...song, albumName, albumImage, songIndex };
+          return { ...song, albumName, songIndex };
         })
       );
       setTracks(songList);
@@ -69,7 +45,6 @@ function FooterMusicPlayer({ selectedSong }) {
       console.error("Error fetching data:", error);
     }
   };
-
   const fetchAlbumData = async (albumId) => {
     try {
       const response = await axios.get(
@@ -79,23 +54,6 @@ function FooterMusicPlayer({ selectedSong }) {
     } catch (error) {
       console.error("Error fetching album data:", error);
       return null;
-    }
-  };
-
-  const fetchAlbumImage = async (albumName) => {
-    try {
-      const response = await fetch(
-        `https://localhost:7106/AlbumImage/${albumName}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch album image");
-      }
-      const imageBlob = await response.blob();
-      const objectUrl = URL.createObjectURL(imageBlob);
-      return objectUrl;
-    } catch (error) {
-      console.error("Error fetching album image:", error);
-      return "https://via.placeholder.com/650";
     }
   };
 
@@ -115,10 +73,8 @@ function FooterMusicPlayer({ selectedSong }) {
   };
 
   useEffect(() => {
-    fetchData();
-    loadAudioByURL();
     fetchCurrentSongDetails();
-  }, []);
+  }, [selectedSong]);
 
   /*
   useEffect(() => {
@@ -159,52 +115,72 @@ function FooterMusicPlayer({ selectedSong }) {
   };
 */
 
+  useEffect(() => {
+    fetchData();
+  }, []); // This effect runs only once, on component mount
 
-const loadAudioByURL = async () => {
-  try {
-    console.log(tracks[selectedSong]);
-    const songQuery = tracks[currentTrackIndex];
-    const encodedFileName = encodeURIComponent(songQuery) + ".mp3";
-    const audioUrl = `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
-    const response = await fetch(audioUrl);
-    if (!response.ok) {
-      throw new Error("Failed to load audio file");
-    }
-    const audioBlob = await response.blob();
-    const objectUrl = await URL.createObjectURL(audioBlob);
-    audioRef.current.src = objectUrl;
-    await audioRef.current.load();
+  useEffect(() => {
+    setCurrentTrackIndex(songnumber);
+  }, [selectedSong]);
 
-    // Fetch song details by name
-    const songDetailsResponse = await fetch(
-      `https://localhost:7106/api/Connection/songdetailsbyname/${selectedSong}`
-    );
-    if (!songDetailsResponse.ok) {
-      throw new Error("Failed to fetch song details");
+  useEffect(() => {
+    if (selectedSong !== -1) {
+      // Replace `defaultValue` with your default value for `selectedSong`
+      loadAudioByURL();
     }
-    const songDetailsData = await songDetailsResponse.json();
+  }, [selectedSong, tracks, currentTrackIndex]);
 
-    // Update song details in state
-    setCurrentSongDetails({
-      artistName: songDetailsData.mainArtist.artistName,
-      songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ""),
-      albumName: songDetailsData.albumName,
-    });
-    const albumImageResponse = await fetch(
-      `https://localhost:7106/AlbumImage/${encodeURIComponent(
-        songDetailsData.albumName
-      )}`
-    );
-    if (!albumImageResponse.ok) {
-      throw new Error("Failed to fetch album image");
+  const loadAudioByURL = async () => {
+    if(userInteracted)
+    {
+      try {
+        const songQuery = tracks[currentTrackIndex].name;
+        const encodedFileName = encodeURIComponent(songQuery) + ".mp3";
+        const audioUrl = `https://localhost:7106/api/MusicStreaming/stream?fileName=${encodedFileName}`;
+        const response = await fetch(audioUrl);
+        if (!response.ok) {
+          throw new Error("Failed to load audio file");
+        }
+        const audioBlob = await response.blob();
+        const objectUrl = await URL.createObjectURL(audioBlob);
+        audioRef.current.src = objectUrl;
+        await audioRef.current.load();
+  
+        // Fetch song details by name
+        const songDetailsResponse = await fetch(
+          `https://localhost:7106/api/Connection/songdetailsbyname/${songQuery}`
+        );
+        if (!songDetailsResponse.ok) {
+          throw new Error("Failed to fetch song details");
+        }
+        const songDetailsData = await songDetailsResponse.json();
+  
+        // Update song details in state
+        setCurrentSongDetails({
+          artistName: songDetailsData.mainArtist.artistName,
+          songName: songDetailsData.songName.replace(/^[^-]*-\s*/, ""),
+          albumName: songDetailsData.albumName,
+        });
+        const albumImageResponse = await fetch(
+          `https://localhost:7106/AlbumImage/${encodeURIComponent(
+            songDetailsData.albumName
+          )}`
+        );
+        if (!albumImageResponse.ok) {
+          throw new Error("Failed to fetch album image");
+        }
+        const albumImageBlob = await albumImageResponse.blob();
+        const albumImageObjectUrl = URL.createObjectURL(albumImageBlob);
+        setAlbumImage(albumImageObjectUrl);
+        if (isPlaying === false) {
+          audioRef.current.pause(); // If it was paused, pause it again
+          togglePlayPause();
+        }
+      } catch (error) {
+        console.error("Error loading audio:", error);
+      }
     }
-    const albumImageBlob = await albumImageResponse.blob();
-    const albumImageObjectUrl = URL.createObjectURL(albumImageBlob);
-    setAlbumImage(albumImageObjectUrl);
-  } catch (error) {
-    console.error("Error loading audio:", error);
-  }
-};
+  };
 
   const togglePlayPause = () => {
     if (!userInteracted) {
@@ -244,7 +220,7 @@ const loadAudioByURL = async () => {
       audioRef.current.pause(); // If it was paused, pause it again
       togglePlayPause();
     }
-    setCurrentTrackIndex((currentTrackIndex - 1) % tracks.length);
+    setCurrentTrackIndex((currentTrackIndex - 1 % tracks.length) % tracks.length);
     await fetchCurrentSongDetails();
   };
 
@@ -367,7 +343,8 @@ const loadAudioByURL = async () => {
     <div>
       {!isMobile ? (
         <div className=" d-flex align-items-stretch justify-content-between text-nowrap musicPlayer">
-          <div className="col row">
+          {(userInteracted && currentTrackIndex !== -1) ? (
+            <div className="col row">
             <img
               className="img-fluid musicThumbnail"
               src={albumImage}
@@ -389,6 +366,30 @@ const loadAudioByURL = async () => {
               </div>
             </div>
           </div>
+          ) : (
+            <div className="col row">
+            <img
+              className="img-fluid musicThumbnail"
+              src={albumImage}
+              alt="Music thumbnail"
+            />
+            <div className="col-6 songdetailsplayer">
+              <div className="row">
+                <p className={`text-start whitetextbold songtitleplayer`}>
+                  <TextScroll text="No song selected" />
+                </p>
+              </div>
+              <div className="row">
+                <p
+                  className="text-start whitetext songartistplayer"
+                  style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                >
+                  Select a song to play
+                </p>
+              </div>
+            </div>
+          </div>
+          )}
 
           <div className="align-items-center col footerdiv text-center text-white p-2">
             <div>
