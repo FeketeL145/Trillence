@@ -37,6 +37,7 @@ function AllPlaylist() {
       .catch(console.error)
       .finally(() => {
         setFetchPending(false);
+        console.log(playlists);
       });
   }, []);
 
@@ -108,18 +109,14 @@ function AllPlaylist() {
         <LoadingComponent />
       ) : playlists.length === 0 ? (
         <div
-          className="embedFrame"
-          style={{
-            backdropFilter: "blur(10px)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
+          className="h-100 w-100 d-flex justify-content-center align-items-center"
         >
-          <p
-            className="whitetext"
-            style={{ fontSize: "30px", marginTop: "-9%" }}
+          <div
+            className="whitetext text-center w-100 h-100"
+            style={{ fontSize: "30px"}}
           >
             There aren't any playlists available.
-          </p>
+          </div>
         </div>
       ) : (
         <div className="container-fluid mt-3 embedFrame">
@@ -130,7 +127,7 @@ function AllPlaylist() {
                 to={`/playlist/${playlist.id}`}
                 key={playlist.id}
               >
-                <div className="d-flex justify-content-center align-items-center w-100 h-100">
+                <div className="d-flex justify-content-center align-items-center w-100 h-100" style={{ overflowX: "hidden" }}>
                   <h5 className="whitetext">{playlist.name}</h5>
                 </div>
               </NavLink>

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../App.css";
 import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPlayer";
+import AllSongPlaylist from "../../../Components/AllSongPlaylist";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as FaIcons from "react-icons/fa";
@@ -11,6 +12,7 @@ import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark/dark.css";
 
 export function PlaylistSinglePage() {
+  const Navigate = useNavigate();
   const { id } = useParams(); // Get the playlist ID from the URL
   const [playlistId, setPlaylistId] = useState(id); // Ensure the state is initialized
   const [Playlist, setPlaylist] = useState(null);
@@ -18,7 +20,6 @@ export function PlaylistSinglePage() {
   const [isFetchPendingplaylist, setFetchPendingplaylist] = useState(false);
   const [isFetchPendingsongs, setFetchPendingsongs] = useState(false);
   const [Ismodifying, setIsmodifying] = useState(false);
-  const [AreYouSureToDelete, setAreYouSureToDelete] = useState(false);
   const [EmptyPlaylistName, setEmptyPlaylistName] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const notify = async (message) => {
@@ -101,6 +102,7 @@ export function PlaylistSinglePage() {
   };
 
   const handleDeletePlaylistClicked = async (playlistId) => {
+    console.log(playlistId);
     Swal.fire({
       title: "Are you sure you want to delete this playlist?",
       text: "You won't be able to revert this!",
@@ -111,27 +113,29 @@ export function PlaylistSinglePage() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Playlist deleted!",
-          text: "The playlist has been successfully deleted.",
-          icon: "success",
-        }).then(handleDeletePlaylist(playlistId));
+        handleDeletePlaylist(playlistId);
       }
     });
   };
-  const handleDeletePlaylist = async (playlistId) => {
+
+  const handleDeletePlaylist = async (recievedPlaylistId) => {
     try {
+      console.log(recievedPlaylistId);
       const response = await axios.delete(
-        `https://localhost:7106/api/Playlist/deletebyid/${playlistId}`
+        `https://localhost:7106/api/Playlist/deletebyid/${recievedPlaylistId}`
       );
+
       console.log(response.data);
-      window.location.href = "/playlists";
+      Swal.fire({
+        title: "Playlist deleted!",
+        text: "The playlist has been successfully deleted.",
+        icon: "success",
+      }).then(() => {
+        Navigate("/playlists");
+      });
     } catch (error) {
       console.log(error);
     }
-  };
-  const handleBack = () => {
-    window.location.href = "/playlists";
   };
   const handleModifyPlaylistName = async (newName) => {
     try {
@@ -172,7 +176,7 @@ export function PlaylistSinglePage() {
       ) : (
         <div>
           <div
-            className="card col-sm-8 d-inline-block p-2"
+            className="card col-sm-8 d-inline-block p-2 overflow-auto"
             style={{
               borderRadius: "20px",
               backgroundColor: "rgba(50, 50, 50, 0.5)",
@@ -232,13 +236,13 @@ export function PlaylistSinglePage() {
                   className="btn btn-outline-primary col ms-2"
                   onClick={() => setIsmodifying(!Ismodifying)}
                 >
-                  <i className="bi bi-pencil-square"></i> Modify
+                  <i className="bi bi-pencil-square"></i> Rename
                 </button>
 
                 <button
                   type="button"
                   className="btn btn-outline-danger col ms-2"
-                  onClick={handleDeletePlaylistClicked}
+                  onClick={() => handleDeletePlaylistClicked(playlistId)}
                 >
                   <FaIcons.FaTrashAlt /> Delete
                 </button>
@@ -299,41 +303,8 @@ export function PlaylistSinglePage() {
             )}
           </div>
           {/*Hozzáadni új zenéket*/}
-          <div>
-            <div className="">
-              {isFetchPendingsongs ? (
-                <div className="spinner-border"></div>
-              ) : (
-                <div className="d-flex row flex-nowrap overflow-auto hiddenscrollbar">
-                  {songs.map((album) =>
-                    album.songs.map((song) => (
-                      <div
-                        key={song.songId}
-                        className="songcard card p-4 mt-4 ms-2 bg-dark rounded-8 whitetext"
-                        style={{ maxWidth: "25%" }}
-                      >
-                        <div className="card-body" style={{ color: "white" }}>
-                          <h5 className="card-title">{song.songName}</h5>
-                          <p className="card-text">
-                            {album.mainArtist.artistName}
-                          </p>
-                          <button
-                            className="btn btn-outline-success"
-                            style={{ color: "white" }}
-                            onClick={() =>
-                              handleAddSong(song.songId, Playlist.playlistId)
-                            }
-                          >
-                            <FaIcons.FaPlus /> Add song to playlist
-                          </button>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
+
+              <AllSongPlaylist/>
           {isPlayerVisible && <PlaylistMusicPlayer playlistId={playlistId} />}
         </div>
       )}

@@ -46,6 +46,14 @@ a {
   overflow: hidden;
   position: fixed;
 }
+.embedFramePlaylistSong{
+  width: calc(100% - 15.6rem);
+  margin-top: 3rem;
+  margin-left: -3rem;
+  height: 39vh;
+  overflow: hidden;
+  position: fixed;
+}
 
 @media screen and (max-width: 960px) {
   .embedFrame {
@@ -58,6 +66,9 @@ a {
     height: calc(100% - 10rem);
     overflow: hidden;
     position: fixed;
+  }
+  .embedFramePlaylistSong{
+    width: 100%;
   }
 }
 @media screen and (max-width: 760px) {

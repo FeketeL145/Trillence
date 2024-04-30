@@ -24,7 +24,6 @@
     rgba(0, 0, 0, 0) 100%
   );
 }
-
 .songtitle {
   font-size: 2rem;
   color: white;
@@ -36,39 +35,69 @@
   color: white;
   font-weight: 400;
 }
+.song-card-liststyle {
+  width: 100%;
+  height: 5rem;
+  border-radius: 1vw;
+  position: relative;
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.song-details-liststyle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;
+  border-radius: 1vw;
+}
+.songtitle-liststyle {
+  font-size: 2rem;
+  color: white;
+  font-weight: 600;
+}
 
-.searchbar{
+.songartist-liststyle {
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 400;
+}
+
+
+.searchbar {
   height: 2rem;
   margin-left: 0.01rem;
   margin-top: 0.5rem;
   background: rgba(21, 23, 28, 1);
   border: 0px;
-  color:white;
+  color: white;
 }
-.searchwidth{
+.searchwidth {
   width: 80%;
 }
-.searchbar::placeholder{
-  color:rgba(255,255,255,0.5);
+.searchbar::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
-.searchbar:focus{
+.searchbar:focus {
   background: rgba(21, 23, 28, 1);
   backdrop-filter: blur(15px);
   color: white;
   border: 0px;
   outline: none;
 }
-.searchbutton{
+.searchbutton {
   height: 2rem;
   background: rgba(21, 23, 28, 1);
-  color:white;
+  color: white;
   padding-right: 20px;
   margin-top: 0.5rem;
 }
-.loadmorebutton{
+.loadmorebutton {
   background: rgba(21, 23, 28, 0.4);
   backdrop-filter: blur(15px);
-  color:white;
+  color: white;
 }
 @media screen and (max-width: 1400px) {
   .songtitle {
@@ -88,11 +117,11 @@
   }
 }
 
-@media screen and (max-width: 760px){
-  .searchbutton{
+@media screen and (max-width: 760px) {
+  .searchbutton {
     padding-right: 10px;
   }
-  .searchwidth{
+  .searchwidth {
     width: 90%;
   }
 }
