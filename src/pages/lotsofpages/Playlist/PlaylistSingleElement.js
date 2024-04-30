@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import axios from "axios";
 import "../../../App.css";
 import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPlayer";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export function PlaylistSinglePage() {
   const { id } = useParams(); // Get the playlist ID from the URL
   const [playlistId, setPlaylistId] = useState(id); // Ensure the state is initialized
@@ -17,7 +17,19 @@ export function PlaylistSinglePage() {
   const [AreYouSureToDelete, setAreYouSureToDelete] = useState(false);
   const [EmptyPlaylistName, setEmptyPlaylistName] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
-  const notify = () => toast("Please add songs to the playlist before playing it.");
+  const notify = (message) => {
+    toast.info(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
   useEffect(() => {
     setFetchPendingplaylist(true);
     axios
@@ -76,12 +88,12 @@ export function PlaylistSinglePage() {
   };
 
   const handlePlayPlaylist = () => {
-  if (Playlist.songs.length === 0) {
-    notify(); // Call the notify function when there are no songs
-  } else {
-    setIsPlayerVisible(true); // Show the player when there are songs
-  }
-};
+    if (Playlist.songs.length === 0) {
+      notify("Playlist is empty\nAdd songs to play."); // Call the notify function when there are no songs
+    } else {
+      setIsPlayerVisible(true); // Show the player when there are songs
+    }
+  };
 
   const handleDeletePlaylist = async (playlistId) => {
     try {
@@ -89,6 +101,14 @@ export function PlaylistSinglePage() {
         `https://localhost:7106/api/Playlist/deletebyid/${playlistId}`
       );
       console.log(response.data);
+  
+      // Display toast message
+      toast.success(`Playlist ${response.data.name} successfully deleted.\nRedirecting...`);
+  
+      // Set a delay of 3 seconds before redirecting
+      setTimeout(() => {
+        window.location.href = "/playlists";
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +133,20 @@ export function PlaylistSinglePage() {
     }
   };
   return (
-    <div className="p-5 m-auto text-center content bg-ivory">
+    <div className="p-5 m-auto text-center content">
+      <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
       {isFetchPendingplaylist || !Playlist ? (
         <div className="spinner-border"></div>
       ) : (
@@ -308,7 +341,6 @@ export function PlaylistSinglePage() {
           {isPlayerVisible && <PlaylistMusicPlayer playlistId={playlistId} />}
         </div>
       )}
-      <ToastContainer />
     </div>
   );
 }

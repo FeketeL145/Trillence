@@ -16,7 +16,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
   const notify = (currentlyPlaying) => {
     toast.info(`Now playing:\n ${currentlyPlaying}`, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -91,7 +91,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
   const handleSongClick = (song, songindex) => {
     const songName = `${song}`;
     const songIndex = `${songindex}`;
-    notify(songName + " " + songIndex);
+    notify(songName);
     onSongSelect(songIndex);
   };
 
@@ -117,7 +117,8 @@ function AllSongs({ onSongSelect, updateSongs }) {
       <div className="embedFrame overflow-auto">
         <ToastContainer
           position="top-right"
-          autoClose={2500}
+          autoClose={1500}
+          limit={1}
           hideProgressBar={false}
           newestOnTop
           closeOnClick

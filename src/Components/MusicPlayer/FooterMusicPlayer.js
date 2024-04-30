@@ -76,45 +76,6 @@ function FooterMusicPlayer({ selectedSong }) {
     fetchCurrentSongDetails();
   }, [selectedSong]);
 
-  /*
-  useEffect(() => {
-    if (userInteracted) {
-      const loadAudio = async () => {
-        try {
-          const response = await fetch(
-            "https://localhost:7106/api/MusicStreaming/current"
-          );
-          if (!response.ok) {
-            throw new Error("Failed to load audio file");
-          }
-          const audioBlob = await response.blob();
-          const objectUrl = URL.createObjectURL(audioBlob);
-          audioRef.current.src = objectUrl;
-          audioRef.current.load();
-        } catch (error) {
-          console.error("Error loading audio:", error);
-        }
-      };
-      loadAudio();
-    }
-  }, [currentTrackIndex, tracks, userInteracted]);
-  
-  const loadAudio = async (url) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Failed to load audio file");
-      }
-      const audioBlob = await response.blob();
-      const objectUrl = URL.createObjectURL(audioBlob);
-      audioRef.current.src = objectUrl;
-      audioRef.current.load();
-    } catch (error) {
-      console.error("Error loading audio:", error);
-    }
-  };
-*/
-
   useEffect(() => {
     fetchData();
   }, []); // This effect runs only once, on component mount
@@ -131,8 +92,6 @@ function FooterMusicPlayer({ selectedSong }) {
   }, [selectedSong, tracks, currentTrackIndex]);
 
   const loadAudioByURL = async () => {
-    if(userInteracted)
-    {
       try {
         const songQuery = tracks[currentTrackIndex].name;
         const encodedFileName = encodeURIComponent(songQuery) + ".mp3";
@@ -179,7 +138,6 @@ function FooterMusicPlayer({ selectedSong }) {
       } catch (error) {
         console.error("Error loading audio:", error);
       }
-    }
   };
 
   const togglePlayPause = () => {
@@ -220,7 +178,7 @@ function FooterMusicPlayer({ selectedSong }) {
       audioRef.current.pause(); // If it was paused, pause it again
       togglePlayPause();
     }
-    setCurrentTrackIndex((currentTrackIndex - 1 % tracks.length) % tracks.length);
+    setCurrentTrackIndex((currentTrackIndex - 1 + tracks.length) % tracks.length);
     await fetchCurrentSongDetails();
   };
 
@@ -343,7 +301,7 @@ function FooterMusicPlayer({ selectedSong }) {
     <div>
       {!isMobile ? (
         <div className=" d-flex align-items-stretch justify-content-between text-nowrap musicPlayer">
-          {(userInteracted && currentTrackIndex !== -1) ? (
+          {(currentTrackIndex !== -1) ? (
             <div className="col row">
             <img
               className="img-fluid musicThumbnail"
