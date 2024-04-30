@@ -36,6 +36,40 @@
   margin-top: -1rem;
   overflow-x: hidden;
 }
+
+.progressBar{
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.progressBar::-webkit-slider-runnable-track{
+  background: #ffffff;
+  height: 0.5rem;
+  border-radius: 20px;
+}
+.progressBar::-moz-range-track{
+  background: #ffffff;
+  height: 0.5rem;
+  border-radius: 20px;
+}
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none; /* Centers thumb on the track */
+  background-color: rgba(41, 122, 214, 1);
+  border-radius: 100%;
+  margin-top: -4px;
+  height: 1rem;
+  width: 1rem;    
+}
+.progressBar::-moz-range-thumb {
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 0; /*Removes default border-radius that FF applies*/
+  background-color: rgba(41, 122, 214, 1);
+  height: 2rem;
+  width: 1rem;
+}
+
 #scroll-text {
   /* initial position */
   -moz-transform: translateX(0%);
