@@ -7,5 +7,6 @@
         Task<object> GetSongDetailsByName(string songName);
         Task<object> GetAllPlaylistDetails();
         Task<object> GetPlaylistDetailsById(Guid playlistId);
+        Task<object> GetPlaylistDetailsByUsername(string username);
     }
 }

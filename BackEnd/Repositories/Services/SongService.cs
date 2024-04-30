@@ -30,7 +30,7 @@ namespace BackEnd.Repositories.Services
 
         public async Task<IEnumerable<Song>> GetAllWithPage(int pageNumber)
         {
-            var songs = await trillenceContext.Songs.OrderBy(x => x.Name).Skip((pageNumber - 1) * 10).Take(10).ToListAsync();
+            var songs = await trillenceContext.Songs.OrderBy(x => x.Name).Skip((pageNumber - 1) * 16).Take(16).ToListAsync();
 
             return songs;
         }

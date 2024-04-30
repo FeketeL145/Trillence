@@ -224,5 +224,33 @@ namespace BackEnd.Repositories.Services
                 songs = songs
             };
         }
+
+        public async Task<object> GetPlaylistDetailsByUsername(string username)
+        {
+            var playlists = await _trillenceContext.Playlists
+                .Include(p => p.User)
+                .Include(p => p.PlaylistSongs)
+                    .ThenInclude(ps => ps.Song)
+                .Where(p => p.User.Name == username)
+                .ToListAsync();
+
+            if (playlists == null || !playlists.Any())
+            {
+                return $"No playlists found for the username: {username}.";
+            }
+
+            var result = playlists.Select(playlist => new
+            {
+                playlistId = playlist.Id,
+                playlistName = playlist.Name,
+                songs = playlist.PlaylistSongs.Select(ps => new
+                {
+                    songId = ps.Song.Id,
+                    songName = ps.Song.Name
+                }).ToList()
+            }).ToList();
+
+            return result;
+        }
     }
 }
