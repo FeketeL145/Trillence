@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "../../../App.css";
 import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPlayer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export function PlaylistSinglePage() {
   const { id } = useParams(); // Get the playlist ID from the URL
   const [playlistId, setPlaylistId] = useState(id); // Ensure the state is initialized
@@ -15,6 +17,7 @@ export function PlaylistSinglePage() {
   const [AreYouSureToDelete, setAreYouSureToDelete] = useState(false);
   const [EmptyPlaylistName, setEmptyPlaylistName] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
+  const notify = () => toast("Please add songs to the playlist before playing it.");
   useEffect(() => {
     setFetchPendingplaylist(true);
     axios
@@ -73,8 +76,12 @@ export function PlaylistSinglePage() {
   };
 
   const handlePlayPlaylist = () => {
-    setIsPlayerVisible(true);
-  };
+  if (Playlist.songs.length === 0) {
+    notify(); // Call the notify function when there are no songs
+  } else {
+    setIsPlayerVisible(true); // Show the player when there are songs
+  }
+};
 
   const handleDeletePlaylist = async (playlistId) => {
     try {
@@ -301,6 +308,7 @@ export function PlaylistSinglePage() {
           {isPlayerVisible && <PlaylistMusicPlayer playlistId={playlistId} />}
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

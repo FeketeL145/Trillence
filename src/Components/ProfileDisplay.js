@@ -38,12 +38,6 @@ function ProfileDisplay() {
               >
                 Change username
               </button>
-              <button
-                className="btn row m-2"
-                style={{ backgroundColor: "#15171c", color: "white" }}
-              >
-                Delete all playlists
-              </button>
             </div>
           </div>
         </div>
