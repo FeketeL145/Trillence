@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import LoadingComponent from "../Components/LoadingComponent";
 import axios from "axios";
 import { Card } from "react-bootstrap";
-import { ToastContainer, toast, Bounce } from "react-toastify";
 import "./AllSongs.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,27 +12,14 @@ function AllSongs({ onSongSelect, updateSongs }) {
   const [totalItems, setTotalItems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  /*const notify = async (currentlyPlaying) => {
-    await toast.dismiss();
-    await toast.info(`Now playing:\n ${currentlyPlaying}`, {
-      position: "top-right",
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };*/
-
   useEffect(() => {
     if (pageNumber != 1) {
       fetchData(pageNumber);
     } else {
       fetchData(1);
     }
+    updateSongs(songs);
+    onSongSelect(0);
   }, [pageNumber]);
 
   const loadMore = async () => {
@@ -91,10 +77,10 @@ function AllSongs({ onSongSelect, updateSongs }) {
 
   const handleSongClick = async (song, songindex) => {
     try {
-      const songName = `${song}`;
-      const songIndex = `${songindex}`;
+      const songName = await `${song}`;
+      const songIndex = await `${songindex}`;
       await onSongSelect(songIndex);
-      updateSongs(songs);
+      await updateSongs(songs);
     } catch (error) {
       console.error("Error handling song click:", error);
     }
@@ -120,20 +106,6 @@ function AllSongs({ onSongSelect, updateSongs }) {
   return (
     <div className="d-flex justify-content-center">
       <div className="embedFrame overflow-auto">
-        <ToastContainer
-          position="top-right"
-          autoClose={1500}
-          limit={1}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-          transition={Bounce}
-        />
         {isLoading ? (
           <LoadingComponent />
         ) : (
@@ -146,7 +118,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
                     style={{
                       backgroundImage: `url(${
                         song.albumImage || "https://via.placeholder.com/650"
-                      })`,
+                      })`, cursor: "pointer",
                     }}
                     onClick={() => handleSongClick(song.name, index)}
                   >

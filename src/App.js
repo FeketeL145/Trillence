@@ -35,7 +35,6 @@ function isExcluded(path, patterns) {
 function App() {
   const [selectedSong, setSelectedSong] = useState("");
 
-  /*useState(() => {}, [setSelectedSongName]); */
   return (
     <Router>
       <AppContent
@@ -46,7 +45,7 @@ function App() {
   );
 }
 
-function AppContent({ setSelectedSong, selectedSong }) {
+function AppContent ({ setSelectedSong, selectedSong }) {
   const location = useLocation();
 
   const excludedPatterns = [new RegExp("^/playlist/.*$")];

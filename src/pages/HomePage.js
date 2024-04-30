@@ -8,8 +8,8 @@ function HomePage(props) {
     await props.setSelectedSong(songName);
   };
 
-  const updateSongs = (newSongs) => {
-    setSongs(newSongs);
+  const updateSongs = async (newSongs) => {
+    await setSongs(newSongs);
     console.log(songs);
   };
 

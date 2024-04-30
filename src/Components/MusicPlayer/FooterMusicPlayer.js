@@ -11,10 +11,11 @@ function FooterMusicPlayer({ selectedSong }) {
   const [userInteracted, setUserInteracted] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
   const progressBarRef = useRef(null);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(-1);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [tracks, setTracks] = useState([]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [effectCounter, setEffectCounter] = useState(0);
   const [currentSongDetails, setCurrentSongDetails] = useState({
     artistName: "",
     songName: "",
@@ -81,18 +82,29 @@ function FooterMusicPlayer({ selectedSong }) {
   }, []); // This effect runs only once, on component mount
 
   useEffect(() => {
-    const setCurrentTrackIndexAsync = async () => {
-      setCurrentTrackIndex(songnumber);
-    };
-  
-    setCurrentTrackIndexAsync();
-  }, [selectedSong]);  
+    if (selectedSong !== -1 && currentTrackIndex >= 0) { // Ensure correct track index
+      const handleSongSelect = async (songIndex) => {
+        // Set the track index and wait for it to complete before other operations
+        await setCurrentTrackIndex(songIndex);
+      };
+      handleSongSelect(selectedSong);    
+    }
+  }, [selectedSong]); // Include both as dependencies
 
   useEffect(() => {
+    if (currentTrackIndex >= 0) {
+      loadAudioByURL();
+    }
+  }, [currentTrackIndex]);
+
+  useEffect(() => {
+    if(effectCounter < 2){
     if (selectedSong !== -1) {
       loadAudioByURL();
     }
-  }, [selectedSong, tracks, currentTrackIndex]);
+    setEffectCounter((prevCount) => prevCount + 1);
+  }
+  }, []);
 
   const loadAudioByURL = async () => {
       try {
@@ -176,22 +188,21 @@ function FooterMusicPlayer({ selectedSong }) {
     }
   };
 
-  const handlePrevious = async () => {
-    if (isPlaying === false) {
-      await audioRef.current.pause(); // If it was paused, pause it again
-      await togglePlayPause();
+  const handlePrevious = async (ctIndex) => {
+    if (tracks.length > 0) {
+      console.log(ctIndex);
+      const newIndex = (ctIndex - 1 + tracks.length) % tracks.length;
+      console.log(newIndex);
+      await setCurrentTrackIndex(newIndex);
     }
-    await setCurrentTrackIndex((currentTrackIndex - 1 + tracks.length) % tracks.length);
-    await fetchCurrentSongDetails();
   };
-
-  const handleNext = async () => {
-    if (isPlaying === false) {
-      await audioRef.current.pause(); // If it was paused, pause it again
-      await togglePlayPause();
+  
+  const handleNext = async (ctIndex) => {
+    if (tracks.length > 0) {
+      console.log(ctIndex);
+      const newIndex = (ctIndex + 1) % tracks.length;
+      await setCurrentTrackIndex(newIndex);
     }
-    await setCurrentTrackIndex((currentTrackIndex + 1) % tracks.length);
-    await fetchCurrentSongDetails();
   };
 
   const handleProgressChange = async (e) => {
@@ -250,7 +261,7 @@ function FooterMusicPlayer({ selectedSong }) {
         }
 
         if (audioReady && currentTime >= duration) {
-          await handleNext(); // Automatically play the next song
+          await handleNext(currentTrackIndex); // Automatically play the next song
           await fetchCurrentSongDetails(); // Fetch details for the new song
         }
       }
@@ -366,7 +377,7 @@ function FooterMusicPlayer({ selectedSong }) {
 
           <div className="align-items-center col footerdiv text-center text-white p-2">
             <div>
-              <button onClick={handlePrevious} className="ms-2 btn">
+              <button onClick={() => handlePrevious(currentTrackIndex)} className="ms-2 btn">
                 <i className="fa-solid fa-backward-fast playericon" />
               </button>
               <button onClick={skipBackward} className="ms-2 btn">
@@ -382,7 +393,7 @@ function FooterMusicPlayer({ selectedSong }) {
               <button onClick={skipForward} className="ms-2 btn">
                 <i className="fa-solid fa-forward-step playericon" />
               </button>
-              <button onClick={handleNext} className="ms-2 btn">
+              <button onClick={() => handleNext(currentTrackIndex)} className="ms-2 btn">
                 <i className="fa-solid fa-forward-fast playericon " />
               </button>
             </div>
@@ -556,7 +567,7 @@ function FooterMusicPlayer({ selectedSong }) {
                 </div>
               </div>
               <div className="text-center mt-2">
-                <button onClick={handlePrevious} className="ms-2 btn">
+                <button onClick={() => handlePrevious(currentTrackIndex)} className="ms-2 btn">
                   <FaIcons.FaFastBackward className="playericonMobileFullscreen" />
                 </button>
                 <button onClick={skipBackward} className="ms-2 btn">
@@ -572,7 +583,7 @@ function FooterMusicPlayer({ selectedSong }) {
                 <button onClick={skipForward} className="ms-2 btn">
                   <FaIcons.FaStepForward className="playericonMobileFullscreen" />
                 </button>
-                <button onClick={handleNext} className="ms-2 btn">
+                <button onClick={() => handleNext(currentTrackIndex)} className="ms-2 btn">
                   <FaIcons.FaFastForward className="playericonMobileFullscreen" />
                 </button>
               </div>
