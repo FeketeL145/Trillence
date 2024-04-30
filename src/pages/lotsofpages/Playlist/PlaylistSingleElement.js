@@ -6,6 +6,7 @@ import "../../../App.css";
 import PlaylistMusicPlayer from "../../../Components/MusicPlayer/PlaylistMusicPlayer";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import * as FaIcons from "react-icons/fa";
 export function PlaylistSinglePage() {
   const { id } = useParams(); // Get the playlist ID from the URL
   const [playlistId, setPlaylistId] = useState(id); // Ensure the state is initialized
@@ -101,10 +102,12 @@ export function PlaylistSinglePage() {
         `https://localhost:7106/api/Playlist/deletebyid/${playlistId}`
       );
       console.log(response.data);
-  
+
       // Display toast message
-      toast.success(`Playlist ${response.data.name} successfully deleted.\nRedirecting...`);
-  
+      toast.success(
+        `Playlist ${response.data.name} successfully deleted.\nRedirecting...`
+      );
+
       // Set a delay of 3 seconds before redirecting
       setTimeout(() => {
         window.location.href = "/playlists";
@@ -112,6 +115,9 @@ export function PlaylistSinglePage() {
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleBack = () => {
+    window.location.href = "/playlists";
   };
   const handleModifyPlaylistName = async (newName) => {
     try {
@@ -135,18 +141,18 @@ export function PlaylistSinglePage() {
   return (
     <div className="p-5 m-auto text-center content">
       <ToastContainer
-          position="top-right"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-          transition={Bounce}
-        />
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       {isFetchPendingplaylist || !Playlist ? (
         <div className="spinner-border"></div>
       ) : (
@@ -155,14 +161,15 @@ export function PlaylistSinglePage() {
             className="card col-sm-8 d-inline-block p-2"
             style={{
               borderRadius: "20px",
-              backgroundColor: "#0A2234",
+              backgroundColor: "rgba(50, 50, 50, 0.5)",
+              backdropFilter: "blur(10px)",
               color: "white",
             }}
           >
             <div className="card-body">
-              <p>{Playlist.playlistId}</p>
               {Ismodifying ? (
                 <form
+                className="mb-2"
                   onSubmit={(e) => {
                     e.preventDefault();
                     handleModifyPlaylistName(
@@ -172,7 +179,7 @@ export function PlaylistSinglePage() {
                 >
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control mb-2"
                     placeholder={Playlist.playlistName}
                     name="playlistName"
                   />
@@ -181,110 +188,111 @@ export function PlaylistSinglePage() {
                   </button>
                 </form>
               ) : (
-                <p>{Playlist.playlistName}</p>
+                <p className="whitetextbold">{Playlist.playlistName}</p>
               )}
-              <div>
+              {EmptyPlaylistName ? (
+                <card>
+                  <p>Playlist name cannot be empty.</p>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setEmptyPlaylistName(false)}
+                  >
+                    Close
+                  </button>
+                </card>
+              ) : (
+                <div></div>
+              )}
+              {AreYouSureToDelete ? (
+                <div
+                  className="card row justify-content-center align-items-center p-2"
+                  style={{
+                    backgroundColor: "rgba(50, 50, 50, 0)",
+                    color: "white",
+                    border: "none",
+                  }}
+                >
+                  <p>Are you sure you want to delete this playlist?</p>
+                  <div className="col-6">
+                    <button
+                      type="button"
+                      className="col m-2 btn btn-danger"
+                      onClick={() => handleDeletePlaylist(Playlist.playlistId)}
+                    >
+                      Sure, delete it
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button
+                      type="button"
+                      className="col m-2 btn btn-secondary"
+                      onClick={() => setAreYouSureToDelete(false)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
+              <div className="row">
                 <button
                   type="button"
-                  className="btn btn-outline-success"
+                  className="btn btn-outline-success col ms-2"
                   onClick={handlePlayPlaylist}
                 >
-                  <i className="bi bi-plus-circle"></i>play this playlist
+                  <i className="bi bi-plus-circle"></i> Play this playlist
                 </button>
 
                 <button
                   type="button"
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-primary col ms-2"
                   onClick={() => setIsmodifying(!Ismodifying)}
                 >
                   <i className="bi bi-pencil-square"></i> Modify
                 </button>
-                {EmptyPlaylistName ? (
-                  <card>
-                    <p>Playlist name cannot be empty.</p>
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => setEmptyPlaylistName(false)}
-                    >
-                      Close
-                    </button>
-                  </card>
-                ) : (
-                  <div></div>
-                )}
+
                 <button
                   type="button"
-                  className="btn btn-outline-danger"
+                  className="btn btn-outline-danger col ms-2"
                   onClick={() => setAreYouSureToDelete(!AreYouSureToDelete)}
                 >
                   <i className="bi bi-trash3"></i> Delete
                 </button>
-                {/*NÁLAM NEM VOLT MODAL*/}
-                {AreYouSureToDelete ? (
-                  <div
-                    className="card row"
-                    style={{
-                      borderRadius: "20px",
-                      backgroundColor: "#223848",
-                      color: "white",
-                    }}
-                  >
-                    <p>Are you sure you want to delete this playlist?</p>
-                    <div className="col-6">
-                      <button
-                        type="button"
-                        className="col m-2 btn btn-danger"
-                        onClick={() =>
-                          handleDeletePlaylist(Playlist.playlistId)
-                        }
-                      >
-                        Sure, delete it
-                      </button>
-                    </div>
-                    <div className="col-6">
-                      <button
-                        type="button"
-                        className="col m-2 btn btn-secondary"
-                        onClick={() => setAreYouSureToDelete(false)}
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div></div>
-                )}
 
-                <NavLink to={`/playlists`} className="p-2">
-                  <button type="button" className="btn btn-outline-secondary">
-                    <i className="bi bi-arrow-left"></i> Back
-                  </button>
-                </NavLink>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary col ms-2"
+                  onClick={handleBack}
+                >
+                  <i className="bi bi-arrow-left"></i> Back
+                </button>
               </div>
             </div>
           </div>
 
           {/*Listában lévő zenék*/}
-          <div className="">
-            <p>Songs in this playlist</p>
+          <div className="row whitetext rounded-2 mt-4" style={{ backdropFilter: "blur(20px)", backgroundColor: "rgba(50, 50, 50, 0.5)"}}>
+            <p className="whitetextbold" style={{ fontSize:"3vh"}}>Songs in this playlist:</p>
             {isFetchPendingplaylist ? (
               <div className="spinner-border"></div>
             ) : (
-              <div className="d-flex flex-wrap proba1 hiddenscrollbar">
+              <div className="d-flex flex-wrap proba1 hiddenscrollbar justify-content-center align-items-center">
                 {Playlist && Playlist.songs ? (
                   Playlist.songs.length === 0 ? (
-                    <p>No songs in this playlist.</p>
+                    <p className="whitetext">No songs in this playlist.</p>
                   ) : (
                     Playlist.songs.map((song) => (
                       <div
                         key={song.songId}
-                        className="container p-4 mt-4 m-2 bg-dark rounded-8"
+                        className="container p-4 mt-4 m-2 rounded-8 whitetext"
                       >
                         <div className="card-body">
                           <h5 className="card-title">{song.songName}</h5>
                           <p className="card-text">{song.artist}</p>
                           <button
+                          className="btn btn-danger"
                             onClick={() =>
                               handleDeleteSong(song.songId, playlistId)
                             }
@@ -301,8 +309,6 @@ export function PlaylistSinglePage() {
               </div>
             )}
           </div>
-
-          {/*<Search />*/}
           {/*Hozzáadni új zenéket*/}
           <div>
             <div className="">
@@ -314,21 +320,22 @@ export function PlaylistSinglePage() {
                     album.songs.map((song) => (
                       <div
                         key={song.songId}
-                        className="songcard card p-4 mt-4 bg-dark rounded-8"
+                        className="songcard card p-4 mt-4 ms-2 bg-dark rounded-8 whitetext"
                         style={{ maxWidth: "25%" }}
                       >
-                        <div className="card-body">
-                          <p>{song.songId}</p>
+                        <div className="card-body" style={{ color: "white" }}>
                           <h5 className="card-title">{song.songName}</h5>
                           <p className="card-text">
                             {album.mainArtist.artistName}
                           </p>
                           <button
+                          className="btn btn-outline-success"
+                          style={{ color: "white" }}
                             onClick={() =>
                               handleAddSong(song.songId, Playlist.playlistId)
                             }
                           >
-                            add this song
+                            <FaIcons.FaPlus/> Add song to playlist
                           </button>
                         </div>
                       </div>
