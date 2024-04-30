@@ -1,5 +1,3 @@
-//Képeket majd még kell belerakni illetve yappelni néhány részen, a Lighthouse tesztet meg mivel még a dok. írásakor még nem volt nálam a legfrissebb verzió
-
 #set text(
   font: "Arial",
   size: 12pt,
@@ -125,7 +123,7 @@ A React egy ingyenes és nyílt forráskódú front-end JavaScript könyvtár, m
 Az egyik fő előnye, hogy csak azokat a DOM-elemeket rendezi újra, amelyek megváltoztak, ezáltal elkerülve a változatlan elemek felesleges újratöltését. A React deklaratív nyelvezete lehetővé teszi a fejlesztők számára, hogy kifejezzék a kívánt végeredményt anélkül, hogy részletesen leírják a lépéseket, ami jelentős könnyebbséget jelent a weblap fejlesztés során.
 A React hatékony eszköz a dinamikus  weblapok fejlesztéséhez, minimalizálva a felesleges munkát és támogatva a gyors és hatékony fejlesztési folyamatot.
 
-== ASP.NET WebAPI
+== ASP.NET Web API
 Az ASP.NET egy szerveroldali webalkalmazás-keretrendszer, amelyet dinamikus weboldalak létrehozására terveztek. A Microsoft fejlesztette ki annak érdekében, hogy lehetővé tegye a programozók számára dinamikus webhelyek, alkalmazások és szolgáltatások építését. Az API-k lehetővé teszik az alkalmazások közötti kommunikációt és az adatok megosztását, így segítve a fejlesztőket abban, hogy hatékony és skálázható alkalmazásokat hozzanak létre. 
 
 
@@ -167,7 +165,6 @@ A Trillance egy új zenestreaming platform, melyet úgy terveztünk, hogy diszkr
 A szolgáltatásunk szerves részét képezi egy folyamatosan bővülő zenei könyvtár, melyben mindig elérhetőek az előadók legfrissebb művei. Ennek érdekében elkötelezettek vagyunk abban, hogy a legújabb zenei trendekkel és kiadványokkal mindig lépést tartva frissítsük és gazdagítsuk repertoárunkat.
 
 Ennek a platformnak a segítségével szeretnénk lehetővé tenni, hogy a felhasználók könnyen és kényelmesen böngésszék és hallgassák meg a zenei tartalmakat. Az intuitív felületnek és a felhasználóbarát dizájnnak köszönhetően minden eszközön élvezhető lesz a Trillance szolgáltatása.
-== A Program működése
 
 #pagebreak()
 
@@ -345,14 +342,6 @@ Egy Get metódus, mely a listát egyel nagyobb értéket ad
 Egy Get metódus, mely a listát egyel kissebb értéket ad
 
 #image("./Images/backend3.png")
-
-= Tesztelés
-
-=== nUnit tesztek
-
-=== ReactJS JEST tesztek
-
-=== Lighthouse teljesítmény eredmények
 
 #pagebreak()
 
