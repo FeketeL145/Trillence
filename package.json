@@ -14,6 +14,7 @@
     "lazy": "^1.0.11",
     "mdb-ui-kit": "^7.2.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

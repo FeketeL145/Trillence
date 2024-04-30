@@ -1,11 +1,11 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import SearchBar from "../Components/Search";
+import SearchComponent from "../Components/Search";
 
 function SearchPage() {
   return (
     <div>
       <div>
-        <SearchBar />
+        <SearchComponent/>
       </div>
     </div>
   );

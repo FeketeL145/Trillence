@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import LoadingComponent from "../Components/LoadingComponent";
 import axios from "axios";
+import { Card, Button } from "react-bootstrap";
 import "./AllSongs.css";
 
 function AllSongs({ onSongSelect, updateSongs }) {
   const [songs, setSongs] = useState([]);
   const [isFetchPending, setFetchPending] = useState(false);
-  const [albumImages, setAlbumImages] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [currentAlbumId, setCurrentAlbumId] = useState("");
-  const [albumName, setAlbumName] = useState("");
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (pageNumber != 1) {
@@ -19,7 +17,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
     } else {
       fetchData(1);
     }
-  }, [pageNumber]); // Make useEffect depend on pageNumber
+  }, [pageNumber]); 
 
   useEffect(() => {
     if (pageNumber === 1) {
@@ -29,7 +27,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
 
   const loadMore = () => {
     const nextPageNumber = pageNumber + 1;
-    setPageNumber(nextPageNumber); // Update pageNumber to trigger useEffect
+    setPageNumber(nextPageNumber); 
     updateSongs(songs);
   };
 
@@ -37,7 +35,7 @@ function AllSongs({ onSongSelect, updateSongs }) {
     try {
       setFetchPending(true);
       const response = await axios.get(
-        `https://localhost:7106/api/Song/allsong?pageNumber=${pageNumber}`
+        `https://localhost:7106/api/Song/allsongpaginated?pageNumber=${pageNumber}`
       );
       const response2 = await axios.get(
         `https://localhost:7106/api/Song/songcount`
@@ -54,11 +52,9 @@ function AllSongs({ onSongSelect, updateSongs }) {
         })
       );
 
-      // If it's the first page, set the songs directly
       if (pageNumber === 1) {
         setSongs(newSongs);
       } else {
-        // If it's not the first page, append new songs to the existing ones
         setSongs((prevSongs) => [...prevSongs, ...newSongs]);
       }
 
@@ -96,56 +92,65 @@ function AllSongs({ onSongSelect, updateSongs }) {
       if (!response.ok) {
         throw new Error("Failed to fetch album image");
       }
-      const imageBlob = await response.blob(); // Fetch the image
-      const objectUrl = URL.createObjectURL(imageBlob); // Create a URL for the image
-      return objectUrl; // Return the image URL
+      const imageBlob = await response.blob(); 
+      const objectUrl = URL.createObjectURL(imageBlob); 
+      return objectUrl; 
     } catch (error) {
       console.error("Error fetching album image:", error);
-      return "https://via.placeholder.com/650"; // Fallback image in case of error
+      return "https://via.placeholder.com/650"; 
     }
   };
 
   return (
-    <div className="embedFrame overflow-auto">
-      {isLoading ? ( // Conditionally render loading state
-        <LoadingComponent />
-      ) : (
-        <div className="song-grid hiddenscrollbar">
-          {songs.map((song, index) => (
-            <div
-              key={`${song.id}-${index}`} // Ensure unique key using index
-              className="card song-card"
-              style={{
-                backgroundImage: `url(${
-                  song.albumImage || "https://via.placeholder.com/650"
-                })`,
-              }}
-              onClick={() => handleSongClick(song.name)}
-            >
-              <div className="song-details w-100 h-100 d-flex align-items-center justify-content-center">
-                <div
-                  className="text-center"
-                  onClick={() => handleSongClick(song.name)}
-                >
-                  <h3 className="whitetextbold">{song.name.split(" - ")[1]}</h3>
-                  <p className="whitetext">{song.name.split(" - ")[0]}</p>
+    <div className="d-flex justify-content-center">
+      <div className="embedFrame overflow-auto">
+        {isLoading ? ( 
+          <LoadingComponent />
+        ) : (
+          <div className="container-fluid">
+            <div className="row">
+              {songs.map((song, index) => (
+                <div key={`${song.id}-${index}`} className="col-md-3 mb-4">
+                  <Card
+                    className="song-card"
+                    style={{
+                      backgroundImage: `url(${
+                        song.albumImage || "https://via.placeholder.com/650"
+                      })`,
+                    }}
+                    onClick={() => handleSongClick(song.name)}
+                  >
+                    <Card.Body className="song-details d-flex align-items-center justify-content-center">
+                      <div
+                        className="text-center"
+                        onClick={() => handleSongClick(song.name)}
+                      >
+                        <Card.Title className="whitetextbold songtitle">
+                          {song.name.split(" - ")[1]}
+                        </Card.Title>
+                        <Card.Subtitle className="whitetext songartist">
+                          {song.name.split(" - ")[0]}
+                        </Card.Subtitle>
+                      </div>
+                    </Card.Body>
+                  </Card>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
-      {!isLoading && songs.length < totalItems && (
-        <div className="text-center mt-3">
-          <button
-            className="btn btn-primary"
-            onClick={loadMore}
-            disabled={isFetchPending}
-          >
-            {isFetchPending ? "Loading..." : "Load More"}
-          </button>
-        </div>
-      )}
+          </div>
+        )}
+        {!isLoading && songs.length < totalItems && (
+          <div className="text-center mt-3 mb-5">
+            <Button
+              variant="primary"
+              onClick={loadMore}
+              disabled={isFetchPending}
+            >
+              {isFetchPending ? "Loading..." : "Load More"}
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -12,10 +12,6 @@ a {
   text-decoration: none;
   color: black;
 }
-
-.bg-dark {
-  color: #f9f6ee;
-}
 .text-justify {
   text-align: justify;
 }
@@ -43,10 +39,24 @@ a {
   overflow: hidden;
   position: fixed;
 }
+.searchFrame{
+  top: 3rem;
+  width: calc(100% - 15.6rem);
+  height: calc(100% - 8rem);
+  overflow: hidden;
+  position: fixed;
+}
 
 @media screen and (max-width: 960px) {
   .embedFrame {
     width: 100%;
+  }
+  .searchFrame{
+    top: 8rem;
+    width: 100%;
+    height: calc(100% - 10rem);
+    overflow: hidden;
+    position: fixed;
   }
 }
 
@@ -65,19 +75,22 @@ a {
 
 /*Styling all of the scrollbars*/
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
-  background: darkgray;
+  background: rgba(0, 0, 0, 0);
   border-radius: 20px;
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #252d44;
   border-radius: 20px;
 }
 
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

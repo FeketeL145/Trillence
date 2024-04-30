@@ -121,13 +121,13 @@ html,
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0);
   border-radius: 20px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #15171c;
+  background: #252d44;
   border-radius: 20px;
 }
 

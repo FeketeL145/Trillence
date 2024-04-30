@@ -1,25 +1,79 @@
-.song-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
-  gap: 20px;
-  overflow-y: scroll;
-  padding: 20px;
+.song-card {
+  width: 100%;
+  height: 0;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  border-radius: 1vw;
+  position: relative;
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-@media (max-width: 960px) {
-  .song-grid {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+
+.song-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(21, 23, 28, 0.2) 10%,
+    rgba(41, 122, 214, 0.8) 50%,
+    rgba(21, 23, 28, 0.2) 90%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.songtitle {
+  font-size: 2rem;
+  color: white;
+  font-weight: 600;
+}
+
+.songartist {
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 400;
+}
+
+.searchbar{
+  width: 80%;
+  height: 2rem;
+  background: rgba(21, 23, 28, 1);
+  border: 0px;
+  color:white;
+}
+.searchbar::placeholder{
+  color:rgba(255,255,255,0.5);
+}
+.searchbar:focus{
+  background: rgba(21, 23, 28, 1);
+  backdrop-filter: blur(15px);
+  color: white;
+  border: 0px;
+  outline: none;
+}
+.searchbutton{
+  height: 2rem;
+  background: rgba(21, 23, 28, 1);
+  color:white;
+  padding-right: 20px;
+}
+@media screen and (max-width: 1400px) {
+  .songtitle {
+    font-size: 1.5rem;
+  }
+  .songartist {
+    font-size: 1rem;
   }
 }
 
-.song-card {
-  width: 20vw;
-  height: 20vw;
-  background-size: contain;
-  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.125); /* White inner shadow */
-  border-radius: 1vw;
-  padding: 0.5vw;
-}
-.song-details {
-  backdrop-filter: blur(15px) saturate(0.8) brightness(0.8);
-  border-radius: 0.75vw;
+@media screen and (max-width: 1200px) {
+  .songtitle {
+    font-size: 1.25rem;
+  }
+  .songartist {
+    font-size: 0.75rem;
+  }
 }
