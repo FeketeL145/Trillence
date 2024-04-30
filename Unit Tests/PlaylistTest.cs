@@ -2,45 +2,50 @@
 using BackEnd.Models.Dtos;
 using BackEnd.Repositories.Interfaces;
 using BackEnd.Repositories.Services;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Moq;
+using Microsoft.EntityFrameworkCore;
 
-namespace BackEnd.Tests.Repositories.Services
+[TestFixture]
+public class PlaylistTest
 {
-    [TestFixture]
-    public class PlaylistTest
+    private TrillenceContext _context;
+    private IPlaylistInterface _playlistService;
+
+    [SetUp]
+    public void Setup()
     {
-        private Mock<TrillenceContext> _mockContext;
-        private IPlaylistInterface _playlistService;
+        var options = new DbContextOptionsBuilder<TrillenceContext>()
+            .UseInMemoryDatabase("TrillenceTestDb")
+            .Options;
 
-        [SetUp]
-        public void Setup()
+        _context = new TrillenceContext(options);
+        _playlistService = new PlaylistService(_context);
+
+        _context.Users.Add(new User { Id = Guid.NewGuid(), Name = "Test Username" });
+        _context.SaveChanges();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        if (_context != null)
         {
-            _mockContext = new Mock<TrillenceContext>();
-            _playlistService = new PlaylistService(_mockContext.Object);
+            _context.Dispose();
         }
+    }
 
-        [Test]
-        public async Task Post_ValidInput_ReturnsPlaylist()
-        {
-            CreatePlaylistDto createPlaylistDto = new CreatePlaylistDto("Test Playlist", Guid.NewGuid());
-            Playlist playlist = new Playlist
-            {
-                Id = Guid.NewGuid(),
-                Name = createPlaylistDto.Name,
-                UserId = createPlaylistDto.UserId,
-            };
-#pragma warning disable CS8600
-#pragma warning disable CS8620
-            _mockContext.Setup(x => x.Playlists.AddAsync(It.IsAny<Playlist>(), default)).ReturnsAsync((EntityEntry<Playlist>)null);
-#pragma warning restore CS8620
-#pragma warning restore CS8600
+    [Test]
+    public async Task Post_ValidInput_ReturnsPlaylist()
+    {
+        var createPlaylistDto = new CreatePlaylistDto("Test Playlist", "Test Username");
 
-            Playlist result = await _playlistService.Post(createPlaylistDto);
+        var result = await _playlistService.Post(createPlaylistDto);
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Name, Is.EqualTo(createPlaylistDto.Name));
-            Assert.That(result.UserId, Is.EqualTo(createPlaylistDto.UserId));
-        }
+        var expectedUser = _context.Users.FirstOrDefault(u => u.Name == "Test Username");
+
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Name, Is.EqualTo(createPlaylistDto.Name));
+#pragma warning disable CS8602
+        Assert.That(result.UserId, Is.EqualTo(expectedUser.Id));
+#pragma warning restore CS8602
     }
 }

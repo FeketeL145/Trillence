@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace BackEnd.Repositories.Interfaces
+﻿namespace BackEnd.Repositories.Interfaces
 {
     public interface IMusicStreamingInterface
     {

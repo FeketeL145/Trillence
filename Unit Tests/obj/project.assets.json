@@ -1348,6 +1348,22 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/8.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.4"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/8.0.4": {
         "type": "package",
         "dependencies": {
@@ -3080,6 +3096,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.4",
           "Microsoft.AspNetCore.OpenApi": "8.0.4",
           "Microsoft.EntityFrameworkCore": "8.0.4",
+          "Microsoft.EntityFrameworkCore.InMemory": "8.0.4",
           "Microsoft.Extensions.Configuration.Json": "8.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.2",
           "Moq": "4.20.70",
@@ -5387,6 +5404,21 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/8.0.4": {
+      "sha512": "3fj0V/NKG66LLwUtoDofSyogku1ueF78uUIdGPEJJhS3MW7w3xLsizMaDYX+ooR74IM96YJI5N3tyOU5FZiiwg==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/8.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.8.0.4.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.4": {
@@ -8547,23 +8579,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fekete Laszlo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\": {},
+    "H:\\Components\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\Unit Tests.csproj",
+      "projectUniqueName": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
       "projectName": "Unit Tests",
-      "projectPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\Unit Tests.csproj",
-      "packagesPath": "C:\\Users\\Fekete Laszlo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\Unit Tests\\obj\\",
+      "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\Unit Tests.csproj",
+      "packagesPath": "C:\\Users\\ChrisGamerHun\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "H:\\Components\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Fekete Laszlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ChrisGamerHun\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8579,8 +8611,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj": {
-              "projectPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\BackEnd.csproj"
+            "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj": {
+              "projectPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\BackEnd.csproj"
             }
           }
         }
@@ -8645,7 +8677,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

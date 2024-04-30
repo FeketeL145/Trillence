@@ -1,22 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\",
+  "WorkspaceRootPath": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{465B3713-D08F-4542-9267-ADAC6F92929D}|..\\Unit Tests\\Unit Tests.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\unit tests\\playlisttest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\repositories\\interfaces\\isonginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\interfaces\\isonginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:controllers\\songcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\models\\dtos\\playlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:models\\dtos\\playlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|c:\\users\\fekete laszlo\\desktop\\trillence backend\\backend\\auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{864DA226-486C-42AE-871A-038AB38AA370}|Auth\\Auth\\Auth.csproj|solutionrelative:auth\\auth\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|c:\\users\\chrisgamerhun\\desktop\\trillence backend\\backend\\repositories\\services\\playlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48E4623B-64DC-427D-90A7-CDBADA00EA25}|BackEnd.csproj|solutionrelative:repositories\\services\\playlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,76 +25,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SongController.cs",
-              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Controllers\\SongController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SongController.cs",
-              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Controllers\\SongController.cs",
-              "RelativeToolTip": "Controllers\\SongController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwB4AAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T10:32:47.796Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ISongInterface.cs",
-              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\ISongInterface.cs",
-              "RelativeDocumentMoniker": "Repositories\\Interfaces\\ISongInterface.cs",
-              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Interfaces\\ISongInterface.cs",
-              "RelativeToolTip": "Repositories\\Interfaces\\ISongInterface.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAApAAAA",
+              "Title": "PlaylistController.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\PlaylistController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PlaylistController.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Controllers\\PlaylistController.cs",
+              "RelativeToolTip": "Controllers\\PlaylistController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T10:32:43.637Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SongService.cs",
-              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\SongService.cs",
-              "RelativeDocumentMoniker": "Repositories\\Services\\SongService.cs",
-              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Repositories\\Services\\SongService.cs",
-              "RelativeToolTip": "Repositories\\Services\\SongService.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAywCcAAABYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T10:32:40.333Z",
+              "WhenOpened": "2024-04-30T09:40:18.426Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Auth\\Auth\\Program.cs",
-              "RelativeDocumentMoniker": "Auth\\Auth\\Program.cs",
-              "ToolTip": "C:\\Users\\Fekete Laszlo\\Desktop\\Trillence Backend\\BackEnd\\Auth\\Auth\\Program.cs",
-              "RelativeToolTip": "Auth\\Auth\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "PlaylistService.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\PlaylistService.cs",
+              "RelativeDocumentMoniker": "Repositories\\Services\\PlaylistService.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Repositories\\Services\\PlaylistService.cs",
+              "RelativeToolTip": "Repositories\\Services\\PlaylistService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T16:11:38.625Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 1524,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "WhenOpened": "2024-04-30T09:39:45.689Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlaylistDto.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Models\\Dtos\\PlaylistDto.cs",
+              "RelativeDocumentMoniker": "Models\\Dtos\\PlaylistDto.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\BackEnd\\Models\\Dtos\\PlaylistDto.cs",
+              "RelativeToolTip": "Models\\Dtos\\PlaylistDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-30T09:39:15.907Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlaylistTest.cs",
+              "DocumentMoniker": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\PlaylistTest.cs",
+              "RelativeDocumentMoniker": "..\\Unit Tests\\PlaylistTest.cs",
+              "ToolTip": "C:\\Users\\ChrisGamerHun\\Desktop\\Trillence BackEnd\\Unit Tests\\PlaylistTest.cs",
+              "RelativeToolTip": "..\\Unit Tests\\PlaylistTest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-30T09:36:49.013Z",
+              "EditorCaption": ""
             }
           ]
         }

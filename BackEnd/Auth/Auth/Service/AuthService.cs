@@ -7,7 +7,6 @@ using MailKit.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
-using System.Configuration;
 
 namespace Auth.Service
 {
