@@ -1,6 +1,6 @@
 #set text(
   font: "Arial",
-  size: 12pt,
+  size: 13pt,
 )
 #set page(
   paper: "a4"
@@ -86,16 +86,14 @@
 = Feladatkörök
 
 == Bodnár István Gábor
-Dokumentáció, FrontEnd wireframe, grid rendszer, Frontend logika első verziói
+Gábor feladata volt a dokumentáció szerkezetének létrehozása, a kiinduló UI design megtervezése, és a Frontend logika első verzióinak a létrehozása. Továbbá segítséget nyújtott a Trello menedzselésében és naprakészentartásában.
+
 == Fekete László
-Ui megvalósítása, branding létrehozása, grafikák, frontend végső verziói
+László feladata volt létrehozni a végleges felhasználói felületet, ebbe beleértve a komplexebb logikát és a különböző komponenseket is.
+A feladatkörébe még beletartozott a branding létrehozása is, ezen belül a grafikák és a logók elkészítése.
 == Takács Krisztián
-Backend, adatbázis, frontendben a zenelejátszó
-
-
-
-
-
+Krisztián feladata volt az Adatbázis megtervezése, és ennek vezérlése a Backend szerverrel.
+Több végpontot hozott létre amelyek szilárd alapot fektettek le a projekt többi részének a megoldásához, továbbá dolgozott a felhasználói felület logikáján is, a zenelejátszó és a lejátszási listák az ő nevéhez köthetőek.
 
 #pagebreak()
 
@@ -124,14 +122,14 @@ Az egyik fő előnye, hogy csak azokat a DOM-elemeket rendezi újra, amelyek meg
 A React hatékony eszköz a dinamikus  weblapok fejlesztéséhez, minimalizálva a felesleges munkát és támogatva a gyors és hatékony fejlesztési folyamatot.
 
 == ASP.NET Web API
-Az ASP.NET egy szerveroldali webalkalmazás-keretrendszer, amelyet dinamikus weboldalak létrehozására terveztek. A Microsoft fejlesztette ki annak érdekében, hogy lehetővé tegye a programozók számára dinamikus webhelyek, alkalmazások és szolgáltatások építését. Az API-k lehetővé teszik az alkalmazások közötti kommunikációt és az adatok megosztását, így segítve a fejlesztőket abban, hogy hatékony és skálázható alkalmazásokat hozzanak létre. 
+Az ASP.NET egy szerveroldali webalkalmazás-keretrendszer, amelyet dinamikus weboldalak létrehozására terveztek. A Microsoft fejlesztette ki annak érdekében, hogy lehetővé tegye a programozók számára dinamikus webhelyek, alkalmazások és szolgáltatások építését. Az API-k lehetővé teszik az alkalmazások közötti kommunikációt és az adatok megosztását, így segítve a fejlesztőket abban, hogy hatékony és skálázható alkalmazásokat hozzanak létre.
 
 
 == Github
-A GitHub egy olyan platform, amely lehetővé teszi a fejlesztők számára, hogy hatékonyan együttműködjenek különböző szoftverfejlesztési projektekben. Alapja a Git elosztott verziókezelő rendszer, amely lehetővé teszi a fejlesztők számára, hogy nyomon kövessék a kódbázis változásait, és könnyen együtt dolgozzanak rajta. A GitHubon keresztül a fejlesztők tárolhatják, kezelhetik és megoszthatják kódjaikat, valamint nyomon követhetik a változtatásokat.
+A GitHub egy olyan platform, amely lehetővé teszi a fejlesztők számára, hogy hatékonyan együttműködjenek különböző szoftverfejlesztési projektekben. Alapja a Git elosztott verziókezelő rendszer, amely lehetővé teszi a fejlesztők számára, hogy nyomon kövessék a kódbázis változásait, és könnyen együtt dolgozzanak rajta. A GitHubon keresztül a fejlesztők tárolhatják, kezelhetik és megoszthatják kódjaikat, valamint nyomon követhetik a változtatásokat. A fejlesztés megkövetelte, hogy használjuk az eszközt.
 
 == Bootstrap CSS - FontAwesome Icons
-A Bootstrap egy ingyenes és nyílt forráskódú CSS keretrendszer, melyet reszponzív frontend webfejlesztéshez terveztek. A projekt HTML, CSS és opcionálisan JavaScript alapú tervezési sablonokat kínál tipográfiához, űrlapokhoz, gombokhoz, navigációhoz és más felületi komponensekhez.A bootstrap az egyik legelterjedtebb frontend keretrendszer
+A Bootstrap egy ingyenes és nyílt forráskódú CSS keretrendszer, melyet reszponzív frontend webfejlesztéshez terveztek. A projekt HTML, CSS és opcionálisan JavaScript alapú tervezési sablonokat kínál tipográfiához, űrlapokhoz, gombokhoz, navigációhoz és más felületi komponensekhez. Azért választottuk, mivel a bootstrap az egyik legelterjedtebb és legkönyebben használható keretrendszer manapség.
 
 == MySql
 
@@ -144,152 +142,335 @@ A kliens segítségével lehetőség van a csomagok keresésére, telepítésér
 
 #pagebreak()
 
-= Deploy platform
 
-== Linux otthoni szerver
-Ha esetleg a helyi számítógépen való futtatással gondok lennének akkor a programnak egy működő verziója elérhető a következő weboldalon: #align(top + center,[
-  #link("https://trillence.quatrohosting.net")[
-  Trillence weboldal (katt link)]
-])
-== Cloudflare - Zero trust tunnel és Domain
-//Yapp yapp yapp fogalmam sincs mit írtam le és helyes-e
-A Cloudflare zero trust Tunnel egy biztonságos megoldást kínált nekünk. Az erőforrásaink elérhetők anélkül, hogy nyilvánosan routolható IP-címeket kellene használni. Az úgynevezett "Tunnel" segítségével a forgalom nem küldődik ki külső IP-címre, hanem egy könnyűsúlyú a "cloudflared" segítségével kimenő kapcsolatokat hoz létre a Cloudflare globális hálózatával. Ennek eredményeként HTTP és SSH kiszolgálók, távoli asztali számítógépek és más protokollok biztonságosan csatlakozhatnak a Cloudflare-hez. Ez lehetővé teszi az eredeti szerver számára, hogy kiszolgálja a Cloudflare-en keresztüli forgalmat, miközben védve van a Cloudflare-t megkerülő támadásokkal szemben.
-
-#pagebreak()
 
 = A Program
 
 == A Program leírása
-A Trillance egy új zenestreaming platform, melyet úgy terveztünk, hogy diszkrét megoldást kínáljunk az ingyenes zenehallgatásra, minimális helyigény mellett. Célunk, hogy bárhol és bármikor élvezhessék a felhasználók a kedvenc dalokat, anélkül, hogy az eszközeik túlzott terhelést jelentenének.
+A Trillence egy új Zenestreaming platform, amelyet arra terveztünk, hogy egy diszkrét és ingyenes zenelejátszási megoldást kínáljon a felhasználóinknak. Az oldal akár regisztráció nélkül is elérhető. 
 
 A szolgáltatásunk szerves részét képezi egy folyamatosan bővülő zenei könyvtár, melyben mindig elérhetőek az előadók legfrissebb művei. Ennek érdekében elkötelezettek vagyunk abban, hogy a legújabb zenei trendekkel és kiadványokkal mindig lépést tartva frissítsük és gazdagítsuk repertoárunkat.
 
-Ennek a platformnak a segítségével szeretnénk lehetővé tenni, hogy a felhasználók könnyen és kényelmesen böngésszék és hallgassák meg a zenei tartalmakat. Az intuitív felületnek és a felhasználóbarát dizájnnak köszönhetően minden eszközön élvezhető lesz a Trillance szolgáltatása.
+== Deploy platform és Publikáció
+
+=== Linux otthoni szerver
+A weboldalunkat egy saját futtatású Linux ubuntu alapú szerverre deploy-oltuk (publikáltuk), ami a Cloudflare Zero trust tunnel-el lett kifordítva az internet felé a biztonságos adatáramlás érdekében.
+Ezen a linux szerveren futtatjuk az Adatbázisunkat, a Backend szervert és a Frontend-et is.
+Az alábbi linkkel elérhető az oldalunk megtekintésre:
+
+ #align(top + center,[
+  #link("https://trillence.quatrohosting.net")[
+  trillence.quatrohosting.net]
+])
+=== Cloudflare - Zero trust tunnel és Domain
+
+A Cloudflare zero trust Tunnel egy biztonságos megoldást kínált nekünk. Az erőforrásaink elérhetők anélkül, hogy nyilvánosan routolható IP-címeket kellene használni. Ezt a Cloudflared teszi biztonságossá, amely lehetővé teszi, hogy a Cloudflare saját szerverein keresztül továbbítsa a tartalmunkat, egy proxy-val védett DNS-en át.
 
 #pagebreak()
 
 = Tájékozódás az oldalon belül
 
 == Főoldal
-Ez az oldalt a nem bejelentkezett felhasználók is megtekinthetik és lejátszathatnak zenéket is.
-A főoldalon a felhasználó megtalálhatja az összes megtalálható zenéket. Ha lentebb görget a felhasználó és elér a látható lista végére akkor a "load more songs" gombal tud mégtöbbet betölteni illetve megjeleníteni. a weboldal alsó sávjában megtalálható a zenelejátszó, baloldalt pedig a navigációs menü. Telefonról nézve pedig a fenti sávban található hamburger menüvel érheti el a navigációs menüt
 
-#image("./images/navbar.png", height: 50%)
+#align(center)[
+  Ezt az oldalt a nem bejelentkezett felhasználók is megtekinthetik és lejátszathatnak zenéket is. A főoldalon a felhasználó megtalálhatja az összes zenét egy listában.
+]
+
+#image("./images/Homepage-trillence.png")
+#grid(
+  columns: (1fr, 1fr),
+  align(left + horizon)[
+    A zenék lejátszhatók a "Play" ikonra kattintva, mely megjeleníti az oldal alján a zenelejátszót. Ha a felhasználó be van jelentkezve, akkor a létrehozott lejátszási listákba is hozzáadhatja a zeneszámot az "Add" ikonra való kattintással.
+  ],
+  align(left + horizon)[
+    #image("./images/singlesong.png")
+  ]
+)
+
+#grid(
+  columns: (1fr, 1fr),
+  align(left + horizon)[
+    #image("./images/Homepage-songs.png")
+  ],
+  align(left + horizon)[
+    A felhasználói élmény javítása érdekében csak 16 számot jelenítünk meg oldalanként. A felhasználó a "Load more songs" gombra kattintva érheti el a többi zeneszámot.
+  ]
+)
+
+#grid(
+  columns: (1fr, 1fr),
+  align(left + horizon)[
+    Bal oldalt megtalálható a navigációs menü, amellyel navigálhatunk az oldalon belül. Mobiltelefonon ez a navigációs menü egy hamburgermenü-vé alakul, amelynek a megnyomásakor el lehet érni a menüpontokat.
+  ],
+  align(right)[
+    #image("./images/navbar.png", height: 45%)
+  ]
+)
 //EBBEN VANNAK MEGFOGALMAZÁSI HIBÁK!!!!
 == Zenelejátszó
 A zenelejátszó a weboldal alján található.Ha a felhasználó számítógépen használja az weboldalt akkor az alsó sáv bal oldalán Az album borító, a zenecíme és az előadó neve található. 
 #linebreak()
 Középen találhatók a zenelejátszó iránytó gombjai, amelyek a következők balról jobbra haladva:
 #linebreak()
-Zene Visszaugrása
+#grid(
+  columns: (1fr, 1fr),
+  align(left)[
+    Zene Visszaléptetése
+    #linebreak()
+    Zene visszatekerése 10 másodperccel
+    #linebreak()
+    Zene elindítása/megállítása
+    #linebreak()
+    Zene előretekerése 10 másodperccel
+    #linebreak()
+    Zene átugrása
+  ],
+  align(right + horizon)[
+    #image("./images/musicplayerbuttons.png")
+  ]
+)
+Ez alatt található, hogy a felhasználó a zenében jelenleg hanyadik percnél és másodpercnél jár, ettől jobbra pedig egy sávval vizuálisan is megjelenítve, ha a felhasználó erre rákattint a zenét arra a pontra lépteti, és ettől az elemtől jobbra található a zene teljes hossza is.
+
+
+
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
+A sávnak a jobboldalán található a némító gomb és a hangerő szabályzó. A némító gomb ikonja vizuálisan is jelzi a zenelejátszó jelenlegi hangerejét.
+  ],
+  align(center + horizon)[
+    #image("./Images/volumebutton.png")
+  ]
+)
 #linebreak()
-Zenét 5mp-el visszatekerése
-#linebreak()
-Zene indítása/leállítása
-#linebreak()
-Zene 15mp előre léptetése
-#linebreak()
-Zene átugrása
-#linebreak()
-Ez alatt található hogy a felhasználó a zenében jelenleg hanyadik másodpercnél jár, ettől jobbra pedig egy sávval vizuálisan is megjelenítve, ha a felhasználó erre rákantint a zenét oda fogja ugrasztani.Ettől megint jobbra hogy mennyire hosszú a zene.
-A sávnak a jobboldalán található a némító gomb és a hangerő szabályzó. A némító gomb ikonja vizuálisan is jelzi a zenelejátszó mennyire hangos.
-#image("./Images/PC-songplayer.png", height: 100pt)
-#linebreak()
+
+#grid(
+  columns: (1fr,1fr),
+  align(left + horizon)[
 Ha a felhasználó telefonon nyitja meg akkor az alsó sávon a baloldali elemek változatlanok maradnak, viszont a jobboldalon már csak a zene elindítását/leállítására való gomb található. A többi elem eléréséhez a zenesávra kattintva érhetó el. Ahol megtalálható az összes gomb amely a számítógépen is megtalálható
-#image("./Images/Phoneplayer.png", height: 50%)
+  ], align(center + horizon)[
+
+#image("./Images/Phoneplayer.png", height: 40%)
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 == Navigációs menü
-A navigációs menü tartalma változik attól függően hogy a felhasználó bevan-e jelentkezve illetve van-e admin felhasználói jogosultsága
+
+A navigációs menü tartalma változik attól függően hogy a felhasználó be van jelentkezve illetve rendelkezik admin felhasználói jogosultsággal.
+],
+  align(center + horizon)[
+    #image("./Images/navbar.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Kezdőlap
-A "Home"-ra kattintva lehet elérni a kezdőlapot.Ezen az oldalon található az összes elérhető zene
+
+A "Home"-ra kattintva lehet elérni a kezdőlapot. Ezen az oldalon található az összes elérhető zene.
+],
+  align(center + horizon)[
+    #image("./Images/Homepage-Songs.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Kereső
-A "Search"-re kattintva lehet elérni a keresőoldalt. Az oldalon zenékre lehet keresni, amelyekre rákantintva lehet elindítani a zenét
 
-//LEHET ÁTKELL ÍRNI AMINT MEGVAN A UI
+A "Search"-re kattintva lehet elérni a keresőoldalt. Az oldalon zenékre lehet keresni, amelyekre rákattintva lehet elindítani, vagy egy lejátszási listához hozzáadni a zenét.
+],
+  align(center + horizon)[
+    #image("./Images/search.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Lejátszási lista
-A lejetszási listát csak bejelentkezett felhasználók tekinthetik meg, mivel magukhoz a felhasználóhoz vannak hozzákötve az általuk létrehozott lejátszási lista, tehát a felhasználók egymás lejátszási listáit nem tekinthetik meg. 
-A zenelistákat a "Playlist" menüpontal lehet elérni. Felül egyszerűen lehet létrehozni lejátszási listát. A "New playlist name"-be beírja a felhasználó a lejátszási lista nevét és a jobboldalon rákantint a "Create Playlist"-re, amely azonnal megjelenik.
-A lejátszási lista nevére kattintva a rákantintott lejátszási lista oldalára kerül. Felül megtalálható a lejátszási lista neve és művelet gombok.
-A "Play"-re kattintva elindul a lejátszási listában található zenék. A "Modify"-ra kattintva megváltoztatható a lejátszási lista neve, a "Delete"-el pedig törölhető a lejátszási lista.
-Ez a menüsor alatt található meg az összes lejátszási listában található zene.Amik törölhetők is a "Delete" gombal.
-Ettől a listától lentebb található az összes zene amiket az "Add" gombal hozzáadható a lejátszási listához
 
+A lejetszási listát csak bejelentkezett felhasználók tekinthetik meg, mivel magukhoz a felhasználóhoz vannak hozzákötve az általuk létrehozott lejátszási listák, tehát a felhasználók egymás lejátszási listáit nem láthatják.
+A zenelistákat a "Playlist" menüponttal lehet elérni. Felül egyszerűen lehet létrehozni lejátszási listát. A "New playlist name"-be beírja a felhasználó a lejátszási lista nevét és a jobboldalon rákattint a "Create Playlist"-re, amely azonnal megjelenik.
+A lejátszási lista nevére kattintva a rákattintott lejátszási lista oldalára kerül.
+],
+  align(center + horizon)[
+    #image("./Images/playlists.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
+Felül megtalálható a lejátszási lista neve és a műveleti gombok.
+A "Play"-re kattintva elindulnak a lejátszási listában található zenék. A "Rename"-re kattintva megváltoztatható a lejátszási lista neve, a "Delete"-el pedig törölhető a lejátszási lista.
+Ez a menüsor alatt található meg az összes lejátszási listában található zene. Amik törölhetők is a "Delete" gombbal.
+A lejátszási listába a zenéket a kezdő, vagy a keresőlapon található zenéknél a + jelre kattintva, adhatjuk hozzá.
+],
+  align(center + horizon)[
+    #image("./Images/singleplaylist.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 == Saját Profil
+
 A "My Profile" menüpontra kattintva érhető el a felhasználó oldala. Felül egy szöveg köszönti a felhasználót. Ebben a menüben érhető el a felhasználó beállításának megváltoztatása, a profil neve és jelszava
-
+],
+  align(center + horizon)[
+    #image("./Images/profilesettings.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Jelszó módosítása
-A "Change password"-re kattintva az oldal átírányítja a felhasználót a "Reset Passowrd" oldalra, ahol először meg kell adnia a jelenleg jelszót és a kívánt jelszót, amelyet szintén meg kell erősíteni. A "Change password"-el elmenti a változtatásokat, és a felhasználó jelszava módosult. Az új jelszóri szintén vonatkoznak a jelszó formai szabályai: A jelszónak minimum 8 karaktert kell tartalmaznia, illetve tartalmaznia kell Kis- és nagybetűt, számot, és egy speciális karaktert is
 
+A "Change password"-re kattintva az oldal átírányítja a felhasználót a "Reset Passowrd" oldalra, ahol először meg kell adnia a jelenleg jelszót és a kívánt jelszót, amelyet szintén meg kell erősíteni. A "Change password"-el elmenti a változtatásokat, és a felhasználó jelszava módosul. Az új jelszóra szintén vonatkoznak a jelszó formai szabályai: A jelszónak minimum 8 karaktert kell tartalmaznia, illetve tartalmaznia kell kis és nagybetűt, számot, és egy speciális karaktert is.
+],
+  align(center + horizon)[
+    #image("./Images/resetpassword.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Profilnév módosítása
-A "Change username" menüpontal a weboldal átirányítja a felhasználót a "Change username" oldalra ahol ha a felhasználó beírja a kívánt új felhasználó nevet. 
 
-
+A "Change username" menüponttal a weboldal átirányítja a felhasználót a "Change username" oldalra ahol ha a felhasználó beírja a kívánt új felhasználó nevet. 
+],
+  align(center + horizon)[
+    #image("./Images/changeusername.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 == Admin panel
-Az adminisztrátori panelt csak az adminisztrátori jogosultsággal rendelkező felhasználók számára elérhető. 
+
+Az admin panelt csak az adminisztrátori jogosultsággal rendelkező felhasználók használhatják. 
 #linebreak()
-Az első menüpontban Megváltoztatható a megadott felhasználónak,a felhasználó neve.
+Az első menüpontban megváltoztatható a megadott felhasználónak ,a felhasználó neve.
 #linebreak()
-Az azt követő menüpontban megváltoztatható egy felhasználónak a jelszava amelyet itt is meg kell erősíteni.
+Az azt követő menüpontban megváltoztatható egy felhasználónak a jelszava.
 #linebreak()
-Még lentebb törölhető a megadott felhasználó a felhasználónév megadásával
+Még lentebb törölhető a megadott felhasználó a felhasználónév megadásával.
 #linebreak()
-Az oldal legalján pedig adminisztrátori jogosultságot ad annak a felhasználónak amely a megadott email-el regisztrált
-#image("./images/adminpage.png")
+Az utolsó előtti menüpont pedig adminisztrátori jogosultságot ad annak a felhasználónak amely a megadott email-el regisztrált.
+#linebreak()
+Az utolsó menüpont a backend szerver zene adatainak beolvasására, és feltöltésére szolgál az adatbázisban.
+],
+  align(center + horizon)[
+    #image("./Images/adminpage.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
+    
 == SpotDL
-Ez a menüpontot csak az adminisztrátor jogosultsággal rendelkező felhasználók számára elérhető.A projektbe integráltunk egy nyílt forráskódú projektet, amivel megkönnyebbült a zenék megfelelő formátumban való letöltése, és tesztelése.
-=== SpotDL Használata
 
-
+Ez a menüpont csak adminisztrátor jogosultsággal rendelkező felhasználók számára elérhető. A projektbe integráltunk egy nyílt forráskódú projektet, amivel megkönnyebbült a zenék megfelelő formátumban való letöltése, és tesztelése.
+],
+  align(center + horizon)[
+    #image("./Images/spotdl.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 == Bejelentkezés
+
 A "Sign In" menüpontal érhető el a weboldal bejelentkező felülete ahol a felhasználó a beregisztrált felhasználó nevével és jelszavával jelentkezhet be. Amint a felhasználó bejelentkezett, onnantól elérhető számára a "Playlists" és a "My Profile" menüpontok. Ha a felhasználónak adminisztrátori jogai vannak, akkor elérhető lesz számára még a az "Admin panel" és a "SpotDl" menü.
+],
+  align(center + horizon)[
+    #image("./Images/login.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Elfelejtett jelszó
-Ha a felhasználó elfelejti a jelszavát, akkor a "Password" bemeneti mező alatt találhatja a "Forgot password?" gombot, amelyre rákantintva átirányítja egy újabb lapra, ahol a felhasználó email címét megadja, és a "reset passowrd" gombra kattintva a felhasználó kap az email címére egy "reset token"-t amelyet a "Reset token" bemeneti mezőbe bemásolva, és az új jelszót megadva, megváltoztathatja a jelszavát
+
+Ha a felhasználó elfelejti a jelszavát, akkor a "Password" bemeneti mező alatt találhatja a "Forgot password?" gombot, amelyre rákattintva átirányítja egy újabb lapra, ahol a felhasználó email címét megadja, és a "reset password" gombra kattintva a felhasználó kap az email címére egy "reset token"-t amelyet a "Reset token" bemeneti mezőbe bemásolva, és az új jelszót megadva, megváltoztathatja a jelszavát.
+],
+  align(center + horizon)[
+    #image("./Images/forgotpassword.png")
+  ]
+)
 == Regisztráció
-Ha a felhasználó be akarna regisztrálni akkor a "Sign in" menüpontban az oldal alján találhatja a "Sign up" elemre kattintva elérheti a regisztrációs oldalt.
+Ha a felhasználó fel kíván regisztrálni akkor a "Sign in" menüpontban az oldal alján találhatja a "Sign up" elemre kattintva elérheti a regisztrációs oldalt.
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Regisztráció menete és követelményei
- A regisztrációs oldalon a felhasználónak meg kell adnia egy felhasználó nevet (Username), az Email címét, és a jelszavát (Password), amelyet meg is kell erősítenie. A jelszónak minimum 8 karaktert kell tartalmaznia, illetve tartalmaznia kell Kis- és nagybetűt, számot, és egy speciális karaktert is
+
+ A regisztrációs oldalon a felhasználónak meg kell adnia egy felhasználó nevet (Username), az email címét, és a jelszavát (Password), amelyet meg is kell erősítenie. A jelszónak minimum 8 karaktert kell tartalmaznia, illetve tartalmaznia kell kis és nagybetűt, számot, és egy speciális karaktert is.
+ ],
+  align(center + horizon)[
+    #image("./Images/register.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === E-mail megerősítés
-Amint a felhasználó rákantint a "Sign up" gombra, a megadott email címre amelyet a felhasználó megadott érkezik egy email amely tartalmazza a megerősítő kódot
+Amint a felhasználó rákattint a "Sign up" gombra, a megadott email címre amelyet a felhasználó megadott érkezik egy email, amely tartalmazza a megerősítő kódot, ami az email cím hitelesítéséhez szükséges.
+],
+  align(center + horizon)[
+    #image("./Images/email.png")
+  ]
+)
 == Kijelentkezés
-A "Sign Out" gombra kattintva a felhasználó kijelentkezik és a főoldalon landol
+A "Sign Out" gombra kattintva a felhasználó kijelentkezik és átirányítódik a főoldalra.
 
 
 #pagebreak()
 = Backend
-A backenden futó folyamatokat és végpontok elérésében a swagger segített:
+A backenden tesztelésében és a végpontok elérésében a swagger segített:
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 == authorization végpont:
 === register
-Egy post metódust amely a felhasználó nevét, jelszavát, emailjét megkapva legenerál egy "register token" amelyet elküld a kért email címre
+A felhasználó nevét, jelszavát, emailjét megkapva legenerál egy hat számjegyű kódot, majd elküldi emailben. Ezzel a kóddal tudja regisztáláskor a felhasználó magát érvényesíteni.
 
 === AssignRole
-Egy post metódus amely az email címet és a jogosultságot megkapva megadja a m,egadott felhasználó jogosultságát
+Az email címet és a jogosultságot megkapva hozzárendeli a megadott felhasználó jogosultságát.
 
 === Login
-Egy post metódus, mely a felhasználónevet és jelszót megkapva engedélyezi a bejelentkezést.
+A felhasználónevet és jelszót megkapva engedélyezi a bejelentkezést.
 
 === Change Username
-Egy put metódus, mely a régi és új felhasználónevet megkapva lehetővé teszi a felhasználónév módosítását.
+A régi és új felhasználónevet megkapva módosítja a felhasználónevet.
 
 === Change Password
-Egy put metódus, mely a felhasználónevet, régi és új jelszót megkapva lehetővé teszi a jelszó módosítását.
+A felhasználónevet, régi és új jelszót megkapva módosítja a felhasználó jelszavát.
 
 === send-reset-email
-Egy post metódus, mely az email címet megkapva lehetővé teszi a jelszó visszaállításához szükséges visszaállító email elküldését.
+Az email címet megkapva elküldi a jelszó cseréjéhez szükséges emailt.
 
 === reset-password
-Egy put metódus, mely az email címet, új jelszót és visszaállítási tokent megkapva lehetővé teszi a jelszó visszaállítását.
+Az email címet, új jelszót és visszaállítási tokent megkapva lehetővé teszi a jelszó kicserélését.
 
 === delete-user
-Egy delete metódus, mely a felhasználónevet megkapva lehetővé teszi a felhasználó törlését.
+A felhasználónevet megkapva törli a megadott felhasználót.
 
 === is-admin
-Egy post metódus, mely a felhasználónevet megkapva lehetővé teszi ellenőrizni, hogy az adott felhasználó adminisztrátor-e. A frontend ezzel dönti el hogy mely navigációs menük jelenjenek meg
+A felhasználónevet megkapva ellenőrzi a megadott felhasználó jogosultsági szintét.
+],
+  align(center + horizon)[
+    #image("./Images/auth.png")
+  ]
+)
 
-#image("./Images/auth.png")
-
-#pagebreak()
-== Backend végpont:
-=== General CRUD végpontok
-Az adatbázisban lévő összes táblára készült végpont, de mivel ezek nagyrészt ugyanazok ezért ezeket nem írnánk le részletesebben, de felsoroljuk a létező végpontokat:#linebreak()
+== Backend végpontok:
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
+=== Általános CRUD végpontok
+Az adatbázisban lévő összes táblára készült végpont, melyek az adatok létehozására, törlésére, módosítására, lekérdezésére alkalmasok, de mivel ezek nagyrészt ugyanazok ezért ezeket nem írnánk le részletesebben, viszont felsoroljuk a létező végpontokat:#linebreak()
 Album
 #linebreak()
 Artist
@@ -303,45 +484,67 @@ PlaylistSong
 Song
 #linebreak()
 User
-#image("./Images/generalendpoints1.png", height: 50%)
+],
+  align(center + horizon)[
+    #image("./Images/generalendpoints1.png")
+  ]
+)
 #pagebreak()
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Albumimage
-Egy Get metódus amely segítségével lekéri a megadott mappából az összes albumképet
-#image("./Images/backend1.png")
-
+A megadott albumnév alapján streameli az album képet.
+],
+  align(center + horizon)[
+    #image("./Images/backend1.png")
+  ]
+)
+#grid(
+  columns: (1fr,1fr),
+  align(left)[
 === Connection
 ==== allsongdetails
-Egy Get metódus, mely lekéri az összes albumot, az albumnak az előadóit, és végül az összes zenét és annak összes adatát
+Lekéri az összes zenét, és a hozzátartozó adatokat.
 ==== songdetailsbyid/Id
-Egy Get metódus, mely lekéri a megadott zene neve alapján a megadott zene összes adatát
+Lekéri a megadott zene azonosítója alapján a megadott zene összes adatát.
+==== songdetailsbyname/songName
+Lekéri a megadott zene neve alapján a megadott zene összes adatát.
 ==== allplaylistdetails
-Egy Get metódus, mely lekéri az összes playlistnek az összesadatát
-==== allplaylistdetailsby/id
-Egy Get metódus, mely lekéri a megadott playlistnek az összes adatát
+Lekéri az összes lejátszási listának az összes adatát.
+==== allplaylistdetailsbyid/id
+Lekéri a megadott lejátszási lista azonosítója alapján a lista összes adatát.
+==== allplaylistdetailsbyusername/username
+Lekéri a megadott lejátszási lista azonosítója alapján a lista összes adatát.
 
 === Metadata
-Ezt a metódust lefutattva az összes zenének a metadata automatikusa feltölti az adatbázisba Abból a mappából amelyet az appsettings.json-ben bevan állítva
+Ez a metódus a felhasználó zene mappájából feltölti az összes .mp3 fájlt, és annak adatait az adatbázisba, illetve létrehozza az album képfájlokat.
 
 === Musicstreaming
 ==== current
-Egy Get metódus, mely az alapértelmezett listából lejátsza az első számot
+Az alapértelmezett listából lejátssza az első számot, vagy azt, ahol a lejátszás éppen tart.
 ==== current/details
-Egy Get metódus, mely lekéri a jelenleg lejátszott zenének az adatait
+Lekéri a jelenleg lejátszott zenének az adatait.
 ==== next
-Egy Get metódus, mely a listát egyel nagyobb értéket ad
+Eggyel megemeli a currentIndex értékét, ezzel streamelve a következő zenét a zenei listából.
 ==== previous
-Egy Get metódus, mely a listát egyel kissebb értéket ad
-
+Eggyel csökkenti a currentIndex értékét, ezzel streamelve az előző zenét a zenei listából.
 ==== playlist/playlistid/current
-Egy Get metódus, mely a megadott listából lejátsza az első számot
+A megadott lejátszási listából lejátsza az első számot, vagy azt, ahol a lejátszás éppen tart.
 ==== currentplaylist/playlistid/details
-Egy Get metódus, mely lekéri a jelenleg lejátszott zenének az adatait
+Lekéri a jelenleg lejátszott lejátszási listában lévő zenének az adatait.
 ==== playlist/playlistid/next
-Egy Get metódus, mely a listát egyel nagyobb értéket ad
+Lejátssza a megadott lejátszási lista következő zenéjét.
 ==== playlist/playlistid/previous
-Egy Get metódus, mely a listát egyel kissebb értéket ad
+Lejátssza a megadott lejátszási lista előző zenéjét.
+==== stream
+Egy zene bekérésével streameli a megadott zenét.
 
-#image("./Images/backend3.png")
+],
+  align(center + horizon)[
+    #image("./Images/backend3.png")
+  ]
+)
 
 #pagebreak()
 
@@ -349,24 +552,24 @@ Egy Get metódus, mely a listát egyel kissebb értéket ad
 
 
 #linebreak()
-//Visual Studio 2022
+== Visual Studio 2022
 https://learn.microsoft.com/hu-hu/visualstudio/windows/?view=vs-2022&preserve-view=true
 #linebreak()
-//.NET
+== ASP.NET Core Web API
 https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-8.0&WT.mc_id=dotnet-35129-website
 #linebreak()
 https://www.w3schools.com/asp/default.ASP
 #linebreak()
-//react
+== ReactJS
 https://react.dev/learn
 #linebreak()
 https://www.w3schools.com/react/default.asp
 #linebreak()
-//typst
+== Typst
 https://typst.app/docs/
 #linebreak()
-//NPM
+== NPM
 https://docs.npmjs.com/about-npm
 #linebreak()
-//Bootstrap
+== Bootstrap
 https://getbootstrap.com/docs/5.3/getting-started/introduction/
